@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import { withBase } from '../utils/paths';
 
 /** Optional overrides — defaults keep the site-wide band unchanged. */
 interface Props {
@@ -18,7 +19,7 @@ const {
 <section class="rv cta-band">
   <h2 class="cta-band__title">{title}</h2>
   <p class="cta-band__sub">{sub}</p>
-  <a href={ctaHref} class="btn-invert">{ctaLabel}</a>
+  <a href={withBase(ctaHref)} class="btn-invert">{ctaLabel}</a>
 </section>
 
 <style>

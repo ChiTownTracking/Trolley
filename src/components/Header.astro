@@ -1,14 +1,15 @@
 ---
 import { navMain, navMore } from '../data/site';
+import { withBase, withoutBase } from '../utils/paths';
 
 // Normalize the current path (strip trailing slash) for active matching.
-const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const path = withoutBase(Astro.url.pathname).replace(/\/+$/, '') || '/';
 const isActive = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'));
 const moreActive = navMore.some((n) => isActive(n.href));
 ---
 <header class="hdr">
   <div class="hdr__inner wrap wrap-wide">
-    <a href="/" class="brand" aria-label="ChiTown Trolley home">
+    <a href={withBase('/')} class="brand" aria-label="ChiTown Trolley home">
       <span class="brand__row">
         <span class="brand__rule"></span>
         <span class="brand__name">CHITOWN</span>
@@ -23,7 +24,7 @@ const moreActive = navMore.some((n) => isActive(n.href));
     <div class="hdr__panel" id="hdr-mobile-panel" data-nav-panel>
       <nav class="nav" aria-label="Main">
         {navMain.map((n) => (
-          <a href={n.href} class:list={['nav__link', { active: isActive(n.href) }]}>
+          <a href={withBase(n.href)} class:list={['nav__link', { active: isActive(n.href) }]}>
             {n.html ? <Fragment set:html={n.html} /> : n.label}
           </a>
         ))}
@@ -41,14 +42,14 @@ const moreActive = navMore.some((n) => isActive(n.href));
           </button>
           <div class="more__menu" data-more-panel hidden>
             {navMore.map((n) => (
-              <a href={n.href} class:list={['more__item', { active: isActive(n.href) }]}>{n.label}</a>
+              <a href={withBase(n.href)} class:list={['more__item', { active: isActive(n.href) }]}>{n.label}</a>
             ))}
           </div>
         </div>
       </nav>
 
       <div class="hdr__cta">
-        <a href="/reservation" class="btn-gold btn-gold--sm">Reservation</a>
+        <a href={withBase('/reservation')} class="btn-gold btn-gold--sm">Reservation</a>
       </div>
     </div>
 

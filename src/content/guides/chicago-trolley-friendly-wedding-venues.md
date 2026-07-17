@@ -24,7 +24,7 @@ The best venues have a dedicated area near the entrance — a circular drive, a 
 
 ### Somewhere Great to Take Photos
 
-Once you've arrived, the trolley itself often becomes part of the photography — especially with our [Classic White Trolley](/fleet/classic-white-trolley) and its rear balcony platform. Venues with an attractive building façade, a tree-lined approach, or simply good natural light near the drop-off tend to produce the photos couples end up loving most, precisely because they weren't the "official" posed shots.
+Once you've arrived, the trolley itself often becomes part of the photography — especially with our [Classic White Trolley](../../fleet/classic-white-trolley/) and its rear balcony platform. Venues with an attractive building façade, a tree-lined approach, or simply good natural light near the drop-off tend to produce the photos couples end up loving most, precisely because they weren't the "official" posed shots.
 
 ## Regions Around Chicagoland Worth Considering
 
@@ -38,7 +38,7 @@ Chicago and its suburbs offer a wide range of venue styles, and trolley logistic
 Wherever your venue sits, the region matters less than the specific driveway — always confirm the physical layout rather than assuming based on general area.
 
 <figure>
-  <img src="/uploads/trolleyChristmas.png" alt="Trolley arriving at a venue entrance at dusk with string lights visible" loading="lazy" />
+  <img src="../../uploads/trolleyChristmas.png" alt="Trolley arriving at a venue entrance at dusk with string lights visible" loading="lazy" />
   <figcaption>A well-lit drop-off zone does double duty: easy access, and a beautiful backdrop for evening arrival photos.</figcaption>
 </figure>
 
@@ -56,9 +56,9 @@ Sharing these answers with your transportation provider well ahead of the weddin
 
 ## Coordinating Logistics Without the Back-and-Forth
 
-The smoothest wedding-day transportation happens when the venue coordinator and the transportation company are talking directly, rather than passing details through the couple. When you [request a quote](/reservation), let us know your venue and we'll reach out to their team directly to confirm drop-off logistics — it's one less thing on your plate, and it means the driveway conversation happens between the two parties who actually need to have it.
+The smoothest wedding-day transportation happens when the venue coordinator and the transportation company are talking directly, rather than passing details through the couple. When you [request a quote](../../reservation/), let us know your venue and we'll reach out to their team directly to confirm drop-off logistics — it's one less thing on your plate, and it means the driveway conversation happens between the two parties who actually need to have it.
 
-If you're still finalizing your guest list and trying to figure out which vehicle actually fits your venue and headcount, our guide on [how many guests fit in a trolley](/guides/how-many-guests-fit-in-a-trolley) is a good next stop — sizing and venue logistics tend to go hand in hand.
+If you're still finalizing your guest list and trying to figure out which vehicle actually fits your venue and headcount, our guide on [how many guests fit in a trolley](../how-many-guests-fit-in-a-trolley/) is a good next stop — sizing and venue logistics tend to go hand in hand.
 
 ## The Short Version
 

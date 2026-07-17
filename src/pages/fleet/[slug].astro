@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Eyebrow from '../../components/Eyebrow.astro';
 import { fleet } from '../../data/site';
+import { withBase } from '../../utils/paths';
 
 // Eagerly resolve every fleet gallery image to its built URL. Dropping a new
 // image into src/assets/fleet/<Folder>/ automatically adds it to that carousel.
@@ -34,7 +35,7 @@ const hasGallery = images.length > 1;
   hideCta={true}
 >
   <article class="vd wrap wrap-1000">
-    <a href="/fleet" class="vd__back">← Back to Fleet</a>
+    <a href={withBase('/fleet')} class="vd__back">← Back to Fleet</a>
 
     <header class="vd__head">
       <h1 class="vd__title">{vehicle.name}</h1>
@@ -127,8 +128,8 @@ const hasGallery = images.length > 1;
       <h2 class="vd__cta-title">Ready to reserve the <em class="grad">{vehicle.name}</em>?</h2>
       <p class="vd__cta-body">Tell us your date and we'll confirm availability within one business day — no payment required to request.</p>
       <div class="vd__cta-actions">
-        <a href={`/?vehicle=${encodeURIComponent(vehicle.quoteValue)}#getquote`} class="btn-gold">Get a Free Quote</a>
-        <a href="/reservation" class="btn-ghost">Reserve This Vehicle</a>
+        <a href={withBase(`/?vehicle=${encodeURIComponent(vehicle.quoteValue)}#getquote`)} class="btn-gold">Get a Free Quote</a>
+        <a href={withBase('/reservation')} class="btn-ghost">Reserve This Vehicle</a>
       </div>
     </section>
   </article>

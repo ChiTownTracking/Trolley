@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { gallery } from '../data/site';
+import { withBase } from '../utils/paths';
 ---
 <BaseLayout
   title="Gallery — ChiTown Trolley"
@@ -14,7 +15,7 @@ import { gallery } from '../data/site';
   <section class="gal wrap wrap-1140" style="max-width:1200px">
     {gallery.map((g, i) => (
       <button type="button" class="gal__cell" data-index={i} aria-label="View photo larger">
-        <img src={g.src} alt={g.alt} class="gal__img" />
+        <img src={withBase(g.src)} alt={g.alt} class="gal__img" />
       </button>
     ))}
   </section>

@@ -4,6 +4,7 @@ import CtaBand from '../../components/CtaBand.astro';
 import GuideCard from '../../components/GuideCard.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { categoryLabel, formatGuideDate } from '../../data/guides';
+import { withBase } from '../../utils/paths';
 
 export async function getStaticPaths() {
   const allGuides = await getCollection('guides');
@@ -41,15 +42,15 @@ const schema = {
   '@type': 'BlogPosting',
   headline: data.title,
   description: data.excerpt,
-  image: new URL(data.cover, Astro.site ?? Astro.url).href,
+  image: new URL(withBase(data.cover), Astro.site ?? Astro.url).href,
   datePublished: data.date.toISOString(),
   author: { '@type': 'Organization', name: data.author },
   publisher: {
     '@type': 'Organization',
     name: 'ChiTown Trolley',
-    logo: { '@type': 'ImageObject', url: new URL('/uploads/trolleyBliss.webp', Astro.site ?? Astro.url).href },
+    logo: { '@type': 'ImageObject', url: new URL(withBase('/uploads/trolleyBliss.webp'), Astro.site ?? Astro.url).href },
   },
-  mainEntityOfPage: { '@type': 'WebPage', '@id': new URL(`/guides/${guide.slug}`, Astro.site ?? Astro.url).href },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': new URL(withBase(`/guides/${guide.slug}`), Astro.site ?? Astro.url).href },
 };
 ---
 <BaseLayout
@@ -67,9 +68,9 @@ const schema = {
   <article class="gart">
     <div class="wrap">
       <nav class="gart__crumb" aria-label="Breadcrumb">
-        <a href="/">Home</a>
+        <a href={withBase('/')}>Home</a>
         <span class="gart__crumb-sep" aria-hidden="true">/</span>
-        <a href="/guides">Guides</a>
+        <a href={withBase('/guides')}>Guides</a>
         <span class="gart__crumb-sep" aria-hidden="true">/</span>
         <span class="gart__crumb-current">{data.title}</span>
       </nav>
@@ -86,7 +87,7 @@ const schema = {
         </div>
       </header>
 
-      <img src={data.cover} alt={data.coverAlt} class="gart__hero" loading="eager" decoding="async" />
+      <img src={withBase(data.cover)} alt={data.coverAlt} class="gart__hero" loading="eager" decoding="async" />
     </div>
 
     <div class:list={['gart-layout', 'wrap', 'wrap-1060', { 'gart-layout--solo': !hasToc }]}>

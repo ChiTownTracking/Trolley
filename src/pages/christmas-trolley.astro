@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../data/site';
+import { withBase } from '../utils/paths';
 
 // Resolve every Christmas Trolley photo to its built URL (sorted by filename).
 const globbed = import.meta.glob('/src/assets/fleet/ChristmasTrolley/*.{png,jpg,jpeg,webp}', {
@@ -25,15 +26,15 @@ const featureImgs = allImages.filter(({ url }) => url !== heroImg).slice(0, 4);
 const gallery = allImages;
 
 // Matches the "Choose Vehicle" option so the quote form pre-selects it.
-const quoteHref = `/?vehicle=${encodeURIComponent('Christmas Trolley · 24–36')}#getquote`;
+const quoteHref = withBase(`/?vehicle=${encodeURIComponent('Christmas Trolley · 24–36')}#getquote`);
 
 // Restrained decor accents — elegant transparent-PNG garland/wreath cutouts,
 // keyed from source photos and re-exported as WebP. See public/images/
 // christmas-trolley/decor/ (sourced from src/assets/fleet/ChristmasTrolley/decor).
 const decor = {
-  garlandBottom: '/images/christmas-trolley/decor/garland-strip-b.webp',
-  garlandStrand: '/images/christmas-trolley/decor/garland-strand.webp',
-  cornerWreath: '/images/christmas-trolley/decor/corner-wreath.webp',
+  garlandBottom: withBase('/images/christmas-trolley/decor/garland-strip-b.webp'),
+  garlandStrand: withBase('/images/christmas-trolley/decor/garland-strand.webp'),
+  cornerWreath: withBase('/images/christmas-trolley/decor/corner-wreath.webp'),
 };
 
 const featureList = [
@@ -152,7 +153,7 @@ const featureList = [
 
   <!-- ═══ Add-on callout ═══ -->
   <section class="rv wrap wrap-860 xaddon-wrap">
-    <a href="/contact" class="xaddon">
+    <a href={withBase('/contact')} class="xaddon">
       <span class="xaddon__flourish" style={`--decor-img: url('${decor.cornerWreath}')`} aria-hidden="true"></span>
       <span class="xaddon__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="12" rx="1"/><path d="M4 13h16M12 9v12M12 9s-4 0-5.2-1.6C5.6 5.8 7 4 8.6 4.6 10.4 5.3 12 9 12 9Zm0 0s4 0 5.2-1.6C18.4 5.8 17 4 15.4 4.6 13.6 5.3 12 9 12 9Z"/></svg>

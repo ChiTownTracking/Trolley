@@ -29,9 +29,9 @@ Most couples only need to solve for one or two of these groups, not all three. A
 | Classic White Trolley | 30–36 passengers | Wedding party, ceremony-to-reception transfers, photo stops |
 | Super Coach Bus | Up to 57 passengers | Full guest shuttles, hotel pickups, out-of-town groups |
 
-A [Classic White Trolley](/fleet/classic-white-trolley) comfortably seats a full bridal party plus parents and grandparents, with room left over for the two of you to make an entrance. Its circular perimeter seating means everyone rides facing each other — which sounds like a small detail until you're the one trying to get a candid photo of your whole crew laughing together between stops.
+A [Classic White Trolley](../../fleet/classic-white-trolley/) comfortably seats a full bridal party plus parents and grandparents, with room left over for the two of you to make an entrance. Its circular perimeter seating means everyone rides facing each other — which sounds like a small detail until you're the one trying to get a candid photo of your whole crew laughing together between stops.
 
-Once the guest list climbs past 40 or 50 people, a single trolley starts to feel tight, and that's usually the point where couples add a [Super Coach Bus](/fleet/super-coach-bus) to the plan — one vehicle for the wedding party's photo-friendly ride, and one larger coach handling the guest shuttle in parallel. For smaller, more intimate arrangements — a small immediate-family ride, or an executive airport transfer for out-of-town parents — a [Limo Van](/fleet/limo-vans) is often the more efficient (and more affordable) choice.
+Once the guest list climbs past 40 or 50 people, a single trolley starts to feel tight, and that's usually the point where couples add a [Super Coach Bus](../../fleet/super-coach-bus/) to the plan — one vehicle for the wedding party's photo-friendly ride, and one larger coach handling the guest shuttle in parallel. For smaller, more intimate arrangements — a small immediate-family ride, or an executive airport transfer for out-of-town parents — a [Limo Van](../../fleet/limo-vans/) is often the more efficient (and more affordable) choice.
 
 ## How to Estimate Your Guest Count Needs
 
@@ -49,7 +49,7 @@ One of the most common mistakes we see is couples trying to put everyone — wed
 The cleaner approach: book a smaller, photo-worthy vehicle (trolley or limo van) exclusively for the wedding party's schedule — ceremony arrival, post-ceremony photos, reception entrance — and a separate, larger vehicle for the broader guest shuttle running on its own loop. It costs more than one shared vehicle, but it removes the single biggest source of wedding-day transportation stress: waiting.
 
 <figure>
-  <img src="/uploads/trolley-interior.webp" alt="Trolley interior with rose garlands and quilted leather perimeter seating" loading="lazy" />
+  <img src="../../uploads/trolley-interior.webp" alt="Trolley interior with rose garlands and quilted leather perimeter seating" loading="lazy" />
   <figcaption>Circular perimeter seating keeps the wedding party together and facing each other for the whole ride.</figcaption>
 </figure>
 
@@ -61,7 +61,7 @@ If your guest count sits right on the edge between two vehicle sizes, the decidi
 - **Multiple smaller trips** make sense when there's flexibility in arrival windows, or when you want the wedding party to arrive separately from guests for a grand entrance effect.
 - **Return trips at night** deserve their own plan. A shuttle that ran perfectly at 4 p.m. can bottleneck at 11 p.m. if everyone tries to leave the reception in the same twenty-minute window — consider staggering return departures every 30–45 minutes rather than one mass exit.
 
-For a full breakdown of how to build out arrival and departure windows across an entire wedding day, our guide to [wedding day shuttle logistics and timeline planning](/guides/wedding-day-shuttle-logistics-timeline) walks through the schedule in more detail.
+For a full breakdown of how to build out arrival and departure windows across an entire wedding day, our guide to [wedding day shuttle logistics and timeline planning](../wedding-day-shuttle-logistics-timeline/) walks through the schedule in more detail.
 
 ## Getting It Right the First Time
 

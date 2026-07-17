@@ -1,5 +1,6 @@
 ---
 import { categoryLabel, formatGuideDate } from '../data/guides';
+import { withBase } from '../utils/paths';
 
 /** Article preview card — used in the /guides grid and the "related articles" rail. */
 interface Props {
@@ -14,9 +15,9 @@ interface Props {
 }
 const { href, image, imageAlt, category, title, excerpt, date, readTime } = Astro.props;
 ---
-<a href={href} class="gcard" data-category={category}>
+<a href={withBase(href)} class="gcard" data-category={category}>
   <div class="gcard__media">
-    <img src={image} alt={imageAlt} class="gcard__img" loading="lazy" decoding="async" />
+    <img src={withBase(image)} alt={imageAlt} class="gcard__img" loading="lazy" decoding="async" />
   </div>
   <div class="gcard__body">
     <span class="gcard__tag">{categoryLabel(category)}</span>

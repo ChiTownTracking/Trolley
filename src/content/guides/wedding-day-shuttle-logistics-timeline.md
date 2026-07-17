@@ -22,7 +22,7 @@ Every wedding is different, but most guest shuttle schedules follow a similar sh
 
 - **T-minus 45 minutes before ceremony:** Shuttle departs hotel(s) for the ceremony venue.
 - **T-minus 15 minutes:** Guests seated, vehicle available to reposition for post-ceremony use if needed.
-- **Ceremony to reception gap:** If there's a cocktail hour or travel time between locations, this is when a [Classic White Trolley](/fleet/classic-white-trolley) often shuttles the wedding party for photos while a larger [Super Coach Bus](/fleet/super-coach-bus) handles the broader guest transfer in parallel.
+- **Ceremony to reception gap:** If there's a cocktail hour or travel time between locations, this is when a [Classic White Trolley](../../fleet/classic-white-trolley/) often shuttles the wedding party for photos while a larger [Super Coach Bus](../../fleet/super-coach-bus/) handles the broader guest transfer in parallel.
 - **Reception arrival:** Guests dropped directly at the entrance, ideally timed to arrive 10–15 minutes ahead of the wedding party's grand entrance.
 - **End of night:** One or more return shuttles to the hotel, timed either as a single departure or staggered runs (more on this below).
 
@@ -33,7 +33,7 @@ It's tempting to arrange pickups at every hotel your guests are staying in, but 
 If multiple pickups are unavoidable, build in a firm 5-minute window per stop and communicate it clearly — "the shuttle will wait no more than 5 minutes at each hotel" sets an expectation that keeps the whole schedule from sliding.
 
 <figure>
-  <img src="/uploads/5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg" alt="Coach buses staged at dusk for a wedding guest shuttle pickup" loading="lazy" />
+  <img src="../../uploads/5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg" alt="Coach buses staged at dusk for a wedding guest shuttle pickup" loading="lazy" />
   <figcaption>Consolidating pickups to one or two hotel stops keeps the whole shuttle schedule on time.</figcaption>
 </figure>
 
@@ -59,7 +59,7 @@ Wedding websites, welcome bags, and a simple card at each place setting are all 
 
 As a general guideline: lock in your transportation as soon as your venue and guest count estimate are settled, ideally 6–12 months ahead for peak season weekends, and at least 8–10 weeks out for off-peak dates. Finalize your exact timeline and pickup locations closer to the day — typically 2–3 weeks out — once your final guest count and hotel block are confirmed.
 
-If you're still working out how many vehicles your guest list actually requires, our guide to [how many guests fit in a trolley](/guides/how-many-guests-fit-in-a-trolley) is a useful starting point before you lock in a timeline around the wrong vehicle size.
+If you're still working out how many vehicles your guest list actually requires, our guide to [how many guests fit in a trolley](../how-many-guests-fit-in-a-trolley/) is a useful starting point before you lock in a timeline around the wrong vehicle size.
 
 ## Bringing It All Together
 

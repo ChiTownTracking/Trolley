@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import { steps, weddingTiles } from '../data/site';
+import { withBase } from '../utils/paths';
 ---
 <BaseLayout
   title="Wedding Trolley Transportation — ChiTown Trolley"
@@ -9,7 +10,7 @@ import { steps, weddingTiles } from '../data/site';
 >
   <!-- Hero -->
   <section class="whero">
-    <img src="uploads/trolleyClassic.png" alt="Classic white trolley in warm winter light" class="whero__img" />
+    <img src={withBase('/uploads/trolleyClassic.png')} alt="Classic white trolley in warm winter light" class="whero__img" />
     <div class="whero__scrim"></div>
     <div class="whero__content">
       <Eyebrow label="Weddings" size="md" mb={18} />
@@ -26,9 +27,9 @@ import { steps, weddingTiles } from '../data/site';
       <h2 class="split__title">An hour of the day that's just yours</h2>
       <p class="split__p">Between the ceremony and the reception, the trolley is the one place the whole wedding party is together — no schedule, no guests, just you. Circular seating means no one rides facing a seatback, and the rear balcony makes for photos you'll frame.</p>
       <p class="split__p">We dress the cabin to suit your day, keep it warm in January and cool in July, and your chauffeur handles every turn while the champagne stays upright.</p>
-      <a href="/contact" class="link-gold">Check your date →</a>
+      <a href={withBase('/contact')} class="link-gold">Check your date →</a>
     </div>
-    <img src="uploads/trolley-interior.webp" alt="Trolley interior with rose garlands and quilted leather seating" class="split__img" />
+    <img src={withBase('/uploads/trolley-interior.webp')} alt="Trolley interior with rose garlands and quilted leather seating" class="split__img" />
   </section>
 
   <!-- How it works -->
@@ -51,13 +52,13 @@ import { steps, weddingTiles } from '../data/site';
   <!-- The wedding package -->
   <section class="rv band">
     <div class="wrap split split--flip">
-      <img src="uploads/2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg" alt="Coach interior with quilted leather seating for 57" class="split__img" />
+      <img src={withBase('/uploads/2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg')} alt="Coach interior with quilted leather seating for 57" class="split__img" />
       <div>
         <Eyebrow label="The Wedding Package" align="left" single mb={16} />
         <h2 class="split__title">Trolley for the party, coach for the guests</h2>
         <p class="split__p">Pair the white trolley with a super coach and move the entire celebration together. The wedding party rides the trolley; up to 57 guests follow in quilted-leather comfort — no parking, no lost caravans, no one late for the first dance.</p>
         <p class="split__p">Book both together and we coordinate every pickup on one schedule, hotel to ceremony to reception and back.</p>
-        <a href="/contact" class="link-gold">Ask about the package →</a>
+        <a href={withBase('/contact')} class="link-gold">Ask about the package →</a>
       </div>
     </div>
   </section>

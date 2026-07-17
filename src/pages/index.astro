@@ -4,6 +4,7 @@ import Eyebrow from '../components/Eyebrow.astro';
 import GuideCard from '../components/GuideCard.astro';
 import { getCollection } from 'astro:content';
 import { features, serviceChips, fleetPreview, testimonials, eventTypes, vehicleOptions, hoursOptions, homeFaqs, getLocalBusinessSchema } from '../data/site';
+import { withBase } from '../utils/paths';
 
 const passengerOptions = ['1–10', '11–20', '21–30', '31–40', '41–57'];
 
@@ -16,7 +17,8 @@ const latestGuides = (await getCollection('guides'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
-const businessSchema = getLocalBusinessSchema(new URL(Astro.site ?? Astro.url).href);
+const businessSchema = getLocalBusinessSchema(new URL(withBase('/'), Astro.site ?? Astro.url).href);
+const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); --hero-mobile: url('${withBase('/uploads/heroMobileView.png')}')`;
 ---
 <BaseLayout
   title="ChiTown Trolley — Timeless Wedding Trolley Transportation in Chicago"
@@ -24,7 +26,7 @@ const businessSchema = getLocalBusinessSchema(new URL(Astro.site ?? Astro.url).h
   schema={businessSchema}
 >
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero" style={heroStyle}>
     <div class="hero__overlay"></div>
     <div class="hero__content">
       <h1 class="hero__title">
@@ -32,7 +34,7 @@ const businessSchema = getLocalBusinessSchema(new URL(Astro.site ?? Astro.url).h
         Transportation for<br />
         <em class="grad">Your Wedding Day</em>
       </h1>
-      <a href="/contact" class="btn-gold hero__cta">Get Free Quote</a>
+      <a href={withBase('/contact')} class="btn-gold hero__cta">Get Free Quote</a>
     </div>
   </section>
 
@@ -179,9 +181,9 @@ const businessSchema = getLocalBusinessSchema(new URL(Astro.site ?? Astro.url).h
       <h2 class="h-section text-center fleetp__title">Trolleys for the party, a coach for the guests</h2>
       <div class="fleetp__grid">
         {/* Row 1 — featured full-width trolley */}
-        <a href={`/fleet/${fleetFeatured.slug}`} class="fleet-card fleet-card--feature">
+        <a href={withBase(`/fleet/${fleetFeatured.slug}`)} class="fleet-card fleet-card--feature">
           <div class="fleet-card__media">
-            <img src={fleetFeatured.img} alt={fleetFeatured.name} class="fleetp__img" />
+            <img src={withBase(fleetFeatured.img)} alt={fleetFeatured.name} class="fleetp__img" />
             <span class="fleet-card__cue">View Details →</span>
           </div>
           <div class="fleetp__body">
@@ -192,9 +194,9 @@ const businessSchema = getLocalBusinessSchema(new URL(Astro.site ?? Astro.url).h
         </a>
         {/* Row 2 — Coach, Party Bus, Limo Van */}
         {fleetRest.map((fl) => (
-          <a href={`/fleet/${fl.slug}`} class="fleet-card">
+          <a href={withBase(`/fleet/${fl.slug}`)} class="fleet-card">
             <div class="fleet-card__media">
-              <img src={fl.img} alt={fl.name} class="fleetp__img" />
+              <img src={withBase(fl.img)} alt={fl.name} class="fleetp__img" />
               <span class="fleet-card__cue">View Details →</span>
             </div>
             <div class="fleetp__body">
@@ -205,7 +207,7 @@ const businessSchema = getLocalBusinessSchema(new URL(Astro.site ?? Astro.url).h
         ))}
       </div>
       <div class="fleetp__cta">
-        <a href="/fleet" class="btn-gold">View Full Fleet</a>
+        <a href={withBase('/fleet')} class="btn-gold">View Full Fleet</a>
       </div>
     </div>
   </section>
@@ -278,7 +280,7 @@ const businessSchema = getLocalBusinessSchema(new URL(Astro.site ?? Astro.url).h
       <div class="guidesp__grid">
         {latestGuides.map((g) => (
           <GuideCard
-            href={`/guides/${g.slug}`}
+            href={withBase(`/guides/${g.slug}`)}
             image={g.data.cover}
             imageAlt={g.data.coverAlt}
             category={g.data.category}
@@ -290,7 +292,7 @@ const businessSchema = getLocalBusinessSchema(new URL(Astro.site ?? Astro.url).h
         ))}
       </div>
       <div class="guidesp__cta">
-        <a href="/guides" class="btn-ghost">View All Guides</a>
+        <a href={withBase('/guides')} class="btn-ghost">View All Guides</a>
       </div>
     </div>
   </section>
@@ -302,7 +304,7 @@ const businessSchema = getLocalBusinessSchema(new URL(Astro.site ?? Astro.url).h
     position: relative;
     height: 550px; /* fixed — stays consistent regardless of viewport height */
     overflow: hidden;
-    background: #1b1813 url('/uploads/heroImg.webp') center / cover no-repeat;
+    background: #1b1813 var(--hero-desktop) center / cover no-repeat;
   }
   /* Dark-to-transparent gradient on the left for white-text legibility */
   .hero__overlay {
@@ -335,7 +337,7 @@ const businessSchema = getLocalBusinessSchema(new URL(Astro.site ?? Astro.url).h
   @media (max-width: 700px) {
     .hero {
       height: 420px;
-      background-image: url('/uploads/heroMobileView.png');
+      background-image: var(--hero-mobile);
       background-position: center;
     }
     .hero__content { gap: 24px; }

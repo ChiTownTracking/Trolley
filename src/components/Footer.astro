@@ -1,9 +1,10 @@
 ---
 import { site, navAll, hasPhone, hasInstagram, hasFacebook } from '../data/site';
+import { withBase } from '../utils/paths';
 ---
 <footer class="ftr">
   <div class="ftr__inner wrap">
-    <a href="/" class="ftr__brand" aria-label="ChiTown Trolley home">
+    <a href={withBase('/')} class="ftr__brand" aria-label="ChiTown Trolley home">
       <span class="ftr__brandRow">
         <span class="ftr__rule"></span>
         <span class="ftr__name">CHITOWN</span>
@@ -13,7 +14,7 @@ import { site, navAll, hasPhone, hasInstagram, hasFacebook } from '../data/site'
     </a>
 
     <nav class="ftr__nav" aria-label="Footer">
-      {navAll.map((n) => <a href={n.href} class="ftr__link">{n.label}</a>)}
+      {navAll.map((n) => <a href={withBase(n.href)} class="ftr__link">{n.label}</a>)}
     </nav>
 
     <div class="ftr__contact">
