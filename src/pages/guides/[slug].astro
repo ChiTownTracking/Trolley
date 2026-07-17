@@ -1,0 +1,427 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { categoryLabel, formatGuideDate } from '../../data/guides';
+
+export async function getStaticPaths() {
+  const allGuides = await getCollection('guides');
+  return allGuides.map((guide) => ({
+    params: { slug: guide.slug },
+    props: { guide, allGuides },
+  }));
+}
+
+interface Props {
+  guide: CollectionEntry<'guides'>;
+  allGuides: CollectionEntry<'guides'>[];
+}
+
+const { guide, allGuides } = Astro.props;
+const { data } = guide;
+const { Content, headings } = await guide.render();
+
+// Table of contents — auto-derived from H2/H3s; Astro already slugs heading
+// ids to match, so anchors and IntersectionObserver targets need no extra wiring.
+const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const hasToc = tocHeadings.length > 1;
+
+// Related: prefer the same category, then fill from the rest — newest first, excluding this article.
+const others = allGuides.filter((g) => g.slug !== guide.slug).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const related = [
+  ...others.filter((g) => g.data.category === data.category),
+  ...others.filter((g) => g.data.category !== data.category),
+].slice(0, 3);
+
+const quoteHref = '/#getquote';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: data.title,
+  description: data.excerpt,
+  image: new URL(data.cover, Astro.site ?? Astro.url).href,
+  datePublished: data.date.toISOString(),
+  author: { '@type': 'Organization', name: data.author },
+  publisher: {
+    '@type': 'Organization',
+    name: 'ChiTown Trolley',
+    logo: { '@type': 'ImageObject', url: new URL('/uploads/trolleyBliss.webp', Astro.site ?? Astro.url).href },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': new URL(`/guides/${guide.slug}`, Astro.site ?? Astro.url).href },
+};
+---
+<BaseLayout
+  title={`${data.title} — ChiTown Trolley Guides`}
+  description={data.excerpt}
+  image={data.cover}
+  ogType="article"
+  schema={schema}
+  hideCta={true}
+>
+  <div class="gprogress" data-progress-track aria-hidden="true">
+    <div class="gprogress__fill" data-progress-fill></div>
+  </div>
+
+  <article class="gart">
+    <div class="wrap">
+      <nav class="gart__crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="gart__crumb-sep" aria-hidden="true">/</span>
+        <a href="/guides">Guides</a>
+        <span class="gart__crumb-sep" aria-hidden="true">/</span>
+        <span class="gart__crumb-current">{data.title}</span>
+      </nav>
+
+      <header class="gart__head">
+        <span class="gart__tag">{categoryLabel(data.category)}</span>
+        <h1 class="gart__title">{data.title}</h1>
+        <div class="gart__byline">
+          <span>{data.author}</span>
+          <span class="gart__dot" aria-hidden="true">·</span>
+          <time datetime={data.date.toISOString()}>{formatGuideDate(data.date)}</time>
+          <span class="gart__dot" aria-hidden="true">·</span>
+          <span>{data.readTime}</span>
+        </div>
+      </header>
+
+      <img src={data.cover} alt={data.coverAlt} class="gart__hero" loading="eager" decoding="async" />
+    </div>
+
+    <div class:list={['gart-layout', 'wrap', 'wrap-1060', { 'gart-layout--solo': !hasToc }]}>
+      {hasToc && (
+        <aside class="gtoc" data-toc aria-label="Table of contents">
+          <div class="gtoc__inner">
+            <p class="gtoc__label">In This Article</p>
+            <ul class="gtoc__list">
+              {tocHeadings.map((h) => (
+                <li class:list={['gtoc__item', `gtoc__item--h${h.depth}`]}>
+                  <a href={`#${h.slug}`} data-toc-link={h.slug}>{h.text}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+      )}
+
+      <div class="gart__body" data-article-body>
+        {hasToc && (
+          <div class="gtoc-mobile" data-toc-mobile>
+            <button type="button" class="gtoc-mobile__head" data-toc-mobile-toggle aria-expanded="false">
+              <span>In This Article</span>
+              <span class="gtoc-mobile__chev" aria-hidden="true"></span>
+            </button>
+            <div class="gtoc-mobile__panel">
+              <div class="gtoc-mobile__panel-body">
+                <ul class="gtoc-mobile__list">
+                  {tocHeadings.map((h) => (
+                    <li class:list={['gtoc-mobile__item', `gtoc-mobile__item--h${h.depth}`]}>
+                      <a href={`#${h.slug}`} data-toc-link={h.slug}>{h.text}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <div class="gart__cta">
+    <CtaBand
+      title="Ready to plan your event?"
+      sub="Tell us your date and headcount — we'll help you find the right vehicle and route."
+      ctaLabel="Get a Free Quote"
+      ctaHref={quoteHref}
+    />
+  </div>
+
+  {related.length > 0 && (
+    <section class="grel wrap wrap-1140">
+      <h2 class="grel__title">More Guides</h2>
+      <div class="grel__grid">
+        {related.map((g) => (
+          <GuideCard
+            href={`/guides/${g.slug}`}
+            image={g.data.cover}
+            imageAlt={g.data.coverAlt}
+            category={g.data.category}
+            title={g.data.title}
+            excerpt={g.data.excerpt}
+            date={g.data.date}
+            readTime={g.data.readTime}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  /* Reading progress bar — sticky directly below the header, using the same
+     stacked-sticky trick the header itself relies on: both are position:sticky
+     siblings, so the bar's own top offset (the header's live rendered height,
+     since nav wraps to 2 lines at narrower widths) keeps it glued underneath
+     at every scroll position, without needing position:fixed + resize math. */
+  .gprogress {
+    position: sticky;
+    top: var(--nav-h, 80px);
+    z-index: 55;
+    height: 3px;
+    background: var(--gold-cream);
+    overflow: hidden;
+  }
+  .gprogress__fill {
+    height: 100%;
+    width: 0%;
+    background: var(--gold-dark);
+    transition: width .1s linear;
+  }
+
+  .gart { padding-top: 40px; }
+  .gart__crumb {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    font-size: 12px; letter-spacing: .04em; color: var(--faint); margin-bottom: 30px;
+  }
+  .gart__crumb a { color: var(--faint); text-decoration: none; transition: color .2s ease; }
+  .gart__crumb a:hover { color: var(--gold-deep); }
+  .gart__crumb-sep { color: var(--line-2); }
+  .gart__crumb-current { color: var(--muted); }
+
+  .gart__head { margin-bottom: 30px; }
+  .gart__tag {
+    display: inline-block;
+    font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; font-weight: 500;
+    color: var(--gold-deep); background: var(--gold-cream);
+    border-radius: 999px; padding: 6px 14px; margin-bottom: 18px;
+  }
+  .gart__title { font-family: var(--serif); font-size: clamp(32px, 4.6vw, 48px); font-weight: 600; line-height: 1.15; margin: 0 0 18px; }
+  .gart__byline { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--muted); }
+  .gart__dot { color: var(--gold); }
+
+  .gart__hero {
+    width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
+    border-radius: 10px; margin-bottom: 46px;
+  }
+
+  /* Two-column layout: sticky TOC sidebar + article body. Both live inside
+     this single grid so the sidebar's sticky containment naturally ends at
+     the body's last line — not floating over the CTA/related sections below,
+     which sit outside this container entirely. */
+  .gart-layout {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+  }
+  .gart-layout--solo { grid-template-columns: 1fr; }
+
+  /* TOC sidebar (desktop/tablet) */
+  .gtoc { position: sticky; top: calc(var(--nav-h, 80px) + 3px + 28px); }
+  .gtoc__label {
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
+    color: var(--gold-deep); margin: 0 0 18px;
+  }
+  .gtoc__list { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line-2); }
+  .gtoc__item a {
+    display: block; margin-left: -1px; padding: 9px 0 9px 20px;
+    font-size: 13.5px; line-height: 1.4; color: var(--muted); text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .gtoc__item--h3 a { padding-left: 34px; font-size: 12.5px; }
+  .gtoc__item a:hover { color: var(--gold-deep); }
+  .gtoc__item a.is-active { color: var(--gold-deep); font-weight: 600; border-left-color: var(--gold-dark); }
+
+  /* "In This Article" accordion (mobile/narrow tablet only) */
+  .gtoc-mobile { display: none; margin-bottom: 36px; border: 1px solid var(--line-2); border-radius: 8px; }
+  .gtoc-mobile__head {
+    all: unset;
+    box-sizing: border-box;
+    width: 100%; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    padding: 16px 20px;
+    font-family: var(--sans); font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; font-weight: 500;
+    color: var(--gold-deep);
+  }
+  .gtoc-mobile__chev {
+    flex: none; width: 9px; height: 9px;
+    border-right: 1.5px solid var(--gold-deep); border-bottom: 1.5px solid var(--gold-deep);
+    transform: rotate(45deg); transition: transform .3s ease;
+  }
+  .gtoc-mobile.is-open .gtoc-mobile__chev { transform: rotate(225deg); }
+  .gtoc-mobile__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+  .gtoc-mobile.is-open .gtoc-mobile__panel { grid-template-rows: 1fr; }
+  .gtoc-mobile__panel-body { overflow: hidden; min-height: 0; }
+  .gtoc-mobile__list { list-style: none; margin: 0; padding: 4px 20px 18px; display: flex; flex-direction: column; gap: 2px; }
+  .gtoc-mobile__item a { display: block; padding: 7px 0; font-size: 14px; color: var(--muted); text-decoration: none; transition: color .2s ease; }
+  .gtoc-mobile__item--h3 a { padding-left: 18px; font-size: 13px; }
+  .gtoc-mobile__item a:hover { color: var(--gold-deep); }
+  .gtoc-mobile__item a.is-active { color: var(--gold-deep); font-weight: 600; }
+
+  /* Article body typography */
+  .gart__body {
+    font-family: var(--sans); font-weight: 300; font-size: 16.5px; line-height: 1.85; color: var(--ink);
+  }
+  .gart__body :global(p) { margin: 0 0 26px; }
+  .gart__body :global(h2),
+  .gart__body :global(h3) { scroll-margin-top: calc(var(--nav-h, 80px) + 28px); }
+  .gart__body :global(h2) {
+    font-family: var(--serif); font-weight: 600; font-size: 27px; line-height: 1.3;
+    margin: 52px 0 20px; color: var(--ink);
+  }
+  .gart__body :global(h3) {
+    font-family: var(--serif); font-weight: 600; font-size: 21px; line-height: 1.3;
+    margin: 38px 0 16px; color: var(--ink);
+  }
+  .gart__body :global(ul),
+  .gart__body :global(ol) { margin: 0 0 26px; padding-left: 22px; }
+  .gart__body :global(li) { margin-bottom: 10px; }
+  .gart__body :global(a) {
+    color: var(--gold-deep); text-decoration: underline; text-decoration-color: var(--gold);
+    text-underline-offset: 3px; transition: color .2s ease;
+  }
+  .gart__body :global(a:hover) { color: var(--gold-dark); }
+  .gart__body :global(strong) { font-weight: 500; color: var(--ink); }
+  .gart__body :global(blockquote) {
+    margin: 0 0 26px; padding: 4px 0 4px 22px; border-left: 2px solid var(--gold);
+    font-style: italic; color: var(--muted);
+  }
+  .gart__body :global(figure) { margin: 0 0 34px; }
+  .gart__body :global(figure img) { width: 100%; border-radius: 8px; display: block; }
+  .gart__body :global(figcaption) {
+    font-size: 13px; color: var(--faint); text-align: center; margin-top: 10px; font-style: italic;
+  }
+  .gart__body :global(table) { width: 100%; border-collapse: collapse; margin: 0 0 30px; font-size: 15px; }
+  .gart__body :global(th),
+  .gart__body :global(td) { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .gart__body :global(th) {
+    font-family: var(--sans); font-weight: 500; letter-spacing: .04em; text-transform: uppercase; font-size: 11.5px;
+    color: var(--gold-deep); border-bottom: 2px solid var(--gold-cream);
+  }
+
+  .gart__cta { margin-top: 60px; }
+
+  /* Related articles */
+  .grel { padding: 88px 28px 100px; }
+  .grel__title { font-family: var(--serif); font-size: clamp(24px, 3vw, 30px); font-weight: 600; text-align: center; margin: 0 0 40px; }
+  .grel__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+
+  @media (max-width: 900px) {
+    .grel__grid { grid-template-columns: repeat(2, 1fr); }
+    /* No room for a side column — the TOC becomes the accordion above the body instead. */
+    .gart-layout { grid-template-columns: 1fr; gap: 0; }
+    .gtoc { display: none; }
+    .gtoc-mobile { display: block; }
+  }
+  @media (max-width: 640px) {
+    .gart__body { font-size: 15.5px; }
+    .gart__cta { margin-top: 52px; }
+    .grel__grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gprogress__fill { transition: none; }
+    .gtoc-mobile__panel { transition: none; }
+    .gtoc-mobile__chev { transition: none; }
+  }
+</style>
+
+<script>
+  // Live header height → --nav-h, so the progress bar, the sticky TOC's top
+  // offset, and each heading's scroll-margin all stay correct even when the
+  // nav wraps to a second line at narrower widths.
+  const header = document.querySelector<HTMLElement>('.hdr');
+  let navH = header?.offsetHeight ?? 0;
+  const applyNavH = () => {
+    navH = header?.offsetHeight ?? 0;
+    document.documentElement.style.setProperty('--nav-h', `${navH}px`);
+  };
+  applyNavH();
+  if (header && 'ResizeObserver' in window) {
+    new ResizeObserver(applyNavH).observe(header);
+  } else {
+    window.addEventListener('resize', applyNavH);
+  }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Reading progress bar — 0% at the article body's top edge, 100% once its
+  // bottom edge reaches the reading line (just below the sticky nav/bar).
+  const fill = document.querySelector<HTMLElement>('[data-progress-fill]');
+  const articleBody = document.querySelector<HTMLElement>('[data-article-body]');
+
+  if (fill && articleBody) {
+    let ticking = false;
+    const updateProgress = () => {
+      const rect = articleBody.getBoundingClientRect();
+      const distancePastReadingLine = navH - rect.top;
+      const progressed = Math.min(Math.max(distancePastReadingLine, 0), rect.height);
+      fill.style.width = `${rect.height > 0 ? (progressed / rect.height) * 100 : 0}%`;
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(updateProgress);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    updateProgress();
+  }
+
+  // Table of contents — active-section highlighting + offset smooth-scroll.
+  // Desktop sidebar and mobile accordion share the same data-toc-link slugs,
+  // so both stay in sync from one observer/click handler.
+  const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]'));
+  const headingEls = tocLinks
+    .map((link) => document.getElementById(link.dataset.tocLink ?? ''))
+    .filter((el): el is HTMLElement => !!el);
+
+  const setActiveToc = (id: string) => {
+    tocLinks.forEach((link) => link.classList.toggle('is-active', link.dataset.tocLink === id));
+  };
+
+  if (headingEls.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length === 0) return;
+        const topMost = visible.reduce((a, b) => (a.boundingClientRect.top < b.boundingClientRect.top ? a : b));
+        setActiveToc(topMost.target.id);
+      },
+      { rootMargin: `-${navH + 16}px 0px -60% 0px`, threshold: 0 },
+    );
+    headingEls.forEach((el) => io.observe(el));
+  }
+
+  tocLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const id = link.dataset.tocLink;
+      const target = id ? document.getElementById(id) : null;
+      if (!target) return;
+      e.preventDefault();
+      const offset = navH + 3 + 20;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
+      history.pushState(null, '', `#${id}`);
+
+      // Collapse the mobile accordion after jumping, if that's where the click came from.
+      const mobileWrap = link.closest<HTMLElement>('[data-toc-mobile]');
+      if (mobileWrap?.classList.contains('is-open')) {
+        mobileWrap.classList.remove('is-open');
+        mobileWrap.querySelector('[data-toc-mobile-toggle]')?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // Mobile "In This Article" accordion toggle.
+  const mobileToc = document.querySelector<HTMLElement>('[data-toc-mobile]');
+  const mobileToggle = mobileToc?.querySelector<HTMLButtonElement>('[data-toc-mobile-toggle]');
+  mobileToggle?.addEventListener('click', () => {
+    const open = mobileToc?.classList.toggle('is-open') ?? false;
+    mobileToggle.setAttribute('aria-expanded', String(open));
+  });
+</script>

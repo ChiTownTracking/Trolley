@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { gallery } from '../data/site';
+---
+<BaseLayout
+  title="Gallery — ChiTown Trolley"
+  description="A close-up look at the ChiTown white trolleys and super coach — interiors, exteriors, and details."
+>
+  <PageHero eyebrow="Gallery" pb={56}>
+    The trolleys, <em class="grad">up close</em>
+  </PageHero>
+
+  <section class="gal wrap wrap-1140" style="max-width:1200px">
+    {gallery.map((g, i) => (
+      <button type="button" class="gal__cell" data-index={i} aria-label="View photo larger">
+        <img src={g.src} alt={g.alt} class="gal__img" />
+      </button>
+    ))}
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lb" data-lightbox hidden role="dialog" aria-modal="true" aria-label="Photo lightbox">
+    <button type="button" class="lb__nav lb__prev" data-lb-prev aria-label="Previous photo">‹</button>
+    <img class="lb__img" data-lb-img src="" alt="" />
+    <button type="button" class="lb__nav lb__next" data-lb-next aria-label="Next photo">›</button>
+    <button type="button" class="lb__close" data-lb-close aria-label="Close">×</button>
+    <p class="lb__count" data-lb-count></p>
+  </div>
+</BaseLayout>
+
+<style>
+  .gal {
+    padding: 0 28px 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: 18px;
+  }
+  .gal__cell {
+    all: unset;
+    box-sizing: border-box;
+    cursor: zoom-in;
+    display: block;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .gal__img {
+    width: 100%;
+    aspect-ratio: 5 / 3.4;
+    object-fit: cover;
+    display: block;
+    transition: transform .7s cubic-bezier(.22, .6, .2, 1);
+  }
+  .gal__cell:hover .gal__img,
+  .gal__cell:focus-visible .gal__img { transform: scale(1.045); }
+
+  /* Lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(20, 18, 14, .92);
+    display: flex; align-items: center; justify-content: center;
+    padding: 48px; cursor: zoom-out;
+  }
+  .lb__img { max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 24px 80px rgba(0, 0, 0, .5); cursor: default; }
+  .lb__nav {
+    all: unset; box-sizing: border-box; cursor: pointer;
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 52px; height: 52px;
+    border: 1px solid rgba(240, 217, 168, .5); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold-light); font-size: 20px;
+    transition: background .25s ease;
+  }
+  .lb__nav:hover { background: rgba(240, 217, 168, .12); }
+  .lb__prev { left: 20px; }
+  .lb__next { right: 20px; }
+  .lb__close {
+    all: unset; box-sizing: border-box; cursor: pointer;
+    position: absolute; top: 20px; right: 20px;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold-light); font-size: 24px;
+  }
+  .lb__count {
+    position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    color: rgba(240, 217, 168, .8); margin: 0;
+  }
+</style>
+
+<script define:vars={{ gallery }}>
+  const lb = document.querySelector('[data-lightbox]');
+  const lbImg = lb.querySelector('[data-lb-img]');
+  const lbCount = lb.querySelector('[data-lb-count]');
+  let current = -1;
+
+  function show(i) {
+    current = (i + gallery.length) % gallery.length;
+    const item = gallery[current];
+    lbImg.src = item.src;
+    lbImg.alt = item.alt;
+    lbCount.textContent = `${current + 1} of ${gallery.length}`;
+  }
+  function open(i) { show(i); lb.hidden = false; document.body.style.overflow = 'hidden'; }
+  function close() { lb.hidden = true; current = -1; document.body.style.overflow = ''; }
+
+  document.querySelectorAll('.gal__cell').forEach((cell) => {
+    cell.addEventListener('click', () => open(Number(cell.dataset.index)));
+  });
+
+  lb.querySelector('[data-lb-prev]').addEventListener('click', (e) => { e.stopPropagation(); show(current - 1); });
+  lb.querySelector('[data-lb-next]').addEventListener('click', (e) => { e.stopPropagation(); show(current + 1); });
+  lb.querySelector('[data-lb-close]').addEventListener('click', (e) => { e.stopPropagation(); close(); });
+  lbImg.addEventListener('click', (e) => e.stopPropagation());
+  lb.addEventListener('click', close); // click backdrop to close
+
+  document.addEventListener('keydown', (e) => {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') show(current - 1);
+    else if (e.key === 'ArrowRight') show(current + 1);
+  });
+</script>

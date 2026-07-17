@@ -1,0 +1,78 @@
+---
+import { site, navAll, hasPhone, hasInstagram, hasFacebook } from '../data/site';
+---
+<footer class="ftr">
+  <div class="ftr__inner wrap">
+    <a href="/" class="ftr__brand" aria-label="ChiTown Trolley home">
+      <span class="ftr__brandRow">
+        <span class="ftr__rule"></span>
+        <span class="ftr__name">CHITOWN</span>
+        <span class="ftr__rule ftr__rule--r"></span>
+      </span>
+      <span class="ftr__sub">TROLLEY</span>
+    </a>
+
+    <nav class="ftr__nav" aria-label="Footer">
+      {navAll.map((n) => <a href={n.href} class="ftr__link">{n.label}</a>)}
+    </nav>
+
+    <div class="ftr__contact">
+      {hasPhone ? (
+        <a href={site.phoneHref} class="ftr__cLink">{site.phone}</a>
+      ) : (
+        <span class="ftr__cLink">{site.phone}</span>
+      )}
+      <span class="ftr__dot">◆</span>
+      <a href={`mailto:${site.email}`} class="ftr__cLink">{site.email}</a>
+      <span class="ftr__dot">◆</span>
+      <span>{site.city}</span>
+    </div>
+
+    {(hasInstagram || hasFacebook) && (
+      <div class="ftr__social">
+        {hasInstagram && <a href={site.instagram} aria-label="Instagram" class="ftr__soc">IG</a>}
+        {hasFacebook && <a href={site.facebook} aria-label="Facebook" class="ftr__soc">FB</a>}
+      </div>
+    )}
+
+    <p class="ftr__legal">© 2026 ChiTown Trolley · Licensed &amp; insured · Chicagoland's wedding trolley</p>
+  </div>
+</footer>
+
+<style>
+  .ftr { background: var(--paper); border-top: 1px solid var(--line); padding: 64px 28px 40px; }
+  .ftr__inner { display: flex; flex-direction: column; align-items: center; gap: 32px; }
+
+  .ftr__brand { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--ink); }
+  .ftr__brandRow { display: flex; align-items: center; gap: 12px; }
+  .ftr__rule { display: block; width: 34px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dark)); }
+  .ftr__rule--r { background: linear-gradient(90deg, var(--gold-dark), transparent); }
+  .ftr__name { font-family: var(--serif); font-weight: 600; font-size: 24px; letter-spacing: .14em; line-height: 1; }
+  .ftr__sub { font-size: 10px; letter-spacing: .5em; color: var(--gold-dark); font-weight: 500; margin-left: .5em; }
+
+  .ftr__nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 26px; }
+  .ftr__link {
+    font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none; transition: color .25s ease;
+  }
+  .ftr__link:hover { color: var(--gold-deep); }
+
+  .ftr__contact {
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+    gap: 12px 28px; font-weight: 300; font-size: 13.5px; color: var(--muted);
+  }
+  .ftr__cLink { color: var(--muted); text-decoration: none; transition: color .25s ease; }
+  .ftr__cLink:hover { color: var(--gold-deep); }
+  .ftr__dot { color: var(--gold); }
+
+  .ftr__social { display: flex; gap: 14px; }
+  .ftr__soc {
+    width: 44px; height: 44px; border: 1px solid var(--line-2); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold-deep); text-decoration: none; font-size: 11px;
+    transition: border-color .25s ease;
+  }
+  .ftr__soc:hover { border-color: var(--gold); }
+
+  .ftr__legal { font-weight: 300; font-size: 12px; letter-spacing: .08em; color: var(--faint); margin: 0; }
+</style>

@@ -1,0 +1,44 @@
+---
+import { site } from '../data/site';
+
+/** Optional overrides — defaults keep the site-wide band unchanged. */
+interface Props {
+  title?: string;
+  sub?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+const {
+  title = "Your date won't wait — let's hold it",
+  sub = `Call ${site.phone} or request a quote in under two minutes.`,
+  ctaLabel = 'Get a Free Quote',
+  ctaHref = '/contact',
+} = Astro.props;
+---
+<section class="rv cta-band">
+  <h2 class="cta-band__title">{title}</h2>
+  <p class="cta-band__sub">{sub}</p>
+  <a href={ctaHref} class="btn-invert">{ctaLabel}</a>
+</section>
+
+<style>
+  .cta-band {
+    background: var(--grad-gold);
+    padding: 72px 28px;
+    text-align: center;
+  }
+  .cta-band__title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(26px, 3.4vw, 42px);
+    color: var(--paper);
+    margin: 0 0 10px;
+  }
+  .cta-band__sub {
+    font-weight: 300;
+    font-size: 15px;
+    color: rgba(253, 252, 250, .85);
+    margin: 0 0 32px;
+    letter-spacing: .04em;
+  }
+</style>

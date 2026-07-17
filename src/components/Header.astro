@@ -1,0 +1,319 @@
+---
+import { navMain, navMore } from '../data/site';
+
+// Normalize the current path (strip trailing slash) for active matching.
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActive = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'));
+const moreActive = navMore.some((n) => isActive(n.href));
+---
+<header class="hdr">
+  <div class="hdr__inner wrap wrap-wide">
+    <a href="/" class="brand" aria-label="ChiTown Trolley home">
+      <span class="brand__row">
+        <span class="brand__rule"></span>
+        <span class="brand__name">CHITOWN</span>
+        <span class="brand__rule brand__rule--r"></span>
+      </span>
+      <span class="brand__sub">TROLLEY</span>
+    </a>
+
+    <!-- Below ~1024px this whole block becomes a slide-in drawer (see the
+         max-width media query) — `display:contents` keeps it a no-op wrapper
+         at desktop widths so today's inline flex layout is untouched there. -->
+    <div class="hdr__panel" id="hdr-mobile-panel" data-nav-panel>
+      <nav class="nav" aria-label="Main">
+        {navMain.map((n) => (
+          <a href={n.href} class:list={['nav__link', { active: isActive(n.href) }]}>
+            {n.html ? <Fragment set:html={n.html} /> : n.label}
+          </a>
+        ))}
+
+        <div class="more" data-more-menu>
+          <button
+            type="button"
+            class:list={['nav__link', 'more__btn', { active: moreActive }]}
+            aria-expanded="false"
+            aria-haspopup="true"
+            data-more-toggle
+          >
+            More
+            <svg class="more__caret" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="more__menu" data-more-panel hidden>
+            {navMore.map((n) => (
+              <a href={n.href} class:list={['more__item', { active: isActive(n.href) }]}>{n.label}</a>
+            ))}
+          </div>
+        </div>
+      </nav>
+
+      <div class="hdr__cta">
+        <a href="/reservation" class="btn-gold btn-gold--sm">Reservation</a>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="hdr__burger"
+      data-menu-toggle
+      aria-expanded="false"
+      aria-controls="hdr-mobile-panel"
+      aria-label="Open menu"
+    >
+      <span class="hdr__burger-line" aria-hidden="true"></span>
+      <span class="hdr__burger-line" aria-hidden="true"></span>
+      <span class="hdr__burger-line" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div class="hdr__backdrop" data-menu-backdrop aria-hidden="true"></div>
+</header>
+
+<style>
+  .hdr {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: rgba(253, 252, 250, .92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .hdr__inner {
+    padding-block: 12px;
+    min-height: 52px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(8px, 1.6vw, 20px);
+  }
+
+  /* Brand / logo */
+  .brand {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    text-decoration: none; color: var(--ink); flex: none;
+  }
+  .brand__row { display: flex; align-items: center; gap: clamp(5px, .8vw, 10px); }
+  .brand__rule { display: block; width: clamp(14px, 2.1vw, 26px); height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dark)); }
+  .brand__rule--r { background: linear-gradient(90deg, var(--gold-dark), transparent); }
+  .brand__name { font-family: var(--serif); font-weight: 600; font-size: clamp(15.5px, 1.7vw, 21px); letter-spacing: .14em; line-height: 1; }
+  .brand__sub { font-size: clamp(7.5px, .77vw, 9.5px); letter-spacing: .44em; color: var(--gold-dark); font-weight: 500; margin-left: .44em; }
+
+  /* Nav */
+  .nav {
+    display: flex; flex-wrap: nowrap; gap: clamp(10px, 1.75vw, 22px);
+    align-items: center; justify-content: center; min-width: 0;
+  }
+  .nav__link {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 12px; letter-spacing: .16em; font-weight: 400;
+    text-transform: uppercase; text-decoration: none;
+    padding: 4px 0; white-space: nowrap;
+    color: var(--ink);
+    border-bottom: 1px solid transparent;
+    transition: color .25s ease;
+  }
+  .nav__link:hover { color: var(--gold-dark); }
+  .nav__link.active { color: var(--gold-deep); border-bottom-color: var(--gold); }
+
+  /* Festive "Christmas Trolley" link — keeps its colors on hover/active.
+     :global() is required because these spans are injected via set:html
+     and don't carry Astro's scoped-style attribute. */
+  .nav__link :global(.xmas-c) { color: #00BF4C; }
+  .nav__link :global(.xmas-t) { color: #C8102E; }
+
+  /* More dropdown */
+  .more { position: relative; }
+  .more__btn { display: flex; align-items: center; gap: 7px; }
+  .more__caret { transition: transform .25s ease; }
+  .more.open .more__caret { transform: rotate(180deg); }
+  .more__menu {
+    position: absolute; top: calc(100% + 19.5px); left: 50%; transform: translateX(-50%);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--gold);
+    box-shadow: 0 14px 40px rgba(26, 26, 26, .12);
+    min-width: 190px;
+    display: flex; flex-direction: column;
+    padding: 8px 0; z-index: 70;
+  }
+  .more__item {
+    font-size: 11.5px; letter-spacing: .16em; font-weight: 400;
+    text-decoration: none; text-transform: uppercase;
+    padding: 11px 22px; white-space: nowrap;
+    color: var(--ink);
+    transition: color .2s ease, background .2s ease;
+  }
+  .more__item:hover { color: var(--gold-deep); background: var(--cream); }
+  .more__item.active { color: var(--gold-deep); }
+
+  .hdr__cta { display: flex; align-items: center; gap: 20px; flex: none; }
+
+  /* Hamburger (hidden on desktop — the panel stays inline there via `contents`) */
+  .hdr__burger {
+    display: none;
+    position: relative; z-index: 66; flex: none;
+    width: 44px; height: 44px; margin-left: 8px;
+    background: transparent; border: 0; cursor: pointer; padding: 0;
+    flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  }
+  .hdr__burger-line {
+    display: block; width: 22px; height: 1.5px; background: var(--ink);
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  .hdr__burger.is-open .hdr__burger-line:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hdr__burger.is-open .hdr__burger-line:nth-child(2) { opacity: 0; }
+  .hdr__burger.is-open .hdr__burger-line:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* Backdrop behind the mobile drawer */
+  .hdr__backdrop {
+    display: none;
+  }
+
+  /* On desktop the panel is an invisible wrapper — nav + reservation button
+     keep flowing inline in .hdr__inner exactly as before this change. */
+  .hdr__panel { display: contents; }
+
+  @media (max-width: 1023px) {
+    .hdr__burger { display: flex; }
+
+    .hdr__backdrop {
+      display: block; position: fixed; inset: 0; z-index: 64;
+      background: rgba(20, 18, 14, .45);
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    .hdr__backdrop.is-open { opacity: 1; pointer-events: auto; }
+
+    /* The panel becomes the real slide-in drawer. */
+    .hdr__panel {
+      display: flex; flex-direction: column; align-items: stretch;
+      position: fixed; top: 0; right: 0; z-index: 65;
+      width: min(320px, 86vw); height: 100dvh;
+      background: var(--paper);
+      padding: 96px 28px 32px;
+      box-shadow: -16px 0 44px rgba(26, 26, 26, .18);
+      transform: translateX(100%);
+      /* visibility (not just the off-screen transform) must gate the closed
+         state — a fixed+transformed box alone can still get counted toward
+         the document's scrollable width in some mobile browsers, which is
+         what let the "closed" drawer be reached by scrolling sideways.
+         visibility flips to hidden only after the slide-out transition
+         finishes (transition-delay), so the close animation still plays. */
+      visibility: hidden;
+      transition: transform .35s cubic-bezier(.22, .6, .2, 1), visibility 0s linear .35s;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .hdr__panel.is-open {
+      transform: translateX(0);
+      visibility: visible;
+      transition: transform .35s cubic-bezier(.22, .6, .2, 1);
+    }
+
+    .nav {
+      flex-direction: column; align-items: stretch; justify-content: flex-start;
+      gap: 0; flex-wrap: nowrap;
+    }
+    .nav__link {
+      width: 100%; padding: 13px 2px;
+      font-size: 13px; letter-spacing: .14em;
+      border-bottom: 1px solid var(--line);
+    }
+    .more { width: 100%; }
+    .more__btn { width: 100%; justify-content: space-between; }
+    /* Inline accordion instead of a floating dropdown, so it pushes the rest
+       of the drawer down rather than overlapping it. */
+    .more__menu {
+      position: static; transform: none;
+      border: 0; border-top: none; box-shadow: none;
+      background: var(--cream);
+      min-width: 0; width: 100%;
+      padding: 4px 0 4px 18px;
+    }
+    .more__item { padding: 12px 4px; }
+
+    .hdr__cta { width: 100%; margin-top: 22px; }
+    .hdr__cta .btn-gold {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; min-height: 44px;
+    }
+  }
+</style>
+
+<script>
+  // "More" dropdown: toggle, close on outside click / Escape.
+  const menu = document.querySelector<HTMLElement>('[data-more-menu]');
+  const toggle = menu?.querySelector<HTMLButtonElement>('[data-more-toggle]');
+  const panel = menu?.querySelector<HTMLElement>('[data-more-panel]');
+
+  function setOpen(open: boolean) {
+    if (!menu || !toggle || !panel) return;
+    menu.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    panel.hidden = !open;
+  }
+
+  toggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setOpen(menu?.classList.contains('open') ? false : true);
+  });
+  document.addEventListener('click', (e) => {
+    if (menu && !menu.contains(e.target as Node)) setOpen(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+</script>
+
+<script>
+  // Mobile nav drawer: hamburger toggle, backdrop, Escape, and auto-close on
+  // link click or on resizing back up into the desktop layout.
+  const burger = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const navPanel = document.querySelector<HTMLElement>('[data-nav-panel]');
+  const menuBackdrop = document.querySelector<HTMLElement>('[data-menu-backdrop]');
+
+  // iOS Safari ignores `overflow: hidden` on body for scroll/bounce purposes,
+  // so the body is also pinned with `position: fixed` at its pre-open scroll
+  // offset (via inline `top`) while the drawer is open, then unpinned and
+  // scrolled back to that exact offset on close.
+  let lockedScrollY = 0;
+
+  const lockScroll = () => {
+    lockedScrollY = window.scrollY;
+    document.body.classList.add('no-scroll');
+    document.body.style.top = `-${lockedScrollY}px`;
+  };
+
+  const unlockScroll = () => {
+    document.body.classList.remove('no-scroll');
+    document.body.style.top = '';
+    window.scrollTo(0, lockedScrollY);
+  };
+
+  const setMenuOpen = (open: boolean) => {
+    burger?.classList.toggle('is-open', open);
+    burger?.setAttribute('aria-expanded', String(open));
+    navPanel?.classList.toggle('is-open', open);
+    menuBackdrop?.classList.toggle('is-open', open);
+    if (open) lockScroll();
+    else unlockScroll();
+  };
+
+  burger?.addEventListener('click', () => setMenuOpen(!navPanel?.classList.contains('is-open')));
+  menuBackdrop?.addEventListener('click', () => setMenuOpen(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenuOpen(false);
+  });
+  navPanel?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenuOpen(false)));
+
+  // If the viewport grows back into the desktop range (e.g. rotating a
+  // tablet, or resizing a browser window), drop the drawer state entirely.
+  const desktopMq = window.matchMedia('(min-width: 1024px)');
+  desktopMq.addEventListener('change', (e) => {
+    if (e.matches) setMenuOpen(false);
+  });
+</script>

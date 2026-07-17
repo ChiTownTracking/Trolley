@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site, eventTypes, hasPhone, hasInstagram, hasFacebook } from '../data/site';
+---
+<BaseLayout
+  title="Get a Quote — ChiTown Trolley"
+  description="Tell us about your event and we'll reply within one business day. Chicago wedding & event trolley quotes."
+>
+  <PageHero eyebrow="Get a Quote" pb={48}>
+    Let's hold <em class="grad">your date</em>
+    <p slot="lead">Tell us about your event and we'll reply within one business day.</p>
+  </PageHero>
+
+  <section class="contact wrap wrap-1060">
+    <div class="contact__formcol">
+      <form class="qform" data-quote-form>
+        <label class="field">
+          <span class="field__label">Name</span>
+          <input required name="name" type="text" placeholder="Your full name" class="field__control" />
+        </label>
+        <label class="field">
+          <span class="field__label">Email</span>
+          <input required name="email" type="email" placeholder="you@example.com" class="field__control" />
+        </label>
+        <label class="field">
+          <span class="field__label">Phone</span>
+          <input name="phone" type="tel" placeholder="(312) 555-0000" class="field__control" />
+        </label>
+        <label class="field">
+          <span class="field__label">Event Date</span>
+          <input name="date" type="date" class="field__control" />
+        </label>
+        <label class="field">
+          <span class="field__label">Event Type</span>
+          <select name="type" class="field__control">
+            {eventTypes.map((t) => <option>{t}</option>)}
+          </select>
+        </label>
+        <label class="field">
+          <span class="field__label">Passengers</span>
+          <input name="passengers" type="number" min="1" max="36" placeholder="Up to 36" class="field__control" />
+        </label>
+        <label class="field field--full">
+          <span class="field__label">Message</span>
+          <textarea name="message" rows="4" placeholder="Tell us about your day — venues, timing, anything at all" class="field__control"></textarea>
+        </label>
+        <div class="qform__submit">
+          <button type="submit" class="btn-gold">Request My Quote</button>
+        </div>
+      </form>
+
+      <div class="confirm" data-quote-confirm hidden>
+        <span class="confirm__mark">✳</span>
+        <h2 class="confirm__title">Thank you</h2>
+        <p class="confirm__body">Your request is on its way. We'll be in touch within one business day — usually much sooner.</p>
+        <button type="button" class="link-gold" data-quote-reset>Send another request</button>
+      </div>
+    </div>
+
+    <aside class="aside">
+      <div>
+        <p class="aside__eyebrow">Prefer to talk?</p>
+        {hasPhone ? (
+          <a href={site.phoneHref} class="aside__phone">{site.phone}</a>
+        ) : (
+          <span class="aside__phone">{site.phone}</span>
+        )}
+        <a href={`mailto:${site.email}`} class="aside__email">{site.email}</a>
+      </div>
+      <div class="rule-gold"></div>
+      <div>
+        <p class="aside__eyebrow">Serving Chicago &amp; Suburbs</p>
+        <p class="aside__area">{site.serviceArea}</p>
+      </div>
+      {(hasInstagram || hasFacebook) && (
+        <>
+          <div class="rule-gold"></div>
+          <div class="aside__social">
+            {hasInstagram && <a href={site.instagram} aria-label="Instagram" class="aside__soc">IG</a>}
+            {hasFacebook && <a href={site.facebook} aria-label="Facebook" class="aside__soc">FB</a>}
+          </div>
+        </>
+      )}
+    </aside>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact {
+    padding: 0 28px 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 64px;
+    align-items: start;
+  }
+  .qform { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .qform__submit { grid-column: 1 / -1; margin-top: 8px; }
+
+  .confirm__title { font-family: var(--serif); font-size: 28px; font-weight: 600; margin: 0; }
+  .confirm__body { font-weight: 300; font-size: 15px; line-height: 1.8; color: var(--muted); margin: 0; max-width: 38ch; }
+
+  .aside { display: flex; flex-direction: column; gap: 36px; }
+  .aside__eyebrow { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-deep); font-weight: 500; margin: 0 0 12px; }
+  .aside__phone {
+    font-family: var(--serif); font-size: 30px; font-weight: 600;
+    color: var(--ink); text-decoration: none; display: block; transition: color .25s ease;
+  }
+  .aside__phone:hover { color: var(--gold-deep); }
+  .aside__email { font-weight: 300; font-size: 15px; color: var(--muted); text-decoration: none; display: block; margin-top: 6px; transition: color .25s ease; }
+  .aside__email:hover { color: var(--gold-deep); }
+  .aside__area { font-weight: 300; font-size: 14.5px; line-height: 2; color: var(--muted); margin: 0; }
+  .aside__social { display: flex; gap: 16px; align-items: center; }
+  .aside__soc {
+    width: 40px; height: 40px; border: 1px solid var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold-deep); text-decoration: none; font-size: 12px; letter-spacing: .05em;
+    transition: background .25s ease;
+  }
+  .aside__soc:hover { background: var(--cream); }
+
+  @media (max-width: 520px) {
+    .qform { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  // Client-side "thank you" swap — mirrors the original's in-place confirmation.
+  const form = document.querySelector<HTMLFormElement>('[data-quote-form]');
+  const confirm = document.querySelector<HTMLElement>('[data-quote-confirm]');
+  const reset = document.querySelector<HTMLButtonElement>('[data-quote-reset]');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    form.hidden = true;
+    if (confirm) confirm.hidden = false;
+    window.scrollTo(0, 0);
+  });
+  reset?.addEventListener('click', () => {
+    if (confirm) confirm.hidden = true;
+    if (form) { form.hidden = false; form.reset(); }
+  });
+</script>

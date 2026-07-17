@@ -1,0 +1,33 @@
+---
+import Eyebrow from './Eyebrow.astro';
+
+/**
+ * Centered page intro used across Fleet / Services / About / Gallery /
+ * FAQ / Contact / Reservation. The heading (with its gold <em>) goes in
+ * the default slot; an optional lead paragraph in the "lead" slot.
+ */
+interface Props {
+  eyebrow: string;
+  /** Bottom padding of the hero block (varies per page in the original). */
+  pb?: number;
+}
+const { eyebrow, pb = 56 } = Astro.props;
+const hasLead = Astro.slots.has('lead');
+---
+<section class="page-hero" style={`padding-bottom:${pb}px`}>
+  <Eyebrow label={eyebrow} size="md" mb={16} />
+  <h1 class="h-page"><slot /></h1>
+  {hasLead && <p class="page-hero__lead"><slot name="lead" /></p>}
+</section>
+
+<style>
+  .page-hero { text-align: center; padding: 88px 28px 56px; }
+  .page-hero .h-page { margin-inline: auto; }
+  .page-hero__lead {
+    font-weight: 300;
+    font-size: 15.5px;
+    color: var(--muted);
+    margin: 18px auto 0;
+    max-width: 52ch;
+  }
+</style>

@@ -1,0 +1,90 @@
+---
+import '../styles/global.css';
+import TopBar from '../components/TopBar.astro';
+import Header from '../components/Header.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Hide the gold CTA band above the footer (e.g. on Contact/Reservation). */
+  hideCta?: boolean;
+  /** Root-relative or absolute og:image (e.g. an article's cover photo). */
+  image?: string;
+  /** og:type — pages like guide articles should pass 'article'. */
+  ogType?: 'website' | 'article';
+  /** Optional JSON-LD object(s) injected as a <script type="application/ld+json">. */
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title = 'ChiTown Trolley — Chicago Wedding Trolley Transportation',
+  description = 'Timeless white trolley transportation for weddings and events across Chicagoland. Owner-operated, licensed and insured.',
+  hideCta = false,
+  image,
+  ogType = 'website',
+  schema,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const ogImage = image ? new URL(image, Astro.site ?? Astro.url).href : undefined;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+  {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+  <link rel="icon" href="/uploads/trolleyBliss.webp" type="image/webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <div class="site">
+    <TopBar />
+    <Header />
+    <main>
+      <slot />
+    </main>
+    {!hideCta && <CtaBand />}
+    <Footer />
+  </div>
+
+  <script>
+    // Reveal-on-scroll for any .rv element on the page.
+    const reveal = () => {
+      const els = document.querySelectorAll<HTMLElement>('.rv:not(.in)');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach((el) => el.classList.add('in'));
+        return;
+      }
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' },
+      );
+      els.forEach((el) => io.observe(el));
+    };
+    reveal();
+  </script>
+</body>
+</html>

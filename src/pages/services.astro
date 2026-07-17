@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import { services } from '../data/site';
+---
+<BaseLayout
+  title="Services — ChiTown Trolley"
+  description="Weddings, corporate events, proms, quinceañeras, bachelor & bachelorette parties, game days, airport runs, coach charters and nights out — across Chicagoland."
+>
+  <PageHero eyebrow="Services" pb={40}>
+    Any occasion worth <em class="grad">arriving for</em>
+  </PageHero>
+
+  <section class="svc wrap">
+    {services.map((sv, i) => {
+      const imgOrder = i % 2 === 0 ? 1 : 2;
+      const txtOrder = i % 2 === 0 ? 2 : 1;
+      return (
+        <div class="rv svc__row">
+          <img src={sv.img} alt={sv.title} class="svc__img" style={`order:${imgOrder}`} />
+          <div style={`order:${txtOrder}`}>
+            <Eyebrow label={sv.eyebrow} align="left" single size="xs" mb={14} />
+            <h2 class="svc__title">{sv.title}</h2>
+            <p class="svc__body">{sv.body}</p>
+            <a href="/contact" class="link-gold">Get a quote →</a>
+          </div>
+        </div>
+      );
+    })}
+  </section>
+</BaseLayout>
+
+<style>
+  .svc {
+    padding: 40px 28px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 88px;
+  }
+  .svc__row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 48px;
+    align-items: center;
+  }
+  .svc__img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border: 1px solid var(--line);
+  }
+  .svc__title { font-family: var(--serif); font-weight: 500; font-size: clamp(24px, 2.6vw, 34px); margin: 0 0 16px; }
+  .svc__body { font-weight: 300; font-size: 15px; line-height: 1.85; color: var(--muted); margin: 0 0 24px; }
+</style>

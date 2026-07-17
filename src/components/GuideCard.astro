@@ -1,0 +1,67 @@
+---
+import { categoryLabel, formatGuideDate } from '../data/guides';
+
+/** Article preview card — used in the /guides grid and the "related articles" rail. */
+interface Props {
+  href: string;
+  image: string;
+  imageAlt: string;
+  category: string;
+  title: string;
+  excerpt: string;
+  date: Date;
+  readTime: string;
+}
+const { href, image, imageAlt, category, title, excerpt, date, readTime } = Astro.props;
+---
+<a href={href} class="gcard" data-category={category}>
+  <div class="gcard__media">
+    <img src={image} alt={imageAlt} class="gcard__img" loading="lazy" decoding="async" />
+  </div>
+  <div class="gcard__body">
+    <span class="gcard__tag">{categoryLabel(category)}</span>
+    <h3 class="gcard__title">{title}</h3>
+    <p class="gcard__excerpt">{excerpt}</p>
+    <div class="gcard__meta">
+      <time datetime={date.toISOString()}>{formatGuideDate(date)}</time>
+      <span class="gcard__dot" aria-hidden="true">·</span>
+      <span>{readTime}</span>
+    </div>
+  </div>
+</a>
+
+<style>
+  .gcard {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: 0 2px 10px rgba(26, 26, 26, .04);
+    overflow: hidden;
+    transition: box-shadow .35s ease, transform .35s ease, border-color .35s ease;
+  }
+  .gcard:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(26, 26, 26, .14); border-color: var(--gold-cream); }
+  .gcard__media { aspect-ratio: 16 / 9; overflow: hidden; }
+  .gcard__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.22, .6, .2, 1); }
+  .gcard:hover .gcard__img { transform: scale(1.05); }
+  .gcard__body { padding: 22px 24px 26px; }
+  .gcard__tag {
+    display: inline-block;
+    font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 500;
+    color: var(--gold-deep); background: var(--gold-cream);
+    border-radius: 999px; padding: 5px 13px; margin-bottom: 14px;
+  }
+  .gcard__title {
+    font-family: var(--serif); font-size: 21px; font-weight: 600; line-height: 1.3;
+    margin: 0 0 10px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .gcard__excerpt {
+    font-weight: 300; font-size: 14px; line-height: 1.6; color: var(--muted);
+    margin: 0 0 16px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .gcard__meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--faint); }
+  .gcard__dot { color: var(--gold); }
+</style>

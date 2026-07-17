@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { faqs } from '../data/site';
+---
+<BaseLayout
+  title="FAQ — ChiTown Trolley"
+  description="Booking lead times, passenger capacity, minimums, climate control, BYOB rules, service area, decorating and chauffeurs — answered."
+>
+  <PageHero eyebrow="FAQ" pb={56}>
+    Good questions, <em class="grad">honest answers</em>
+  </PageHero>
+
+  <section class="faq wrap wrap-760">
+    {faqs.map((f, i) => (
+      <details class="faq__item" name="faq" open={i === 0}>
+        <summary class="faq__q">
+          <span class="faq__text">{f.q}</span>
+          <span class="faq__mark" aria-hidden="true"></span>
+        </summary>
+        <p class="faq__a">{f.a}</p>
+      </details>
+    ))}
+  </section>
+</BaseLayout>
+
+<style>
+  .faq { padding: 0 28px 100px; }
+  .faq__item { border-bottom: 1px solid var(--line); }
+  .faq__q {
+    cursor: pointer;
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 20px; padding: 24px 4px;
+  }
+  .faq__q::-webkit-details-marker { display: none; }
+  .faq__text { font-family: var(--serif); font-size: 21px; font-weight: 600; color: var(--ink); }
+  .faq__mark {
+    font-family: var(--serif); font-size: 24px; color: var(--gold-dark);
+    flex: none; font-weight: 400; line-height: 1;
+  }
+  .faq__mark::before { content: '+'; }
+  .faq__item[open] .faq__mark::before { content: '−'; }
+  .faq__a {
+    font-weight: 300; font-size: 15px; line-height: 1.85; color: var(--muted);
+    margin: 0; padding: 0 4px 26px; max-width: 60ch;
+  }
+</style>

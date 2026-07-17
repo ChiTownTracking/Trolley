@@ -1,0 +1,32 @@
+---
+/**
+ * The small "— LABEL —" divider used above most section headings.
+ * - `align`: centered (default) or left-aligned split-section variant.
+ * - `single`: drop the right-hand rule (left-aligned sections).
+ * - `size`: rule width / label size — sm (sections), md (page heroes), lg (home hero).
+ * - `mb`: bottom margin in px (varies per section in the original).
+ */
+interface Props {
+  label: string;
+  align?: 'center' | 'left';
+  single?: boolean;
+  size?: 'xs' | 'sm' | 'md' | 'lg';
+  mb?: number;
+}
+const { label, align = 'center', single = false, size = 'sm', mb = 0 } = Astro.props;
+
+const spec = {
+  xs: { rule: 30, font: '10.5px', ls: '.38em' },
+  sm: { rule: 36, font: '11px', ls: '.42em' },
+  md: { rule: 40, font: '11px', ls: '.42em' },
+  lg: { rule: 44, font: '11.5px', ls: '.42em' },
+}[size];
+---
+<div
+  class:list={['eyebrow', { center: align === 'center' }]}
+  style={mb ? `margin-bottom:${mb}px` : undefined}
+>
+  <span class="eyebrow__rule" style={`width:${spec.rule}px`}></span>
+  <span class="eyebrow__label" style={`font-size:${spec.font};letter-spacing:${spec.ls}`}>{label}</span>
+  {!single && <span class="eyebrow__rule eyebrow__rule--r" style={`width:${spec.rule}px`}></span>}
+</div>

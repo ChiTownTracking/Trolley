@@ -1,0 +1,251 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import { fleet } from '../../data/site';
+
+// Eagerly resolve every fleet gallery image to its built URL. Dropping a new
+// image into src/assets/fleet/<Folder>/ automatically adds it to that carousel.
+const galleryImages = import.meta.glob('/src/assets/fleet/**/*.{png,jpg,jpeg,webp}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>;
+
+const imagesForFolder = (folder: string): string[] =>
+  Object.entries(galleryImages)
+    .filter(([path]) => path.includes(`/fleet/${folder}/`))
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([, url]) => url);
+
+export function getStaticPaths() {
+  return fleet.map((vehicle) => ({
+    params: { slug: vehicle.slug },
+    props: { vehicle },
+  }));
+}
+
+const { vehicle } = Astro.props;
+const images = imagesForFolder(vehicle.folder);
+const hasGallery = images.length > 1;
+---
+<BaseLayout
+  title={`${vehicle.name} — ChiTown Trolley`}
+  description={vehicle.intro.slice(0, 155)}
+  hideCta={true}
+>
+  <article class="vd wrap wrap-1000">
+    <a href="/fleet" class="vd__back">← Back to Fleet</a>
+
+    <header class="vd__head">
+      <h1 class="vd__title">{vehicle.name}</h1>
+    
+    </header>
+
+    <!-- Image gallery / carousel -->
+    <div class="gal" data-gallery tabindex="0" aria-label={`${vehicle.name} photo gallery`}>
+      <div class="gal__main">
+        {images.map((src, i) => (
+          <img
+            src={src}
+            alt={`${vehicle.name} — photo ${i + 1}`}
+            class:list={['gal__img', { 'is-active': i === 0 }]}
+            data-gal-slide
+            loading={i === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+        ))}
+        {hasGallery && (
+          <>
+            <button type="button" class="gal__arrow gal__arrow--prev" data-gal-prev aria-label="Previous image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button type="button" class="gal__arrow gal__arrow--next" data-gal-next aria-label="Next image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </>
+        )}
+      </div>
+      {hasGallery && (
+        <div class="gal__thumbs" data-gal-thumbs>
+          {images.map((src, i) => (
+            <button type="button" class:list={['gal__thumb', { 'is-active': i === 0 }]} data-gal-thumb={i} aria-label={`Show image ${i + 1}`}>
+              <img src={src} alt="" loading="lazy" decoding="async" />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  <div class="vd__stats">
+        {vehicle.stats.map((s) => (
+          <div class="stat">
+            <span class="stat__label">{s.label}</span>
+            <span class="stat__value">{s.value}</span>
+          </div>
+        ))}
+      </div>
+    <!-- Narrative intro -->
+    <p class="vd__intro">{vehicle.intro}</p>
+
+    <!-- Features + Perfect For -->
+    <div class="vd__cols">
+      <section class="vd__block">
+        <h2 class="vd__h">Features &amp; Amenities</h2>
+        <ul class="vd__feats">
+          {vehicle.feats.map((f) => (
+            <li class="vd__feat"><span class="vd__diamond">◆</span>{f}</li>
+          ))}
+        </ul>
+      </section>
+      <section class="vd__block">
+        <h2 class="vd__h">Perfect For</h2>
+        <div class="vd__tags">
+          {vehicle.perfectFor.map((p) => <span class="vd__tag">{p}</span>)}
+        </div>
+      </section>
+    </div>
+
+    <!-- See it in action -->
+    <section class="vd__video">
+      <Eyebrow label="Take a Closer Look" align="left" single mb={12} />
+      <h2 class="vd__h vd__h--lg">See it in action</h2>
+      <!-- TODO: placeholder video — swap vehicle.video in src/data/site.ts for real footage -->
+      <div class="vid">
+        <iframe
+          class="vid__frame"
+          src={`https://www.youtube.com/embed/${vehicle.video}`}
+          title={`${vehicle.name} — video`}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section class="vd__cta">
+      <h2 class="vd__cta-title">Ready to reserve the <em class="grad">{vehicle.name}</em>?</h2>
+      <p class="vd__cta-body">Tell us your date and we'll confirm availability within one business day — no payment required to request.</p>
+      <div class="vd__cta-actions">
+        <a href={`/?vehicle=${encodeURIComponent(vehicle.quoteValue)}#getquote`} class="btn-gold">Get a Free Quote</a>
+        <a href="/reservation" class="btn-ghost">Reserve This Vehicle</a>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .vd { padding-block: 40px 96px; }
+  .vd__back {
+    display: inline-block; font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold-deep); text-decoration: none; margin-bottom: 26px; transition: color .2s ease;
+  }
+  .vd__back:hover { color: var(--gold-dark); }
+  .vd__head { margin-bottom: 34px; }
+  .vd__title { font-family: var(--serif); font-size: clamp(34px, 5vw, 52px); font-weight: 600; line-height: 1.08; margin: 0; }
+  .vd__stats { display: flex; flex-wrap: wrap; gap: 20px 40px; margin-top: 22px; }
+  .stat { display: flex; flex-direction: column; gap: 5px; }
+  .stat__label { font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-deep); }
+  .stat__value { font-family: var(--serif); font-size: 25px; font-weight: 600; line-height: 1; }
+
+  /* Gallery */
+  .gal { outline: none; }
+  .gal__main {
+    position: relative; height: clamp(300px, 46vw, 540px);
+    border-radius: 10px; overflow: hidden; background: var(--cream);
+  }
+  .gal__img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    opacity: 0; transition: opacity .5s ease;
+  }
+  .gal__img.is-active { opacity: 1; }
+  .gal__arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+    width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
+    background: rgba(253, 252, 250, .85); color: var(--ink);
+    display: grid; place-items: center; box-shadow: 0 2px 12px rgba(0, 0, 0, .15);
+    transition: background .2s ease, color .2s ease;
+  }
+  .gal__arrow:hover { background: #fff; color: var(--gold-deep); }
+  .gal__arrow svg { width: 20px; height: 20px; }
+  .gal__arrow--prev { left: 14px; }
+  .gal__arrow--next { right: 14px; }
+  .gal__thumbs { display: flex; gap: 12px; margin-top: 14px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+  .gal__thumb {
+    flex: 0 0 auto; width: 96px; height: 66px; padding: 0; cursor: pointer;
+    border: 2px solid transparent; border-radius: 6px; overflow: hidden; background: none;
+    opacity: .6; transition: opacity .25s ease, border-color .25s ease;
+  }
+  .gal__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gal__thumb:hover { opacity: 1; }
+  .gal__thumb.is-active { border-color: var(--gold); opacity: 1; }
+
+  /* Intro + content */
+  .vd__intro {
+    font-family: var(--serif); font-size: 22px; line-height: 1.6; color: var(--ink);
+    margin: 46px 0 0; max-width: 66ch;
+  }
+  .vd__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 56px; }
+  .vd__h { font-family: var(--serif); font-size: 22px; font-weight: 600; margin: 0 0 22px; }
+  .vd__h--lg { font-size: 26px; margin-bottom: 22px; }
+  .vd__feats { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .vd__feat { font-weight: 300; font-size: 15px; color: var(--muted); display: flex; align-items: baseline; gap: 12px; }
+  .vd__diamond { color: var(--gold-dark); font-size: 11px; flex: none; }
+  .vd__tags { display: flex; flex-wrap: wrap; gap: 10px; }
+  .vd__tag {
+    font-size: 12px; letter-spacing: .04em; color: var(--gold-deep);
+    border: 1px solid var(--gold); border-radius: 999px; padding: 8px 16px; background: var(--paper);
+  }
+
+  /* Video (16:9) */
+  .vd__video { margin-top: 72px; }
+  .vid {
+    position: relative; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden;
+    background: var(--cream); border: 1px solid var(--line);
+  }
+  .vid__frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  /* Closing CTA */
+  .vd__cta {
+    margin-top: 76px; text-align: center; background: var(--cream);
+    border: 1px solid var(--line-2); border-radius: 10px; padding: 56px 32px;
+  }
+  .vd__cta-title { font-family: var(--serif); font-size: clamp(26px, 4vw, 32px); font-weight: 600; margin: 0 0 12px; }
+  .vd__cta-body { font-weight: 300; font-size: 15px; color: var(--muted); line-height: 1.7; margin: 0 auto 28px; max-width: 46ch; }
+  .vd__cta-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+
+  @media (max-width: 700px) {
+    .vd__cols { grid-template-columns: 1fr; gap: 40px; }
+    .vd__intro { font-size: 20px; }
+    /* Kept at 44px (not shrunk) — that's the tap-target minimum, and there's
+       enough room in the responsive-height gallery to keep it. */
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gal__img { transition: none; }
+  }
+</style>
+
+<script>
+  // Detail-page image gallery: thumbnails + arrows with a crossfade.
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gal) => {
+    const slides = Array.from(gal.querySelectorAll<HTMLElement>('[data-gal-slide]'));
+    const thumbs = Array.from(gal.querySelectorAll<HTMLElement>('[data-gal-thumb]'));
+    if (slides.length < 2) return;
+    let idx = 0;
+
+    const show = (i: number) => {
+      idx = (i + slides.length) % slides.length;
+      slides.forEach((s, si) => s.classList.toggle('is-active', si === idx));
+      thumbs.forEach((t, ti) => t.classList.toggle('is-active', ti === idx));
+      thumbs[idx]?.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
+    };
+
+    thumbs.forEach((t, i) => t.addEventListener('click', () => show(i)));
+    gal.querySelector('[data-gal-prev]')?.addEventListener('click', () => show(idx - 1));
+    gal.querySelector('[data-gal-next]')?.addEventListener('click', () => show(idx + 1));
+    gal.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { show(idx - 1); }
+      else if (e.key === 'ArrowRight') { show(idx + 1); }
+    });
+  });
+</script>

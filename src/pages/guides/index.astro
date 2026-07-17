@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { getCollection } from 'astro:content';
+import { guideCategories, categoryLabel, formatGuideDate } from '../../data/guides';
+
+const allGuides = (await getCollection('guides')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const featured = allGuides.find((g) => g.data.featured) ?? allGuides[0];
+const rest = allGuides.filter((g) => g.slug !== featured.slug);
+
+// Initial visible batch in the grid — the rest reveal behind "Load More".
+const INITIAL_COUNT = 6;
+---
+<BaseLayout
+  title="Guides & Inspiration — Wedding & Event Transportation Tips | ChiTown Trolley"
+  description="Planning tips, venue ideas, and everything you need to coordinate trolley and shuttle transportation for your wedding or event across Chicagoland."
+>
+  <section class="ghero wrap wrap-1140">
+    <Eyebrow label="The Journal" size="md" mb={16} />
+    <h1 class="h-page ghero__title">Guides &amp; <em class="grad">Inspiration</em></h1>
+    <p class="ghero__lead">Planning tips, venue ideas, and everything you need to coordinate transportation for your big day.</p>
+  </section>
+
+  <div class="gtabs wrap wrap-1140" data-guide-tabs>
+    <button type="button" class="gtab is-active" data-guide-tab="all">All</button>
+    {guideCategories.map((c) => (
+      <button type="button" class="gtab" data-guide-tab={c.slug}>{c.label}</button>
+    ))}
+  </div>
+
+  {/* ── Featured article ───────────────────────────────── */}
+  <section class="wrap wrap-1140 gfeat-wrap" data-guide-featured data-category={featured.data.category}>
+    <a href={`/guides/${featured.slug}`} class="gfeat">
+      <div class="gfeat__media">
+        <img src={featured.data.cover} alt={featured.data.coverAlt} class="gfeat__img" loading="eager" decoding="async" />
+      </div>
+      <div class="gfeat__body">
+        <span class="gfeat__tag">{categoryLabel(featured.data.category)}</span>
+        <h2 class="gfeat__title">{featured.data.title}</h2>
+        <p class="gfeat__excerpt">{featured.data.excerpt}</p>
+        <div class="gfeat__meta">
+          <time datetime={featured.data.date.toISOString()}>{formatGuideDate(featured.data.date)}</time>
+          <span class="gfeat__dot" aria-hidden="true">·</span>
+          <span>{featured.data.readTime}</span>
+        </div>
+        <span class="link-gold gfeat__cta">Read More →</span>
+      </div>
+    </a>
+  </section>
+
+  {/* ── Article grid ───────────────────────────────────── */}
+  <section class="wrap wrap-1140 ggrid-wrap">
+    <div class="ggrid" data-guide-grid>
+      {rest.map((g, i) => (
+        <div class:list={['ggrid__cell', { 'is-hidden-initial': i >= INITIAL_COUNT }]} data-guide-cell data-category={g.data.category}>
+          <GuideCard
+            href={`/guides/${g.slug}`}
+            image={g.data.cover}
+            imageAlt={g.data.coverAlt}
+            category={g.data.category}
+            title={g.data.title}
+            excerpt={g.data.excerpt}
+            date={g.data.date}
+            readTime={g.data.readTime}
+          />
+        </div>
+      ))}
+    </div>
+    {rest.length > INITIAL_COUNT && (
+      <div class="gmore">
+        <button type="button" class="btn-ghost" data-guide-loadmore>Load More</button>
+      </div>
+    )}
+    <p class="gempty" data-guide-empty hidden>No guides in this category yet — check back soon.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .ghero { text-align: center; padding: 88px 28px 8px; }
+  .ghero__title { margin-inline: auto; }
+  .ghero__lead { font-weight: 300; font-size: 15.5px; color: var(--muted); margin: 18px auto 0; max-width: 52ch; }
+
+  /* Category filter tabs */
+  .gtabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 40px 28px 8px; }
+  .gtab {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 400;
+    color: var(--muted);
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    padding: 11px 24px;
+    transition: border-color .25s ease, color .25s ease, background .25s ease;
+  }
+  .gtab:hover { border-color: var(--gold); color: var(--gold-deep); }
+  .gtab.is-active { background: var(--grad-gold); border-color: transparent; color: #1a1a1a; font-weight: 500; }
+
+  /* Featured article */
+  .gfeat-wrap { padding: 40px 28px 20px; }
+  .gfeat {
+    display: grid; grid-template-columns: 1.15fr 1fr; align-items: stretch;
+    text-decoration: none; color: inherit;
+    background: var(--paper); border: 1px solid var(--line);
+    box-shadow: 0 2px 10px rgba(26, 26, 26, .04);
+    overflow: hidden;
+    transition: box-shadow .35s ease, transform .35s ease, border-color .35s ease;
+  }
+  .gfeat:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(26, 26, 26, .14); border-color: var(--gold-cream); }
+  .gfeat__media { overflow: hidden; min-height: clamp(280px, 30vw, 420px); }
+  .gfeat__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.22, .6, .2, 1); }
+  .gfeat:hover .gfeat__img { transform: scale(1.05); }
+  .gfeat__body { display: flex; flex-direction: column; justify-content: center; padding: 40px clamp(28px, 4vw, 52px); }
+  .gfeat__tag {
+    align-self: flex-start;
+    font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; font-weight: 500;
+    color: var(--gold-deep); background: var(--gold-cream);
+    border-radius: 999px; padding: 6px 14px; margin-bottom: 18px;
+  }
+  .gfeat__title { font-family: var(--serif); font-size: clamp(26px, 3vw, 34px); font-weight: 600; line-height: 1.25; margin: 0 0 14px; }
+  .gfeat__excerpt { font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--muted); margin: 0 0 20px; }
+  .gfeat__meta { display: flex; align-items: center; gap: 9px; font-size: 12.5px; color: var(--faint); margin-bottom: 22px; }
+  .gfeat__dot { color: var(--gold); }
+  .gfeat__cta { align-self: flex-start; }
+
+  /* Grid */
+  .ggrid-wrap { padding: 20px 28px 100px; }
+  .ggrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+  .ggrid__cell.is-hidden-initial { display: none; }
+  .ggrid__cell.is-filtered-out { display: none !important; }
+
+  .gmore { display: flex; justify-content: center; margin-top: 48px; }
+  .gempty { text-align: center; font-weight: 300; color: var(--muted); margin-top: 48px; }
+
+  @media (max-width: 900px) {
+    .ggrid { grid-template-columns: repeat(2, 1fr); }
+    .gfeat { grid-template-columns: 1fr; }
+    .gfeat__media { min-height: 260px; }
+  }
+  @media (max-width: 640px) {
+    .ggrid { grid-template-columns: 1fr; gap: 28px; }
+    .gfeat__body { padding: 32px 26px 38px; }
+  }
+</style>
+
+<script>
+  // Category tabs: client-side filter, synced to ?category= in the URL (no reload).
+  const tabsRoot = document.querySelector<HTMLElement>('[data-guide-tabs]');
+  const featuredEl = document.querySelector<HTMLElement>('[data-guide-featured]');
+  const cells = Array.from(document.querySelectorAll<HTMLElement>('[data-guide-cell]'));
+  const loadMoreBtn = document.querySelector<HTMLButtonElement>('[data-guide-loadmore]');
+  const emptyMsg = document.querySelector<HTMLElement>('[data-guide-empty]');
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-guide-tab]'));
+
+  const setActiveTab = (category: string) => {
+    tabs.forEach((t) => t.classList.toggle('is-active', t.dataset.guideTab === category));
+  };
+
+  const applyFilter = (category: string) => {
+    let visibleCount = 0;
+    if (featuredEl) {
+      const match = category === 'all' || featuredEl.dataset.category === category;
+      featuredEl.hidden = !match;
+    }
+    cells.forEach((cell) => {
+      const match = category === 'all' || cell.dataset.category === category;
+      cell.classList.toggle('is-filtered-out', !match);
+      // Filtering resets the "load more" paging — every match is shown immediately.
+      cell.classList.toggle('is-hidden-initial', false);
+      if (match) visibleCount++;
+    });
+    if (loadMoreBtn) loadMoreBtn.hidden = true;
+    const featuredVisible = !!featuredEl && !featuredEl.hidden;
+    if (emptyMsg) emptyMsg.hidden = visibleCount > 0 || featuredVisible;
+    setActiveTab(category);
+  };
+
+  const initialCategory = new URLSearchParams(location.search).get('category') ?? 'all';
+  if (initialCategory !== 'all') {
+    applyFilter(initialCategory);
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const category = tab.dataset.guideTab ?? 'all';
+      const url = new URL(location.href);
+      if (category === 'all') url.searchParams.delete('category');
+      else url.searchParams.set('category', category);
+      history.pushState({}, '', url);
+      applyFilter(category);
+    });
+  });
+
+  loadMoreBtn?.addEventListener('click', () => {
+    cells.forEach((cell) => cell.classList.remove('is-hidden-initial'));
+    loadMoreBtn.hidden = true;
+  });
+</script>

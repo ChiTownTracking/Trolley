@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import { steps, weddingTiles } from '../data/site';
+---
+<BaseLayout
+  title="Wedding Trolley Transportation — ChiTown Trolley"
+  description="The ride between “I do” and the dance floor. Classic white wedding trolleys plus a coach for your guests, across Chicagoland."
+>
+  <!-- Hero -->
+  <section class="whero">
+    <img src="uploads/trolleyClassic.png" alt="Classic white trolley in warm winter light" class="whero__img" />
+    <div class="whero__scrim"></div>
+    <div class="whero__content">
+      <Eyebrow label="Weddings" size="md" mb={18} />
+      <h1 class="whero__title">
+        The ride between <em class="grad">"I do"</em> and the dance floor
+      </h1>
+    </div>
+  </section>
+
+  <!-- Why couples choose us -->
+  <section class="rv split wrap">
+    <div>
+      <Eyebrow label="Why Couples Choose Us" align="left" single mb={16} />
+      <h2 class="split__title">An hour of the day that's just yours</h2>
+      <p class="split__p">Between the ceremony and the reception, the trolley is the one place the whole wedding party is together — no schedule, no guests, just you. Circular seating means no one rides facing a seatback, and the rear balcony makes for photos you'll frame.</p>
+      <p class="split__p">We dress the cabin to suit your day, keep it warm in January and cool in July, and your chauffeur handles every turn while the champagne stays upright.</p>
+      <a href="/contact" class="link-gold">Check your date →</a>
+    </div>
+    <img src="uploads/trolley-interior.webp" alt="Trolley interior with rose garlands and quilted leather seating" class="split__img" />
+  </section>
+
+  <!-- How it works -->
+  <section class="rv band">
+    <div class="wrap wrap-1000 text-center">
+      <Eyebrow label="How It Works" mb={14} />
+      <h2 class="h-section steps__title">Three simple steps</h2>
+      <div class="steps__grid">
+        {steps.map((s) => (
+          <div class="step">
+            <span class="step__num">{s.num}</span>
+            <h3 class="step__title">{s.title}</h3>
+            <p class="step__body">{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The wedding package -->
+  <section class="rv band">
+    <div class="wrap split split--flip">
+      <img src="uploads/2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg" alt="Coach interior with quilted leather seating for 57" class="split__img" />
+      <div>
+        <Eyebrow label="The Wedding Package" align="left" single mb={16} />
+        <h2 class="split__title">Trolley for the party, coach for the guests</h2>
+        <p class="split__p">Pair the white trolley with a super coach and move the entire celebration together. The wedding party rides the trolley; up to 57 guests follow in quilted-leather comfort — no parking, no lost caravans, no one late for the first dance.</p>
+        <p class="split__p">Book both together and we coordinate every pickup on one schedule, hotel to ceremony to reception and back.</p>
+        <a href="/contact" class="link-gold">Ask about the package →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wedding tiles -->
+  <section class="rv wtiles wrap wrap-1000">
+    {weddingTiles.map((t) => (
+      <div class="wtile">
+        <p class="wtile__big">{t.big}</p>
+        <div class="wtile__rule"></div>
+        <p class="wtile__small">{t.small}</p>
+      </div>
+    ))}
+  </section>
+</BaseLayout>
+
+<style>
+  .band { background: var(--cream); padding: 88px 28px; }
+
+  /* Hero */
+  .whero { position: relative; height: 56vh; min-height: 420px; overflow: hidden; }
+  .whero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .whero__scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(253, 252, 250, .3), rgba(253, 252, 250, .88) 90%); }
+  .whero__content {
+    position: relative; z-index: 2; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    text-align: center; padding: 0 24px 64px;
+  }
+  .whero__title {
+    font-family: var(--serif); font-weight: 500;
+    font-size: clamp(34px, 4.6vw, 58px); margin: 0; max-width: 18ch; line-height: 1.15;
+  }
+
+  /* Split sections */
+  .split {
+    padding: 96px 28px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 56px; align-items: center;
+  }
+  .band .split { padding: 0; }
+  .split__title { font-family: var(--serif); font-weight: 500; font-size: clamp(26px, 3vw, 38px); margin: 0 0 20px; line-height: 1.2; }
+  .split__p { font-weight: 300; font-size: 15.5px; line-height: 1.85; color: var(--muted); margin: 0 0 16px; }
+  .split__p + .link-gold { display: inline-block; margin-top: 12px; }
+  .split__img {
+    width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+    border: 1px solid var(--line); box-shadow: 0 16px 44px rgba(26, 26, 26, .1);
+  }
+
+  /* Steps */
+  .steps__title { margin-bottom: 56px; }
+  .steps__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 44px; }
+  .step { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .step__num {
+    font-family: var(--serif); font-style: italic; font-size: 44px; line-height: 1;
+    background: linear-gradient(100deg, var(--gold-dark), var(--gold));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .step__title { font-family: var(--serif); font-size: 22px; font-weight: 600; margin: 0; }
+  .step__body { font-weight: 300; font-size: 14px; line-height: 1.7; color: var(--muted); margin: 0; max-width: 28ch; }
+
+  /* Wedding tiles */
+  .wtiles {
+    padding: 88px 28px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px;
+  }
+  .wtile { border: 1px solid var(--line); padding: 36px 30px; text-align: center; display: flex; flex-direction: column; gap: 8px; }
+  .wtile__big { font-family: var(--serif); font-size: 30px; font-weight: 600; margin: 0; }
+  .wtile__rule { width: 34px; height: 1px; background: linear-gradient(90deg, var(--gold-dark), var(--gold-light)); margin: 6px auto; }
+  .wtile__small { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin: 0; line-height: 1.7; }
+</style>

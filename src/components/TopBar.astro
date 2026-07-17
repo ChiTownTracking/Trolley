@@ -1,0 +1,82 @@
+---
+import { site, hasPhone, hasInstagram, hasFacebook } from '../data/site';
+---
+<div class="topbar">
+  <div class="topbar__inner wrap wrap-wide">
+    {(hasInstagram || hasFacebook) && (
+      <div class="topbar__social">
+        {hasInstagram && (
+          <a href={site.instagram} aria-label="Instagram" class="soc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF6A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+        )}
+        {hasFacebook && (
+          <a href={site.facebook} aria-label="Facebook" class="soc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF6A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          </a>
+        )}
+      </div>
+    )}
+    <div class="topbar__contact">
+      {hasPhone ? (
+        <a href={site.phoneHref} class="topbar__link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF6A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          {site.phone}
+        </a>
+      ) : (
+        <span class="topbar__link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#D4AF6A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          {site.phone}
+        </span>
+      )}
+      <span class="topbar__divider"></span>
+      <a href={`mailto:${site.email}`} class="topbar__link topbar__link--email">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF6A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+        {site.email}
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .topbar { background: var(--ink); }
+  .topbar__inner {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .topbar__social { display: flex; align-items: center; gap: 6px; flex: none; }
+  .soc {
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; text-decoration: none;
+    transition: background .25s ease;
+  }
+  .soc:hover { background: rgba(212, 175, 106, .15); }
+  .topbar__contact {
+    display: flex; align-items: center; gap: 28px;
+    min-width: 0; overflow: hidden; justify-content: flex-end;
+  }
+  .topbar__link {
+    font-size: 12.5px; letter-spacing: .06em; font-weight: 300;
+    color: var(--gold-cream); text-decoration: none;
+    display: flex; align-items: center; gap: 9px;
+    white-space: nowrap; flex: none;
+    transition: color .25s ease;
+  }
+  .topbar__link:hover { color: var(--gold-light); }
+  .topbar__link--email { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .topbar__divider { width: 1px; height: 14px; background: rgba(212, 175, 106, .35); }
+
+  /* Email is the least essential item here (it's also in the footer) — drop
+     it below ~480px so the phone number and social icons have real breathing
+     room instead of everything fighting for a 40px-tall strip. */
+  @media (max-width: 480px) {
+    .topbar__link--email,
+    .topbar__divider { display: none; }
+    .topbar__inner { height: auto; padding-block: 9px; }
+    .soc { width: 36px; height: 36px; }
+  }
+</style>

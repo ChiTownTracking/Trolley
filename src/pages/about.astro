@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { aboutTiles } from '../data/site';
+---
+<BaseLayout
+  title="About — ChiTown Trolley"
+  description="A small, owner-operated Chicago trolley company. You book with the people who wash the trolleys by hand and drive them on your wedding day."
+>
+  <PageHero eyebrow="About Us" pb={56}>
+    A small company with a <em class="grad">personal touch</em>
+  </PageHero>
+
+  <section class="rv about wrap wrap-1060">
+    <img src="uploads/trolleyFestive.png" alt="ChiTown trolley among summer trees" class="about__img" />
+    <div>
+      <p class="about__lead">We started ChiTown Trolley for one reason: Chicago couples deserved better than an anonymous mega-fleet.</p>
+      <p class="about__p">When you book with us, you talk to the people who own the trolleys, wash them by hand, and drive them on your wedding day. No dispatch center, no substitutions, no surprises — the trolley you toured is the trolley that arrives.</p>
+      <p class="about__p" style="margin-bottom:0">Our chauffeurs are professional, licensed, and background-checked, and both trolleys are inspected and detailed before every event. It's a small operation — which is exactly why the details never slip.</p>
+    </div>
+  </section>
+
+  <section class="rv about-band">
+    <div class="wrap wrap-1000 about-band__grid">
+      {aboutTiles.map((t) => (
+        <div class="atile">
+          <p class="atile__big">{t.big}</p>
+          <div class="atile__rule"></div>
+          <p class="atile__small">{t.small}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about {
+    padding: 0 28px 88px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 56px;
+    align-items: center;
+  }
+  .about__img {
+    width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+    border: 1px solid var(--line); box-shadow: 0 16px 44px rgba(26, 26, 26, .1);
+  }
+  .about__lead { font-family: var(--serif); font-size: 24px; line-height: 1.55; margin: 0 0 22px; }
+  .about__p { font-weight: 300; font-size: 15.5px; line-height: 1.85; color: var(--muted); margin: 0 0 16px; }
+
+  .about-band { background: var(--cream); padding: 72px 28px; }
+  .about-band__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; }
+  .atile { text-align: center; display: flex; flex-direction: column; gap: 8px; }
+  .atile__big { font-family: var(--serif); font-size: 24px; font-weight: 600; margin: 0; }
+  .atile__rule { width: 34px; height: 1px; background: linear-gradient(90deg, var(--gold-dark), var(--gold-light)); margin: 4px auto; }
+  .atile__small { font-weight: 300; font-size: 14px; color: var(--muted); margin: 0; line-height: 1.7; }
+</style>

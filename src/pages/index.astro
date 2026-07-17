@@ -1,0 +1,781 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import GuideCard from '../components/GuideCard.astro';
+import { getCollection } from 'astro:content';
+import { features, serviceChips, fleetPreview, testimonials, eventTypes, vehicleOptions, hoursOptions, homeFaqs, getLocalBusinessSchema } from '../data/site';
+
+const passengerOptions = ['1–10', '11–20', '21–30', '31–40', '41–57'];
+
+// Fleet grid: the first vehicle (Classic White Trolley) is the full-width
+// featured card; the rest fill the 3-up row below it.
+const [fleetFeatured, ...fleetRest] = fleetPreview;
+
+// Guides preview: always the 3 most recently published articles.
+const latestGuides = (await getCollection('guides'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const businessSchema = getLocalBusinessSchema(new URL(Astro.site ?? Astro.url).href);
+---
+<BaseLayout
+  title="ChiTown Trolley — Timeless Wedding Trolley Transportation in Chicago"
+  description="Arrive the way the day deserves — a classic white wedding trolley for Chicagoland weddings and events. Owner-operated, licensed and insured."
+  schema={businessSchema}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <h1 class="hero__title">
+        Timeless Trolley<br />
+        Transportation for<br />
+        <em class="grad">Your Wedding Day</em>
+      </h1>
+      <a href="/contact" class="btn-gold hero__cta">Get Free Quote</a>
+    </div>
+  </section>
+
+  <!-- Get a Quote -->
+  <section class="rv getquote" id="getquote">
+    <div class="getquote__inner">
+      <h2 class="h-section getquote__title">Request a <em class="grad">free quote</em></h2>
+
+      <form class="qform wizard" data-quote-form>
+        <!-- Step 1 · Trip Information -->
+        <div class="step is-open" data-step="1">
+          <button type="button" class="step__head" data-step-toggle="1" aria-expanded="true">
+            <span class="step__num"><span class="step__digit">1</span></span>
+            <span class="step__label">
+              <span class="step__kicker">Step 1 of 3</span>
+              <span class="step__name">Trip Information</span>
+            </span>
+            <span class="step__chev" aria-hidden="true"></span>
+          </button>
+          <div class="step__panel">
+            <div class="step__body">
+              <div class="step__inner">
+                <div class="step__grid">
+                  <label class="field">
+                    <select name="type" class="field__control" aria-label="Event type">
+                      <option value="" disabled selected>Event Type</option>
+                      {eventTypes.map((t) => <option>{t}</option>)}
+                    </select>
+                  </label>
+                  <label class="field">
+                    <select name="hours" class="field__control" aria-label="Number of hours">
+                      <option value="" disabled selected>Number of Hours</option>
+                      {hoursOptions.map((h) => <option>{h}</option>)}
+                    </select>
+                  </label>
+                  <label class="field">
+                    <select name="vehicle" class="field__control" aria-label="Choose vehicle">
+                      <option value="" disabled selected>Choose Vehicle</option>
+                      {vehicleOptions.map((v) => <option>{v}</option>)}
+                    </select>
+                  </label>
+                  <label class="field">
+                    <select name="passengers" class="field__control" aria-label="Number of passengers">
+                      <option value="" disabled selected>Number of Passengers</option>
+                      {passengerOptions.map((p) => <option>{p}</option>)}
+                    </select>
+                  </label>
+                </div>
+                <div class="step__nav">
+                  <button type="button" class="btn-gold" data-step-next="2">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 · Itinerary -->
+        <div class="step" data-step="2">
+          <button type="button" class="step__head" data-step-toggle="2" aria-expanded="false">
+            <span class="step__num"><span class="step__digit">2</span></span>
+            <span class="step__label">
+              <span class="step__kicker">Step 2 of 3</span>
+              <span class="step__name">Itinerary</span>
+            </span>
+            <span class="step__chev" aria-hidden="true"></span>
+          </button>
+          <div class="step__panel">
+            <div class="step__body">
+              <div class="step__inner">
+                <div class="step__grid">
+                  <label class="field">
+                    <input name="date" type="date" class="field__control" aria-label="Event date" />
+                  </label>
+                  <label class="field">
+                    <input name="time" type="time" class="field__control" aria-label="Pickup time" />
+                  </label>
+                  <label class="field">
+                    <input name="pickup" type="text" placeholder="Pickup Location" class="field__control" aria-label="Pickup location" />
+                  </label>
+                  <label class="field">
+                    <input name="dropoff" type="text" placeholder="Destination" class="field__control" aria-label="Destination" />
+                  </label>
+                </div>
+                <div class="step__nav">
+                  <button type="button" class="btn-ghost" data-step-back="1">Back</button>
+                  <button type="button" class="btn-gold" data-step-next="3">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 · Personal Info -->
+        <div class="step" data-step="3">
+          <button type="button" class="step__head" data-step-toggle="3" aria-expanded="false">
+            <span class="step__num"><span class="step__digit">3</span></span>
+            <span class="step__label">
+              <span class="step__kicker">Step 3 of 3</span>
+              <span class="step__name">Personal Info</span>
+            </span>
+            <span class="step__chev" aria-hidden="true"></span>
+          </button>
+          <div class="step__panel">
+            <div class="step__body">
+              <div class="step__inner">
+                <div class="step__grid step__grid--3">
+                  <label class="field">
+                    <input required name="name" type="text" placeholder="Full Name" class="field__control" aria-label="Full name" />
+                  </label>
+                  <label class="field">
+                    <input required name="phone" type="tel" placeholder="Phone Number" class="field__control" aria-label="Phone number" />
+                  </label>
+                  <label class="field">
+                    <input required name="email" type="email" placeholder="E-mail Address" class="field__control" aria-label="E-mail address" />
+                  </label>
+                  <label class="field field--full">
+                    <textarea name="message" rows="2" placeholder="How did you find us?" class="field__control" aria-label="How did you find us?"></textarea>
+                  </label>
+                </div>
+                <div class="step__nav">
+                  <button type="button" class="btn-ghost" data-step-back="2">Back</button>
+                  <button type="submit" class="btn-gold">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="confirm" data-quote-confirm hidden>
+        <span class="confirm__mark">✳</span>
+        <h2 class="confirm__title">Thank you</h2>
+        <p class="confirm__body">Your request is on its way. We'll be in touch within one business day — usually much sooner.</p>
+        <button type="button" class="link-gold" data-quote-reset>Send another request</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Fleet preview -->
+  <section class="rv band">
+    <div class="wrap">
+      <Eyebrow label="The Fleet" mb={14} />
+      <h2 class="h-section text-center fleetp__title">Trolleys for the party, a coach for the guests</h2>
+      <div class="fleetp__grid">
+        {/* Row 1 — featured full-width trolley */}
+        <a href={`/fleet/${fleetFeatured.slug}`} class="fleet-card fleet-card--feature">
+          <div class="fleet-card__media">
+            <img src={fleetFeatured.img} alt={fleetFeatured.name} class="fleetp__img" />
+            <span class="fleet-card__cue">View Details →</span>
+          </div>
+          <div class="fleetp__body">
+            <p class="fleetp__cap">{fleetFeatured.cap}</p>
+            <h3 class="fleetp__name">{fleetFeatured.name}</h3>
+            <span class="link-gold fleetp__more">View Details →</span>
+          </div>
+        </a>
+        {/* Row 2 — Coach, Party Bus, Limo Van */}
+        {fleetRest.map((fl) => (
+          <a href={`/fleet/${fl.slug}`} class="fleet-card">
+            <div class="fleet-card__media">
+              <img src={fl.img} alt={fl.name} class="fleetp__img" />
+              <span class="fleet-card__cue">View Details →</span>
+            </div>
+            <div class="fleetp__body">
+              <p class="fleetp__cap">{fl.cap}</p>
+              <h3 class="fleetp__name">{fl.name}</h3>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="fleetp__cta">
+        <a href="/fleet" class="btn-gold">View Full Fleet</a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Testimonials -->
+  <section class="rv tst">
+    <div class="wrap">
+      <Eyebrow label="Kind Words" mb={56} />
+      <div class="tstc" data-carousel>
+        <button type="button" class="tstc__arrow" data-carousel-prev aria-label="Previous testimonial">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="tstc__viewport">
+          <div class="tstc__track" data-carousel-track>
+            {testimonials.map((t) => {
+              const [personName, personRole] = t.name.split('·').map((s) => s.trim());
+              return (
+                <figure class="quote tstc__slide">
+                  <span class="quote__mark">“</span>
+                  <blockquote class="quote__text">{t.quote}</blockquote>
+                  <span class="quote__rule" aria-hidden="true"></span>
+                  <figcaption class="quote__attribution">
+                    <span class="quote__person">{personName}</span>
+                    {personRole && <span class="quote__role">{personRole}</span>}
+                  </figcaption>
+                </figure>
+              );
+            })}
+          </div>
+        </div>
+        <button type="button" class="tstc__arrow" data-carousel-next aria-label="Next testimonial">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+      <div class="tstc__dots" data-carousel-dots aria-label="Testimonial navigation"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="rv faq">
+    <div class="wrap">
+      <Eyebrow label="Common Questions" mb={14} />
+      <h2 class="h-section text-center faq__title">Questions, answered</h2>
+      <div class="faq__list" data-faq>
+        {homeFaqs.map((f) => (
+          <div class="faq__item">
+            <button type="button" class="faq__head" aria-expanded="false" data-faq-toggle>
+              <span class="faq__q">{f.q}</span>
+              <span class="faq__chev" aria-hidden="true"></span>
+            </button>
+            <div class="faq__panel">
+              <div class="faq__body">
+                <p class="faq__a">{f.a}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Guides preview -->
+  <section class="rv guidesp">
+    <div class="wrap">
+      <Eyebrow label="The Journal" mb={14} />
+      <h2 class="h-section text-center guidesp__title">Helpful Guides for Your <em class="grad">Big Day</em></h2>
+      <p class="guidesp__lead">Everything you need to coordinate transportation for your event.</p>
+      <div class="guidesp__grid">
+        {latestGuides.map((g) => (
+          <GuideCard
+            href={`/guides/${g.slug}`}
+            image={g.data.cover}
+            imageAlt={g.data.coverAlt}
+            category={g.data.category}
+            title={g.data.title}
+            excerpt={g.data.excerpt}
+            date={g.data.date}
+            readTime={g.data.readTime}
+          />
+        ))}
+      </div>
+      <div class="guidesp__cta">
+        <a href="/guides" class="btn-ghost">View All Guides</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    height: 550px; /* fixed — stays consistent regardless of viewport height */
+    overflow: hidden;
+    background: #1b1813 url('/uploads/heroImg.webp') center / cover no-repeat;
+  }
+  /* Dark-to-transparent gradient on the left for white-text legibility */
+  .hero__overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(15, 12, 8, .82) 0%,
+      rgba(15, 12, 8, .55) 32%,
+      rgba(15, 12, 8, .18) 58%,
+      rgba(15, 12, 8, 0) 80%
+    );
+  }
+  .hero__content {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;
+    text-align: left; gap: 30px;
+    max-width: 1400px; 
+    margin-top: 80px;
+    padding: 0 clamp(24px, 6vw, 96px);
+    
+    animation: fadeInUp 1.1s cubic-bezier(.22, .6, .2, 1) both;
+  }
+  .hero__title {
+    font-family: var(--serif); font-weight: 400; color: #fff;
+    font-size: clamp(34px, 5vw, 60px); line-height: 1.08;
+    margin: 0; text-shadow: 0 2px 26px rgba(0, 0, 0, .38);
+  }
+  .hero__cta { align-self: flex-start; padding: 14px 34px; min-height: 44px; display: inline-flex; align-items: center; }
+
+  @media (max-width: 700px) {
+    .hero {
+      height: 420px;
+      background-image: url('/uploads/heroMobileView.png');
+      background-position: center;
+    }
+    .hero__content { gap: 24px; }
+    /* Lighter mobile wash keeps more of the portrait artwork visible. */
+    .hero__overlay {
+      background: linear-gradient(
+        90deg,
+        rgba(15, 12, 8, .76) 0%,
+        rgba(15, 12, 8, .54) 55%,
+        rgba(15, 12, 8, .28) 100%
+      );
+    }
+    .hero__title { font-size: clamp(28px, 8vw, 44px); }
+    .hero__cta { padding: 12px 28px; font-size: 11px; min-height: 44px; }
+  }
+
+  /* Shared section helpers */
+  .band { background: var(--cream); padding: 88px 28px; }
+
+  /* Get a Quote — multi-step wizard */
+  .getquote { padding: 40px 0 48px; }
+  .getquote__inner { margin: 0 auto; padding-inline: clamp(20px, 4vw, 72px); }
+  .getquote__title { margin: 0 0 20px; text-align: left; }
+
+  .wizard { display: flex; flex-direction: column; }
+  .qform .field__control { width: 100%; }
+  .qform ::placeholder { color: var(--muted); opacity: .75; }
+  .qform select.field__control:has(option:disabled:checked) { color: var(--muted); }
+
+  /* Step shell */
+  .step { border-top: 1px solid var(--line-2); }
+  .step:last-of-type { border-bottom: 1px solid var(--line-2); }
+  .step__head {
+    width: 100%; display: flex; align-items: center; gap: 18px;
+    padding: 22px 4px; background: transparent; border: 0; cursor: pointer;
+    text-align: left; font-family: var(--sans); color: var(--ink);
+  }
+  .step__num {
+    position: relative; flex: none; width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid var(--gold); color: var(--gold-deep);
+    font-family: var(--serif); font-size: 18px;
+    transition: background .25s ease, color .25s ease, border-color .25s ease;
+  }
+  /* Absolute-centered numeral — immune to serif baseline quirks */
+  .step__digit { position: absolute; top: 43%; left: 50%; transform: translate(-50%, -50%); line-height: 1; }
+  .step.is-open .step__num { background: var(--grad-gold); color: #fff;  }
+  .step.is-done:not(.is-open) .step__num { background: var(--gold-deep); color: #fff; border-color: transparent; }
+  .step__label { display: flex; flex-direction: column; gap: 3px; }
+  .step__kicker { font-size: 10.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-deep); }
+  .step__name { font-family: var(--serif); font-size: 21px; font-weight: 600; line-height: 1.05; color: var(--ink); }
+  .step__chev {
+    margin-left: auto; flex: none; width: 9px; height: 9px;
+    border-right: 1.5px solid var(--gold-deep); border-bottom: 1.5px solid var(--gold-deep);
+    transform: translateY(-2px) rotate(45deg); transition: transform .3s ease;
+  }
+  .step.is-open .step__chev { transform: translateY(2px) rotate(-135deg); }
+
+  /* Collapsible panel — animated height via grid-rows 0fr → 1fr */
+  .step__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+  .step.is-open .step__panel { grid-template-rows: 1fr; }
+  .step__body { overflow: hidden; min-height: 0; }
+  .step__inner { padding: 2px 4px 30px; }
+
+  .step__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 22px; }
+  .step__grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .step__nav { display: flex; align-items: center; justify-content: flex-end; gap: 14px; margin-top: 26px; }
+  /* Slimmer nav buttons (scoped — leaves the global .btn-gold untouched).
+     min-height (rather than relying on padding + line-height math) guarantees
+     a real 44px tap target regardless of font metrics. */
+  .step__nav .btn-gold {
+    padding: 11px 30px; font-size: 11.5px; letter-spacing: .22em; box-shadow: none;
+    min-height: 44px; display: inline-flex; align-items: center;
+  }
+  /* Slim the ghost "Back" button to match the slimmed Next in the wizard nav
+     (the base .btn-ghost lives in global.css). */
+  .step__nav .btn-ghost {
+    padding: 10px 29px; font-size: 11.5px; letter-spacing: .22em;
+    min-height: 44px; display: inline-flex; align-items: center;
+  }
+
+  .confirm { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+  .confirm__mark {
+    font-family: var(--serif); font-size: 40px; line-height: 1;
+    background: linear-gradient(100deg, var(--gold-dark), var(--gold));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .confirm__title { font-family: var(--serif); font-size: 28px; font-weight: 600; margin: 0; }
+  .confirm__body { font-weight: 300; font-size: 15px; line-height: 1.8; color: var(--muted); margin: 0; max-width: 46ch; }
+
+  /* 4/3 cols → 2 on tablet → 1 on mobile */
+  @media (max-width: 900px) {
+    .step__grid, .step__grid--3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .step__grid, .step__grid--3 { grid-template-columns: 1fr; }
+    .step__head { gap: 14px; padding: 18px 2px; }
+    .step__name { font-size: 19px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .step__panel, .step__chev, .step__num { transition: none; }
+  }
+
+  /* Why */
+  .why__title { margin-bottom: 56px; }
+  .why__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; }
+  .feature { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .feature__glyph {
+    width: 58px; height: 58px; border: 1px solid var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 22px; color: var(--gold-dark); font-style: italic;
+  }
+  .feature__title { font-family: var(--serif); font-size: 21px; font-weight: 600; margin: 0; }
+  .feature__body { font-weight: 300; font-size: 14px; line-height: 1.7; color: var(--muted); margin: 0; max-width: 26ch; }
+
+  /* Services strip */
+  .strip { padding: 80px 28px; text-align: center; }
+  .strip__chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 14px; }
+
+  /* Fleet preview — elevated cards */
+  .fleetp__title { margin-bottom: 52px; }
+  .fleetp__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .fleet-card {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--paper);
+    border: 1px solid var(--line-2);
+    box-shadow: 0 2px 10px rgba(26, 26, 26, .04);
+    overflow: hidden;
+    transition: box-shadow .35s ease, transform .35s ease, border-color .35s ease;
+  }
+  .fleet-card:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(26, 26, 26, .14); border-color: var(--gold-cream); }
+  .fleet-card__media { position: relative; overflow: hidden; }
+  .fleetp__img { width: 100%; height: 260px; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.22, .6, .2, 1); }
+  .fleet-card:hover .fleetp__img { transform: scale(1.05); }
+  /* Darkening wash — deepens on hover to lift the caption cue */
+  .fleet-card__media::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to top, rgba(15, 12, 8, .55), rgba(15, 12, 8, 0) 55%);
+    opacity: .35; transition: opacity .35s ease;
+  }
+  .fleet-card:hover .fleet-card__media::after { opacity: 1; }
+  .fleet-card__cue {
+    position: absolute; left: 0; right: 0; bottom: 16px; z-index: 2;
+    text-align: center; color: #fff;
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity .35s ease, transform .35s ease;
+  }
+  .fleet-card:hover .fleet-card__cue { opacity: 1; transform: translateY(0); }
+  .fleetp__body { padding: 22px 26px 26px; text-align: center; }
+  .fleetp__cap { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-deep); margin: 0 0 8px; }
+  .fleetp__name {
+    font-family: var(--serif); font-size: 25px; font-weight: 600; margin: 0;
+    position: relative; display: inline-block; padding-bottom: 7px;
+  }
+  .fleetp__name::after {
+    content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+    width: 0; height: 2px; background: var(--grad-gold); transition: width .35s ease;
+  }
+  .fleet-card:hover .fleetp__name::after { width: 44px; }
+  .fleetp__cta { text-align: center; margin-top: 48px; }
+  .fleetp__more { display: none; }
+
+  /* Featured full-width trolley — landscape layout (image | content) */
+  .fleet-card--feature {
+    grid-column: 1 / -1;
+    display: grid; grid-template-columns: 2.2fr 1fr; align-items: stretch;
+  }
+  .fleet-card--feature .fleet-card__media { height: 100%; min-height: clamp(320px, 34vw, 400px); }
+  .fleet-card--feature .fleetp__img { height: 100%; }
+  .fleet-card--feature .fleetp__body {
+    text-align: left; display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 40px clamp(32px, 4vw, 60px);
+  }
+  .fleet-card--feature .fleetp__cap { margin: 0 0 12px; }
+  .fleet-card--feature .fleetp__name { font-size: clamp(30px, 3.2vw, 40px); }
+  .fleet-card--feature .fleetp__name::after { left: 0; transform: none; }
+  .fleet-card--feature .fleetp__more { display: inline-block; margin-top: 24px; }
+
+  /* Touch devices (no hover): reveal the cue and gold accent by default */
+  @media (hover: none) {
+    .fleet-card__cue { opacity: 1; transform: none; }
+    .fleet-card__media::after { opacity: .8; }
+    .fleetp__name::after { width: 44px; }
+  }
+  /* Tablet: row 2 collapses to 2 columns (feature stays full width) */
+  @media (max-width: 900px) {
+    .fleetp__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  /* Mobile: everything stacks, feature card becomes image-over-content */
+  @media (max-width: 640px) {
+    .fleetp__grid { grid-template-columns: 1fr; }
+    .fleet-card--feature { grid-template-columns: 1fr; }
+    .fleet-card--feature .fleet-card__media { min-height: 240px; }
+    .fleet-card--feature .fleetp__body { padding: 26px 26px 30px; }
+  }
+
+  /* Testimonials carousel */
+  .tst { padding: 96px 28px; }
+  .tstc { display: flex; align-items: center; gap: 12px; max-width: 900px; margin: 0 auto; }
+  .tstc__viewport { flex: 1 1 auto; min-width: 0; overflow: hidden; }
+  .tstc__track { display: flex; transition: transform .6s cubic-bezier(.22, .6, .2, 1); }
+  .tstc__slide { flex: 0 0 100%; padding: 0 14px; }
+  .tstc__arrow {
+    flex: none; cursor: pointer; background: none; border: 0; padding: 8px; line-height: 0;
+    min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
+    color: var(--gold-deep); border-radius: 50%;
+    transition: color .25s ease, background .25s ease;
+  }
+  .tstc__arrow:hover { color: var(--gold-dark); background: var(--cream); }
+  .tstc__arrow svg { width: 26px; height: 26px; }
+  .tstc__dots { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 40px; }
+  /* The bar buttons are created in JS, so they never receive Astro's scoped
+     data-astro-cid attribute — a bare `.tstc__dot` here compiles to
+     `.tstc__dot[data-astro-cid-…]` and silently matches nothing, leaving the
+     browser's default button styling. Scoping through the server-rendered
+     wrapper with :global() is what actually reaches them.
+     The button itself is a full 44px-tall tap target; the visible 3px bar is
+     a centered ::after so the flat, minimal look doesn't shrink the hit area. */
+  .tstc__dots :global(.tstc__dot) {
+    appearance: none;
+    flex: none; padding: 0; border: none; cursor: pointer;
+    width: 24px; height: 44px;
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    transition: width .3s ease-in-out;
+  }
+  .tstc__dots :global(.tstc__dot)::after {
+    content: ''; display: block; width: 100%; height: 3px; border-radius: 2px;
+    background: rgba(212, 175, 106, .28);
+    transition: background-color .3s ease-in-out;
+  }
+  .tstc__dots :global(.tstc__dot:hover)::after { background: rgba(212, 175, 106, .5); }
+  .tstc__dots :global(.tstc__dot.active) { width: 44px; }
+  .tstc__dots :global(.tstc__dot.active)::after { background: var(--gold-dark); }
+  .tstc__dots :global(.tstc__dot.active:hover)::after { background: var(--gold-dark); }
+
+  .quote { margin: 0; text-align: center; display: flex; flex-direction: column; gap: 16px; align-items: center; }
+  .quote__mark {
+    font-family: var(--serif); font-size: 64px; line-height: .5; margin-top: 20px;
+    background: linear-gradient(100deg, var(--gold-dark), var(--gold));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .quote__text { margin: 0; font-family: var(--serif); font-size: 20px; line-height: 1.6; font-style: italic; font-weight: 400; max-width: 52ch; }
+  .quote__rule { width: 40px; height: 1px; background: var(--grad-gold); }
+  .quote__attribution { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .quote__person { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--ink); }
+  .quote__role { font-size: 11.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
+
+  /* FAQ accordion (mirrors the quote-form step accordion) */
+  .faq { background: var(--cream); padding: 96px 28px; }
+  .faq__title { margin-bottom: 46px; }
+  .faq__list { max-width: 800px; margin: 0 auto; }
+  .faq__item { border-top: 1px solid var(--line-2); }
+  .faq__item:last-child { border-bottom: 1px solid var(--line-2); }
+  .faq__head {
+    width: 100%; display: flex; align-items: center; gap: 20px;
+    padding: 24px 4px; background: transparent; border: 0; cursor: pointer;
+    text-align: left; font-family: var(--serif); color: var(--ink);
+  }
+  .faq__q { flex: 1; font-size: 20px; font-weight: 600; line-height: 1.35; }
+  .faq__chev {
+    flex: none; width: 10px; height: 10px;
+    border-right: 1.5px solid var(--gold-deep); border-bottom: 1.5px solid var(--gold-deep);
+    transform: translateY(-2px) rotate(45deg); transition: transform .3s ease;
+  }
+  .faq__item.is-open .faq__chev { transform: translateY(2px) rotate(-135deg); }
+  .faq__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+  .faq__item.is-open .faq__panel { grid-template-rows: 1fr; }
+  .faq__body { overflow: hidden; min-height: 0; }
+  .faq__a { margin: 0; padding: 0 4px 26px; font-weight: 300; font-size: 15px; line-height: 1.8; color: var(--muted); max-width: 66ch; }
+
+  /* Guides preview */
+  .guidesp { background: var(--paper); padding: 96px 28px; }
+  .guidesp__title { margin-bottom: 14px; }
+  .guidesp__lead {
+    text-align: center; font-weight: 300; font-size: 15.5px; color: var(--muted);
+    margin: 0 auto 52px; max-width: 52ch;
+  }
+  .guidesp__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .guidesp__cta { text-align: center; margin-top: 48px; }
+
+  @media (max-width: 900px) {
+    .guidesp__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .guidesp__grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .tstc { gap: 2px; }
+    .tstc__arrow svg { width: 20px; height: 20px; }
+    .tstc__slide { padding: 0 4px; }
+    .faq__q { font-size: 17px; }
+    .faq__head { gap: 14px; padding: 20px 2px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fleetp__img, .fleet-card, .tstc__track, .faq__panel, .faq__chev { transition: none; }
+  }
+</style>
+
+<script>
+  // Multi-step accordion wizard + in-place "thank you" swap.
+  const form = document.querySelector<HTMLFormElement>('[data-quote-form]');
+  const confirm = document.querySelector<HTMLElement>('[data-quote-confirm]');
+  const reset = document.querySelector<HTMLButtonElement>('[data-quote-reset]');
+
+  if (form) {
+    const steps = Array.from(form.querySelectorAll<HTMLElement>('.step'));
+    const stepByNum = (n: string) => steps.find((s) => s.dataset.step === n);
+
+    // Sync a step's open state across class, aria, and inert (keeps hidden
+    // fields out of the tab order while preserving their values).
+    const setOpen = (step: HTMLElement, open: boolean) => {
+      step.classList.toggle('is-open', open);
+      step.querySelector('.step__head')?.setAttribute('aria-expanded', String(open));
+      const body = step.querySelector<HTMLElement>('.step__body');
+      if (body) body.inert = !open;
+    };
+
+    const openStep = (n: string, focus = true) => {
+      steps.forEach((s) => setOpen(s, s.dataset.step === n));
+      if (focus) {
+        const first = stepByNum(n)?.querySelector<HTMLElement>('.step__body .field__control');
+        first?.focus({ preventScroll: true });
+      }
+    };
+
+    const toggleStep = (n: string) => {
+      const step = stepByNum(n);
+      if (!step) return;
+      if (step.classList.contains('is-open')) steps.forEach((s) => setOpen(s, false));
+      else openStep(n, false);
+    };
+
+    // Wire headers (accordion), Next, and Back.
+    form.querySelectorAll<HTMLElement>('[data-step-toggle]').forEach((btn) =>
+      btn.addEventListener('click', () => toggleStep(btn.dataset.stepToggle!)),
+    );
+    form.querySelectorAll<HTMLElement>('[data-step-next]').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        btn.closest<HTMLElement>('.step')?.classList.add('is-done');
+        openStep(btn.dataset.stepNext!);
+      }),
+    );
+    form.querySelectorAll<HTMLElement>('[data-step-back]').forEach((btn) =>
+      btn.addEventListener('click', () => openStep(btn.dataset.stepBack!)),
+    );
+
+    // Initialize inert/aria from the markup's default (Step 1 open).
+    steps.forEach((s) => setOpen(s, s.classList.contains('is-open')));
+
+    // Pre-select a vehicle when arriving from a fleet detail page (?vehicle=…).
+    const wantVehicle = new URLSearchParams(location.search).get('vehicle');
+    if (wantVehicle) {
+      const sel = form.querySelector<HTMLSelectElement>('select[name="vehicle"]');
+      const match = sel && Array.from(sel.options).find((o) => o.text === wantVehicle);
+      if (sel && match) sel.value = match.value;
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      form.hidden = true;
+      if (confirm) confirm.hidden = false;
+    });
+    reset?.addEventListener('click', () => {
+      if (confirm) confirm.hidden = true;
+      form.hidden = false;
+      form.reset();
+      steps.forEach((s) => s.classList.remove('is-done'));
+      openStep('1', false);
+    });
+  }
+</script>
+
+<script>
+  // Testimonials carousel — auto-advance, arrows, dots, pause on hover.
+  const carousel = document.querySelector<HTMLElement>('[data-carousel]');
+  if (carousel) {
+    const track = carousel.querySelector<HTMLElement>('[data-carousel-track]');
+    const slides = track ? (Array.from(track.children) as HTMLElement[]) : [];
+    const dotsWrap = carousel.parentElement?.querySelector<HTMLElement>('[data-carousel-dots]');
+    const prev = carousel.querySelector<HTMLButtonElement>('[data-carousel-prev]');
+    const next = carousel.querySelector<HTMLButtonElement>('[data-carousel-next]');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (track && slides.length) {
+      const count = slides.length;
+      let index = 0;
+      let timer = 0;
+
+      const go = (i: number) => {
+        index = (i + count) % count;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((d, di) => d.classList.toggle('active', di === index));
+      };
+      const start = () => {
+        window.clearInterval(timer);
+        if (!reduce) timer = window.setInterval(() => go(index + 1), 7000);
+      };
+
+      // Build pagination dots.
+      const dots: HTMLButtonElement[] = slides.map((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'tstc__dot';
+        dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
+        dot.addEventListener('click', () => { go(i); start(); });
+        dotsWrap?.appendChild(dot);
+        return dot;
+      });
+
+      prev?.addEventListener('click', () => { go(index - 1); start(); });
+      next?.addEventListener('click', () => { go(index + 1); start(); });
+      carousel.addEventListener('mouseenter', () => window.clearInterval(timer));
+      carousel.addEventListener('mouseleave', start);
+
+      go(0);
+      start();
+    }
+  }
+
+  // FAQ accordion — single item open at a time (matches the quote-form pattern).
+  const faq = document.querySelector<HTMLElement>('[data-faq]');
+  if (faq) {
+    const items = Array.from(faq.querySelectorAll<HTMLElement>('.faq__item'));
+    const setFaqOpen = (item: HTMLElement, open: boolean) => {
+      item.classList.toggle('is-open', open);
+      item.querySelector('[data-faq-toggle]')?.setAttribute('aria-expanded', String(open));
+      const body = item.querySelector<HTMLElement>('.faq__body');
+      if (body) body.inert = !open;
+    };
+    items.forEach((item) => {
+      item.querySelector<HTMLButtonElement>('[data-faq-toggle]')?.addEventListener('click', () => {
+        const wasOpen = item.classList.contains('is-open');
+        items.forEach((it) => setFaqOpen(it, false));
+        if (!wasOpen) setFaqOpen(item, true);
+      });
+      setFaqOpen(item, false); // init: closed + inert
+    });
+  }
+</script>

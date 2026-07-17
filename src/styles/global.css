@@ -1,0 +1,314 @@
+/* ============================================================
+   ChiTown Trolley — global styles & design tokens
+   Ported from the original DivMagic inline styles into a
+   structured, class-based system. Colors/spacing preserved 1:1.
+   ============================================================ */
+
+:root {
+  /* Palette */
+  --paper: #FDFCFA;
+  --cream: #F7F1E6;
+  --ink: #1A1A1A;
+  --muted: #6D675C;
+  --faint: #A69F91;
+  --gold-deep: #8A6A1F;
+  --gold-dark: #B8860B;
+  --gold: #D4AF6A;
+  --gold-light: #F0D9A8;
+  --gold-cream: #EDE3CB;
+  --line: #EFE9DD;
+  --line-2: #E6DECC;
+
+  /* Signature gradients */
+  --grad-gold: linear-gradient(100deg, #B8860B, #D4AF6A 55%, #F0D9A8);
+  --grad-text: linear-gradient(100deg, #B8860B, #D4AF6A 55%, #C9A24B);
+
+  /* Type */
+  --serif: 'Cormorant Garamond', serif;
+  --sans: 'Jost', sans-serif;
+}
+
+/* ----------  Base  ---------- */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: auto; overflow-x: hidden; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Mobile nav drawer scroll lock — position:fixed (not just overflow:hidden)
+   is required to stop background scroll/bounce on iOS Safari. `top` is set
+   inline by the drawer script to the negative of the pre-lock scrollY, so
+   the page doesn't visibly jump when it's applied/removed. */
+body.no-scroll {
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+img { max-width: 100%; }
+
+input::placeholder,
+textarea::placeholder { color: var(--faint); }
+
+.site {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main { flex: 1; }
+
+/* ----------  Layout helpers  ---------- */
+.wrap { max-width: 1100px; margin: 0 auto; padding-inline: 28px; }
+.wrap-wide { max-width: 1240px; }
+.wrap-1140 { max-width: 1140px; }
+.wrap-1060 { max-width: 1060px; }
+.wrap-1000 { max-width: 1000px; }
+.wrap-860 { max-width: 860px; }
+.wrap-760 { max-width: 760px; }
+.wrap-720 { max-width: 720px; }
+
+.text-center { text-align: center; }
+
+/* Gold "text-fill" gradient used inside headings */
+.grad {
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+}
+
+/* ----------  Reveal-on-scroll  ---------- */
+.rv {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .9s cubic-bezier(.22, .6, .2, 1),
+              transform .9s cubic-bezier(.22, .6, .2, 1);
+}
+.rv.in { opacity: 1; transform: none; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+@keyframes heroFade { 0% { opacity: 0; } 7% { opacity: 1; } 26% { opacity: 1; } 33% { opacity: 0; } 100% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1; transform: none; transition: none; }
+  .hero-slide { animation: none !important; }
+}
+
+/* ----------  Eyebrow (— LABEL —)  ---------- */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.eyebrow.center { justify-content: center; }
+.eyebrow__rule {
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dark));
+}
+.eyebrow__rule--r { background: linear-gradient(90deg, var(--gold-dark), transparent); }
+.eyebrow__label {
+  font-size: 11px;
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  font-weight: 500;
+}
+
+/* ----------  Headings  ---------- */
+.h-section {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(28px, 3.4vw, 42px);
+  margin: 0;
+}
+.h-page {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(34px, 4.6vw, 56px);
+  margin: 0;
+  line-height: 1.15;
+}
+
+/* ----------  Buttons & links  ---------- */
+.btn-gold {
+  display: inline-block;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: black;
+  text-decoration: none;
+  padding: 16px 38px;
+  border: none;
+  background: var(--grad-gold);
+  box-shadow: 0 4px 18px rgba(184, 134, 11, .3);
+  transition: box-shadow .3s ease;
+}
+.btn-gold:hover { box-shadow: 0 6px 24px rgba(184, 134, 11, .45); }
+
+/* Smaller header CTA variant */
+.btn-gold--sm {
+  font-size: 11.5px;
+  letter-spacing: .22em;
+  padding: 12px 22px;
+  box-shadow: 0 2px 10px rgba(184, 134, 11, .25);
+}
+.btn-gold--sm:hover { box-shadow: 0 4px 16px rgba(184, 134, 11, .4); }
+
+/* On the gold CTA band: an inverted white button */
+.btn-invert {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gold-deep);
+  text-decoration: none;
+  padding: 16px 38px;
+  background: var(--paper);
+  box-shadow: 0 4px 18px rgba(90, 60, 0, .25);
+  transition: box-shadow .3s ease;
+}
+.btn-invert:hover { box-shadow: 0 6px 24px rgba(90, 60, 0, .4); }
+
+/* Understated gold "→" text link */
+.link-gold {
+  cursor: pointer;
+  font-size: 11.5px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gold-deep);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 5px;
+  transition: color .25s ease;
+}
+.link-gold:hover { color: var(--gold-dark); }
+
+/* Secondary "ghost" button — gold outline, pairs with the gold primary */
+.btn-ghost {
+  display: inline-block;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gold-deep);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid var(--gold);
+  padding: 15px 37px;
+  transition: background .25s ease, border-color .25s ease, color .25s ease;
+}
+.btn-ghost:hover { background: var(--gold-cream); border-color: var(--gold-dark); color: var(--gold-dark); }
+
+/* ----------  Hero  ---------- */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-slide.crossfade {
+  opacity: 0;
+  animation: heroFade 28s ease-in-out infinite;
+}
+
+/* ----------  Cards / chips  ---------- */
+.chip {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 12.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 12px 22px;
+  border: 1px solid var(--line-2);
+  background: var(--paper);
+  transition: border-color .25s ease, color .25s ease;
+}
+.chip:hover { border-color: var(--gold); color: var(--gold-deep); }
+
+.fleet-card {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: block;
+  transition: box-shadow .3s ease;
+}
+.fleet-card:hover { box-shadow: 0 12px 34px rgba(26, 26, 26, .09); }
+
+/* ----------  Section dividers / rules  ---------- */
+.rule-gold {
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+/* ----------  Forms  ---------- */
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field--full { grid-column: 1 / -1; }
+.field__label {
+  font-size: 11px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.field__control {
+  font-family: var(--sans);
+  font-weight: 300;
+  /* 16px, not 15px — under 16px, iOS Safari auto-zooms the viewport on focus,
+     which is a real functional annoyance across every form on the site. */
+  font-size: 16px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line-2);
+  padding: 10px 2px;
+  outline: none;
+  transition: border-color .25s ease;
+}
+.field__control:focus { border-bottom-color: var(--gold-dark); }
+textarea.field__control { resize: vertical; }
+
+/* Confirmation panel after a form submit */
+.confirm {
+  border: 1px solid var(--gold);
+  padding: 56px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+.confirm__mark {
+  font-family: var(--serif);
+  font-size: 44px;
+  line-height: 1;
+  background: linear-gradient(100deg, var(--gold-dark), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+[hidden] { display: none !important; }

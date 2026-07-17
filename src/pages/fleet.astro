@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { fleet } from '../data/site';
+
+// The first vehicle (Classic White Trolley) is the full-width featured card;
+// the rest fill the 3-up row below it.
+const [fleetFeatured, ...fleetRest] = fleet;
+---
+<BaseLayout
+  title="Our Fleet — ChiTown Trolley"
+  description="Classic white trolley, super coach bus, party bus, and executive limo vans — hand-detailed for weddings and events across Chicagoland."
+>
+  <PageHero eyebrow="The Fleet" pb={64}>
+    ChiTown Trolleys, <em class="grad">hand-detailed</em> for every event
+  </PageHero>
+
+  <section class="fleet wrap wrap-1140">
+    {/* Row 1 — featured full-width trolley (landscape) */}
+    <a href={`/fleet/${fleetFeatured.slug}`} class="rv fcard fcard--feature">
+      <div class="fcard__media">
+        <img src={fleetFeatured.img} alt={fleetFeatured.name} class="fcard__img" />
+      </div>
+      <div class="fcard__body">
+        <h2 class="fcard__name">{fleetFeatured.name}</h2>
+        <p class="fcard__cap">{fleetFeatured.cap}</p>
+        <div class="rule-gold fcard__rule"></div>
+        <ul class="fcard__feats">
+          {fleetFeatured.feats.map((ft) => (
+            <li class="fcard__feat"><span class="fcard__diamond">◆</span>{ft}</li>
+          ))}
+        </ul>
+        <span class="fcard__cta link-gold">View Details →</span>
+      </div>
+    </a>
+    {/* Row 2 — Coach, Party Bus, Limo Van */}
+    {fleetRest.map((fv) => (
+      <a href={`/fleet/${fv.slug}`} class="rv fcard">
+        <div class="fcard__media">
+          <img src={fv.img} alt={fv.name} class="fcard__img" />
+        </div>
+        <div class="fcard__body">
+          <h2 class="fcard__name">{fv.name}</h2>
+          <p class="fcard__cap">{fv.cap}</p>
+          <div class="rule-gold fcard__rule"></div>
+          <ul class="fcard__feats">
+            {fv.feats.map((ft) => (
+              <li class="fcard__feat"><span class="fcard__diamond">◆</span>{ft}</li>
+            ))}
+          </ul>
+          <span class="fcard__cta link-gold">View Details →</span>
+        </div>
+      </a>
+    ))}
+  </section>
+</BaseLayout>
+
+<style>
+  .fleet {
+    padding: 0 28px 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 44px;
+  }
+  .fcard {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--paper); border: 1px solid var(--line);
+    box-shadow: 0 2px 10px rgba(26, 26, 26, .04);
+    overflow: hidden;
+    transition: box-shadow .35s ease, transform .35s ease, border-color .35s ease;
+  }
+  .fcard:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(26, 26, 26, .14); border-color: var(--gold-cream); }
+  .fcard__media { overflow: hidden; }
+  .fcard__img { width: 100%; height: 300px; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.22, .6, .2, 1); }
+  .fcard:hover .fcard__img { transform: scale(1.05); }
+  .fcard__body { padding: 36px 38px 42px; }
+  .fcard__name { font-family: var(--serif); font-size: 29px; font-weight: 600; margin: 0 0 6px; }
+  .fcard__cap { font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-deep); margin: 0 0 24px; }
+  .fcard__rule { margin-bottom: 24px; }
+  .fcard__feats { list-style: none; margin: 0 0 30px; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .fcard__feat { font-weight: 300; font-size: 14.5px; color: var(--muted); display: flex; align-items: baseline; gap: 12px; }
+  .fcard__diamond { color: var(--gold-dark); font-size: 11px; }
+  .fcard__cta { display: inline-block; }
+
+  /* Featured full-width trolley — landscape (image | content) */
+  .fcard--feature {
+    grid-column: 1 / -1;
+    display: grid; grid-template-columns: 1.1fr 1fr; align-items: stretch;
+  }
+  .fcard--feature .fcard__media { height: 100%; min-height: clamp(340px, 34vw, 460px); }
+  .fcard--feature .fcard__img { height: 100%; }
+  .fcard--feature .fcard__body {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 44px clamp(32px, 4vw, 56px);
+  }
+  .fcard--feature .fcard__name { font-size: clamp(30px, 3vw, 38px); }
+
+  /* Tablet: row 2 → 2 columns (feature stays full width) */
+  @media (max-width: 900px) {
+    .fleet { grid-template-columns: repeat(2, 1fr); }
+  }
+  /* Mobile: stack everything; feature becomes image-over-content */
+  @media (max-width: 640px) {
+    .fleet { grid-template-columns: 1fr; gap: 32px; }
+    .fcard--feature { grid-template-columns: 1fr; }
+    .fcard--feature .fcard__media { min-height: 260px; }
+    .fcard--feature .fcard__body { padding: 32px 30px 38px; }
+  }
+</style>
