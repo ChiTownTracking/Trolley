@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+
+// TODO(LEGAL REVIEW): This page is structured placeholder copy only. The
+// business or qualified legal counsel must review and replace it before the
+// policy is treated as final or relied upon publicly.
+---
+<BaseLayout
+  title="Privacy Policy — ChiTown Trolley"
+  description="Draft privacy policy information for the ChiTown Trolley website."
+  hideCta={true}
+>
+  <PageHero eyebrow="Legal" pb={40}>
+    Privacy <em class="grad">Policy</em>
+  </PageHero>
+
+  <article class="legal-page wrap wrap-760">
+    <aside class="legal-page__notice" aria-label="Draft legal notice">
+      <strong>Draft placeholder:</strong> This policy requires review and approval by the business or legal counsel before publication as final legal text.
+    </aside>
+
+    <section>
+      <h2>Information you choose to share</h2>
+      <p>When you contact ChiTown Trolley or submit a quote or reservation request, you may choose to provide contact, event, passenger, route, and scheduling details. The final policy must confirm every form and service that receives this information.</p>
+    </section>
+
+    <section>
+      <h2>How information may be used</h2>
+      <p>Information submitted through the website may be used to respond to an inquiry, discuss availability, prepare a quote, or coordinate a requested service. Final wording must be reviewed against the business's actual operating practices.</p>
+    </section>
+
+    <section>
+      <h2>Website and third-party services</h2>
+      <p>The final policy must identify any hosting, form-processing, analytics, communications, payment, or other third-party services used by this website and explain their role accurately. No specific service or retention period is represented by this placeholder.</p>
+    </section>
+
+    <section>
+      <h2>Your questions and choices</h2>
+      <p>Questions about personal information or this draft policy can be sent to <a href={`mailto:${site.email}`}>{site.email}</a>. The final policy must define any applicable request process after legal review.</p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-page { padding: 0 28px 96px; }
+  .legal-page__notice { margin: 0 0 38px; padding: 18px 20px; border-left: 3px solid var(--gold); background: var(--cream); color: var(--muted); font-size: 13.5px; line-height: 1.7; }
+  .legal-page section { padding: 28px 0; border-top: 1px solid var(--line-2); }
+  .legal-page section:last-child { border-bottom: 1px solid var(--line-2); }
+  .legal-page h2 { margin: 0 0 12px; color: var(--ink); font-family: var(--serif); font-size: clamp(22px, 3vw, 28px); font-weight: 600; }
+  .legal-page p { margin: 0; color: var(--muted); font-size: 15px; font-weight: 300; line-height: 1.8; }
+  .legal-page a { color: var(--gold-deep); overflow-wrap: anywhere; text-underline-offset: 4px; }
+  .legal-page a:focus-visible { outline: 2px solid var(--gold-dark); outline-offset: 4px; }
+
+  @media (max-width: 639px) {
+    .legal-page { padding-inline: 24px; padding-bottom: 72px; }
+    .legal-page__notice { margin-bottom: 28px; padding: 16px; }
+    .legal-page section { padding-block: 24px; }
+    .legal-page p { font-size: 14.5px; line-height: 1.75; }
+  }
+</style>

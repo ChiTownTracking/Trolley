@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+
+// TODO(LEGAL REVIEW): This page is structured placeholder copy only. The
+// business or qualified legal counsel must review and replace it before these
+// terms are treated as final or relied upon publicly.
+---
+<BaseLayout
+  title="Terms and Conditions — ChiTown Trolley"
+  description="Draft website terms and conditions for ChiTown Trolley."
+  hideCta={true}
+>
+  <PageHero eyebrow="Legal" pb={40}>
+    Terms and <em class="grad">Conditions</em>
+  </PageHero>
+
+  <article class="legal-page wrap wrap-760">
+    <aside class="legal-page__notice" aria-label="Draft legal notice">
+      <strong>Draft placeholder:</strong> These terms require review and approval by the business or legal counsel before publication as final legal text.
+    </aside>
+
+    <section>
+      <h2>Website information</h2>
+      <p>This website provides general information about ChiTown Trolley's vehicles and services. Final terms must define how website content, availability information, and updates should be interpreted.</p>
+    </section>
+
+    <section>
+      <h2>Quote and reservation requests</h2>
+      <p>Submitting a website form starts a conversation with the business. The final terms must accurately describe when a booking becomes confirmed and identify the documents or approvals that govern an actual reservation.</p>
+    </section>
+
+    <section>
+      <h2>Service policies</h2>
+      <p>Pricing, deposits, payment timing, cancellations, schedule changes, passenger responsibilities, and vehicle-specific conditions must be supplied and reviewed by the business. This placeholder does not establish those policies.</p>
+    </section>
+
+    <section>
+      <h2>External services and links</h2>
+      <p>The website may link to third-party websites or services. Final terms must explain those relationships accurately and should not make guarantees about services the business does not control.</p>
+    </section>
+
+    <section>
+      <h2>Questions</h2>
+      <p>Questions about these draft terms can be sent to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-page { padding: 0 28px 96px; }
+  .legal-page__notice { margin: 0 0 38px; padding: 18px 20px; border-left: 3px solid var(--gold); background: var(--cream); color: var(--muted); font-size: 13.5px; line-height: 1.7; }
+  .legal-page section { padding: 28px 0; border-top: 1px solid var(--line-2); }
+  .legal-page section:last-child { border-bottom: 1px solid var(--line-2); }
+  .legal-page h2 { margin: 0 0 12px; color: var(--ink); font-family: var(--serif); font-size: clamp(22px, 3vw, 28px); font-weight: 600; }
+  .legal-page p { margin: 0; color: var(--muted); font-size: 15px; font-weight: 300; line-height: 1.8; }
+  .legal-page a { color: var(--gold-deep); overflow-wrap: anywhere; text-underline-offset: 4px; }
+  .legal-page a:focus-visible { outline: 2px solid var(--gold-dark); outline-offset: 4px; }
+
+  @media (max-width: 639px) {
+    .legal-page { padding-inline: 24px; padding-bottom: 72px; }
+    .legal-page__notice { margin-bottom: 28px; padding: 16px; }
+    .legal-page section { padding-block: 24px; }
+    .legal-page p { font-size: 14.5px; line-height: 1.75; }
+  }
+</style>

@@ -1,79 +1,535 @@
 ---
-import { site, navAll, hasPhone, hasInstagram, hasFacebook } from '../data/site';
+import { site, navAll, hasInstagram, hasFacebook } from '../data/site';
 import { withBase } from '../utils/paths';
+
+// TODO: Replace these generic platform URLs with ChiTown Trolley's verified
+// business profile URLs in src/data/site.ts. Do not publish invented handles.
+const instagramHref = hasInstagram ? site.instagram : 'https://www.instagram.com/';
+const facebookHref = hasFacebook ? site.facebook : 'https://www.facebook.com/';
 ---
 <footer class="ftr">
   <div class="ftr__inner wrap">
-    <a href={withBase('/')} class="ftr__brand" aria-label="ChiTown Trolley home">
-      <span class="ftr__brandRow">
-        <span class="ftr__rule"></span>
-        <span class="ftr__name">CHITOWN</span>
-        <span class="ftr__rule ftr__rule--r"></span>
-      </span>
-      <span class="ftr__sub">TROLLEY</span>
-    </a>
-
-    <nav class="ftr__nav" aria-label="Footer">
-      {navAll.map((n) => <a href={withBase(n.href)} class="ftr__link">{n.label}</a>)}
-    </nav>
-
-    <div class="ftr__contact">
-      {hasPhone ? (
-        <a href={site.phoneHref} class="ftr__cLink">{site.phone}</a>
-      ) : (
-        <span class="ftr__cLink">{site.phone}</span>
-      )}
-      <span class="ftr__dot">◆</span>
-      <a href={`mailto:${site.email}`} class="ftr__cLink">{site.email}</a>
-      <span class="ftr__dot">◆</span>
-      <span>{site.city}</span>
+    <div class="ftr__brandBlock">
+      <a href={withBase('/')} class="ftr__brand" aria-label="ChiTown Trolley home">
+        <span class="ftr__brandRow">
+          <span class="ftr__rule"></span>
+          <span class="ftr__name">CHITOWN</span>
+          <span class="ftr__rule ftr__rule--r"></span>
+        </span>
+        <span class="ftr__sub">TROLLEY</span>
+      </a>
+      <p class="ftr__statement">Timeless trolley transportation for weddings and events across Chicagoland.</p>
     </div>
 
-    {(hasInstagram || hasFacebook) && (
-      <div class="ftr__social">
-        {hasInstagram && <a href={site.instagram} aria-label="Instagram" class="ftr__soc">IG</a>}
-        {hasFacebook && <a href={site.facebook} aria-label="Facebook" class="ftr__soc">FB</a>}
-      </div>
-    )}
+    <nav class="ftr__nav" aria-label="Footer navigation">
+      <ul class="ftr__navList">
+        {navAll.map((item) => (
+          <li><a href={withBase(item.href)} class="ftr__link">{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
 
-    <p class="ftr__legal">© 2026 ChiTown Trolley · Licensed &amp; insured · Chicagoland's wedding trolley</p>
+    <address class="ftr__contact" aria-label="Contact information">
+      <ul class="ftr__contactList">
+        <li class="ftr__contactItem">
+          <svg class="ftr__contactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href={site.phoneHref} class="ftr__contactLink">{site.phone}</a>
+        </li>
+
+        <li class="ftr__contactItem">
+          <svg class="ftr__contactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <a href={`mailto:${site.email}`} class="ftr__contactLink">{site.email}</a>
+        </li>
+      </ul>
+    </address>
+
+    <section class="ftr__socialSection" aria-labelledby="ftr-social-heading">
+      <h2 class="ftr__heading" id="ftr-social-heading">Follow</h2>
+      <ul class="ftr__socialLinks">
+        <li>
+          <a class="ftr__socialLink" href={instagramHref} target="_blank" rel="noopener noreferrer" aria-label="ChiTown Trolley on Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".75" fill="currentColor" stroke="none"/></svg>
+            <span>Instagram</span>
+          </a>
+        </li>
+        <li>
+          <a class="ftr__socialLink" href={facebookHref} target="_blank" rel="noopener noreferrer" aria-label="ChiTown Trolley on Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.7 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5H17V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.5V13h2.8v8h3.4Z"/></svg>
+            <span>Facebook</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="ftr__cert" aria-labelledby="ftr-cert-heading">
+      <h2 class="ftr__heading" id="ftr-cert-heading">Women-owned business</h2>
+      <p>Serving Chicago and the surrounding suburbs.</p>
+      <img
+        class="ftr__certLogo"
+        src={withBase('/uploads/wbenc-logo.svg')}
+        alt="WBENC — Women's Business Enterprise National Council"
+        width="142"
+        height="30"
+        loading="lazy"
+        decoding="async"
+      />
+    </section>
+
+    <nav class="ftr__legalNav" aria-label="Legal navigation">
+      <ul class="ftr__legalList">
+        <li class="ftr__legalItem"><span>Legal</span></li>
+        <li class="ftr__legalItem"><a href={withBase('/privacy-policy')} class="ftr__legalLink">Privacy Policy</a></li>
+        <li class="ftr__legalItem"><a href={withBase('/terms-and-conditions')} class="ftr__legalLink">Terms and Conditions</a></li>
+      </ul>
+    </nav>
+
+    <div class="ftr__copyright">
+      <span>© 2026 ChiTown Trolley</span>
+      <span>Licensed &amp; insured <span aria-hidden="true">·</span> Chicagoland's wedding trolley</span>
+    </div>
   </div>
 </footer>
 
 <style>
-  .ftr { background: var(--paper); border-top: 1px solid var(--line); padding: 64px 28px 40px; }
-  .ftr__inner { display: flex; flex-direction: column; align-items: center; gap: 32px; }
-
-  .ftr__brand { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--ink); }
-  .ftr__brandRow { display: flex; align-items: center; gap: 12px; }
-  .ftr__rule { display: block; width: 34px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dark)); }
-  .ftr__rule--r { background: linear-gradient(90deg, var(--gold-dark), transparent); }
-  .ftr__name { font-family: var(--serif); font-weight: 600; font-size: 24px; letter-spacing: .14em; line-height: 1; }
-  .ftr__sub { font-size: 10px; letter-spacing: .5em; color: var(--gold-dark); font-weight: 500; margin-left: .5em; }
-
-  .ftr__nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 26px; }
-  .ftr__link {
-    font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase;
-    color: var(--muted); text-decoration: none; transition: color .25s ease;
+  .ftr {
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    padding: 42px 28px 28px;
   }
-  .ftr__link:hover { color: var(--gold-deep); }
+
+  .ftr__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .ftr__brandBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ftr__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .ftr__brandRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 100%;
+  }
+
+  .ftr__rule {
+    display: block;
+    width: 34px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dark));
+  }
+
+  .ftr__rule--r {
+    background: linear-gradient(90deg, var(--gold-dark), transparent);
+  }
+
+  .ftr__name {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    line-height: 1;
+  }
+
+  .ftr__sub {
+    margin-left: .5em;
+    color: var(--gold-dark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .5em;
+  }
+
+  .ftr__statement {
+    max-width: 54ch;
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.55;
+  }
+
+  .ftr__navList,
+  .ftr__contactList,
+  .ftr__socialLinks,
+  .ftr__legalList {
+    padding: 0;
+    margin-bottom: 0;
+    list-style: none;
+  }
+
+  .ftr__nav {
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  .ftr__navList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px 24px;
+    max-width: 980px;
+    margin-top: 0;
+    margin-inline: auto;
+  }
+
+  .ftr__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: .15em;
+    line-height: 1.3;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color .2s ease;
+    white-space: nowrap;
+  }
+
+  .ftr__link:hover,
+  .ftr__contactLink:hover,
+  .ftr__legalLink:hover {
+    color: var(--gold-deep);
+  }
 
   .ftr__contact {
-    display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
-    gap: 12px 28px; font-weight: 300; font-size: 13.5px; color: var(--muted);
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: 13.5px;
+    font-style: normal;
+    font-weight: 300;
   }
-  .ftr__cLink { color: var(--muted); text-decoration: none; transition: color .25s ease; }
-  .ftr__cLink:hover { color: var(--gold-deep); }
-  .ftr__dot { color: var(--gold); }
 
-  .ftr__social { display: flex; gap: 14px; }
-  .ftr__soc {
-    width: 44px; height: 44px; border: 1px solid var(--line-2); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--gold-deep); text-decoration: none; font-size: 11px;
-    transition: border-color .25s ease;
+  .ftr__contactList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 22px;
+    margin-top: 0;
   }
-  .ftr__soc:hover { border-color: var(--gold); }
 
-  .ftr__legal { font-weight: 300; font-size: 12px; letter-spacing: .08em; color: var(--faint); margin: 0; }
+  .ftr__contactItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+  }
+
+  .ftr__contactItem + .ftr__contactItem::before {
+    width: 5px;
+    height: 5px;
+    margin-right: 10px;
+    background: var(--gold);
+    content: '';
+    transform: rotate(45deg);
+  }
+
+  .ftr__contactIcon {
+    flex: none;
+    width: 17px;
+    height: 17px;
+    color: var(--gold-deep);
+  }
+
+  .ftr__contactLink {
+    min-width: 0;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+    text-decoration: none;
+    transition: color .2s ease;
+  }
+
+  .ftr__heading {
+    margin: 0;
+    color: var(--gold-deep);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: .28em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .ftr__socialSection {
+    margin-top: 18px;
+  }
+
+  .ftr__socialLinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .ftr__socialLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 126px;
+    min-height: 40px;
+    padding: 7px 13px;
+    border: 1px solid var(--line-2);
+    color: var(--ink);
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-decoration: none;
+    transition: border-color .2s ease, color .2s ease, background .2s ease;
+  }
+
+  .ftr__socialLink svg {
+    flex: none;
+    width: 17px;
+    height: 17px;
+    color: var(--gold-deep);
+  }
+
+  .ftr__socialLink:hover {
+    border-color: var(--gold);
+    color: var(--gold-deep);
+    background: var(--cream);
+  }
+
+  .ftr__cert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 22px;
+  }
+
+  .ftr__cert p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: 12.5px;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .ftr__certLogo {
+    width: 108px;
+    height: auto;
+    margin-top: 10px;
+  }
+
+  .ftr__legalNav {
+    margin-top: 20px;
+  }
+
+  .ftr__legalList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 12px;
+    margin-top: 0;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+  .ftr__legalItem {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .ftr__legalItem + .ftr__legalItem::before {
+    width: 4px;
+    height: 4px;
+    margin-right: 12px;
+    background: var(--gold);
+    content: '';
+    transform: rotate(45deg);
+  }
+
+  .ftr__legalLink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .2s ease;
+  }
+
+  .ftr__copyright {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px 18px;
+    width: min(100%, 720px);
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    color: var(--faint);
+    font-size: 11.5px;
+    font-weight: 300;
+    letter-spacing: .04em;
+    line-height: 1.55;
+  }
+
+  .ftr__copyright span + span::before {
+    margin-right: 18px;
+    color: var(--gold);
+    content: '·';
+  }
+
+  .ftr a:focus-visible {
+    outline: 2px solid var(--gold-dark);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 639px) {
+    .ftr {
+      padding: 30px 18px 24px;
+    }
+
+    .ftr__inner {
+      width: min(100%, 440px);
+      padding-inline: 0;
+      margin-inline: auto;
+    }
+
+    .ftr__brandRow {
+      gap: 9px;
+    }
+
+    .ftr__rule {
+      width: 27px;
+    }
+
+    .ftr__name {
+      font-size: 22px;
+    }
+
+    .ftr__sub {
+      font-size: 9px;
+    }
+
+    .ftr__statement {
+      max-width: 34ch;
+      margin-top: 10px;
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+
+    .ftr__nav {
+      margin-top: 19px;
+    }
+
+    .ftr__navList {
+      gap: 3px 17px;
+      max-width: 380px;
+    }
+
+    .ftr__link {
+      min-height: 29px;
+      font-size: 10.5px;
+      letter-spacing: .11em;
+    }
+
+    .ftr__contact {
+      margin-top: 17px;
+    }
+
+    .ftr__contactList {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ftr__contactItem + .ftr__contactItem::before {
+      display: none;
+    }
+
+    .ftr__contactIcon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .ftr__contactLink {
+      font-size: 13px;
+    }
+
+    .ftr__socialSection {
+      margin-top: 16px;
+    }
+
+    .ftr__socialLinks {
+      gap: 8px;
+      margin-top: 9px;
+    }
+
+    .ftr__socialLink {
+      min-width: 122px;
+      min-height: 38px;
+      padding: 6px 12px;
+    }
+
+    .ftr__cert {
+      margin-top: 18px;
+    }
+
+    .ftr__cert p {
+      font-size: 12px;
+    }
+
+    .ftr__certLogo {
+      width: 98px;
+      margin-top: 8px;
+    }
+
+    .ftr__legalNav {
+      margin-top: 17px;
+    }
+
+    .ftr__legalList {
+      gap: 4px 9px;
+      font-size: 11.5px;
+    }
+
+    .ftr__legalItem + .ftr__legalItem::before {
+      margin-right: 9px;
+    }
+
+    .ftr__legalLink {
+      min-height: 29px;
+    }
+
+    .ftr__copyright {
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+      margin-top: 11px;
+      padding-top: 11px;
+      font-size: 11px;
+    }
+
+    .ftr__copyright span + span::before {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ftr__link,
+    .ftr__contactLink,
+    .ftr__socialLink,
+    .ftr__legalLink {
+      transition: none;
+    }
+  }
 </style>
