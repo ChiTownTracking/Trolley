@@ -1,0 +1,889 @@
+{
+  "generatedAt": "2026-07-18",
+  "site": "https://chitowntracking.github.io",
+  "base": "/Trolley",
+  "outputMode": "static",
+  "totalRoutes": 20,
+  "redirects": [],
+  "errorPages": [],
+  "apiRoutes": [],
+  "routes": [
+    {
+      "route": "/about/",
+      "sourceFile": "src/pages/about.astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "PageHero"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": null,
+      "title": "About — ChiTown Trolley",
+      "titleLength": 23,
+      "description": "A small, owner-operated Chicago trolley company. You book with the people who wash the trolleys by hand and drive them on your wedding day.",
+      "descriptionLength": 139,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/about/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "A small company with a personal touch",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/christmas-trolley/",
+      "sourceFile": "src/pages/christmas-trolley.astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "Eyebrow",
+        "CtaBand"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": null,
+      "title": "Christmas Trolley — Private Holiday Lights Tours in Chicago | ChiTown Trolley",
+      "titleLength": 77,
+      "description": "Tour Chicago's holiday lights aboard a heated, twinkling white trolley. Private BYOB Christmas tours for 24–36 guests across the city and suburbs. Seasonal dates book early.",
+      "descriptionLength": 173,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/christmas-trolley/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Chicago's Christmas Trolley",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/contact/",
+      "sourceFile": "src/pages/contact.astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "PageHero"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": null,
+      "title": "Get a Quote — ChiTown Trolley",
+      "titleLength": 29,
+      "description": "Tell us about your event and we'll reply within one business day. Chicago wedding &#38; event trolley quotes.",
+      "descriptionLength": 109,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/contact/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Let's hold your date",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": [
+        "Client-only form does not submit data."
+      ]
+    },
+    {
+      "route": "/faq/",
+      "sourceFile": "src/pages/faq.astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "PageHero"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": null,
+      "title": "FAQ — ChiTown Trolley",
+      "titleLength": 21,
+      "description": "Booking lead times, passenger capacity, minimums, climate control, BYOB rules, service area, decorating and chauffeurs — answered.",
+      "descriptionLength": 130,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/faq/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Good questions, honest answers",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/fleet/classic-white-trolley/",
+      "sourceFile": "src/pages/fleet/[slug].astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "Eyebrow"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": {
+        "slug": "classic-white-trolley"
+      },
+      "title": "Classic White Trolley — ChiTown Trolley",
+      "titleLength": 39,
+      "description": "There is something about an open-air trolley that turns a simple drive into an occasion. Polished rails, a rear balcony made for the photos everyone rememb",
+      "descriptionLength": 155,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/fleet/classic-white-trolley/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Classic White Trolley",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/fleet/",
+      "sourceFile": "src/pages/fleet.astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "PageHero"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": null,
+      "title": "Our Fleet — ChiTown Trolley",
+      "titleLength": 27,
+      "description": "Classic white trolley, super coach bus, party bus, and executive limo vans — hand-detailed for weddings and events across Chicagoland.",
+      "descriptionLength": 134,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/fleet/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "ChiTown Trolleys, hand-detailed for every event",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/fleet/limo-vans/",
+      "sourceFile": "src/pages/fleet/[slug].astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "Eyebrow"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": {
+        "slug": "limo-vans"
+      },
+      "title": "Limo Vans — ChiTown Trolley",
+      "titleLength": 27,
+      "description": "For smaller parties and executive runs, the Limo Van is the versatile favorite — intimate, understated, and ready for anything from an airport pickup to a",
+      "descriptionLength": 154,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/fleet/limo-vans/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Limo Vans",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/fleet/party-bus/",
+      "sourceFile": "src/pages/fleet/[slug].astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "Eyebrow"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": {
+        "slug": "party-bus"
+      },
+      "title": "Party Bus — ChiTown Trolley",
+      "titleLength": 27,
+      "description": "When the celebration is the whole point, the Party Bus brings the venue along with you. Step aboard to wraparound lounge seating, color-shifting lights, an",
+      "descriptionLength": 155,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/fleet/party-bus/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Party Bus",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/fleet/super-coach-bus/",
+      "sourceFile": "src/pages/fleet/[slug].astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "Eyebrow"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": {
+        "slug": "super-coach-bus"
+      },
+      "title": "Super Coach Bus — ChiTown Trolley",
+      "titleLength": 33,
+      "description": "When the guest list outgrows the trolley, the Super Coach Bus keeps everyone together in quilted-leather comfort. Climate-controlled, whisper-smooth, and b",
+      "descriptionLength": 155,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/fleet/super-coach-bus/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Super Coach Bus",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/gallery/",
+      "sourceFile": "src/pages/gallery.astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "PageHero"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": null,
+      "title": "Gallery — ChiTown Trolley",
+      "titleLength": 25,
+      "description": "A close-up look at the ChiTown white trolleys and super coach — interiors, exteriors, and details.",
+      "descriptionLength": 98,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/gallery/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "The trolleys, up close",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/guides/chicago-trolley-friendly-wedding-venues/",
+      "sourceFile": "src/pages/guides/[slug].astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "CtaBand",
+        "GuideCard"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": {
+        "slug": "chicago-trolley-friendly-wedding-venues"
+      },
+      "title": "Chicago's Most Trolley-Friendly Wedding Venues — ChiTown Trolley Guides",
+      "titleLength": 71,
+      "description": "What actually makes a venue easy to arrive at by trolley — driveway clearance, drop-off zones, and photo backdrops — plus where around Chicagoland to look.",
+      "descriptionLength": 155,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/guides/chicago-trolley-friendly-wedding-venues/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "present",
+        "types": [
+          "BlogPosting"
+        ]
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": "https://chitowntracking.github.io/Trolley/uploads/trolleyMidnight.png"
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Chicago's Most Trolley-Friendly Wedding Venues",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/guides/how-many-guests-fit-in-a-trolley/",
+      "sourceFile": "src/pages/guides/[slug].astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "CtaBand",
+        "GuideCard"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": {
+        "slug": "how-many-guests-fit-in-a-trolley"
+      },
+      "title": "How Many Guests Fit in a Trolley? A Wedding Transportation Sizing Guide — ChiTown Trolley Guides",
+      "titleLength": 96,
+      "description": "Capacity breakdowns for trolleys, coach buses, and limo vans — plus how to estimate your real guest count needs before you book.",
+      "descriptionLength": 128,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/guides/how-many-guests-fit-in-a-trolley/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "present",
+        "types": [
+          "BlogPosting"
+        ]
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": "https://chitowntracking.github.io/Trolley/uploads/trolleyClassic.png"
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "How Many Guests Fit in a Trolley? A Wedding Transportation Sizing Guide",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/guides/",
+      "sourceFile": "src/pages/guides/index.astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "Eyebrow",
+        "GuideCard"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": null,
+      "title": "Guides & Inspiration — Wedding & Event Transportation Tips | ChiTown Trolley",
+      "titleLength": 76,
+      "description": "Planning tips, venue ideas, and everything you need to coordinate trolley and shuttle transportation for your wedding or event across Chicagoland.",
+      "descriptionLength": 146,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/guides/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Guides & Inspiration",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/guides/wedding-day-shuttle-logistics-timeline/",
+      "sourceFile": "src/pages/guides/[slug].astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "CtaBand",
+        "GuideCard"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": {
+        "slug": "wedding-day-shuttle-logistics-timeline"
+      },
+      "title": "Wedding Day Shuttle Logistics: A Timeline Guide for Guest Transportation — ChiTown Trolley Guides",
+      "titleLength": 97,
+      "description": "How to build a transportation timeline that actually holds up on the day — hotel pickups, ceremony-to-reception shuttles, and return trips guests won't stand around waiting for.",
+      "descriptionLength": 177,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/guides/wedding-day-shuttle-logistics-timeline/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "present",
+        "types": [
+          "BlogPosting"
+        ]
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": "https://chitowntracking.github.io/Trolley/uploads/3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg"
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Wedding Day Shuttle Logistics: A Timeline Guide for Guest Transportation",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/",
+      "sourceFile": "src/pages/index.astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "Eyebrow",
+        "GuideCard"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": null,
+      "title": "ChiTown Trolley — Timeless Wedding Trolley Transportation in Chicago",
+      "titleLength": 68,
+      "description": "Arrive the way the day deserves — a classic white wedding trolley for Chicagoland weddings and events. Owner-operated, licensed and insured.",
+      "descriptionLength": 140,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "present",
+        "types": [
+          "TaxiService"
+        ]
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Timeless Trolley Transportation for Your Wedding Day",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": [
+        "Broken desktop hero asset URL in built output.",
+        "Client-only form does not submit data."
+      ]
+    },
+    {
+      "route": "/privacy-policy/",
+      "sourceFile": "src/pages/privacy-policy.astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "PageHero"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": null,
+      "title": "Privacy Policy — ChiTown Trolley",
+      "titleLength": 32,
+      "description": "Draft privacy policy information for the ChiTown Trolley website.",
+      "descriptionLength": 65,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/privacy-policy/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Privacy Policy",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": [
+        "Draft legal content is indexable."
+      ]
+    },
+    {
+      "route": "/reservation/",
+      "sourceFile": "src/pages/reservation.astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "PageHero"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": null,
+      "title": "Reserve Your Ride — ChiTown Trolley",
+      "titleLength": 35,
+      "description": "Request a reservation for your Chicago wedding or event. Tell us the where and when — we'll confirm availability and hold your date. No payment required to request.",
+      "descriptionLength": 164,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/reservation/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Reserve your ride",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": [
+        "Client-only form does not submit data."
+      ]
+    },
+    {
+      "route": "/services/",
+      "sourceFile": "src/pages/services.astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "PageHero",
+        "Eyebrow"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": null,
+      "title": "Services — ChiTown Trolley",
+      "titleLength": 26,
+      "description": "Weddings, corporate events, proms, quinceañeras, bachelor &#38; bachelorette parties, game days, airport runs, coach charters and nights out — across Chicagoland.",
+      "descriptionLength": 162,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/services/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Any occasion worth arriving for",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    },
+    {
+      "route": "/terms-and-conditions/",
+      "sourceFile": "src/pages/terms-and-conditions.astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "PageHero"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": null,
+      "title": "Terms and Conditions — ChiTown Trolley",
+      "titleLength": 38,
+      "description": "Draft website terms and conditions for ChiTown Trolley.",
+      "descriptionLength": 55,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/terms-and-conditions/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "Terms and Conditions",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": [
+        "Draft legal content is indexable."
+      ]
+    },
+    {
+      "route": "/weddings/",
+      "sourceFile": "src/pages/weddings.astro",
+      "layout": "src/layouts/BaseLayout.astro",
+      "mainComponents": [
+        "Eyebrow"
+      ],
+      "rendering": "static prerendered",
+      "dynamicParams": null,
+      "title": "Wedding Trolley Transportation — ChiTown Trolley",
+      "titleLength": 48,
+      "description": "The ride between “I do” and the dance floor. Classic white wedding trolleys plus a coach for your guests, across Chicagoland.",
+      "descriptionLength": 125,
+      "canonical": {
+        "value": "https://chitowntracking.github.io/Trolley/weddings/",
+        "status": "present"
+      },
+      "indexability": {
+        "status": "indexable",
+        "robotsMeta": null,
+        "inSitemap": true
+      },
+      "structuredData": {
+        "status": "absent",
+        "types": []
+      },
+      "openGraph": {
+        "coreFields": "present",
+        "image": null
+      },
+      "twitter": {
+        "status": "absent"
+      },
+      "mainHeading": "The ride between \"I do\" and the dance floor",
+      "h1Count": 1,
+      "missingSeoFields": [
+        "og:image",
+        "Twitter card metadata",
+        "theme-color"
+      ],
+      "notes": []
+    }
+  ]
+}

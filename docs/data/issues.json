@@ -1,0 +1,774 @@
+{
+  "generatedAt": "2026-07-18",
+  "priorityDefinitions": {
+    "P0": "Launch blocker or a feature that currently fails its primary purpose.",
+    "P1": "High-impact security, accessibility, SEO, performance, deployment, or content risk to address before launch.",
+    "P2": "Important maintainability, resilience, privacy, or quality improvement.",
+    "P3": "Polish or low-risk optimization."
+  },
+  "issues": [
+    {
+      "id": "P0-001",
+      "priority": "P0",
+      "category": "forms",
+      "title": "All three forms report success without transmitting data",
+      "evidence": [
+        "The home, contact, and reservation submit handlers call preventDefault(), reportValidity(), hide the form, and reveal confirmation markup.",
+        "No action, method, fetch, API route, server adapter, or third-party form endpoint exists."
+      ],
+      "affected": [
+        "src/pages/index.astro",
+        "src/pages/contact.astro",
+        "src/pages/reservation.astro"
+      ],
+      "impact": "Prospective customer inquiries and reservations are silently lost while users are told they were received.",
+      "recommendation": "Choose a real endpoint/provider, submit asynchronously with server-side validation, add loading/error/success states, spam controls, privacy disclosure, and end-to-end tests.",
+      "effort": "M",
+      "severity": "Critical",
+      "file": [
+        "src/pages/index.astro",
+        "src/pages/contact.astro",
+        "src/pages/reservation.astro"
+      ],
+      "location": "src/pages/index.astro; src/pages/contact.astro; src/pages/reservation.astro",
+      "description": "All three forms report success without transmitting data",
+      "risk": "Prospective customer inquiries and reservations are silently lost while users are told they were received."
+    },
+    {
+      "id": "P0-002",
+      "priority": "P0",
+      "category": "content",
+      "title": "Launch-critical business contact and social values are placeholders",
+      "evidence": [
+        "site.phone is '(000) TROLLEY'; site.phoneHref is 'tel:0008765539'; street/postal address values are TODO; Instagram and Facebook are '#'.",
+        "Footer still renders the placeholder phone as a clickable tel link and substitutes generic platform home pages for social profiles."
+      ],
+      "affected": [
+        "src/data/site.ts",
+        "src/components/Footer.astro",
+        "src/components/TopBar.astro"
+      ],
+      "impact": "Customers cannot reliably call or find the business, and structured data is incomplete.",
+      "recommendation": "Supply verified phone, address/service-area decision, and official social profile URLs; keep placeholders non-clickable until verified.",
+      "effort": "S",
+      "severity": "Critical",
+      "file": [
+        "src/data/site.ts",
+        "src/components/Footer.astro",
+        "src/components/TopBar.astro"
+      ],
+      "location": "src/data/site.ts; src/components/Footer.astro; src/components/TopBar.astro",
+      "description": "Launch-critical business contact and social values are placeholders",
+      "risk": "Customers cannot reliably call or find the business, and structured data is incomplete."
+    },
+    {
+      "id": "P0-003",
+      "priority": "P0",
+      "category": "assets",
+      "title": "Desktop homepage hero references an asset absent from the production build",
+      "evidence": [
+        "src/pages/index.astro constructs /uploads/heroImg2.png with withBase().",
+        "The file exists only in root uploads/, not public/uploads/, and is not directly imported.",
+        "Build-reference scan found /Trolley/uploads/heroImg2.png missing; preview request would return 404."
+      ],
+      "affected": [
+        "src/pages/index.astro",
+        "uploads/heroImg2.png"
+      ],
+      "impact": "The desktop hero background can be blank in the deployed static site.",
+      "recommendation": "Import the asset through Astro or move an approved optimized version into public and verify the built URL.",
+      "effort": "S",
+      "severity": "Critical",
+      "file": [
+        "src/pages/index.astro",
+        "uploads/heroImg2.png"
+      ],
+      "location": "src/pages/index.astro; uploads/heroImg2.png",
+      "description": "Desktop homepage hero references an asset absent from the production build",
+      "risk": "The desktop hero background can be blank in the deployed static site."
+    },
+    {
+      "id": "P0-004",
+      "priority": "P0",
+      "category": "legal",
+      "title": "Draft legal pages and certification claims are public and indexable",
+      "evidence": [
+        "Privacy and terms pages explicitly describe themselves as placeholder/draft content.",
+        "Both are included in the sitemap and have no noindex directive.",
+        "Footer displays 'Women-owned business' and a WBENC logo."
+      ],
+      "affected": [
+        "src/pages/privacy-policy.astro",
+        "src/pages/terms-and-conditions.astro",
+        "src/components/Footer.astro",
+        "public/uploads/wbenc-logo.svg"
+      ],
+      "impact": "Creates compliance, trust, and certification-use risk.",
+      "recommendation": "Obtain legal review, decide consent/retention/vendor disclosures, verify authorization and exact certification wording/logo use, then publish; otherwise remove/noindex until approved.",
+      "effort": "M",
+      "severity": "Critical",
+      "file": [
+        "src/pages/privacy-policy.astro",
+        "src/pages/terms-and-conditions.astro",
+        "src/components/Footer.astro",
+        "public/uploads/wbenc-logo.svg"
+      ],
+      "location": "src/pages/privacy-policy.astro; src/pages/terms-and-conditions.astro; src/components/Footer.astro; public/uploads/wbenc-logo.svg",
+      "description": "Draft legal pages and certification claims are public and indexable",
+      "risk": "Creates compliance, trust, and certification-use risk."
+    },
+    {
+      "id": "P1-001",
+      "priority": "P1",
+      "category": "security",
+      "title": "Astro 4 dependency tree has known high/moderate vulnerabilities and is multiple majors behind",
+      "evidence": [
+        "npm audit reported 3 vulnerabilities: 2 high and 1 moderate, affecting Astro and transitive Vite/esbuild.",
+        "Installed Astro is 4.16.19; npm outdated reports 7.1.1 latest. Sitemap is 3.2.1 versus 3.7.3."
+      ],
+      "affected": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "impact": "Known compiler/dev-server/XSS-related advisories remain; static output reduces but does not eliminate exposure.",
+      "recommendation": "Plan and test a staged Astro 7 migration using official migration guides; re-run audit/build/check and visual regression after each major step.",
+      "effort": "L",
+      "severity": "High",
+      "file": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "location": "package.json; package-lock.json",
+      "description": "Astro 4 dependency tree has known high/moderate vulnerabilities and is multiple majors behind",
+      "risk": "Known compiler/dev-server/XSS-related advisories remain; static output reduces but does not eliminate exposure."
+    },
+    {
+      "id": "P1-002",
+      "priority": "P1",
+      "category": "performance",
+      "title": "Broad eager fleet image glob emits unrelated multi-megabyte decor assets",
+      "evidence": [
+        "fleet/[slug].astro eagerly imports /src/assets/fleet/**/*, so all 24 source images are emitted.",
+        "Four Christmas decor JPEGs total about 13 MB; the largest is 6,453,853 bytes at 8000Ã—2474.",
+        "The built site totals 30,702,516 bytes, with images dominating."
+      ],
+      "affected": [
+        "src/pages/fleet/[slug].astro",
+        "src/assets/fleet/ChristmasTrolley/decor"
+      ],
+      "impact": "Inflates deployment size and cache churn; affected route markup can reference oversized originals without responsive variants.",
+      "recommendation": "Narrow globs per vehicle/content use, keep decor out of fleet gallery imports, resize/compress sources, and use Astro image optimization with responsive srcset/sizes.",
+      "effort": "M",
+      "severity": "High",
+      "file": [
+        "src/pages/fleet/[slug].astro",
+        "src/assets/fleet/ChristmasTrolley/decor"
+      ],
+      "location": "src/pages/fleet/[slug].astro; src/assets/fleet/ChristmasTrolley/decor",
+      "description": "Broad eager fleet image glob emits unrelated multi-megabyte decor assets",
+      "risk": "Inflates deployment size and cache churn; affected route markup can reference oversized originals without responsive variants."
+    },
+    {
+      "id": "P1-003",
+      "priority": "P1",
+      "category": "accessibility",
+      "title": "Keyboard focus treatment is incomplete and header defaults are explicitly removed",
+      "evidence": [
+        "Header .nav__link uses all: unset and has no :focus-visible replacement.",
+        "Global buttons/links have hover styles but no global focus-visible rule; only footer links define one.",
+        "No skip-to-content link exists."
+      ],
+      "affected": [
+        "src/components/Header.astro",
+        "src/styles/global.css",
+        "src/layouts/BaseLayout.astro"
+      ],
+      "impact": "Keyboard users can lose track of focus and must traverse global navigation on every page.",
+      "recommendation": "Add a consistent high-contrast focus-visible system, restore focus indication for reset controls, add a skip link/main target, and test drawer/dropdown focus order and focus return.",
+      "effort": "M",
+      "severity": "High",
+      "file": [
+        "src/components/Header.astro",
+        "src/styles/global.css",
+        "src/layouts/BaseLayout.astro"
+      ],
+      "location": "src/components/Header.astro; src/styles/global.css; src/layouts/BaseLayout.astro",
+      "description": "Keyboard focus treatment is incomplete and header defaults are explicitly removed",
+      "risk": "Keyboard users can lose track of focus and must traverse global navigation on every page."
+    },
+    {
+      "id": "P1-004",
+      "priority": "P1",
+      "category": "deployment",
+      "title": "Two GitHub Pages workflows can deploy the same branch with conflicting configuration",
+      "evidence": [
+        "astro.yml and deploy.yml both trigger on main and share the pages concurrency group.",
+        "astro.yml uses Node 20 and Pages-derived site/base; deploy.yml uses Node 24 and fixed astro.config values.",
+        "Action versions and cancel-in-progress behavior also differ."
+      ],
+      "affected": [
+        ".github/workflows/astro.yml",
+        ".github/workflows/deploy.yml",
+        "astro.config.mjs"
+      ],
+      "impact": "Duplicate/racing deployments can publish artifacts built with different canonical/base settings.",
+      "recommendation": "Keep one reviewed workflow, pin the supported Node version, use one source of truth for site/base, and add build/check gates.",
+      "effort": "S",
+      "severity": "High",
+      "file": [
+        ".github/workflows/astro.yml",
+        ".github/workflows/deploy.yml",
+        "astro.config.mjs"
+      ],
+      "location": ".github/workflows/astro.yml; .github/workflows/deploy.yml; astro.config.mjs",
+      "description": "Two GitHub Pages workflows can deploy the same branch with conflicting configuration",
+      "risk": "Duplicate/racing deployments can publish artifacts built with different canonical/base settings."
+    },
+    {
+      "id": "P1-005",
+      "priority": "P1",
+      "category": "seo",
+      "title": "Canonical production origin and base path require confirmation",
+      "evidence": [
+        "astro.config.mjs hard-codes https://chitowntracking.github.io with base /Trolley.",
+        "All 20 canonicals and sitemap URLs use that GitHub Pages address."
+      ],
+      "affected": [
+        "astro.config.mjs",
+        "src/layouts/BaseLayout.astro"
+      ],
+      "impact": "If a branded domain or different repository path is intended, search engines will receive incorrect canonicals and social URLs.",
+      "recommendation": "Confirm the real production URL and deployment path, then align config, workflow, Search Console, sitemap, and redirects.",
+      "effort": "S",
+      "severity": "High",
+      "file": [
+        "astro.config.mjs",
+        "src/layouts/BaseLayout.astro"
+      ],
+      "location": "astro.config.mjs; src/layouts/BaseLayout.astro",
+      "description": "Canonical production origin and base path require confirmation",
+      "risk": "If a branded domain or different repository path is intended, search engines will receive incorrect canonicals and social URLs."
+    },
+    {
+      "id": "P1-006",
+      "priority": "P1",
+      "category": "seo",
+      "title": "Social metadata is incomplete and several snippets exceed common display ranges",
+      "evidence": [
+        "Only 3 guide routes provide og:image; 17 routes have none.",
+        "No route has Twitter card metadata.",
+        "Six titles exceed 60 characters; four descriptions exceed 160; draft legal descriptions are very short."
+      ],
+      "affected": [
+        "src/layouts/BaseLayout.astro",
+        "multiple page templates"
+      ],
+      "impact": "Weak or inconsistent social previews and truncated search snippets.",
+      "recommendation": "Add a verified default social image, Twitter card tags, per-page overrides, and edit titles/descriptions based on Search Console results rather than hard limits alone.",
+      "effort": "M",
+      "severity": "High",
+      "file": [
+        "src/layouts/BaseLayout.astro",
+        "multiple page templates"
+      ],
+      "location": "src/layouts/BaseLayout.astro; multiple page templates",
+      "description": "Social metadata is incomplete and several snippets exceed common display ranges",
+      "risk": "Weak or inconsistent social previews and truncated search snippets."
+    },
+    {
+      "id": "P1-007",
+      "priority": "P1",
+      "category": "resilience",
+      "title": "No custom 404, robots policy, redirects, or security-header configuration",
+      "evidence": [
+        "No src/pages/404.astro, public/robots.txt, middleware, redirects, or headers configuration was found.",
+        "Static preview only verifies existing routes."
+      ],
+      "affected": [
+        "src/pages",
+        "public",
+        "deployment configuration"
+      ],
+      "impact": "Poor not-found experience and no explicit crawler/security policy; moved URLs cannot be preserved.",
+      "recommendation": "Add a branded 404, explicit robots.txt referencing the sitemap, required redirects, and host-supported security headers after inventorying external sources.",
+      "effort": "M",
+      "severity": "High",
+      "file": [
+        "src/pages",
+        "public",
+        "deployment configuration"
+      ],
+      "location": "src/pages; public; deployment configuration",
+      "description": "No custom 404, robots policy, redirects, or security-header configuration",
+      "risk": "Poor not-found experience and no explicit crawler/security policy; moved URLs cannot be preserved."
+    },
+    {
+      "id": "P1-008",
+      "priority": "P1",
+      "category": "content",
+      "title": "Every fleet vehicle embeds the same placeholder YouTube video",
+      "evidence": [
+        "All four vehicle.video entries use YE7VzlLtp-4 and comments mark them TODO.",
+        "Each fleet detail page labels the embed as that vehicle's video."
+      ],
+      "affected": [
+        "src/data/site.ts",
+        "src/pages/fleet/[slug].astro"
+      ],
+      "impact": "Potentially misleading content plus unnecessary third-party privacy/performance cost.",
+      "recommendation": "Provide verified per-vehicle footage or remove the section until available; consider youtube-nocookie and click-to-load consent behavior.",
+      "effort": "S",
+      "severity": "High",
+      "file": [
+        "src/data/site.ts",
+        "src/pages/fleet/[slug].astro"
+      ],
+      "location": "src/data/site.ts; src/pages/fleet/[slug].astro",
+      "description": "Every fleet vehicle embeds the same placeholder YouTube video",
+      "risk": "Potentially misleading content plus unnecessary third-party privacy/performance cost."
+    },
+    {
+      "id": "P1-009",
+      "priority": "P1",
+      "category": "content",
+      "title": "Capacity, fleet, and service-area claims are inconsistent",
+      "evidence": [
+        "FAQ refers to Classic and Grand trolleys with capacities up to 30 and 36, while fleet data lists one Classic White Trolley at 30â€“36.",
+        "Contact passengers max is 36 while coach capacity and home options reach 57.",
+        "Homepage hero names four states while structured data and other copy describe Chicagoland."
+      ],
+      "affected": [
+        "src/data/site.ts",
+        "src/pages/contact.astro",
+        "src/pages/index.astro"
+      ],
+      "impact": "Customers and search engines receive conflicting eligibility and capacity information.",
+      "recommendation": "Create a verified business-content matrix and drive all capacity/service-area copy and form constraints from one source.",
+      "effort": "M",
+      "severity": "High",
+      "file": [
+        "src/data/site.ts",
+        "src/pages/contact.astro",
+        "src/pages/index.astro"
+      ],
+      "location": "src/data/site.ts; src/pages/contact.astro; src/pages/index.astro",
+      "description": "Capacity, fleet, and service-area claims are inconsistent",
+      "risk": "Customers and search engines receive conflicting eligibility and capacity information."
+    },
+    {
+      "id": "P1-010",
+      "priority": "P1",
+      "category": "quality",
+      "title": "No lint, type-check, or test commands are configured",
+      "evidence": [
+        "package.json provides dev/build/preview/astro only.",
+        "astro check could not run because @astrojs/check and TypeScript are not installed.",
+        "No unit, integration, accessibility, or end-to-end tests were found."
+      ],
+      "affected": [
+        "package.json",
+        "package-lock.json",
+        ".github/workflows"
+      ],
+      "impact": "Regressions in routes, forms, keyboard behavior, metadata, and content can reach production unnoticed.",
+      "recommendation": "Add Astro check, lint/format rules, unit tests for path/data helpers, and browser tests for navigation/forms/galleries; run them in the single deployment workflow.",
+      "effort": "M",
+      "severity": "High",
+      "file": [
+        "package.json",
+        "package-lock.json",
+        ".github/workflows"
+      ],
+      "location": "package.json; package-lock.json; .github/workflows",
+      "description": "No lint, type-check, or test commands are configured",
+      "risk": "Regressions in routes, forms, keyboard behavior, metadata, and content can reach production unnoticed."
+    },
+    {
+      "id": "P1-011",
+      "priority": "P1",
+      "category": "images",
+      "title": "Most rendered images lack intrinsic dimensions and responsive delivery",
+      "evidence": [
+        "Generated HTML has 111 img elements; 91 lack width and/or height.",
+        "No picture/srcset/sizes output was observed for public images; large originals are served directly.",
+        "15 audited source assets exceed 1 MB."
+      ],
+      "affected": [
+        "multiple page templates",
+        "src/data/site.ts",
+        "public/uploads",
+        "src/assets"
+      ],
+      "impact": "Layout shifts, excess mobile transfer, and slower LCP/interaction on image-heavy routes.",
+      "recommendation": "Use Astro image metadata/components, specify intrinsic dimensions, responsive widths/sizes, modern formats, and intentional eager/fetchpriority only for the LCP image.",
+      "effort": "L",
+      "severity": "High",
+      "file": [
+        "multiple page templates",
+        "src/data/site.ts",
+        "public/uploads",
+        "src/assets"
+      ],
+      "location": "multiple page templates; src/data/site.ts; public/uploads; src/assets",
+      "description": "Most rendered images lack intrinsic dimensions and responsive delivery",
+      "risk": "Layout shifts, excess mobile transfer, and slower LCP/interaction on image-heavy routes."
+    },
+    {
+      "id": "P1-012",
+      "priority": "P1",
+      "category": "performance",
+      "title": "Core Web Vitals and visual responsive behavior remain unmeasured",
+      "evidence": [
+        "The in-app browser was unavailable, so Lighthouse, computed layout, keyboard walkthroughs, and mobile screenshots could not be captured.",
+        "HTTP preview smoke tests returned 200 for all 20 pages, but that does not measure rendering quality."
+      ],
+      "affected": [
+        "all routes"
+      ],
+      "impact": "LCP, CLS, INP, responsive overflow, and interactive accessibility risks are not quantified.",
+      "recommendation": "Run Lighthouse and real-browser checks at 320/375/390/430/768 and desktop widths on a production-like deployment; record field data after launch.",
+      "effort": "M",
+      "severity": "High",
+      "file": [
+        "all routes"
+      ],
+      "location": "all routes",
+      "description": "Core Web Vitals and visual responsive behavior remain unmeasured",
+      "risk": "LCP, CLS, INP, responsive overflow, and interactive accessibility risks are not quantified."
+    },
+    {
+      "id": "P2-001",
+      "priority": "P2",
+      "category": "assets",
+      "title": "Asset storage contains extensive duplicates and unreferenced source candidates",
+      "evidence": [
+        "70 image files total 44,140,764 bytes across src/assets, public, and root uploads.",
+        "17 byte-identical duplicate groups were found.",
+        "Root uploads contains working/reference variants; public also copies unreferenced files into dist."
+      ],
+      "affected": [
+        "uploads",
+        "public/uploads",
+        "src/assets"
+      ],
+      "impact": "Repository bloat and uncertainty about canonical source assets increase maintenance mistakes.",
+      "recommendation": "After launch assets are verified, choose one canonical source per image, archive originals outside deployable folders, and remove only proven-unreferenced copies in a dedicated cleanup change.",
+      "effort": "M",
+      "severity": "Medium",
+      "file": [
+        "uploads",
+        "public/uploads",
+        "src/assets"
+      ],
+      "location": "uploads; public/uploads; src/assets",
+      "description": "Asset storage contains extensive duplicates and unreferenced source candidates",
+      "risk": "Repository bloat and uncertainty about canonical source assets increase maintenance mistakes."
+    },
+    {
+      "id": "P2-002",
+      "priority": "P2",
+      "category": "architecture",
+      "title": "Several files combine content, presentation, and interaction at high line counts",
+      "evidence": [
+        "index.astro is 881 lines; Footer 517; christmas-trolley 447; guides/[slug] 428; Header 320.",
+        "Large scoped CSS/script blocks are embedded beside route markup."
+      ],
+      "affected": [
+        "src/pages/index.astro",
+        "src/components/Footer.astro",
+        "src/pages/christmas-trolley.astro",
+        "src/pages/guides/[slug].astro",
+        "src/components/Header.astro"
+      ],
+      "impact": "Higher regression risk and slower review for focused changes.",
+      "recommendation": "Extract stable section/form/carousel/gallery components and small client modules while preserving static rendering and avoiding premature abstractions.",
+      "effort": "L",
+      "severity": "Medium",
+      "file": [
+        "src/pages/index.astro",
+        "src/components/Footer.astro",
+        "src/pages/christmas-trolley.astro",
+        "src/pages/guides/[slug].astro",
+        "src/components/Header.astro"
+      ],
+      "location": "src/pages/index.astro; src/components/Footer.astro; src/pages/christmas-trolley.astro; src/pages/guides/[slug].astro; src/components/Header.astro",
+      "description": "Several files combine content, presentation, and interaction at high line counts",
+      "risk": "Higher regression risk and slower review for focused changes."
+    },
+    {
+      "id": "P2-003",
+      "priority": "P2",
+      "category": "performance",
+      "title": "Google Fonts adds render-path and privacy dependencies",
+      "evidence": [
+        "BaseLayout loads two families and seven style/weight combinations from fonts.googleapis.com/gstatic.com.",
+        "display=swap and preconnects are present, but fonts are not self-hosted or preloaded."
+      ],
+      "affected": [
+        "src/layouts/BaseLayout.astro"
+      ],
+      "impact": "Third-party requests can delay typography and may require disclosure depending on jurisdiction.",
+      "recommendation": "Reduce weights/styles and evaluate self-hosted subsets with long cache headers; measure before/after.",
+      "effort": "M",
+      "severity": "Medium",
+      "file": [
+        "src/layouts/BaseLayout.astro"
+      ],
+      "location": "src/layouts/BaseLayout.astro",
+      "description": "Google Fonts adds render-path and privacy dependencies",
+      "risk": "Third-party requests can delay typography and may require disclosure depending on jurisdiction."
+    },
+    {
+      "id": "P2-004",
+      "priority": "P2",
+      "category": "observability",
+      "title": "No analytics, error monitoring, or form-delivery monitoring is present",
+      "evidence": [
+        "No analytics SDK, beacon, error service, or submission tracking was found."
+      ],
+      "affected": [
+        "site-wide"
+      ],
+      "impact": "Traffic, conversion failures, client errors, and post-launch regressions are invisible.",
+      "recommendation": "Define privacy-conscious analytics and error/form-delivery monitoring only after consent and legal requirements are approved.",
+      "effort": "M",
+      "severity": "Medium",
+      "file": [
+        "site-wide"
+      ],
+      "location": "site-wide",
+      "description": "No analytics, error monitoring, or form-delivery monitoring is present",
+      "risk": "Traffic, conversion failures, client errors, and post-launch regressions are invisible."
+    },
+    {
+      "id": "P2-005",
+      "priority": "P2",
+      "category": "security",
+      "title": "No Content Security Policy or related browser security headers are defined",
+      "evidence": [
+        "No header configuration was found.",
+        "Current external sources include Google Fonts and YouTube, which must be accounted for in a CSP."
+      ],
+      "affected": [
+        "deployment configuration"
+      ],
+      "impact": "Reduced defense in depth against injection and framing attacks.",
+      "recommendation": "Add host-supported CSP, Referrer-Policy, X-Content-Type-Options, frame policy, and Permissions-Policy in report-only/staged mode, then enforce.",
+      "effort": "M",
+      "severity": "Medium",
+      "file": [
+        "deployment configuration"
+      ],
+      "location": "deployment configuration",
+      "description": "No Content Security Policy or related browser security headers are defined",
+      "risk": "Reduced defense in depth against injection and framing attacks."
+    },
+    {
+      "id": "P2-006",
+      "priority": "P2",
+      "category": "accessibility",
+      "title": "Dynamic confirmations and carousels need stronger assistive-technology behavior",
+      "evidence": [
+        "Confirmation panels are revealed without role=status, aria-live, or explicit focus movement.",
+        "Testimonials auto-advance on desktop and dots are generated client-side; no live status text is present."
+      ],
+      "affected": [
+        "src/pages/index.astro",
+        "src/pages/contact.astro",
+        "src/pages/reservation.astro"
+      ],
+      "impact": "Screen-reader users may not learn that state changed; auto-rotation may be confusing.",
+      "recommendation": "Move focus to a status heading or announce politely after actual submission; provide pause control and verify reduced-motion/touch/keyboard behavior.",
+      "effort": "M",
+      "severity": "Medium",
+      "file": [
+        "src/pages/index.astro",
+        "src/pages/contact.astro",
+        "src/pages/reservation.astro"
+      ],
+      "location": "src/pages/index.astro; src/pages/contact.astro; src/pages/reservation.astro",
+      "description": "Dynamic confirmations and carousels need stronger assistive-technology behavior",
+      "risk": "Screen-reader users may not learn that state changed; auto-rotation may be confusing."
+    },
+    {
+      "id": "P2-007",
+      "priority": "P2",
+      "category": "structured-data",
+      "title": "LocalBusiness structured data is intentionally incomplete",
+      "evidence": [
+        "Home emits TaxiService JSON-LD, but telephone, address, and sameAs are omitted because source values are placeholders.",
+        "Only guide articles emit Article schema elsewhere."
+      ],
+      "affected": [
+        "src/data/site.ts",
+        "src/pages/index.astro",
+        "src/pages/guides/[slug].astro"
+      ],
+      "impact": "Search engines receive limited verified entity information.",
+      "recommendation": "After business details are verified, add complete LocalBusiness fields and validate all JSON-LD with schema tools; avoid unverifiable ratings/reviews.",
+      "effort": "S",
+      "severity": "Medium",
+      "file": [
+        "src/data/site.ts",
+        "src/pages/index.astro",
+        "src/pages/guides/[slug].astro"
+      ],
+      "location": "src/data/site.ts; src/pages/index.astro; src/pages/guides/[slug].astro",
+      "description": "LocalBusiness structured data is intentionally incomplete",
+      "risk": "Search engines receive limited verified entity information."
+    },
+    {
+      "id": "P2-008",
+      "priority": "P2",
+      "category": "assets",
+      "title": "Root tooling artifacts are unexplained and not part of the application",
+      "evidence": [
+        "support.js (61,032 bytes) and .thumbnail (25,410 bytes) exist at repository root.",
+        "support.js contains dynamic code/innerHTML patterns but no src import references were found."
+      ],
+      "affected": [
+        "support.js",
+        ".thumbnail"
+      ],
+      "impact": "Noise and potentially risky copied tooling can confuse contributors or be accidentally shipped later.",
+      "recommendation": "Identify provenance and ownership, then archive or remove in a separate cleanup only after confirmation.",
+      "effort": "S",
+      "severity": "Medium",
+      "file": [
+        "support.js",
+        ".thumbnail"
+      ],
+      "location": "support.js; .thumbnail",
+      "description": "Root tooling artifacts are unexplained and not part of the application",
+      "risk": "Noise and potentially risky copied tooling can confuse contributors or be accidentally shipped later."
+    },
+    {
+      "id": "P2-009",
+      "priority": "P2",
+      "category": "accessibility",
+      "title": "Active navigation state is visual only",
+      "evidence": [
+        "Header adds an active class but does not emit aria-current='page' on matching links."
+      ],
+      "affected": [
+        "src/components/Header.astro",
+        "src/components/Footer.astro"
+      ],
+      "impact": "Assistive technology does not receive the current-page relationship.",
+      "recommendation": "Add aria-current='page' to the matching primary/dropdown/footer link and verify dynamic route matching.",
+      "effort": "S",
+      "severity": "Medium",
+      "file": [
+        "src/components/Header.astro",
+        "src/components/Footer.astro"
+      ],
+      "location": "src/components/Header.astro; src/components/Footer.astro",
+      "description": "Active navigation state is visual only",
+      "risk": "Assistive technology does not receive the current-page relationship."
+    },
+    {
+      "id": "P2-010",
+      "priority": "P2",
+      "category": "color-contrast",
+      "title": "Several palette tokens fail normal-text contrast on the paper background",
+      "evidence": [
+        "Calculated contrast on #FDFCFA: faint #A69F91 = 2.56:1, gold-dark #B8860B = 3.17:1, gold #D4AF6A = 2.02:1.",
+        "These colors appear in placeholders, copyright, small labels, icons, borders, and gradients; actual compliance depends on use/size."
+      ],
+      "affected": [
+        "src/styles/global.css",
+        "scoped component/page styles"
+      ],
+      "impact": "Small text or meaningful icons using these colors may fail WCAG AA.",
+      "recommendation": "Audit computed uses, reserve low-contrast colors for decoration, and darken semantic text/icon states to at least 4.5:1 for normal text.",
+      "effort": "M",
+      "severity": "Medium",
+      "file": [
+        "src/styles/global.css",
+        "scoped component/page styles"
+      ],
+      "location": "src/styles/global.css; scoped component/page styles",
+      "description": "Several palette tokens fail normal-text contrast on the paper background",
+      "risk": "Small text or meaningful icons using these colors may fail WCAG AA."
+    },
+    {
+      "id": "P3-001",
+      "priority": "P3",
+      "category": "metadata",
+      "title": "PWA/browser polish metadata is minimal",
+      "evidence": [
+        "A WebP photo is used as favicon; no theme-color, Apple touch icon, web manifest, or dedicated multi-size icon set was found."
+      ],
+      "affected": [
+        "src/layouts/BaseLayout.astro",
+        "public"
+      ],
+      "impact": "Inconsistent browser tab, bookmark, and mobile home-screen presentation.",
+      "recommendation": "Create a small verified icon set and add only the metadata the site will actively support.",
+      "effort": "S",
+      "severity": "Low",
+      "file": [
+        "src/layouts/BaseLayout.astro",
+        "public"
+      ],
+      "location": "src/layouts/BaseLayout.astro; public",
+      "description": "PWA/browser polish metadata is minimal",
+      "risk": "Inconsistent browser tab, bookmark, and mobile home-screen presentation."
+    },
+    {
+      "id": "P3-002",
+      "priority": "P3",
+      "category": "maintenance",
+      "title": "Copyright year is hard-coded",
+      "evidence": [
+        "Footer contains Â© 2026 directly in markup."
+      ],
+      "affected": [
+        "src/components/Footer.astro"
+      ],
+      "impact": "Requires manual annual maintenance.",
+      "recommendation": "Choose an intentional static year/range policy or derive the current year at build time.",
+      "effort": "S",
+      "severity": "Low",
+      "file": [
+        "src/components/Footer.astro"
+      ],
+      "location": "src/components/Footer.astro",
+      "description": "Copyright year is hard-coded",
+      "risk": "Requires manual annual maintenance."
+    },
+    {
+      "id": "P3-003",
+      "priority": "P3",
+      "category": "code-safety",
+      "title": "Controlled set:html usage should remain tightly constrained",
+      "evidence": [
+        "Header renders one local navigation label with set:html; BaseLayout serializes local JSON-LD with set:html.",
+        "No user-controlled input reaches either use today."
+      ],
+      "affected": [
+        "src/components/Header.astro",
+        "src/layouts/BaseLayout.astro",
+        "src/data/site.ts"
+      ],
+      "impact": "Low current risk, but future editable/CMS data could turn these into injection sinks.",
+      "recommendation": "Prefer structured Astro markup for nav styling and keep JSON-LD serialization isolated; never pass untrusted HTML.",
+      "effort": "S",
+      "severity": "Low",
+      "file": [
+        "src/components/Header.astro",
+        "src/layouts/BaseLayout.astro",
+        "src/data/site.ts"
+      ],
+      "location": "src/components/Header.astro; src/layouts/BaseLayout.astro; src/data/site.ts",
+      "description": "Controlled set:html usage should remain tightly constrained",
+      "risk": "Low current risk, but future editable/CMS data could turn these into injection sinks."
+    }
+  ],
+  "summary": {
+    "P0": 4,
+    "P1": 12,
+    "P2": 10,
+    "P3": 3
+  }
+}

@@ -1,0 +1,1180 @@
+{
+  "generatedAt": "2026-07-18",
+  "scope": [
+    "src/assets",
+    "public",
+    "uploads"
+  ],
+  "method": "Filesystem metadata, exact path-reference scan, and import.meta.glob review. Dimensions use sharp; runtime viewport selection and transfer bytes were not measured.",
+  "fieldConventions": {
+    "usedIn": "Source usage locations; an omitted field means no source reference was found.",
+    "flags": "Apply the matching optimizationRules entries; an empty array uses the default rule."
+  },
+  "flagDefinitions": {
+    "unreferenced-deployed": "Copied/emitted despite no direct content reference.",
+    "unreferenced-source": "Not referenced and not emitted.",
+    "over-1MB": "Source file exceeds 1 MB.",
+    "high-pixels": "At least 4 megapixels.",
+    "duplicate": "Byte-identical content exists at another path.",
+    "broad-eager-glob": "Emitted because fleet/[slug].astro eagerly imports all fleet assets, even unrelated decor."
+  },
+  "optimizationRules": {
+    "default": "Keep only if the visual is approved; add intrinsic dimensions and responsive delivery at the rendering site.",
+    "unreferenced-deployed": "Remove from the deployable public directory after confirming no external URL depends on it.",
+    "unreferenced-source": "Archive or delete only in a dedicated cleanup after ownership and intended future use are confirmed.",
+    "over-1MB": "Resize to the maximum rendered dimensions and recompress to an appropriate WebP/AVIF/JPEG quality.",
+    "high-pixels": "Generate responsive widths rather than shipping the full-resolution source to browsers.",
+    "duplicate": "Choose one canonical source and eliminate redundant deployable copies after reference verification.",
+    "broad-eager-glob": "Narrow the import glob so unrelated decor is not emitted with fleet gallery assets."
+  },
+  "totals": {
+    "files": 70,
+    "bytes": 44140764,
+    "referenced": 42,
+    "unreferenced": 28,
+    "emitted": 49,
+    "filesOver1MB": 15,
+    "duplicateGroups": 17,
+    "byArea": {
+      "source": {
+        "files": 24,
+        "bytes": 18740119,
+        "referenced": 24,
+        "emitted": 24
+      },
+      "public": {
+        "files": 24,
+        "bytes": 9324227,
+        "referenced": 17,
+        "emitted": 24
+      },
+      "root-upload": {
+        "files": 22,
+        "bytes": 16076418,
+        "referenced": 1,
+        "emitted": 1
+      }
+    }
+  },
+  "assets": [
+    {
+      "path": "public/images/christmas-trolley/decor/corner-wreath.webp",
+      "area": "public",
+      "format": "webp",
+      "bytes": 231920,
+      "width": 900,
+      "height": 1289,
+      "usedIn": [
+        "src/pages/christmas-trolley.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": []
+    },
+    {
+      "path": "public/images/christmas-trolley/decor/garland-strand.webp",
+      "area": "public",
+      "format": "webp",
+      "bytes": 341688,
+      "width": 2000,
+      "height": 895,
+      "usedIn": [
+        "src/pages/christmas-trolley.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": []
+    },
+    {
+      "path": "public/images/christmas-trolley/decor/garland-strip-a.webp",
+      "area": "public",
+      "format": "webp",
+      "bytes": 217254,
+      "width": 2400,
+      "height": 742,
+      "referenced": false,
+      "emitted": true,
+      "flags": [
+        "unreferenced-deployed"
+      ]
+    },
+    {
+      "path": "public/images/christmas-trolley/decor/garland-strip-b.webp",
+      "area": "public",
+      "format": "webp",
+      "bytes": 385078,
+      "width": 2000,
+      "height": 1172,
+      "usedIn": [
+        "src/pages/christmas-trolley.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": []
+    },
+    {
+      "path": "public/uploads/2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg",
+      "area": "public",
+      "format": "jpeg",
+      "bytes": 463159,
+      "width": 1000,
+      "height": 648,
+      "usedIn": [
+        "src/data/site.ts",
+        "src/pages/weddings.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-01",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/24-passenger-white-party-bus-01a.jpg",
+      "area": "public",
+      "format": "jpeg",
+      "bytes": 261194,
+      "width": 1000,
+      "height": 800,
+      "usedIn": [
+        "src/data/site.ts"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-02",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg",
+      "area": "public",
+      "format": "jpeg",
+      "bytes": 410400,
+      "width": 1100,
+      "height": 733,
+      "usedIn": [
+        "src/content/guides/wedding-day-shuttle-logistics-timeline.md",
+        "src/data/site.ts"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-03",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg",
+      "area": "public",
+      "format": "jpeg",
+      "bytes": 358480,
+      "width": 1100,
+      "height": 733,
+      "usedIn": [
+        "src/content/guides/wedding-day-shuttle-logistics-timeline.md",
+        "src/data/site.ts"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-04",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/heroImg.png",
+      "area": "public",
+      "format": "png",
+      "bytes": 2285651,
+      "width": 1536,
+      "height": 1024,
+      "referenced": false,
+      "emitted": true,
+      "duplicateGroup": "dup-05",
+      "flags": [
+        "unreferenced-deployed",
+        "over-1MB",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/heroImg.webp",
+      "area": "public",
+      "format": "webp",
+      "bytes": 149244,
+      "width": 1536,
+      "height": 1024,
+      "referenced": false,
+      "emitted": true,
+      "flags": [
+        "unreferenced-deployed"
+      ]
+    },
+    {
+      "path": "public/uploads/heroMobileView.png",
+      "area": "public",
+      "format": "png",
+      "bytes": 2133883,
+      "width": 941,
+      "height": 1672,
+      "referenced": false,
+      "emitted": true,
+      "flags": [
+        "unreferenced-deployed",
+        "over-1MB"
+      ]
+    },
+    {
+      "path": "public/uploads/new-sprinter-limo-page.jpg",
+      "area": "public",
+      "format": "jpeg",
+      "bytes": 1017719,
+      "width": 1200,
+      "height": 800,
+      "usedIn": [
+        "src/data/site.ts"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-06",
+      "flags": [
+        "over-1MB",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/sprinter-limo-interior-1920w.webp",
+      "area": "public",
+      "format": "webp",
+      "bytes": 55896,
+      "width": 800,
+      "height": 531,
+      "referenced": false,
+      "emitted": true,
+      "duplicateGroup": "dup-07",
+      "flags": [
+        "unreferenced-deployed",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/sprinter-shuttle-van2.jpg",
+      "area": "public",
+      "format": "jpeg",
+      "bytes": 194521,
+      "width": 1002,
+      "height": 665,
+      "referenced": false,
+      "emitted": true,
+      "duplicateGroup": "dup-08",
+      "flags": [
+        "unreferenced-deployed",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/trolley-interior.webp",
+      "area": "public",
+      "format": "webp",
+      "bytes": 41476,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/content/guides/how-many-guests-fit-in-a-trolley.md",
+        "src/data/site.ts",
+        "src/pages/weddings.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-09",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/trolleyBliss.png",
+      "area": "public",
+      "format": "png",
+      "bytes": 107550,
+      "width": 555,
+      "height": 327,
+      "referenced": false,
+      "emitted": true,
+      "duplicateGroup": "dup-10",
+      "flags": [
+        "unreferenced-deployed",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/trolleyBliss.webp",
+      "area": "public",
+      "format": "webp",
+      "bytes": 62658,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/data/site.ts",
+        "src/layouts/BaseLayout.astro",
+        "src/pages/guides/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-11",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/trolleyChristmas.png",
+      "area": "public",
+      "format": "png",
+      "bytes": 90137,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/content/guides/chicago-trolley-friendly-wedding-venues.md",
+        "src/data/site.ts"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-12",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/trolleyClassic.png",
+      "area": "public",
+      "format": "png",
+      "bytes": 112238,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/content/guides/how-many-guests-fit-in-a-trolley.md",
+        "src/data/site.ts",
+        "src/pages/weddings.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-13",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/trolleyFestive.png",
+      "area": "public",
+      "format": "png",
+      "bytes": 130515,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/data/site.ts",
+        "src/pages/about.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-14",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/trolleyFusion.png",
+      "area": "public",
+      "format": "png",
+      "bytes": 104043,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/data/site.ts"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-15",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/trolleyMidnight.png",
+      "area": "public",
+      "format": "png",
+      "bytes": 113960,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/content/guides/chicago-trolley-friendly-wedding-venues.md",
+        "src/data/site.ts"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-16",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/trolleyUltimate.jpg",
+      "area": "public",
+      "format": "jpeg",
+      "bytes": 49963,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/data/site.ts"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-17",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "public/uploads/wbenc-logo.svg",
+      "area": "public",
+      "format": "svg",
+      "bytes": 5600,
+      "width": 142,
+      "height": 30,
+      "usedIn": [
+        "src/components/Footer.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": []
+    },
+    {
+      "path": "src/assets/fleet/ChristmasTrolley/1-WAYTOGO-Trolley-&-Bus-Rentals-Xmas-Trolley-Tours-Chicago3.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 434478,
+      "width": 1200,
+      "height": 900,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro",
+        "src/pages/christmas-trolley.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": []
+    },
+    {
+      "path": "src/assets/fleet/ChristmasTrolley/2-WAYTOGO-Xmas-Trolley-Tour-Chicago.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 366544,
+      "width": 1200,
+      "height": 900,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro",
+        "src/pages/christmas-trolley.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": []
+    },
+    {
+      "path": "src/assets/fleet/ChristmasTrolley/3-WAYTOGO-Xmas-Trolleys-Chicago.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 430493,
+      "width": 1200,
+      "height": 900,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro",
+        "src/pages/christmas-trolley.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": []
+    },
+    {
+      "path": "src/assets/fleet/ChristmasTrolley/4-WAYTOGO-Xmas-Trolley-Tours-Chicago.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 317183,
+      "width": 1200,
+      "height": 900,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro",
+        "src/pages/christmas-trolley.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": []
+    },
+    {
+      "path": "src/assets/fleet/ChristmasTrolley/5-Chicago-Christmas-Xmas-Trolley-WAYTOGO.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 421071,
+      "width": 1200,
+      "height": 900,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro",
+        "src/pages/christmas-trolley.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": []
+    },
+    {
+      "path": "src/assets/fleet/ChristmasTrolley/6-WAYTOGO-Trolley-&-Bus-Rentals-Xmas-Trolley-Tours-Chicago.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 384248,
+      "width": 1200,
+      "height": 900,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro",
+        "src/pages/christmas-trolley.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": []
+    },
+    {
+      "path": "src/assets/fleet/ChristmasTrolley/decor/228Z_Christmas_tree22_22.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 6453853,
+      "width": 8000,
+      "height": 2474,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": [
+        "over-1MB",
+        "high-pixels",
+        "broad-eager-glob"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/ChristmasTrolley/decor/32a48fd7-58a9-41e9-82b4-2d236480f684.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 2211009,
+      "width": 2500,
+      "height": 2500,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": [
+        "over-1MB",
+        "high-pixels",
+        "broad-eager-glob"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/ChristmasTrolley/decor/47845d13-7372-4b7f-b409-bd767fac3316.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 2305757,
+      "width": 2500,
+      "height": 2500,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": [
+        "over-1MB",
+        "high-pixels",
+        "broad-eager-glob"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/ChristmasTrolley/decor/5d790f87-1ad8-410c-b0a4-ebacbae3153d.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 1994369,
+      "width": 2500,
+      "height": 2500,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": [
+        "over-1MB",
+        "high-pixels",
+        "broad-eager-glob"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/CoachBus/01-exterior.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 410400,
+      "width": 1100,
+      "height": 733,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-03",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/CoachBus/02-exterior-dusk.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 358480,
+      "width": 1100,
+      "height": 733,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-04",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/CoachBus/03-interior.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 463159,
+      "width": 1000,
+      "height": 648,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-01",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/LimoVan/01-exterior.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 1017719,
+      "width": 1200,
+      "height": 800,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-06",
+      "flags": [
+        "over-1MB",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/LimoVan/02-van.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 194521,
+      "width": 1002,
+      "height": 665,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-08",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/LimoVan/03-interior.webp",
+      "area": "source",
+      "format": "webp",
+      "bytes": 55896,
+      "width": 800,
+      "height": 531,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-07",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/PartyBus/24-passenger-white-party-bus-01a.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 261194,
+      "width": 1000,
+      "height": 800,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-02",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/Trolley/01-classic-exterior.png",
+      "area": "source",
+      "format": "png",
+      "bytes": 112238,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-13",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/Trolley/02-front-three-quarter.png",
+      "area": "source",
+      "format": "png",
+      "bytes": 107550,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-10",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/Trolley/03-interior.webp",
+      "area": "source",
+      "format": "webp",
+      "bytes": 41476,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-09",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/Trolley/04-summer.png",
+      "area": "source",
+      "format": "png",
+      "bytes": 130515,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-14",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/Trolley/05-boarding.png",
+      "area": "source",
+      "format": "png",
+      "bytes": 104043,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-15",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/Trolley/06-afternoon.png",
+      "area": "source",
+      "format": "png",
+      "bytes": 113960,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-16",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "src/assets/fleet/Trolley/07-clear-sky.jpg",
+      "area": "source",
+      "format": "jpeg",
+      "bytes": 49963,
+      "width": 555,
+      "height": 327,
+      "usedIn": [
+        "src/pages/fleet/[slug].astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "duplicateGroup": "dup-17",
+      "flags": [
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg",
+      "area": "root-upload",
+      "format": "jpeg",
+      "bytes": 463159,
+      "width": 1000,
+      "height": 648,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-01",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg",
+      "area": "root-upload",
+      "format": "jpeg",
+      "bytes": 410400,
+      "width": 1100,
+      "height": 733,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-03",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg",
+      "area": "root-upload",
+      "format": "jpeg",
+      "bytes": 358480,
+      "width": 1100,
+      "height": 733,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-04",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/heroImg.png",
+      "area": "root-upload",
+      "format": "png",
+      "bytes": 2285651,
+      "width": 1536,
+      "height": 1024,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-05",
+      "flags": [
+        "unreferenced-source",
+        "over-1MB",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/heroImg1.png",
+      "area": "root-upload",
+      "format": "png",
+      "bytes": 2238727,
+      "width": 1829,
+      "height": 860,
+      "referenced": false,
+      "emitted": false,
+      "flags": [
+        "unreferenced-source",
+        "over-1MB"
+      ]
+    },
+    {
+      "path": "uploads/heroImg2.png",
+      "area": "root-upload",
+      "format": "png",
+      "bytes": 2243742,
+      "width": 1774,
+      "height": 887,
+      "referenced": false,
+      "emitted": false,
+      "flags": [
+        "unreferenced-source",
+        "over-1MB"
+      ]
+    },
+    {
+      "path": "uploads/heroMobileView.png",
+      "area": "root-upload",
+      "format": "png",
+      "bytes": 1851254,
+      "width": 941,
+      "height": 1162,
+      "referenced": false,
+      "emitted": false,
+      "flags": [
+        "unreferenced-source",
+        "over-1MB"
+      ]
+    },
+    {
+      "path": "uploads/heroMobileView1.png",
+      "area": "root-upload",
+      "format": "png",
+      "bytes": 2013935,
+      "width": 941,
+      "height": 1672,
+      "referenced": false,
+      "emitted": false,
+      "flags": [
+        "unreferenced-source",
+        "over-1MB"
+      ]
+    },
+    {
+      "path": "uploads/heroMobileView2.png",
+      "area": "root-upload",
+      "format": "png",
+      "bytes": 2124795,
+      "width": 941,
+      "height": 1455,
+      "usedIn": [
+        "src/pages/index.astro"
+      ],
+      "referenced": true,
+      "emitted": true,
+      "flags": [
+        "over-1MB"
+      ]
+    },
+    {
+      "path": "uploads/new-sprinter-limo-page.jpg",
+      "area": "root-upload",
+      "format": "jpeg",
+      "bytes": 1017719,
+      "width": 1200,
+      "height": 800,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-06",
+      "flags": [
+        "unreferenced-source",
+        "over-1MB",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/sprinter-limo-interior-1920w.webp",
+      "area": "root-upload",
+      "format": "webp",
+      "bytes": 55896,
+      "width": 800,
+      "height": 531,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-07",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/sprinter-shuttle-van2.jpg",
+      "area": "root-upload",
+      "format": "jpeg",
+      "bytes": 194521,
+      "width": 1002,
+      "height": 665,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-08",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/trolley-interior.webp",
+      "area": "root-upload",
+      "format": "webp",
+      "bytes": 41476,
+      "width": 555,
+      "height": 327,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-09",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/trolleyBliss.png",
+      "area": "root-upload",
+      "format": "png",
+      "bytes": 107550,
+      "width": 555,
+      "height": 327,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-10",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/trolleyBliss.webp",
+      "area": "root-upload",
+      "format": "webp",
+      "bytes": 62658,
+      "width": 555,
+      "height": 327,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-11",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/trolleyChristmas.png",
+      "area": "root-upload",
+      "format": "png",
+      "bytes": 90137,
+      "width": 555,
+      "height": 327,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-12",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/trolleyClassic.png",
+      "area": "root-upload",
+      "format": "png",
+      "bytes": 112238,
+      "width": 555,
+      "height": 327,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-13",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/trolleyFestive.png",
+      "area": "root-upload",
+      "format": "png",
+      "bytes": 130515,
+      "width": 555,
+      "height": 327,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-14",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/trolleyFusion.png",
+      "area": "root-upload",
+      "format": "png",
+      "bytes": 104043,
+      "width": 555,
+      "height": 327,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-15",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/trolleyMidnight.png",
+      "area": "root-upload",
+      "format": "png",
+      "bytes": 113960,
+      "width": 555,
+      "height": 327,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-16",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/trolleyUltimate.jpg",
+      "area": "root-upload",
+      "format": "jpeg",
+      "bytes": 49963,
+      "width": 555,
+      "height": 327,
+      "referenced": false,
+      "emitted": false,
+      "duplicateGroup": "dup-17",
+      "flags": [
+        "unreferenced-source",
+        "duplicate"
+      ]
+    },
+    {
+      "path": "uploads/wbenc-logo.svg",
+      "area": "root-upload",
+      "format": "svg",
+      "bytes": 5599,
+      "width": 142,
+      "height": 30,
+      "referenced": false,
+      "emitted": false,
+      "flags": [
+        "unreferenced-source"
+      ]
+    }
+  ]
+}

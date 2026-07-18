@@ -1,0 +1,238 @@
+{
+  "generatedAt": "2026-07-18",
+  "method": "Static source/import review. routesUsed lists templates or generated-route scope. No client:* directives were found.",
+  "components": [
+    {
+      "name": "CtaBand",
+      "file": "src/components/CtaBand.astro",
+      "purpose": "Reusable conversion band before the footer.",
+      "pagesUsing": [
+        "BaseLayout global default",
+        "/christmas-trolley/",
+        "/guides/[slug]/"
+      ],
+      "props": {
+        "title": "string?",
+        "sub": "string?",
+        "ctaLabel": "string?",
+        "ctaHref": "string?"
+      },
+      "dependencies": [
+        "src/data/site.ts",
+        "src/utils/paths.ts"
+      ],
+      "hydrationDirective": null,
+      "browserJavaScript": "none",
+      "styles": "Scoped component CSS plus global .btn-invert/.rv tokens.",
+      "accessibilityConcerns": [
+        "Default subtitle repeats placeholder phone data."
+      ],
+      "reusability": "High; focused and configurable.",
+      "refactorRecommendation": "Keep; clarify direct overrides versus BaseLayout hideCta behavior."
+    },
+    {
+      "name": "Eyebrow",
+      "file": "src/components/Eyebrow.astro",
+      "purpose": "Decorative section label with optional rules and alignment.",
+      "pagesUsing": [
+        "/",
+        "/christmas-trolley/",
+        "/services/",
+        "/weddings/",
+        "/fleet/[slug]/",
+        "/guides/"
+      ],
+      "props": {
+        "label": "string",
+        "align": "'center' | 'left'?",
+        "single": "boolean?",
+        "size": "'xs' | 'sm' | 'md' | 'lg'?",
+        "mb": "number?"
+      },
+      "dependencies": [],
+      "hydrationDirective": null,
+      "browserJavaScript": "none",
+      "styles": "Global eyebrow classes with component inline style attributes for size/margin.",
+      "accessibilityConcerns": [
+        "Rules are empty spans and effectively decorative; confirm they remain ignored."
+      ],
+      "reusability": "High.",
+      "refactorRecommendation": "Keep; consider CSS custom properties/classes instead of generated inline styles only if the variant set grows."
+    },
+    {
+      "name": "Footer",
+      "file": "src/components/Footer.astro",
+      "purpose": "Global footer navigation, contact, social, certification, legal, and copyright content.",
+      "pagesUsing": [
+        "all 20 generated routes via BaseLayout"
+      ],
+      "props": {},
+      "dependencies": [
+        "src/data/site.ts",
+        "src/utils/paths.ts"
+      ],
+      "hydrationDirective": null,
+      "browserJavaScript": "none",
+      "styles": "517-line component dominated by scoped responsive CSS.",
+      "accessibilityConcerns": [
+        "Placeholder phone is clickable.",
+        "Generic social fallbacks are announced as business profiles.",
+        "Certification alt/claim needs business verification."
+      ],
+      "reusability": "Global but content and presentation are tightly coupled.",
+      "refactorRecommendation": "After content verification, split data from markup and optionally extract Brand/Social/Contact primitives; avoid changes solely for line count."
+    },
+    {
+      "name": "GuideCard",
+      "file": "src/components/GuideCard.astro",
+      "purpose": "Reusable guide/article preview card.",
+      "pagesUsing": [
+        "/",
+        "/guides/",
+        "/guides/[slug]/"
+      ],
+      "props": {
+        "href": "string",
+        "image": "string",
+        "imageAlt": "string",
+        "category": "string",
+        "title": "string",
+        "excerpt": "string",
+        "date": "Date",
+        "readTime": "string"
+      },
+      "dependencies": [
+        "src/data/guides.ts",
+        "src/utils/paths.ts"
+      ],
+      "hydrationDirective": null,
+      "browserJavaScript": "none",
+      "styles": "Scoped card CSS; global palette tokens.",
+      "accessibilityConcerns": [
+        "Image lacks intrinsic width/height and responsive sources.",
+        "Low-contrast faint/gold metadata should be checked at computed size."
+      ],
+      "reusability": "High.",
+      "refactorRecommendation": "Keep; migrate image rendering to an optimized typed image source."
+    },
+    {
+      "name": "Header",
+      "file": "src/components/Header.astro",
+      "purpose": "Sticky brand header, desktop nav/dropdown, mobile drawer, active state, and scroll locking.",
+      "pagesUsing": [
+        "all 20 generated routes via BaseLayout"
+      ],
+      "props": {},
+      "dependencies": [
+        "src/data/site.ts",
+        "src/utils/paths.ts"
+      ],
+      "hydrationDirective": null,
+      "browserJavaScript": "Two hoisted vanilla scripts; included in small per-page JS chunks.",
+      "styles": "Large scoped responsive CSS plus global buttons/tokens.",
+      "accessibilityConcerns": [
+        "all: unset removes default focus styles with no replacement.",
+        "No aria-current on active links.",
+        "Drawer does not trap focus or restore focus to the trigger.",
+        "Raw set:html is controlled today but should not accept untrusted content."
+      ],
+      "reusability": "Global; combines several navigation behaviors.",
+      "refactorRecommendation": "Split desktop/dropdown/drawer behavior into testable primitives or a small navigation script while preserving one semantic nav data source."
+    },
+    {
+      "name": "PageHero",
+      "file": "src/components/PageHero.astro",
+      "purpose": "Reusable centered page heading and optional lead.",
+      "pagesUsing": [
+        "/about/",
+        "/contact/",
+        "/faq/",
+        "/gallery/",
+        "/services/",
+        "/fleet/",
+        "/privacy-policy/",
+        "/reservation/",
+        "/terms-and-conditions/"
+      ],
+      "props": {
+        "eyebrow": "string",
+        "pb": "number?",
+        "slots": [
+          "default",
+          "lead?"
+        ]
+      },
+      "dependencies": [
+        "src/components/Eyebrow.astro"
+      ],
+      "hydrationDirective": null,
+      "browserJavaScript": "none",
+      "styles": "Small scoped CSS plus global heading tokens.",
+      "accessibilityConcerns": [],
+      "reusability": "High.",
+      "refactorRecommendation": "Keep."
+    },
+    {
+      "name": "TopBar",
+      "file": "src/components/TopBar.astro",
+      "purpose": "Global phone/email utility bar with optional social links.",
+      "pagesUsing": [
+        "all 20 generated routes via BaseLayout"
+      ],
+      "props": {},
+      "dependencies": [
+        "src/data/site.ts"
+      ],
+      "hydrationDirective": null,
+      "browserJavaScript": "none",
+      "styles": "Scoped responsive CSS.",
+      "accessibilityConcerns": [
+        "No component-level focus-visible styling.",
+        "Placeholder phone remains visible as text."
+      ],
+      "reusability": "Global.",
+      "refactorRecommendation": "Keep; render only verified business contact/social data and share contact presentation rules with Footer."
+    },
+    {
+      "name": "BaseLayout",
+      "file": "src/layouts/BaseLayout.astro",
+      "purpose": "Document shell, metadata, global UI, fonts, and reveal-on-scroll behavior.",
+      "pagesUsing": [
+        "all 16 route templates / 20 generated routes"
+      ],
+      "props": {
+        "title": "string?",
+        "description": "string?",
+        "hideCta": "boolean?",
+        "image": "string?",
+        "ogType": "'website' | 'article'?",
+        "schema": "Record<string, unknown> | Record<string, unknown>[]?"
+      },
+      "dependencies": [
+        "src/styles/global.css",
+        "src/components/TopBar.astro",
+        "src/components/Header.astro",
+        "src/components/CtaBand.astro",
+        "src/components/Footer.astro",
+        "src/utils/paths.ts"
+      ],
+      "hydrationDirective": null,
+      "browserJavaScript": "One small hoisted IntersectionObserver reveal script.",
+      "styles": "Imports global CSS; page/component CSS is bundled by Astro.",
+      "accessibilityConcerns": [
+        "No skip link/main target.",
+        "Reveal behavior includes a reduced-motion fallback in global CSS."
+      ],
+      "reusability": "Single global layout; appropriate for current site size.",
+      "refactorRecommendation": "Keep; add a typed SEO/meta layer, default social image, Twitter tags, and explicit crawler/theme metadata after production facts are confirmed."
+    }
+  ],
+  "hydrationSummary": {
+    "clientDirectives": 0,
+    "hydratedFrameworkComponents": 0,
+    "staticAstroComponents": 7,
+    "layouts": 1,
+    "approach": "Static Astro HTML plus hoisted vanilla scripts.",
+    "recommendation": "Do not add framework hydration; current interactions are small enough for scoped vanilla modules. If a future island is introduced, choose the least eager directive supported by the interaction."
+  }
+}
