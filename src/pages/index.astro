@@ -5,6 +5,7 @@ import GuideCard from '../components/GuideCard.astro';
 import { getCollection } from 'astro:content';
 import { features, serviceChips, fleetPreview, testimonials, eventTypes, vehicleOptions, hoursOptions, homeFaqs, getLocalBusinessSchema } from '../data/site';
 import { withBase } from '../utils/paths';
+import heroMobile from '../../uploads/heroMobileView2.png';
 
 const passengerOptions = ['1–10', '11–20', '21–30', '31–40', '41–57'];
 
@@ -18,7 +19,7 @@ const latestGuides = (await getCollection('guides'))
   .slice(0, 3);
 
 const businessSchema = getLocalBusinessSchema(new URL(withBase('/'), Astro.site ?? Astro.url).href);
-const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); --hero-mobile: url('${withBase('/uploads/heroMobileView.png')}')`;
+const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); --hero-mobile: url('${heroMobile.src}')`;
 ---
 <BaseLayout
   title="ChiTown Trolley — Timeless Wedding Trolley Transportation in Chicago"
@@ -30,10 +31,12 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
     <div class="hero__overlay"></div>
     <div class="hero__content">
       <h1 class="hero__title">
-        Timeless Trolley<br />
-        Transportation for<br />
-        <em class="grad">Your Wedding Day</em>
+        <span class="hero__titleLine">Timeless Trolley</span>
+        <span class="hero__titleLine">Transportation <em class="hero__for hero__for--desktop">for</em></span>
+        <span class="hero__finalLine"><em class="hero__for hero__for--mobile">for</em> <em class="grad hero__wedding">Your Wedding Day</em></span>
       </h1>
+      <span class="hero__divider" aria-hidden="true"><span></span><i></i></span>
+      <p class="hero__support">Elegant transportation for<br />weddings across Chicagoland.</p>
       <a href={withBase('/contact')} class="btn-gold hero__cta">Get Free Quote</a>
     </div>
   </section>
@@ -309,6 +312,7 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
   /* Dark-to-transparent gradient on the left for white-text legibility */
   .hero__overlay {
     position: absolute; inset: 0;
+    pointer-events: none;
     background: linear-gradient(
       90deg,
       rgba(15, 12, 8, .82) 0%,
@@ -332,26 +336,118 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
     font-size: clamp(34px, 5vw, 60px); line-height: 1.08;
     margin: 0; text-shadow: 0 2px 26px rgba(0, 0, 0, .38);
   }
+  .hero__titleLine, .hero__finalLine { display: block; }
+  .hero__for { font-style: normal; }
+  .hero__for--mobile { display: none; }
+  .hero__divider, .hero__support { display: none; }
   .hero__cta { align-self: flex-start; padding: 14px 34px; min-height: 44px; display: inline-flex; align-items: center; }
+  .hero__cta:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 4px; }
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     .hero {
-      height: 420px;
+      height: auto;
+      min-height: clamp(380px, 56svh, 440px);
       background-image: var(--hero-mobile);
-      background-position: center;
+      background-position: 66% center;
+      background-size: cover;
     }
-    .hero__content { gap: 24px; }
-    /* Lighter mobile wash keeps more of the portrait artwork visible. */
+
+    .hero::after {
+      position: absolute;
+      z-index: 3;
+      right: -10%;
+      bottom: -22px;
+      left: -10%;
+      height: 44px;
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+      background: var(--paper);
+      content: '';
+      pointer-events: none;
+    }
+
     .hero__overlay {
-      background: linear-gradient(
-        90deg,
-        rgba(15, 12, 8, .76) 0%,
-        rgba(15, 12, 8, .54) 55%,
-        rgba(15, 12, 8, .28) 100%
-      );
+      background:
+        linear-gradient(0deg, rgba(8, 8, 8, .32) 0%, rgba(8, 8, 8, 0) 34%),
+        linear-gradient(
+          90deg,
+          rgba(10, 10, 10, .88) 0%,
+          rgba(10, 10, 10, .72) 38%,
+          rgba(10, 10, 10, .28) 70%,
+          rgba(10, 10, 10, .08) 100%
+        );
     }
-    .hero__title { font-size: clamp(28px, 8vw, 44px); }
-    .hero__cta { padding: 12px 28px; font-size: 11px; min-height: 44px; }
+
+    .hero__content {
+      width: min(82%, 420px);
+      min-height: inherit;
+      padding: 50px 24px 55px;
+      margin: 0;
+      gap: 0;
+    }
+
+    .hero__title {
+      width: 100%;
+      font-size: clamp(2.15rem, 8.5vw, 3.25rem);
+      line-height: .98;
+      text-wrap: balance;
+    }
+
+    .hero__for--desktop { display: none; }
+    .hero__for--mobile {
+      display: inline;
+      font-style: italic;
+    }
+    .hero__finalLine { white-space: nowrap; }
+
+    .hero__divider {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin: 20px 0;
+    }
+    .hero__divider span {
+      width: 90px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero__divider i {
+      width: 7px;
+      height: 7px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
+
+    .hero__support {
+      display: block;
+      margin: 0;
+      color: #fffaf1;
+      font-size: clamp(1rem, 4.3vw, 1.15rem);
+      font-weight: 300;
+      line-height: 1.45;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, .48);
+    }
+
+    .hero__cta {
+      justify-content: center;
+      width: min(100%, 165px);
+      min-height: 36px;
+      padding: 6px 10px;
+      margin-top: 15px;
+      font-size: 10.5px;
+      letter-spacing: .2em;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .hero__content { width: 100%; }
+    .hero__title { width: 100%; font-size: 2.15rem; }
+    .hero__divider span { width: 76px; }
+    .hero__cta { letter-spacing: .16em; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__content { animation: none; }
   }
 
   /* Shared section helpers */
@@ -361,6 +457,10 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
   .getquote { padding: 40px 0 48px; }
   .getquote__inner { margin: 0 auto; padding-inline: clamp(20px, 4vw, 72px); }
   .getquote__title { margin: 0 0 20px; text-align: left; }
+
+  @media (max-width: 768px) {
+    .getquote { padding: 25px 0 48px; }
+  }
 
   .wizard { display: flex; flex-direction: column; }
   .qform .field__control { width: 100%; }
