@@ -69,6 +69,9 @@ main { flex: 1; }
 
 /* ----------  Layout helpers  ---------- */
 .wrap { max-width: 1100px; margin: 0 auto; padding-inline: 28px; }
+@media  (max-width: 768px) {
+  .wrap {padding-inline: 10px;}
+}
 .wrap-wide { max-width: 1240px; }
 .wrap-1140 { max-width: 1140px; }
 .wrap-1060 { max-width: 1060px; }

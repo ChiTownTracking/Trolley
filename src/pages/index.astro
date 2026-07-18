@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import GuideCard from '../components/GuideCard.astro';
 import { getCollection } from 'astro:content';
-import { features, serviceChips, fleetPreview, testimonials, eventTypes, vehicleOptions, hoursOptions, homeFaqs, getLocalBusinessSchema } from '../data/site';
+import { fleetPreview, testimonials, eventTypes, vehicleOptions, hoursOptions, homeFaqs, getLocalBusinessSchema } from '../data/site';
 import { withBase } from '../utils/paths';
 import heroMobile from '../../uploads/heroMobileView2.png';
 
@@ -19,7 +19,7 @@ const latestGuides = (await getCollection('guides'))
   .slice(0, 3);
 
 const businessSchema = getLocalBusinessSchema(new URL(withBase('/'), Astro.site ?? Astro.url).href);
-const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); --hero-mobile: url('${heroMobile.src}')`;
+const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); --hero-mobile: url('${heroMobile.src}')`;
 ---
 <BaseLayout
   title="ChiTown Trolley — Timeless Wedding Trolley Transportation in Chicago"
@@ -32,15 +32,12 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
     <div class="hero__content">
       <h1 class="hero__title">
         <span class="hero__titleLine">Timeless Trolley</span>
-        <span class="hero__titleLine">Transportation <em class="hero__for hero__for--desktop">for</em></span>
-        <span class="hero__finalLine"><em class="hero__for hero__for--mobile">for</em> <em class="grad hero__wedding">Your Wedding Day</em></span>
+        <span class="hero__titleLine">Transportation</span>
+        <span class="hero__finalLine"><em class="hero__for">for</em> <em class="grad hero__wedding">Your Wedding Day</em></span>
       </h1>
       <span class="hero__divider" aria-hidden="true"><span></span><i></i></span>
-      <p class="hero__support">Proudly serving<br />Illinois, Wisconsin, Indiana &amp; Michigan.</p>
-      <a href={withBase('/contact')} class="btn-gold hero__cta">
-        <span class="hero__ctaLabel--desktop">Get Free Quote</span>
-        <span class="hero__ctaLabel--mobile">View Trolley</span>
-      </a>
+      <p class="hero__support">Proudly Serving<br />Illinois, Wisconsin, Indiana &amp; Michigan.</p>
+      <a href={withBase('/contact')} class="btn-gold hero__cta">View Trolley</a>
     </div>
   </section>
 
@@ -190,7 +187,6 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
         <a href={withBase(`/fleet/${fleetFeatured.slug}`)} class="fleet-card fleet-card--feature">
           <div class="fleet-card__media">
             <img src={withBase(fleetFeatured.img)} alt={fleetFeatured.name} class="fleetp__img" />
-            <span class="fleet-card__cue">View Details →</span>
           </div>
           <div class="fleetp__body">
             <p class="fleetp__cap">{fleetFeatured.cap}</p>
@@ -203,7 +199,6 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
           <a href={withBase(`/fleet/${fl.slug}`)} class="fleet-card">
             <div class="fleet-card__media">
               <img src={withBase(fl.img)} alt={fl.name} class="fleetp__img" />
-              <span class="fleet-card__cue">View Details →</span>
             </div>
             <div class="fleetp__body">
               <p class="fleetp__cap">{fl.cap}</p>
@@ -223,7 +218,7 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
   <!-- Testimonials -->
   <section class="rv tst">
     <div class="wrap">
-      <Eyebrow label="Kind Words" mb={56} />
+      <Eyebrow label="Kind Words" mb={40} />
       <div class="tstc" data-carousel>
         <button type="button" class="tstc__arrow" data-carousel-prev aria-label="Previous testimonial">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -257,8 +252,8 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
   <!-- FAQ -->
   <section class="rv faq">
     <div class="wrap">
-      <Eyebrow label="Common Questions" mb={14} />
-      <h2 class="h-section text-center faq__title">Questions, answered</h2>
+      <Eyebrow label="Common Questions" mb={40} />
+    
       <div class="faq__list" data-faq>
         {homeFaqs.map((f) => (
           <div class="faq__item">
@@ -327,7 +322,7 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
   .hero__content {
     position: relative; z-index: 2;
     display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;
-    text-align: left; gap: 30px;
+    text-align: left; gap: 0;
     max-width: 1400px; 
     margin-top: 80px;
     padding: 0 clamp(24px, 6vw, 96px);
@@ -340,11 +335,19 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
     margin: 0; text-shadow: 0 2px 26px rgba(0, 0, 0, .38);
   }
   .hero__titleLine, .hero__finalLine { display: block; }
-  .hero__for { font-style: normal; }
-  .hero__for--mobile { display: none; }
-  .hero__divider, .hero__support { display: none; }
-  .hero__ctaLabel--mobile { display: none; }
-  .hero__cta { align-self: flex-start; padding: 14px 34px; min-height: 44px; display: inline-flex; align-items: center; }
+  .hero__for { font-style: italic; }
+  .hero__finalLine { white-space: nowrap; }
+  .hero__divider { display: flex; align-items: center; gap: 11px; margin: 22px 0; }
+  .hero__divider span { width: 90px; height: 1px; background: var(--gold); }
+  .hero__divider i { width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }
+  .hero__support {
+    display: block; margin: 0; color: #fffaf1; font-size: 18px; font-weight: 300;
+    line-height: 1.5; text-shadow: 0 2px 18px rgba(0, 0, 0, .48);
+  }
+  .hero__cta {
+    align-self: flex-start; display: inline-flex; align-items: center;
+    min-height: 44px; padding: 14px 34px; margin-top: 22px;
+  }
   .hero__cta:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 4px; }
 
   @media (max-width: 768px) {
@@ -396,39 +399,13 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
       text-wrap: balance;
     }
 
-    .hero__for--desktop { display: none; }
-    .hero__for--mobile {
-      display: inline;
-      font-style: italic;
-    }
-    .hero__finalLine { white-space: nowrap; }
-
     .hero__divider {
-      display: flex;
-      align-items: center;
-      gap: 11px;
       margin: 20px 0;
-    }
-    .hero__divider span {
-      width: 90px;
-      height: 1px;
-      background: var(--gold);
-    }
-    .hero__divider i {
-      width: 7px;
-      height: 7px;
-      background: var(--gold);
-      transform: rotate(45deg);
     }
 
     .hero__support {
-      display: block;
-      margin: 0;
-      color: #fffaf1;
       font-size: clamp(1rem, 4.3vw, 1.15rem);
-      font-weight: 300;
       line-height: 1.45;
-      text-shadow: 0 2px 18px rgba(0, 0, 0, .48);
     }
 
     .hero__cta {
@@ -441,8 +418,6 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
       letter-spacing: .2em;
       text-align: center;
     }
-    .hero__ctaLabel--desktop { display: none; }
-    .hero__ctaLabel--mobile { display: inline; }
   }
 
   @media (max-width: 360px) {
@@ -457,7 +432,7 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
   }
 
   /* Shared section helpers */
-  .band { background: var(--cream); padding: 88px 28px; }
+  .band { background: var(--cream); padding: 35px 5px; }
 
   /* Get a Quote — multi-step wizard */
   .getquote { padding: 40px 0 48px; }
@@ -577,21 +552,6 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
   .fleet-card__media { position: relative; overflow: hidden; }
   .fleetp__img { width: 100%; height: 260px; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.22, .6, .2, 1); }
   .fleet-card:hover .fleetp__img { transform: scale(1.05); }
-  /* Darkening wash — deepens on hover to lift the caption cue */
-  .fleet-card__media::after {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(to top, rgba(15, 12, 8, .55), rgba(15, 12, 8, 0) 55%);
-    opacity: .35; transition: opacity .35s ease;
-  }
-  .fleet-card:hover .fleet-card__media::after { opacity: 1; }
-  .fleet-card__cue {
-    position: absolute; left: 0; right: 0; bottom: 16px; z-index: 2;
-    text-align: center; color: #fff;
-    font-size: 11px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500;
-    opacity: 0; transform: translateY(12px);
-    transition: opacity .35s ease, transform .35s ease;
-  }
-  .fleet-card:hover .fleet-card__cue { opacity: 1; transform: translateY(0); }
   .fleetp__body { padding: 22px 26px 26px; text-align: center; }
   .fleetp__cap { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-deep); margin: 0 0 8px; }
   .fleetp__name {
@@ -623,10 +583,8 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
   .fleet-card--feature .fleetp__name::after { left: 0; transform: none; }
   .fleet-card--feature .fleetp__more { display: inline-block; margin-top: 24px; }
 
-  /* Touch devices (no hover): reveal the cue and gold accent by default */
+  /* Touch devices (no hover): reveal the gold accent by default. */
   @media (hover: none) {
-    .fleet-card__cue { opacity: 1; transform: none; }
-    .fleet-card__media::after { opacity: .8; }
     .fleetp__name::after { width: 44px; }
   }
   /* Tablet: row 2 collapses to 2 columns (feature stays full width) */
@@ -636,13 +594,14 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
   /* Mobile: everything stacks, feature card becomes image-over-content */
   @media (max-width: 640px) {
     .fleetp__grid { grid-template-columns: 1fr; }
+    .fleet-card { border-radius: 5px; overflow: hidden; }
     .fleet-card--feature { grid-template-columns: 1fr; }
     .fleet-card--feature .fleet-card__media { min-height: 240px; }
     .fleet-card--feature .fleetp__body { padding: 26px 26px 30px; }
   }
 
   /* Testimonials carousel */
-  .tst { padding: 96px 28px; }
+  .tst { padding: 40px 5px; }
   .tstc { display: flex; align-items: center; gap: 12px; max-width: 900px; margin: 0 auto; }
   .tstc__viewport { flex: 1 1 auto; min-width: 0; overflow: hidden; }
   .tstc__track { display: flex; transition: transform .6s cubic-bezier(.22, .6, .2, 1); }
@@ -694,8 +653,8 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
   .quote__role { font-size: 11.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
 
   /* FAQ accordion (mirrors the quote-form step accordion) */
-  .faq { background: var(--cream); padding: 96px 28px; }
-  .faq__title { margin-bottom: 46px; }
+  .faq { background: var(--cream); padding: 40px 28px; }
+
   .faq__list { max-width: 800px; margin: 0 auto; }
   .faq__item { border-top: 1px solid var(--line-2); }
   .faq__item:last-child { border-bottom: 1px solid var(--line-2); }
@@ -717,7 +676,7 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
   .faq__a { margin: 0; padding: 0 4px 26px; font-weight: 300; font-size: 15px; line-height: 1.8; color: var(--muted); max-width: 66ch; }
 
   /* Guides preview */
-  .guidesp { background: var(--paper); padding: 96px 28px; }
+  .guidesp { background: var(--paper); padding: 40px 28px; }
   .guidesp__title { margin-bottom: 14px; }
   .guidesp__lead {
     text-align: center; font-weight: 300; font-size: 15.5px; color: var(--muted);
@@ -731,12 +690,24 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
   }
   @media (max-width: 640px) {
     .guidesp__grid { grid-template-columns: 1fr; }
+    .tstc__viewport {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tstc__viewport::-webkit-scrollbar { display: none; }
+    .tstc__track { transform: none !important; }
+    .tstc__slide {
+      padding-inline: 0;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
   }
 
   @media (max-width: 560px) {
     .tstc { gap: 2px; }
     .tstc__arrow svg { width: 20px; height: 20px; }
-    .tstc__slide { padding: 0 4px; }
     .faq__q { font-size: 17px; }
     .faq__head { gap: 14px; padding: 20px 2px; }
   }
@@ -825,20 +796,28 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
   const carousel = document.querySelector<HTMLElement>('[data-carousel]');
   if (carousel) {
     const track = carousel.querySelector<HTMLElement>('[data-carousel-track]');
+    const viewport = carousel.querySelector<HTMLElement>('.tstc__viewport');
     const slides = track ? (Array.from(track.children) as HTMLElement[]) : [];
     const dotsWrap = carousel.parentElement?.querySelector<HTMLElement>('[data-carousel-dots]');
     const prev = carousel.querySelector<HTMLButtonElement>('[data-carousel-prev]');
     const next = carousel.querySelector<HTMLButtonElement>('[data-carousel-next]');
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const mobileCarousel = window.matchMedia('(max-width: 640px)');
 
-    if (track && slides.length) {
+    if (track && viewport && slides.length) {
       const count = slides.length;
       let index = 0;
       let timer = 0;
 
       const go = (i: number) => {
         index = (i + count) % count;
-        track.style.transform = `translateX(-${index * 100}%)`;
+        if (mobileCarousel.matches) {
+          track.style.transform = '';
+          viewport.scrollTo({ left: index * viewport.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+        } else {
+          viewport.scrollLeft = 0;
+          track.style.transform = `translateX(-${index * 100}%)`;
+        }
         dots.forEach((d, di) => d.classList.toggle('active', di === index));
       };
       const start = () => {
@@ -859,6 +838,19 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg.webp')}'); 
 
       prev?.addEventListener('click', () => { go(index - 1); start(); });
       next?.addEventListener('click', () => { go(index + 1); start(); });
+      let scrollFrame = 0;
+      viewport.addEventListener('scroll', () => {
+        if (!mobileCarousel.matches) return;
+        window.cancelAnimationFrame(scrollFrame);
+        scrollFrame = window.requestAnimationFrame(() => {
+          const nextIndex = Math.round(viewport.scrollLeft / viewport.clientWidth);
+          if (nextIndex !== index && nextIndex >= 0 && nextIndex < count) {
+            index = nextIndex;
+            dots.forEach((d, di) => d.classList.toggle('active', di === index));
+          }
+        });
+      }, { passive: true });
+      mobileCarousel.addEventListener('change', () => go(index));
       carousel.addEventListener('mouseenter', () => window.clearInterval(timer));
       carousel.addEventListener('mouseleave', start);
 
