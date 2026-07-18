@@ -4,42 +4,100 @@
    pages stay declarative and edits happen in one place.
    ============================================================ */
 
-// TODO: Replace with real business phone number and social URLs before these
-// become live/indexed in structured data and footer/topbar links. Until then,
-// isPlaceholder()/hasPhone/hasInstagram/hasFacebook below keep them out of
-// clickable hrefs and out of the LocalBusiness JSON-LD.
+export interface SiteContact {
+  phoneDisplay: string;
+  phoneHref: `tel:${string}`;
+  email: string;
+}
+
+export interface SiteAddress {
+  streetAddress: string;
+  addressLocality: string;
+  addressRegion: string;
+  postalCode: string;
+  addressCountry: string;
+}
+
+export interface SiteConfig {
+  name: string;
+  /** Requires owner confirmation before legal or structured-data use. */
+  legalName?: string;
+  description: string;
+  contact: SiteContact;
+  address: SiteAddress;
+  locationLabel: string;
+  serviceAreas: readonly string[];
+  social: {
+    instagram: string;
+    facebook: string;
+  };
+  routes: {
+    privacy: string;
+    terms: string;
+    reservation: string;
+  };
+}
+
+/**
+ * Central non-secret site configuration.
+ *
+ * The phone, street address, postal code, social profiles, legal name, and
+ * service-area claims still require owner confirmation. Placeholder contact
+ * and social values must never become live links or structured data.
+ */
 export const site = {
   name: 'ChiTown Trolley',
-  phone: '(000) TROLLEY',
-  phoneHref: 'tel:0008765539',
-  email: 'info@chitowntrolley.com',
-  city: 'Chicago, Illinois',
-  instagram: '#',
-  facebook: '#',
-  serviceArea:
-    'Naperville · Evanston · Oak Brook · Schaumburg · Orland Park · Arlington Heights · Hinsdale · Lake Forest · Wheaton',
-} as const;
-
-// TODO: Replace with the real street address once available — every field
-// must be real (no "TODO" placeholders) before isPlaceholder() will allow
-// this to be emitted into the LocalBusiness JSON-LD.
-export const businessAddress = {
-  streetAddress: 'TODO: street address',
-  addressLocality: 'Chicago',
-  addressRegion: 'IL',
-  postalCode: 'TODO: postal code',
-  addressCountry: 'US',
-} as const;
+  description:
+    'Timeless white trolley transportation for weddings and events across Chicagoland. Owner-operated, licensed and insured.',
+  contact: {
+    phoneDisplay: '(000) TROLLEY',
+    phoneHref: 'tel:0008765539',
+    email: 'info@chitowntrolley.com',
+  },
+  address: {
+    streetAddress: 'TODO: street address',
+    addressLocality: 'Chicago',
+    addressRegion: 'IL',
+    postalCode: 'TODO: postal code',
+    addressCountry: 'US',
+  },
+  locationLabel: 'Chicago, Illinois',
+  serviceAreas: [
+    'Naperville',
+    'Evanston',
+    'Oak Brook',
+    'Schaumburg',
+    'Orland Park',
+    'Arlington Heights',
+    'Hinsdale',
+    'Lake Forest',
+    'Wheaton',
+  ],
+  social: {
+    instagram: '#',
+    facebook: '#',
+  },
+  routes: {
+    privacy: '/privacy-policy',
+    terms: '/terms-and-conditions',
+    reservation: '/reservation',
+  },
+} satisfies SiteConfig;
 
 /** Known placeholder values that must never render as a live link or be emitted into structured data. */
-const PLACEHOLDER_VALUES = new Set<string>(['#', site.phone, site.phoneHref]);
+const PLACEHOLDER_VALUES = new Set<string>([
+  '#',
+  site.contact.phoneDisplay,
+  site.contact.phoneHref,
+]);
 export const isPlaceholder = (value: string): boolean =>
   PLACEHOLDER_VALUES.has(value) || value.trim().toUpperCase().startsWith('TODO');
 
 /** Single source of truth for whether contact info is real enough to render as a live link/schema field. */
-export const hasPhone = !isPlaceholder(site.phone) && !isPlaceholder(site.phoneHref);
-export const hasInstagram = !isPlaceholder(site.instagram);
-export const hasFacebook = !isPlaceholder(site.facebook);
+export const hasPhone =
+  !isPlaceholder(site.contact.phoneDisplay) && !isPlaceholder(site.contact.phoneHref);
+export const hasInstagram = !isPlaceholder(site.social.instagram);
+export const hasFacebook = !isPlaceholder(site.social.facebook);
 
 /** Builds LocalBusiness JSON-LD from site.ts, omitting any field still backed by placeholder data. */
 export function getLocalBusinessSchema(url: string) {
@@ -55,13 +113,15 @@ export function getLocalBusinessSchema(url: string) {
     areaServed: 'Chicago, Illinois and surrounding suburbs',
   };
 
-  if (hasPhone) schema.telephone = site.phone;
+  if (hasPhone) schema.telephone = site.contact.phoneDisplay;
 
-  if (Object.values(businessAddress).every((v) => !isPlaceholder(v))) {
-    schema.address = { '@type': 'PostalAddress', ...businessAddress };
+  if (Object.values(site.address).every((v) => !isPlaceholder(v))) {
+    schema.address = { '@type': 'PostalAddress', ...site.address };
   }
 
-  const sameAs = [site.instagram, site.facebook].filter((v) => !isPlaceholder(v));
+  const sameAs = [site.social.instagram, site.social.facebook].filter(
+    (v) => !isPlaceholder(v),
+  );
   if (sameAs.length) schema.sameAs = sameAs;
 
   return schema;
@@ -70,8 +130,8 @@ export function getLocalBusinessSchema(url: string) {
 export interface NavItem {
   label: string;
   href: string;
-  /** Optional rich HTML label (e.g. multi-color styling); falls back to `label`. */
-  html?: string;
+  /** Optional structured label parts for the festive navigation treatment. */
+  labelParts?: readonly { text: string; className: string }[];
 }
 
 /** Primary nav items shown inline in the header. */
@@ -82,7 +142,10 @@ export const navMain: NavItem[] = [
   {
     label: 'Christmas Trolley',
     href: '/christmas-trolley',
-    html: '<span class="xmas-c">Christmas</span> <span class="xmas-t">Trolley</span>',
+    labelParts: [
+      { text: 'Christmas', className: 'xmas-c' },
+      { text: 'Trolley', className: 'xmas-t' },
+    ],
   },
   { label: 'Services', href: '/services' },
   { label: 'Guides', href: '/guides' },

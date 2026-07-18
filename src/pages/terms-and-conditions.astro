@@ -11,6 +11,7 @@ import { site } from '../data/site';
   title="Terms and Conditions — ChiTown Trolley"
   description="Draft website terms and conditions for ChiTown Trolley."
   hideCta={true}
+  robots="noindex,follow"
 >
   <PageHero eyebrow="Legal" pb={40}>
     Terms and <em class="grad">Conditions</em>
@@ -43,7 +44,7 @@ import { site } from '../data/site';
 
     <section>
       <h2>Questions</h2>
-      <p>Questions about these draft terms can be sent to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      <p>Questions about these draft terms can be sent to <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.</p>
     </section>
   </article>
 </BaseLayout>

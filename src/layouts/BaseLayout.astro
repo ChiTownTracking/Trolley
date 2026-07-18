@@ -4,6 +4,7 @@ import TopBar from '../components/TopBar.astro';
 import Header from '../components/Header.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
 import { withBase } from '../utils/paths';
 
 interface Props {
@@ -15,16 +16,19 @@ interface Props {
   image?: string;
   /** og:type — pages like guide articles should pass 'article'. */
   ogType?: 'website' | 'article';
+  /** Optional crawler directive for confirmed draft/utility pages. */
+  robots?: 'index,follow' | 'noindex,follow';
   /** Optional JSON-LD object(s) injected as a <script type="application/ld+json">. */
   schema?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
-  title = 'ChiTown Trolley — Chicago Wedding Trolley Transportation',
-  description = 'Timeless white trolley transportation for weddings and events across Chicagoland. Owner-operated, licensed and insured.',
+  title = `${site.name} — Chicago Wedding Trolley Transportation`,
+  description = site.description,
   hideCta = false,
   image,
   ogType = 'website',
+  robots,
   schema,
 } = Astro.props;
 
@@ -38,13 +42,18 @@ const ogImage = image ? new URL(withBase(image), Astro.site ?? Astro.url).href :
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  {robots && <meta name="robots" content={robots} />}
   <link rel="canonical" href={canonical} />
   <meta property="og:type" content={ogType} />
   <meta property="og:url" content={canonical} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   {ogImage && <meta property="og:image" content={ogImage} />}
-  {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="theme-color" content="#FDFCFA" />
+  {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />}
   <link rel="icon" href={withBase('/uploads/trolleyBliss.webp')} type="image/webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
@@ -54,10 +63,11 @@ const ogImage = image ? new URL(withBase(image), Astro.site ?? Astro.url).href :
   />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <div class="site">
     <TopBar />
     <Header />
-    <main>
+    <main id="main-content" tabindex="-1">
       <slot />
     </main>
     {!hideCta && <CtaBand />}

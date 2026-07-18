@@ -10,6 +10,8 @@
     {
       "id": "P0-001",
       "priority": "P0",
+      "status": "resolved",
+      "statusNote": "Phase 1 replaced every false success message with a focused role=alert stating that no information was delivered. No endpoint was fabricated.",
       "category": "forms",
       "title": "All three forms report success without transmitting data",
       "evidence": [
@@ -37,6 +39,8 @@
     {
       "id": "P0-002",
       "priority": "P0",
+      "status": "blocked",
+      "statusNote": "Typed placeholders are centralized. The placeholder phone is no longer a live tel link and generic social fallbacks no longer render, but verified owner data is still required.",
       "category": "content",
       "title": "Launch-critical business contact and social values are placeholders",
       "evidence": [
@@ -64,6 +68,8 @@
     {
       "id": "P0-003",
       "priority": "P0",
+      "status": "deferred",
+      "statusNote": "Explicitly deferred to the dedicated image-performance phase; Phase 1 did not change the hero path, import, or asset.",
       "category": "assets",
       "title": "Desktop homepage hero references an asset absent from the production build",
       "evidence": [
@@ -90,6 +96,8 @@
     {
       "id": "P0-004",
       "priority": "P0",
+      "status": "blocked",
+      "statusNote": "Draft legal pages now emit noindex,follow and are excluded from the sitemap. Final legal approval and certification/logo authorization remain blocked on owner documentation.",
       "category": "legal",
       "title": "Draft legal pages and certification claims are public and indexable",
       "evidence": [
@@ -120,6 +128,8 @@
     {
       "id": "P1-001",
       "priority": "P1",
+      "status": "open",
+      "statusNote": "Astro was intentionally not upgraded in Phase 1. The existing audit findings remain and require a separately tested major-version migration.",
       "category": "security",
       "title": "Astro 4 dependency tree has known high/moderate vulnerabilities and is multiple majors behind",
       "evidence": [
@@ -145,6 +155,8 @@
     {
       "id": "P1-002",
       "priority": "P1",
+      "status": "deferred",
+      "statusNote": "Deferred to the dedicated image-performance phase; no image glob or image asset behavior changed.",
       "category": "performance",
       "title": "Broad eager fleet image glob emits unrelated multi-megabyte decor assets",
       "evidence": [
@@ -171,6 +183,8 @@
     {
       "id": "P1-003",
       "priority": "P1",
+      "status": "resolved",
+      "statusNote": "Added a skip link, global and header focus-visible states, current-page semantics, dropdown focus return, and mobile drawer focus containment/return.",
       "category": "accessibility",
       "title": "Keyboard focus treatment is incomplete and header defaults are explicitly removed",
       "evidence": [
@@ -199,6 +213,8 @@
     {
       "id": "P1-004",
       "priority": "P1",
+      "status": "resolved",
+      "statusNote": "Retained astro.yml as the only production Pages workflow and removed the competing deploy.yml workflow.",
       "category": "deployment",
       "title": "Two GitHub Pages workflows can deploy the same branch with conflicting configuration",
       "evidence": [
@@ -227,6 +243,8 @@
     {
       "id": "P1-005",
       "priority": "P1",
+      "status": "blocked",
+      "statusNote": "The existing GitHub Pages target/base were preserved. Final canonical-domain confirmation is required from the owner before changing them.",
       "category": "seo",
       "title": "Canonical production origin and base path require confirmation",
       "evidence": [
@@ -252,6 +270,8 @@
     {
       "id": "P1-006",
       "priority": "P1",
+      "status": "open",
+      "statusNote": "Added text-only Twitter card metadata and theme-color. Social preview images are deferred by the image exclusion; title/description edits require content approval.",
       "category": "seo",
       "title": "Social metadata is incomplete and several snippets exceed common display ranges",
       "evidence": [
@@ -278,6 +298,8 @@
     {
       "id": "P1-007",
       "priority": "P1",
+      "status": "open",
+      "statusNote": "Added a static noindex 404 page and noindexed confirmed draft legal pages. Root robots behavior, redirects, and security headers still depend on the final domain/host capabilities.",
       "category": "resilience",
       "title": "No custom 404, robots policy, redirects, or security-header configuration",
       "evidence": [
@@ -305,6 +327,8 @@
     {
       "id": "P1-008",
       "priority": "P1",
+      "status": "blocked",
+      "statusNote": "No verified vehicle videos were supplied; the existing presentation was preserved rather than inventing or removing content.",
       "category": "content",
       "title": "Every fleet vehicle embeds the same placeholder YouTube video",
       "evidence": [
@@ -330,6 +354,8 @@
     {
       "id": "P1-009",
       "priority": "P1",
+      "status": "blocked",
+      "statusNote": "Requires owner confirmation of fleet capacities, fleet names, form limits, and service areas before copy/data can be reconciled.",
       "category": "content",
       "title": "Capacity, fleet, and service-area claims are inconsistent",
       "evidence": [
@@ -358,6 +384,8 @@
     {
       "id": "P1-010",
       "priority": "P1",
+      "status": "resolved",
+      "statusNote": "Added pinned @astrojs/check and TypeScript development dependencies plus npm run check; check passes with zero diagnostics. A lint/test stack was intentionally not added without an existing convention.",
       "category": "quality",
       "title": "No lint, type-check, or test commands are configured",
       "evidence": [
@@ -386,6 +414,8 @@
     {
       "id": "P1-011",
       "priority": "P1",
+      "status": "deferred",
+      "statusNote": "Deferred to the dedicated image-performance phase; no image markup, dimensions, loading, or responsive behavior changed.",
       "category": "images",
       "title": "Most rendered images lack intrinsic dimensions and responsive delivery",
       "evidence": [
@@ -416,6 +446,8 @@
     {
       "id": "P1-012",
       "priority": "P1",
+      "status": "open",
+      "statusNote": "Build and local interaction smoke tests do not provide Lighthouse or field Core Web Vitals. Production-like lab and field measurement is still required.",
       "category": "performance",
       "title": "Core Web Vitals and visual responsive behavior remain unmeasured",
       "evidence": [
@@ -439,6 +471,8 @@
     {
       "id": "P2-001",
       "priority": "P2",
+      "status": "deferred",
+      "statusNote": "Deferred to the dedicated image-performance phase; no image file was moved, renamed, deleted, or deduplicated.",
       "category": "assets",
       "title": "Asset storage contains extensive duplicates and unreferenced source candidates",
       "evidence": [
@@ -467,6 +501,8 @@
     {
       "id": "P2-002",
       "priority": "P2",
+      "status": "open",
+      "statusNote": "Phase 1 limited structural work to typed site data and small safe utilities; broad component extraction remains a later phase.",
       "category": "architecture",
       "title": "Several files combine content, presentation, and interaction at high line counts",
       "evidence": [
@@ -498,6 +534,8 @@
     {
       "id": "P2-003",
       "priority": "P2",
+      "status": "open",
+      "statusNote": "Font loading was not changed in Phase 1.",
       "category": "performance",
       "title": "Google Fonts adds render-path and privacy dependencies",
       "evidence": [
@@ -521,6 +559,8 @@
     {
       "id": "P2-004",
       "priority": "P2",
+      "status": "blocked",
+      "statusNote": "Analytics, error monitoring, and form delivery monitoring require owner/provider/privacy decisions.",
       "category": "observability",
       "title": "No analytics, error monitoring, or form-delivery monitoring is present",
       "evidence": [
@@ -543,6 +583,8 @@
     {
       "id": "P2-005",
       "priority": "P2",
+      "status": "blocked",
+      "statusNote": "Security-header implementation depends on final hosting capabilities and the approved form/video/font origin set.",
       "category": "security",
       "title": "No Content Security Policy or related browser security headers are defined",
       "evidence": [
@@ -566,6 +608,8 @@
     {
       "id": "P2-006",
       "priority": "P2",
+      "status": "open",
+      "statusNote": "Form status panels now use role=alert and receive focus, but carousel pause/status behavior remains for a later interaction pass.",
       "category": "accessibility",
       "title": "Dynamic confirmations and carousels need stronger assistive-technology behavior",
       "evidence": [
@@ -593,6 +637,8 @@
     {
       "id": "P2-007",
       "priority": "P2",
+      "status": "blocked",
+      "statusNote": "Structured data continues to omit placeholder facts; complete business information is still required.",
       "category": "structured-data",
       "title": "LocalBusiness structured data is intentionally incomplete",
       "evidence": [
@@ -620,6 +666,8 @@
     {
       "id": "P2-008",
       "priority": "P2",
+      "status": "open",
+      "statusNote": "support.js was excluded from project type-checking because it is outside the application import graph, but no root artifact was deleted without ownership confirmation.",
       "category": "assets",
       "title": "Root tooling artifacts are unexplained and not part of the application",
       "evidence": [
@@ -645,6 +693,8 @@
     {
       "id": "P2-009",
       "priority": "P2",
+      "status": "resolved",
+      "statusNote": "Matching header, dropdown, footer, and legal navigation links now emit aria-current=page.",
       "category": "accessibility",
       "title": "Active navigation state is visual only",
       "evidence": [
@@ -669,6 +719,8 @@
     {
       "id": "P2-010",
       "priority": "P2",
+      "status": "open",
+      "statusNote": "Color and typography were explicitly preserved in Phase 1; a dedicated computed-contrast pass is still required.",
       "category": "color-contrast",
       "title": "Several palette tokens fail normal-text contrast on the paper background",
       "evidence": [
@@ -694,6 +746,8 @@
     {
       "id": "P3-001",
       "priority": "P3",
+      "status": "deferred",
+      "statusNote": "Theme-color was added, but favicon/app-icon work is image-related and deferred to the dedicated image phase.",
       "category": "metadata",
       "title": "PWA/browser polish metadata is minimal",
       "evidence": [
@@ -718,6 +772,8 @@
     {
       "id": "P3-002",
       "priority": "P3",
+      "status": "resolved",
+      "statusNote": "Footer copyright year is now generated at build time without changing the current rendered year.",
       "category": "maintenance",
       "title": "Copyright year is hard-coded",
       "evidence": [
@@ -740,6 +796,8 @@
     {
       "id": "P3-003",
       "priority": "P3",
+      "status": "resolved",
+      "statusNote": "Removed raw navigation-label HTML in favor of typed structured label parts; JSON-LD remains serialized from controlled local data.",
       "category": "code-safety",
       "title": "Controlled set:html usage should remain tightly constrained",
       "evidence": [

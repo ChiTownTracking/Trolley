@@ -11,6 +11,7 @@ import { site } from '../data/site';
   title="Privacy Policy — ChiTown Trolley"
   description="Draft privacy policy information for the ChiTown Trolley website."
   hideCta={true}
+  robots="noindex,follow"
 >
   <PageHero eyebrow="Legal" pb={40}>
     Privacy <em class="grad">Policy</em>
@@ -38,7 +39,7 @@ import { site } from '../data/site';
 
     <section>
       <h2>Your questions and choices</h2>
-      <p>Questions about personal information or this draft policy can be sent to <a href={`mailto:${site.email}`}>{site.email}</a>. The final policy must define any applicable request process after legal review.</p>
+      <p>Questions about personal information or this draft policy can be sent to <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>. The final policy must define any applicable request process after legal review.</p>
     </section>
   </article>
 </BaseLayout>

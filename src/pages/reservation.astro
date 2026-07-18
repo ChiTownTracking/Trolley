@@ -81,11 +81,11 @@ import { site, eventTypes, vehicleOptions, hoursOptions, resNotes, hasPhone } fr
         </div>
       </form>
 
-      <div class="confirm" data-res-confirm hidden>
+      <div class="confirm" data-res-confirm role="alert" aria-labelledby="reservation-form-status-title" tabindex="-1" hidden>
         <span class="confirm__mark">✳</span>
-        <h2 class="confirm__title">Request received</h2>
-        <p class="confirm__body">We'll confirm availability and reply within one business day. Your date isn't final until we confirm — but you're first in line.</p>
-        <button type="button" class="link-gold" data-res-reset>Make another request</button>
+        <h2 class="confirm__title" id="reservation-form-status-title">Online request not sent</h2>
+        <p class="confirm__body">No information was delivered. Online form integration is not configured yet; please contact ChiTown Trolley directly.</p>
+        <button type="button" class="link-gold" data-res-reset>Return to form</button>
       </div>
     </div>
 
@@ -93,11 +93,11 @@ import { site, eventTypes, vehicleOptions, hoursOptions, resNotes, hasPhone } fr
       <div>
         <p class="aside__eyebrow">Rather book by phone?</p>
         {hasPhone ? (
-          <a href={site.phoneHref} class="aside__phone">{site.phone}</a>
+          <a href={site.contact.phoneHref} class="aside__phone">{site.contact.phoneDisplay}</a>
         ) : (
-          <span class="aside__phone">{site.phone}</span>
+          <span class="aside__phone">{site.contact.phoneDisplay}</span>
         )}
-        <a href={`mailto:${site.email}`} class="aside__email">{site.email}</a>
+        <a href={`mailto:${site.contact.email}`} class="aside__email">{site.contact.email}</a>
       </div>
       <div class="rule-gold"></div>
       <div class="aside__notes">
@@ -154,11 +154,17 @@ import { site, eventTypes, vehicleOptions, hoursOptions, resNotes, hasPhone } fr
     e.preventDefault();
     if (!form.reportValidity()) return;
     form.hidden = true;
-    if (confirm) confirm.hidden = false;
-    window.scrollTo(0, 0);
+    if (confirm) {
+      confirm.hidden = false;
+      confirm.focus();
+    }
   });
   reset?.addEventListener('click', () => {
     if (confirm) confirm.hidden = true;
-    if (form) { form.hidden = false; form.reset(); }
+    if (form) {
+      form.hidden = false;
+      form.reset();
+      form.querySelector<HTMLElement>('.field__control')?.focus();
+    }
   });
 </script>

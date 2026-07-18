@@ -89,7 +89,7 @@ import { withBase } from '../utils/paths';
   }
 </style>
 
-<script define:vars={{ gallery }}>
+<script define:vars={{ gallery }} is:inline>
   const lb = document.querySelector('[data-lightbox]');
   const lbImg = lb.querySelector('[data-lb-img]');
   const lbCount = lb.querySelector('[data-lb-count]');

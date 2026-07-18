@@ -1,5 +1,5 @@
 ---
-import { navMain, navMore } from '../data/site';
+import { navMain, navMore, site } from '../data/site';
 import { withBase, withoutBase } from '../utils/paths';
 
 // Normalize the current path (strip trailing slash) for active matching.
@@ -9,7 +9,7 @@ const moreActive = navMore.some((n) => isActive(n.href));
 ---
 <header class="hdr">
   <div class="hdr__inner wrap wrap-wide">
-    <a href={withBase('/')} class="brand" aria-label="ChiTown Trolley home">
+    <a href={withBase('/')} class="brand" aria-label={`${site.name} home`}>
       <span class="brand__row">
         <span class="brand__rule"></span>
         <span class="brand__name">CHITOWN</span>
@@ -24,8 +24,16 @@ const moreActive = navMore.some((n) => isActive(n.href));
     <div class="hdr__panel" id="hdr-mobile-panel" data-nav-panel>
       <nav class="nav" aria-label="Main">
         {navMain.map((n) => (
-          <a href={withBase(n.href)} class:list={['nav__link', { active: isActive(n.href) }]}>
-            {n.html ? <Fragment set:html={n.html} /> : n.label}
+          <a
+            href={withBase(n.href)}
+            class:list={['nav__link', { active: isActive(n.href) }]}
+            aria-current={isActive(n.href) ? 'page' : undefined}
+          >
+            {n.labelParts
+              ? n.labelParts.map((part) => (
+                  <span class={part.className}>{part.text} </span>
+                ))
+              : n.label}
           </a>
         ))}
 
@@ -42,14 +50,18 @@ const moreActive = navMore.some((n) => isActive(n.href));
           </button>
           <div class="more__menu" data-more-panel hidden>
             {navMore.map((n) => (
-              <a href={withBase(n.href)} class:list={['more__item', { active: isActive(n.href) }]}>{n.label}</a>
+              <a
+                href={withBase(n.href)}
+                class:list={['more__item', { active: isActive(n.href) }]}
+                aria-current={isActive(n.href) ? 'page' : undefined}
+              >{n.label}</a>
             ))}
           </div>
         </div>
       </nav>
 
       <div class="hdr__cta">
-        <a href={withBase('/reservation')} class="btn-gold btn-gold--sm">Reservation</a>
+        <a href={withBase(site.routes.reservation)} class="btn-gold btn-gold--sm">Reservation</a>
       </div>
     </div>
 
@@ -119,10 +131,15 @@ const moreActive = navMore.some((n) => isActive(n.href));
   }
   .nav__link:hover { color: var(--gold-dark); }
   .nav__link.active { color: var(--gold-deep); border-bottom-color: var(--gold); }
+  .nav__link:focus-visible,
+  .more__item:focus-visible,
+  .hdr__burger:focus-visible {
+    outline: 2px solid var(--gold-dark);
+    outline-offset: 4px;
+  }
 
   /* Festive "Christmas Trolley" link — keeps its colors on hover/active.
-     :global() is required because these spans are injected via set:html
-     and don't carry Astro's scoped-style attribute. */
+     :global() is required because the class names come from shared nav data. */
   .nav__link :global(.xmas-c) { color: #00BF4C; }
   .nav__link :global(.xmas-t) { color: #C8102E; }
 
@@ -251,22 +268,26 @@ const moreActive = navMore.some((n) => isActive(n.href));
   const toggle = menu?.querySelector<HTMLButtonElement>('[data-more-toggle]');
   const panel = menu?.querySelector<HTMLElement>('[data-more-panel]');
 
-  function setOpen(open: boolean) {
+  function setMoreOpen(open: boolean, restoreFocus = false) {
     if (!menu || !toggle || !panel) return;
     menu.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', String(open));
     panel.hidden = !open;
+    if (!open && restoreFocus) toggle.focus();
   }
 
   toggle?.addEventListener('click', (e) => {
     e.stopPropagation();
-    setOpen(menu?.classList.contains('open') ? false : true);
+    setMoreOpen(menu?.classList.contains('open') ? false : true);
   });
   document.addEventListener('click', (e) => {
-    if (menu && !menu.contains(e.target as Node)) setOpen(false);
+    if (menu && !menu.contains(e.target as Node)) setMoreOpen(false);
   });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') setOpen(false);
+    if (e.key === 'Escape' && menu?.classList.contains('open')) {
+      e.preventDefault();
+      setMoreOpen(false, true);
+    }
   });
 </script>
 
@@ -295,26 +316,67 @@ const moreActive = navMore.some((n) => isActive(n.href));
     window.scrollTo(0, lockedScrollY);
   };
 
-  const setMenuOpen = (open: boolean) => {
+  const getDrawerFocusables = () => {
+    const panelFocusables = navPanel
+      ? Array.from(
+          navPanel.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ),
+        ).filter((element) => !element.closest('[hidden]'))
+      : [];
+    return burger ? [...panelFocusables, burger] : panelFocusables;
+  };
+
+  const setMenuOpen = (open: boolean, restoreFocus = true) => {
+    const wasOpen = navPanel?.classList.contains('is-open') ?? false;
     burger?.classList.toggle('is-open', open);
     burger?.setAttribute('aria-expanded', String(open));
+    burger?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     navPanel?.classList.toggle('is-open', open);
     menuBackdrop?.classList.toggle('is-open', open);
-    if (open) lockScroll();
-    else unlockScroll();
+    if (open && !wasOpen) {
+      lockScroll();
+      requestAnimationFrame(() => getDrawerFocusables()[0]?.focus());
+    } else if (!open && wasOpen) {
+      unlockScroll();
+      if (restoreFocus) burger?.focus();
+    }
   };
 
   burger?.addEventListener('click', () => setMenuOpen(!navPanel?.classList.contains('is-open')));
   menuBackdrop?.addEventListener('click', () => setMenuOpen(false));
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') setMenuOpen(false);
+    if (!navPanel?.classList.contains('is-open')) return;
+
+    if (e.key === 'Escape') {
+      if (e.defaultPrevented) return;
+      setMenuOpen(false);
+      return;
+    }
+
+    if (e.key === 'Tab') {
+      const focusables = getDrawerFocusables();
+      const first = focusables[0];
+      const last = focusables.at(-1);
+      if (!first || !last) return;
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
   });
-  navPanel?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenuOpen(false)));
+  navPanel
+    ?.querySelectorAll('a')
+    .forEach((a) => a.addEventListener('click', () => setMenuOpen(false, false)));
 
   // If the viewport grows back into the desktop range (e.g. rotating a
   // tablet, or resizing a browser window), drop the drawer state entirely.
   const desktopMq = window.matchMedia('(min-width: 1024px)');
   desktopMq.addEventListener('change', (e) => {
-    if (e.matches) setMenuOpen(false);
+    if (e.matches) setMenuOpen(false, false);
   });
 </script>

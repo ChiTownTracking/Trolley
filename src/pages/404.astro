@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { withBase } from '../utils/paths';
+---
+<BaseLayout
+  title="Page Not Found — ChiTown Trolley"
+  description="The requested ChiTown Trolley page could not be found."
+  hideCta={true}
+  robots="noindex,follow"
+>
+  <div class="not-found wrap wrap-760">
+    <PageHero eyebrow="404" pb={28}>
+      Page not <em class="grad">found</em>
+      <Fragment slot="lead">The page may have moved or the address may be incorrect.</Fragment>
+    </PageHero>
+    <a href={withBase('/')} class="btn-gold">Return Home</a>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding-block: 36px 96px;
+    text-align: center;
+  }
+</style>

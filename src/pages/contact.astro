@@ -50,11 +50,11 @@ import { site, eventTypes, hasPhone, hasInstagram, hasFacebook } from '../data/s
         </div>
       </form>
 
-      <div class="confirm" data-quote-confirm hidden>
+      <div class="confirm" data-quote-confirm role="alert" aria-labelledby="contact-form-status-title" tabindex="-1" hidden>
         <span class="confirm__mark">✳</span>
-        <h2 class="confirm__title">Thank you</h2>
-        <p class="confirm__body">Your request is on its way. We'll be in touch within one business day — usually much sooner.</p>
-        <button type="button" class="link-gold" data-quote-reset>Send another request</button>
+        <h2 class="confirm__title" id="contact-form-status-title">Online request not sent</h2>
+        <p class="confirm__body">No information was delivered. Online form integration is not configured yet; please contact ChiTown Trolley directly.</p>
+        <button type="button" class="link-gold" data-quote-reset>Return to form</button>
       </div>
     </div>
 
@@ -62,23 +62,23 @@ import { site, eventTypes, hasPhone, hasInstagram, hasFacebook } from '../data/s
       <div>
         <p class="aside__eyebrow">Prefer to talk?</p>
         {hasPhone ? (
-          <a href={site.phoneHref} class="aside__phone">{site.phone}</a>
+          <a href={site.contact.phoneHref} class="aside__phone">{site.contact.phoneDisplay}</a>
         ) : (
-          <span class="aside__phone">{site.phone}</span>
+          <span class="aside__phone">{site.contact.phoneDisplay}</span>
         )}
-        <a href={`mailto:${site.email}`} class="aside__email">{site.email}</a>
+        <a href={`mailto:${site.contact.email}`} class="aside__email">{site.contact.email}</a>
       </div>
       <div class="rule-gold"></div>
       <div>
         <p class="aside__eyebrow">Serving Chicago &amp; Suburbs</p>
-        <p class="aside__area">{site.serviceArea}</p>
+        <p class="aside__area">{site.serviceAreas.join(' · ')}</p>
       </div>
       {(hasInstagram || hasFacebook) && (
         <>
           <div class="rule-gold"></div>
           <div class="aside__social">
-            {hasInstagram && <a href={site.instagram} aria-label="Instagram" class="aside__soc">IG</a>}
-            {hasFacebook && <a href={site.facebook} aria-label="Facebook" class="aside__soc">FB</a>}
+            {hasInstagram && <a href={site.social.instagram} aria-label="Instagram" class="aside__soc">IG</a>}
+            {hasFacebook && <a href={site.social.facebook} aria-label="Facebook" class="aside__soc">FB</a>}
           </div>
         </>
       )}
@@ -125,7 +125,7 @@ import { site, eventTypes, hasPhone, hasInstagram, hasFacebook } from '../data/s
 </style>
 
 <script>
-  // Client-side "thank you" swap — mirrors the original's in-place confirmation.
+  // Do not imply delivery until a verified form endpoint is configured.
   const form = document.querySelector<HTMLFormElement>('[data-quote-form]');
   const confirm = document.querySelector<HTMLElement>('[data-quote-confirm]');
   const reset = document.querySelector<HTMLButtonElement>('[data-quote-reset]');
@@ -134,11 +134,17 @@ import { site, eventTypes, hasPhone, hasInstagram, hasFacebook } from '../data/s
     e.preventDefault();
     if (!form.reportValidity()) return;
     form.hidden = true;
-    if (confirm) confirm.hidden = false;
-    window.scrollTo(0, 0);
+    if (confirm) {
+      confirm.hidden = false;
+      confirm.focus();
+    }
   });
   reset?.addEventListener('click', () => {
     if (confirm) confirm.hidden = true;
-    if (form) { form.hidden = false; form.reset(); }
+    if (form) {
+      form.hidden = false;
+      form.reset();
+      form.querySelector<HTMLElement>('.field__control')?.focus();
+    }
   });
 </script>

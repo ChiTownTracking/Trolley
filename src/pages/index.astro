@@ -6,6 +6,7 @@ import { getCollection } from 'astro:content';
 import { fleetPreview, testimonials, eventTypes, vehicleOptions, hoursOptions, homeFaqs, getLocalBusinessSchema } from '../data/site';
 import { withBase } from '../utils/paths';
 import heroMobile from '../../uploads/heroMobileView2.png';
+import wbencLogo from '../../uploads/WBENC-Certified-Women-Business-.png';
 
 const passengerOptions = ['1–10', '11–20', '21–30', '31–40', '41–57'];
 
@@ -36,10 +37,55 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); 
         <span class="hero__finalLine"><em class="hero__for">for</em> <em class="grad hero__wedding">Your Wedding Day</em></span>
       </h1>
       <span class="hero__divider" aria-hidden="true"><span></span><i></i></span>
-      <p class="hero__support">Proudly Serving<br />Illinois, Wisconsin, Indiana &amp; Michigan.</p>
+      <div class="hero__ownership">
+        <span class="hero__proudly">Proudly</span>
+        <button
+          type="button"
+          class="hero__logoLink"
+          data-certificate-open
+          aria-haspopup="dialog"
+          aria-controls="wbenc-certificate-dialog"
+          aria-label="Open the WBENC certificate"
+        >
+          <span class="hero__logoCrop">
+            <img
+              class="hero__ownershipLogo"
+              src={wbencLogo.src}
+              width={wbencLogo.width}
+              height={wbencLogo.height}
+              alt="WBENC-certified Women Owned business"
+            />
+          </span>
+        </button>
+      </div>
       <a href={withBase('/contact')} class="btn-gold hero__cta">View Trolley</a>
     </div>
   </section>
+
+  <dialog
+    class="certificateModal"
+    id="wbenc-certificate-dialog"
+    data-certificate-dialog
+    aria-label="WBENC certificate"
+  >
+    <div class="certificateModal__panel">
+      <button
+        type="button"
+        class="certificateModal__close"
+        data-certificate-close
+        aria-label="Close certificate"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <img
+        class="certificateModal__image"
+        src={withBase('/uploads/WBENC-woman-owned-chicago-private-transportation-service-company-500w.webp')}
+        width="500"
+        height="364"
+        alt="WBENC National Women's Business Enterprise Certification for Sumadija Trans LLC doing business as ChiTown Limobus"
+      />
+    </div>
+  </dialog>
 
   <!-- Get a Quote -->
   <section class="rv getquote" id="getquote">
@@ -167,11 +213,11 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); 
         </div>
       </form>
 
-      <div class="confirm" data-quote-confirm hidden>
+      <div class="confirm" data-quote-confirm role="alert" aria-labelledby="home-form-status-title" tabindex="-1" hidden>
         <span class="confirm__mark">✳</span>
-        <h2 class="confirm__title">Thank you</h2>
-        <p class="confirm__body">Your request is on its way. We'll be in touch within one business day — usually much sooner.</p>
-        <button type="button" class="link-gold" data-quote-reset>Send another request</button>
+        <h2 class="confirm__title" id="home-form-status-title">Online request not sent</h2>
+        <p class="confirm__body">No information was delivered. Online form integration is not configured yet; please use the contact information in the site header or footer.</p>
+        <button type="button" class="link-gold" data-quote-reset>Return to form</button>
       </div>
     </div>
   </section>
@@ -340,15 +386,108 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); 
   .hero__divider { display: flex; align-items: center; gap: 11px; margin: 22px 0; }
   .hero__divider span { width: 90px; height: 1px; background: var(--gold); }
   .hero__divider i { width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }
-  .hero__support {
-    display: block; margin: 0; color: #fffaf1; font-size: 18px; font-weight: 300;
-    line-height: 1.5; text-shadow: 0 2px 18px rgba(0, 0, 0, .48);
+  .hero__ownership {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+  }
+  .hero__proudly {
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, .48);
+  }
+  .hero__logoCrop {
+    position: relative;
+    display: block;
+    width: clamp(120px, 13vw, 155px);
+    aspect-ratio: 515 / 216;
+    overflow: hidden;
+  }
+  .hero__logoLink {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  .hero__logoLink:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid var(--gold-light);
+    outline-offset: 4px;
+  }
+  .hero__ownershipLogo {
+    position: absolute;
+    top: -32%;
+    left: -3%;
+    display: block;
+    width: 106%;
+    max-width: none;
+    height: auto;
+    filter: invert(1) hue-rotate(180deg) saturate(1.08) brightness(1.08);
   }
   .hero__cta {
     align-self: flex-start; display: inline-flex; align-items: center;
     min-height: 44px; padding: 14px 34px; margin-top: 22px;
   }
   .hero__cta:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 4px; }
+
+  .certificateModal {
+    width: min(92vw, 620px, 110svh);
+    max-width: none;
+    max-height: 90svh;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: visible;
+  }
+  .certificateModal::backdrop {
+    background: rgba(8, 7, 5, .82);
+    backdrop-filter: blur(3px);
+  }
+  .certificateModal__panel {
+    position: relative;
+    padding: clamp(12px, 2.5vw, 22px);
+    background: #fff;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, .48);
+  }
+  .certificateModal__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .certificateModal__close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, .45);
+    border-radius: 50%;
+    background: #171512;
+    color: #fff;
+    font: 300 28px/1 var(--sans);
+    cursor: pointer;
+    place-items: center;
+  }
+  .certificateModal__close:hover { color: var(--gold-light); }
+  .certificateModal__close:focus-visible {
+    outline: 2px solid var(--gold-light);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 480px) {
+    .certificateModal__close {
+      top: 6px;
+      right: 6px;
+    }
+  }
 
   @media (max-width: 768px) {
     .hero {
@@ -403,9 +542,16 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); 
       margin: 20px 0;
     }
 
-    .hero__support {
-      font-size: clamp(1rem, 4.3vw, 1.15rem);
-      line-height: 1.45;
+    .hero__ownership {
+      gap: 6px;
+    }
+
+    .hero__proudly {
+      font-size: 12px;
+    }
+
+    .hero__logoCrop {
+      width: clamp(110px, 35vw, 130px);
     }
 
     .hero__cta {
@@ -717,7 +863,25 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); 
 </style>
 
 <script>
-  // Multi-step accordion wizard + in-place "thank you" swap.
+  const certificateOpen = document.querySelector<HTMLButtonElement>('[data-certificate-open]');
+  const certificateDialog = document.querySelector<HTMLDialogElement>('[data-certificate-dialog]');
+  const certificateClose = certificateDialog?.querySelector<HTMLButtonElement>('[data-certificate-close]');
+
+  certificateOpen?.addEventListener('click', () => {
+    certificateDialog?.showModal();
+  });
+
+  certificateClose?.addEventListener('click', () => {
+    certificateDialog?.close();
+  });
+
+  certificateDialog?.addEventListener('click', (event) => {
+    if (event.target === certificateDialog) certificateDialog.close();
+  });
+</script>
+
+<script>
+  // Multi-step accordion wizard + explicit not-connected status.
   const form = document.querySelector<HTMLFormElement>('[data-quote-form]');
   const confirm = document.querySelector<HTMLElement>('[data-quote-confirm]');
   const reset = document.querySelector<HTMLButtonElement>('[data-quote-reset]');
@@ -779,7 +943,10 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); 
       e.preventDefault();
       if (!form.reportValidity()) return;
       form.hidden = true;
-      if (confirm) confirm.hidden = false;
+      if (confirm) {
+        confirm.hidden = false;
+        confirm.focus();
+      }
     });
     reset?.addEventListener('click', () => {
       if (confirm) confirm.hidden = true;
@@ -787,6 +954,7 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); 
       form.reset();
       steps.forEach((s) => s.classList.remove('is-done'));
       openStep('1', false);
+      form.querySelector<HTMLElement>('.field__control')?.focus();
     });
   }
 </script>

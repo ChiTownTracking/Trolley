@@ -1,16 +1,16 @@
 ---
-import { site, navAll, hasInstagram, hasFacebook } from '../data/site';
-import { withBase } from '../utils/paths';
+import { site, navAll, hasPhone, hasInstagram, hasFacebook } from '../data/site';
+import { withBase, withoutBase } from '../utils/paths';
 
-// TODO: Replace these generic platform URLs with ChiTown Trolley's verified
-// business profile URLs in src/data/site.ts. Do not publish invented handles.
-const instagramHref = hasInstagram ? site.instagram : 'https://www.instagram.com/';
-const facebookHref = hasFacebook ? site.facebook : 'https://www.facebook.com/';
+const path = withoutBase(Astro.url.pathname).replace(/\/+$/, '') || '/';
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(`${href}/`);
+const copyrightYear = new Date().getFullYear();
 ---
 <footer class="ftr">
   <div class="ftr__inner wrap">
     <div class="ftr__brandBlock">
-      <a href={withBase('/')} class="ftr__brand" aria-label="ChiTown Trolley home">
+      <a href={withBase('/')} class="ftr__brand" aria-label={`${site.name} home`}>
         <span class="ftr__brandRow">
           <span class="ftr__rule"></span>
           <span class="ftr__name">CHITOWN</span>
@@ -23,7 +23,7 @@ const facebookHref = hasFacebook ? site.facebook : 'https://www.facebook.com/';
     <nav class="ftr__nav" aria-label="Footer navigation">
       <ul class="ftr__navList">
         {navAll.map((item) => (
-          <li><a href={withBase(item.href)} class="ftr__link">{item.label}</a></li>
+          <li><a href={withBase(item.href)} class="ftr__link" aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a></li>
         ))}
       </ul>
     </nav>
@@ -32,33 +32,43 @@ const facebookHref = hasFacebook ? site.facebook : 'https://www.facebook.com/';
       <ul class="ftr__contactList">
         <li class="ftr__contactItem">
           <svg class="ftr__contactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <a href={site.phoneHref} class="ftr__contactLink">{site.phone}</a>
+          {hasPhone ? (
+            <a href={site.contact.phoneHref} class="ftr__contactLink">{site.contact.phoneDisplay}</a>
+          ) : (
+            <span class="ftr__contactLink">{site.contact.phoneDisplay}</span>
+          )}
         </li>
 
         <li class="ftr__contactItem">
           <svg class="ftr__contactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          <a href={`mailto:${site.email}`} class="ftr__contactLink">{site.email}</a>
+          <a href={`mailto:${site.contact.email}`} class="ftr__contactLink">{site.contact.email}</a>
         </li>
       </ul>
     </address>
 
-    <section class="ftr__socialSection" aria-labelledby="ftr-social-heading">
-      <h2 class="ftr__heading" id="ftr-social-heading">Follow</h2>
-      <ul class="ftr__socialLinks">
-        <li>
-          <a class="ftr__socialLink" href={instagramHref} target="_blank" rel="noopener noreferrer" aria-label="ChiTown Trolley on Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".75" fill="currentColor" stroke="none"/></svg>
-            <span>Instagram</span>
-          </a>
-        </li>
-        <li>
-          <a class="ftr__socialLink" href={facebookHref} target="_blank" rel="noopener noreferrer" aria-label="ChiTown Trolley on Facebook">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.7 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5H17V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.5V13h2.8v8h3.4Z"/></svg>
-            <span>Facebook</span>
-          </a>
-        </li>
-      </ul>
-    </section>
+    {(hasInstagram || hasFacebook) && (
+      <section class="ftr__socialSection" aria-labelledby="ftr-social-heading">
+        <h2 class="ftr__heading" id="ftr-social-heading">Follow</h2>
+        <ul class="ftr__socialLinks">
+          {hasInstagram && (
+            <li>
+              <a class="ftr__socialLink" href={site.social.instagram} target="_blank" rel="noopener noreferrer" aria-label={`${site.name} on Instagram`}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".75" fill="currentColor" stroke="none"/></svg>
+                <span>Instagram</span>
+              </a>
+            </li>
+          )}
+          {hasFacebook && (
+            <li>
+              <a class="ftr__socialLink" href={site.social.facebook} target="_blank" rel="noopener noreferrer" aria-label={`${site.name} on Facebook`}>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.7 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5H17V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.5V13h2.8v8h3.4Z"/></svg>
+                <span>Facebook</span>
+              </a>
+            </li>
+          )}
+        </ul>
+      </section>
+    )}
 
     <section class="ftr__cert" aria-labelledby="ftr-cert-heading">
       <h2 class="ftr__heading" id="ftr-cert-heading">Women-owned business</h2>
@@ -76,13 +86,13 @@ const facebookHref = hasFacebook ? site.facebook : 'https://www.facebook.com/';
 
     <nav class="ftr__legalNav" aria-label="Legal navigation">
       <ul class="ftr__legalList">
-        <li class="ftr__legalItem"><a href={withBase('/privacy-policy')} class="ftr__legalLink">Privacy Policy</a></li>
-        <li class="ftr__legalItem"><a href={withBase('/terms-and-conditions')} class="ftr__legalLink">Terms and Conditions</a></li>
+        <li class="ftr__legalItem"><a href={withBase(site.routes.privacy)} class="ftr__legalLink" aria-current={isActive(site.routes.privacy) ? 'page' : undefined}>Privacy Policy</a></li>
+        <li class="ftr__legalItem"><a href={withBase(site.routes.terms)} class="ftr__legalLink" aria-current={isActive(site.routes.terms) ? 'page' : undefined}>Terms and Conditions</a></li>
       </ul>
     </nav>
 
     <div class="ftr__copyright">
-      <span>© 2026 ChiTown Trolley</span>
+      <span>© {copyrightYear} {site.name}</span>
       <span>Licensed &amp; insured <span aria-hidden="true">·</span> Chicagoland's wedding trolley</span>
     </div>
   </div>
@@ -192,7 +202,7 @@ const facebookHref = hasFacebook ? site.facebook : 'https://www.facebook.com/';
   }
 
   .ftr__link:hover,
-  .ftr__contactLink:hover,
+  .ftr__contactLink[href]:hover,
   .ftr__legalLink:hover {
     color: var(--gold-deep);
   }
