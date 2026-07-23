@@ -2,7 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { gallery } from '../data/site';
-import { withBase } from '../utils/paths';
+import { imageSrc } from '../utils/images';
+
+const galleryClient = gallery.map((item) => ({
+  src: imageSrc(item.image),
+  alt: item.alt,
+}));
 ---
 <BaseLayout
   title="Gallery — ChiTown Trolley"
@@ -15,7 +20,13 @@ import { withBase } from '../utils/paths';
   <section class="gal wrap wrap-1140" style="max-width:1200px">
     {gallery.map((g, i) => (
       <button type="button" class="gal__cell" data-index={i} aria-label="View photo larger">
-        <img src={withBase(g.src)} alt={g.alt} class="gal__img" />
+        <img
+          src={imageSrc(g.image)}
+          width={g.image.width}
+          height={g.image.height}
+          alt={g.alt}
+          class="gal__img"
+        />
       </button>
     ))}
   </section>
@@ -89,7 +100,7 @@ import { withBase } from '../utils/paths';
   }
 </style>
 
-<script define:vars={{ gallery }} is:inline>
+<script define:vars={{ gallery: galleryClient }} is:inline>
   const lb = document.querySelector('[data-lightbox]');
   const lbImg = lb.querySelector('[data-lb-img]');
   const lbCount = lb.querySelector('[data-lb-count]');

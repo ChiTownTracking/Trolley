@@ -1,1180 +1,1164 @@
 {
-  "generatedAt": "2026-07-18",
+  "generatedAt": "2026-07-23",
   "scope": [
-    "src/assets",
-    "public",
-    "uploads"
+    "src/assets/images",
+    "public/images/guides"
   ],
-  "method": "Filesystem metadata, exact path-reference scan, and import.meta.glob review. Dimensions use sharp; runtime viewport selection and transfer bytes were not measured.",
-  "fieldConventions": {
-    "usedIn": "Source usage locations; an omitted field means no source reference was found.",
-    "flags": "Apply the matching optimizationRules entries; an empty array uses the default rule."
-  },
-  "flagDefinitions": {
-    "unreferenced-deployed": "Copied/emitted despite no direct content reference.",
-    "unreferenced-source": "Not referenced and not emitted.",
-    "over-1MB": "Source file exceeds 1 MB.",
-    "high-pixels": "At least 4 megapixels.",
-    "duplicate": "Byte-identical content exists at another path.",
-    "broad-eager-glob": "Emitted because fleet/[slug].astro eagerly imports all fleet assets, even unrelated decor."
-  },
-  "optimizationRules": {
-    "default": "Keep only if the visual is approved; add intrinsic dimensions and responsive delivery at the rendering site.",
-    "unreferenced-deployed": "Remove from the deployable public directory after confirming no external URL depends on it.",
-    "unreferenced-source": "Archive or delete only in a dedicated cleanup after ownership and intended future use are confirmed.",
-    "over-1MB": "Resize to the maximum rendered dimensions and recompress to an appropriate WebP/AVIF/JPEG quality.",
-    "high-pixels": "Generate responsive widths rather than shipping the full-resolution source to browsers.",
-    "duplicate": "Choose one canonical source and eliminate redundant deployable copies after reference verification.",
-    "broad-eager-glob": "Narrow the import glob so unrelated decor is not emitted with fleet gallery assets."
-  },
+  "method": "Current filesystem metadata and dimensions via sharp; SHA-256 duplicate verification; repository-wide source/import/CSS/metadata/glob search; manual contact-sheet review of all 39 unique file hashes.",
   "totals": {
-    "files": 70,
-    "bytes": 44140764,
-    "referenced": 42,
-    "unreferenced": 28,
-    "emitted": 49,
-    "filesOver1MB": 15,
-    "duplicateGroups": 17,
-    "byArea": {
-      "source": {
-        "files": 24,
-        "bytes": 18740119,
-        "referenced": 24,
-        "emitted": 24
-      },
-      "public": {
-        "files": 24,
-        "bytes": 9324227,
-        "referenced": 17,
-        "emitted": 24
-      },
-      "root-upload": {
-        "files": 22,
-        "bytes": 16076418,
-        "referenced": 1,
-        "emitted": 1
-      }
-    }
+    "beforeFiles": 69,
+    "beforeBytes": 35810308,
+    "afterFiles": 37,
+    "afterBytes": 28621903,
+    "exactDuplicateFilesRemoved": 30,
+    "manualDuplicateFilesRemoved": 1,
+    "unusedFilesRemoved": 1,
+    "publicRequiredFiles": 3,
+    "reviewRequiredFiles": 8
   },
   "assets": [
     {
-      "path": "public/images/christmas-trolley/decor/corner-wreath.webp",
-      "area": "public",
+      "currentPath": "public/images/christmas-trolley/decor/corner-wreath.webp",
+      "newPath": "src/assets/images/christmas/decorative/corner-wreath.webp",
+      "filename": "corner-wreath.webp",
       "format": "webp",
-      "bytes": 231920,
       "width": 900,
       "height": 1289,
-      "usedIn": [
+      "sizeBytes": 231920,
+      "usedBy": [
         "src/pages/christmas-trolley.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": []
+      "usageType": "css-background",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "move",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "public/images/christmas-trolley/decor/garland-strand.webp",
-      "area": "public",
+      "currentPath": "public/images/christmas-trolley/decor/garland-strand.webp",
+      "newPath": "src/assets/images/christmas/decorative/garland-strand.webp",
+      "filename": "garland-strand.webp",
       "format": "webp",
-      "bytes": 341688,
       "width": 2000,
       "height": 895,
-      "usedIn": [
+      "sizeBytes": 341688,
+      "usedBy": [
         "src/pages/christmas-trolley.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": []
+      "usageType": "css-background",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "move",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "public/images/christmas-trolley/decor/garland-strip-a.webp",
-      "area": "public",
+      "currentPath": "public/images/christmas-trolley/decor/garland-strip-a.webp",
+      "newPath": "src/assets/images/christmas/decorative/garland-strip-alternate.webp",
+      "filename": "garland-strip-a.webp",
       "format": "webp",
-      "bytes": 217254,
       "width": 2400,
       "height": 742,
-      "referenced": false,
-      "emitted": true,
-      "flags": [
-        "unreferenced-deployed"
-      ]
+      "sizeBytes": 217254,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "review-required",
+      "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
     },
     {
-      "path": "public/images/christmas-trolley/decor/garland-strip-b.webp",
-      "area": "public",
+      "currentPath": "public/images/christmas-trolley/decor/garland-strip-b.webp",
+      "newPath": "src/assets/images/christmas/decorative/garland-strip-bottom.webp",
+      "filename": "garland-strip-b.webp",
       "format": "webp",
-      "bytes": 385078,
       "width": 2000,
       "height": 1172,
-      "usedIn": [
+      "sizeBytes": 385078,
+      "usedBy": [
         "src/pages/christmas-trolley.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": []
+      "usageType": "css-background",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "public/uploads/2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg",
-      "area": "public",
+      "currentPath": "public/uploads/2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg",
+      "newPath": "src/assets/images/fleet/coach/interior.jpg",
+      "filename": "2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg",
       "format": "jpeg",
-      "bytes": 463159,
       "width": 1000,
       "height": 648,
-      "usedIn": [
+      "sizeBytes": 463159,
+      "usedBy": [
         "src/data/site.ts",
         "src/pages/weddings.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-01",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/coach/interior.jpg",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/coach/interior.jpg."
     },
     {
-      "path": "public/uploads/24-passenger-white-party-bus-01a.jpg",
-      "area": "public",
+      "currentPath": "public/uploads/24-passenger-white-party-bus-01a.jpg",
+      "newPath": "src/assets/images/fleet/party-bus/exterior.jpg",
+      "filename": "24-passenger-white-party-bus-01a.jpg",
       "format": "jpeg",
-      "bytes": 261194,
       "width": 1000,
       "height": 800,
-      "usedIn": [
+      "sizeBytes": 261194,
+      "usedBy": [
         "src/data/site.ts"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-02",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/party-bus/exterior.jpg",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/party-bus/exterior.jpg."
     },
     {
-      "path": "public/uploads/3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg",
-      "area": "public",
+      "currentPath": "public/uploads/3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg",
+      "newPath": "src/assets/images/fleet/coach/exterior-rear-dusk.jpg",
+      "filename": "3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg",
       "format": "jpeg",
-      "bytes": 410400,
       "width": 1100,
       "height": 733,
-      "usedIn": [
+      "sizeBytes": 410400,
+      "usedBy": [
         "src/content/guides/wedding-day-shuttle-logistics-timeline.md",
         "src/data/site.ts"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-03",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/coach/exterior-rear-dusk.jpg",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/coach/exterior-rear-dusk.jpg."
     },
     {
-      "path": "public/uploads/5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg",
-      "area": "public",
+      "currentPath": "public/uploads/5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg",
+      "newPath": "public/images/guides/coach-exterior-side-dusk.jpg",
+      "filename": "5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg",
       "format": "jpeg",
-      "bytes": 358480,
       "width": 1100,
       "height": 733,
-      "usedIn": [
+      "sizeBytes": 358480,
+      "usedBy": [
         "src/content/guides/wedding-day-shuttle-logistics-timeline.md",
         "src/data/site.ts"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-04",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "public-url",
+      "category": "fleet",
+      "duplicateOf": "public/images/guides/coach-exterior-side-dusk.jpg",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched public/images/guides/coach-exterior-side-dusk.jpg."
     },
     {
-      "path": "public/uploads/heroImg.png",
-      "area": "public",
-      "format": "png",
-      "bytes": 2285651,
-      "width": 1536,
-      "height": 1024,
-      "referenced": false,
-      "emitted": true,
-      "duplicateGroup": "dup-05",
-      "flags": [
-        "unreferenced-deployed",
-        "over-1MB",
-        "duplicate"
-      ]
-    },
-    {
-      "path": "public/uploads/heroImg.webp",
-      "area": "public",
+      "currentPath": "public/uploads/WBENC-woman-owned-chicago-private-transportation-service-company-500w.webp",
+      "newPath": "src/assets/images/branding/certifications/wbenc-certificate.webp",
+      "filename": "WBENC-woman-owned-chicago-private-transportation-service-company-500w.webp",
       "format": "webp",
-      "bytes": 149244,
-      "width": 1536,
-      "height": 1024,
-      "referenced": false,
-      "emitted": true,
-      "flags": [
-        "unreferenced-deployed"
-      ]
+      "width": 500,
+      "height": 365,
+      "sizeBytes": 18484,
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "usageType": "import",
+      "category": "branding",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "public/uploads/heroMobileView.png",
-      "area": "public",
+      "currentPath": "public/uploads/heroImg.png",
+      "newPath": "src/assets/images/home/hero/hero-desktop-alternate.png",
+      "filename": "heroImg.png",
       "format": "png",
-      "bytes": 2133883,
+      "width": 1536,
+      "height": 1024,
+      "sizeBytes": 2285651,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "home",
+      "duplicateOf": null,
+      "status": "review-required",
+      "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
+    },
+    {
+      "currentPath": "public/uploads/heroImg.webp",
+      "newPath": "src/assets/images/home/hero/hero-desktop-alternate.webp",
+      "filename": "heroImg.webp",
+      "format": "webp",
+      "width": 1536,
+      "height": 1024,
+      "sizeBytes": 149244,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "home",
+      "duplicateOf": null,
+      "status": "review-required",
+      "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
+    },
+    {
+      "currentPath": "public/uploads/heroMobileView.png",
+      "newPath": "src/assets/images/home/hero/hero-mobile-alternate.png",
+      "filename": "heroMobileView.png",
+      "format": "png",
       "width": 941,
       "height": 1672,
-      "referenced": false,
-      "emitted": true,
-      "flags": [
-        "unreferenced-deployed",
-        "over-1MB"
-      ]
+      "sizeBytes": 2133883,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "home",
+      "duplicateOf": null,
+      "status": "review-required",
+      "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
     },
     {
-      "path": "public/uploads/new-sprinter-limo-page.jpg",
-      "area": "public",
+      "currentPath": "public/uploads/new-sprinter-limo-page.jpg",
+      "newPath": "src/assets/images/fleet/sprinter/exterior.jpg",
+      "filename": "new-sprinter-limo-page.jpg",
       "format": "jpeg",
-      "bytes": 1017719,
       "width": 1200,
       "height": 800,
-      "usedIn": [
+      "sizeBytes": 1017719,
+      "usedBy": [
         "src/data/site.ts"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-06",
-      "flags": [
-        "over-1MB",
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/sprinter/exterior.jpg",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/sprinter/exterior.jpg."
     },
     {
-      "path": "public/uploads/sprinter-limo-interior-1920w.webp",
-      "area": "public",
+      "currentPath": "public/uploads/sprinter-limo-interior-1920w.webp",
+      "newPath": "src/assets/images/fleet/sprinter/interior-rear.webp",
+      "filename": "sprinter-limo-interior-1920w.webp",
       "format": "webp",
-      "bytes": 55896,
       "width": 800,
       "height": 531,
-      "referenced": false,
-      "emitted": true,
-      "duplicateGroup": "dup-07",
-      "flags": [
-        "unreferenced-deployed",
-        "duplicate"
-      ]
+      "sizeBytes": 55896,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/sprinter/interior-rear.webp",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/sprinter/interior-rear.webp."
     },
     {
-      "path": "public/uploads/sprinter-shuttle-van2.jpg",
-      "area": "public",
+      "currentPath": "public/uploads/sprinter-shuttle-van2.jpg",
+      "newPath": "src/assets/images/fleet/sprinter/interior-front.jpg",
+      "filename": "sprinter-shuttle-van2.jpg",
       "format": "jpeg",
-      "bytes": 194521,
       "width": 1002,
       "height": 665,
-      "referenced": false,
-      "emitted": true,
-      "duplicateGroup": "dup-08",
-      "flags": [
-        "unreferenced-deployed",
-        "duplicate"
-      ]
+      "sizeBytes": 194521,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/sprinter/interior-front.jpg",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/sprinter/interior-front.jpg."
     },
     {
-      "path": "public/uploads/trolley-interior.webp",
-      "area": "public",
+      "currentPath": "public/uploads/trolley-interior.webp",
+      "newPath": "public/images/guides/trolley-interior.webp",
+      "filename": "trolley-interior.webp",
       "format": "webp",
-      "bytes": 41476,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 41476,
+      "usedBy": [
         "src/content/guides/how-many-guests-fit-in-a-trolley.md",
         "src/data/site.ts",
         "src/pages/weddings.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-09",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "public-url",
+      "category": "fleet",
+      "duplicateOf": "public/images/guides/trolley-interior.webp",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched public/images/guides/trolley-interior.webp."
     },
     {
-      "path": "public/uploads/trolleyBliss.png",
-      "area": "public",
+      "currentPath": "public/uploads/trolleyBliss.png",
+      "newPath": "src/assets/images/fleet/trolley/front-three-quarter.png",
+      "filename": "trolleyBliss.png",
       "format": "png",
-      "bytes": 107550,
       "width": 555,
       "height": 327,
-      "referenced": false,
-      "emitted": true,
-      "duplicateGroup": "dup-10",
-      "flags": [
-        "unreferenced-deployed",
-        "duplicate"
-      ]
+      "sizeBytes": 107550,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/trolley/front-three-quarter.png",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/front-three-quarter.png."
     },
     {
-      "path": "public/uploads/trolleyBliss.webp",
-      "area": "public",
+      "currentPath": "public/uploads/trolleyBliss.webp",
+      "newPath": "src/assets/images/fleet/trolley/front-three-quarter.webp",
+      "filename": "trolleyBliss.webp",
       "format": "webp",
-      "bytes": 62658,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 62658,
+      "usedBy": [
         "src/data/site.ts",
         "src/layouts/BaseLayout.astro",
         "src/pages/guides/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-11",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "public/uploads/trolleyChristmas.png",
-      "area": "public",
+      "currentPath": "public/uploads/trolleyChristmas.png",
+      "newPath": "public/images/guides/trolley-christmas-lights.png",
+      "filename": "trolleyChristmas.png",
       "format": "png",
-      "bytes": 90137,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 90137,
+      "usedBy": [
         "src/content/guides/chicago-trolley-friendly-wedding-venues.md",
         "src/data/site.ts"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-12",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "public-url",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "public-required",
+      "notes": "Single canonical copy retained at a stable public URL because raw HTML figures inside Markdown cannot consume imported image metadata."
     },
     {
-      "path": "public/uploads/trolleyClassic.png",
-      "area": "public",
+      "currentPath": "public/uploads/trolleyClassic.png",
+      "newPath": "src/assets/images/fleet/trolley/classic-exterior.png",
+      "filename": "trolleyClassic.png",
       "format": "png",
-      "bytes": 112238,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 112238,
+      "usedBy": [
         "src/content/guides/how-many-guests-fit-in-a-trolley.md",
         "src/data/site.ts",
         "src/pages/weddings.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-13",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/trolley/classic-exterior.png",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/classic-exterior.png."
     },
     {
-      "path": "public/uploads/trolleyFestive.png",
-      "area": "public",
+      "currentPath": "public/uploads/trolleyFestive.png",
+      "newPath": "src/assets/images/fleet/trolley/summer-exterior.png",
+      "filename": "trolleyFestive.png",
       "format": "png",
-      "bytes": 130515,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 130515,
+      "usedBy": [
         "src/data/site.ts",
         "src/pages/about.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-14",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/trolley/summer-exterior.png",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/summer-exterior.png."
     },
     {
-      "path": "public/uploads/trolleyFusion.png",
-      "area": "public",
+      "currentPath": "public/uploads/trolleyFusion.png",
+      "newPath": "src/assets/images/fleet/trolley/boarding-exterior.png",
+      "filename": "trolleyFusion.png",
       "format": "png",
-      "bytes": 104043,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 104043,
+      "usedBy": [
         "src/data/site.ts"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-15",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/trolley/boarding-exterior.png",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/boarding-exterior.png."
     },
     {
-      "path": "public/uploads/trolleyMidnight.png",
-      "area": "public",
+      "currentPath": "public/uploads/trolleyMidnight.png",
+      "newPath": "src/assets/images/fleet/trolley/afternoon-exterior.png",
+      "filename": "trolleyMidnight.png",
       "format": "png",
-      "bytes": 113960,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 113960,
+      "usedBy": [
         "src/content/guides/chicago-trolley-friendly-wedding-venues.md",
         "src/data/site.ts"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-16",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/trolley/afternoon-exterior.png",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/afternoon-exterior.png."
     },
     {
-      "path": "public/uploads/trolleyUltimate.jpg",
-      "area": "public",
+      "currentPath": "public/uploads/trolleyUltimate.jpg",
+      "newPath": "src/assets/images/fleet/trolley/winter-exterior.jpg",
+      "filename": "trolleyUltimate.jpg",
       "format": "jpeg",
-      "bytes": 49963,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 49963,
+      "usedBy": [
         "src/data/site.ts"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-17",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/trolley/winter-exterior.jpg",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/winter-exterior.jpg."
     },
     {
-      "path": "public/uploads/wbenc-logo.svg",
-      "area": "public",
+      "currentPath": "public/uploads/wbenc-logo.svg",
+      "newPath": "src/assets/images/branding/certifications/wbenc-logo.svg",
+      "filename": "wbenc-logo.svg",
       "format": "svg",
-      "bytes": 5600,
       "width": 142,
       "height": 30,
-      "usedIn": [
+      "sizeBytes": 5600,
+      "usedBy": [
         "src/components/Footer.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": []
+      "usageType": "import",
+      "category": "branding",
+      "duplicateOf": null,
+      "status": "move",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/ChristmasTrolley/1-WAYTOGO-Trolley-&-Bus-Rentals-Xmas-Trolley-Tours-Chicago3.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/ChristmasTrolley/1-WAYTOGO-Trolley-&-Bus-Rentals-Xmas-Trolley-Tours-Chicago3.jpg",
+      "newPath": "src/assets/images/christmas/gallery/christmas-trolley-01.jpg",
+      "filename": "1-WAYTOGO-Trolley-&-Bus-Rentals-Xmas-Trolley-Tours-Chicago3.jpg",
       "format": "jpeg",
-      "bytes": 434478,
       "width": 1200,
       "height": 900,
-      "usedIn": [
+      "sizeBytes": 434478,
+      "usedBy": [
         "src/pages/fleet/[slug].astro",
         "src/pages/christmas-trolley.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": []
+      "usageType": "import",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/ChristmasTrolley/2-WAYTOGO-Xmas-Trolley-Tour-Chicago.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/ChristmasTrolley/2-WAYTOGO-Xmas-Trolley-Tour-Chicago.jpg",
+      "newPath": "src/assets/images/christmas/gallery/christmas-trolley-02.jpg",
+      "filename": "2-WAYTOGO-Xmas-Trolley-Tour-Chicago.jpg",
       "format": "jpeg",
-      "bytes": 366544,
       "width": 1200,
       "height": 900,
-      "usedIn": [
+      "sizeBytes": 366544,
+      "usedBy": [
         "src/pages/fleet/[slug].astro",
         "src/pages/christmas-trolley.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": []
+      "usageType": "import",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/ChristmasTrolley/3-WAYTOGO-Xmas-Trolleys-Chicago.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/ChristmasTrolley/3-WAYTOGO-Xmas-Trolleys-Chicago.jpg",
+      "newPath": "",
+      "filename": "3-WAYTOGO-Xmas-Trolleys-Chicago.jpg",
       "format": "jpeg",
-      "bytes": 430493,
       "width": 1200,
       "height": 900,
-      "usedIn": [
+      "sizeBytes": 430493,
+      "usedBy": [
         "src/pages/fleet/[slug].astro",
         "src/pages/christmas-trolley.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": []
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "unused",
+      "notes": "Watermarked duplicate already excluded by the Christmas gallery filter; repository-wide search found no other use."
     },
     {
-      "path": "src/assets/fleet/ChristmasTrolley/4-WAYTOGO-Xmas-Trolley-Tours-Chicago.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/ChristmasTrolley/4-WAYTOGO-Xmas-Trolley-Tours-Chicago.jpg",
+      "newPath": "src/assets/images/christmas/gallery/christmas-trolley-04.jpg",
+      "filename": "4-WAYTOGO-Xmas-Trolley-Tours-Chicago.jpg",
       "format": "jpeg",
-      "bytes": 317183,
       "width": 1200,
       "height": 900,
-      "usedIn": [
+      "sizeBytes": 317183,
+      "usedBy": [
         "src/pages/fleet/[slug].astro",
         "src/pages/christmas-trolley.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": []
+      "usageType": "import",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/ChristmasTrolley/5-Chicago-Christmas-Xmas-Trolley-WAYTOGO.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/ChristmasTrolley/5-Chicago-Christmas-Xmas-Trolley-WAYTOGO.jpg",
+      "newPath": "src/assets/images/christmas/gallery/christmas-trolley-05.jpg",
+      "filename": "5-Chicago-Christmas-Xmas-Trolley-WAYTOGO.jpg",
       "format": "jpeg",
-      "bytes": 421071,
       "width": 1200,
       "height": 900,
-      "usedIn": [
+      "sizeBytes": 421071,
+      "usedBy": [
         "src/pages/fleet/[slug].astro",
         "src/pages/christmas-trolley.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": []
+      "usageType": "import",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/ChristmasTrolley/6-WAYTOGO-Trolley-&-Bus-Rentals-Xmas-Trolley-Tours-Chicago.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/ChristmasTrolley/6-WAYTOGO-Trolley-&-Bus-Rentals-Xmas-Trolley-Tours-Chicago.jpg",
+      "newPath": "src/assets/images/christmas/gallery/christmas-trolley-06.jpg",
+      "filename": "6-WAYTOGO-Trolley-&-Bus-Rentals-Xmas-Trolley-Tours-Chicago.jpg",
       "format": "jpeg",
-      "bytes": 384248,
       "width": 1200,
       "height": 900,
-      "usedIn": [
+      "sizeBytes": 384248,
+      "usedBy": [
         "src/pages/fleet/[slug].astro",
         "src/pages/christmas-trolley.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": []
+      "usageType": "import",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/ChristmasTrolley/decor/228Z_Christmas_tree22_22.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/ChristmasTrolley/decor/228Z_Christmas_tree22_22.jpg",
+      "newPath": "src/assets/images/christmas/decorative/sources/garland-strip-source.jpg",
+      "filename": "228Z_Christmas_tree22_22.jpg",
       "format": "jpeg",
-      "bytes": 6453853,
       "width": 8000,
       "height": 2474,
-      "usedIn": [
+      "sizeBytes": 6453853,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": [
-        "over-1MB",
-        "high-pixels",
-        "broad-eager-glob"
-      ]
+      "usageType": "css-background",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "review-required",
+      "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
     },
     {
-      "path": "src/assets/fleet/ChristmasTrolley/decor/32a48fd7-58a9-41e9-82b4-2d236480f684.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/ChristmasTrolley/decor/32a48fd7-58a9-41e9-82b4-2d236480f684.jpg",
+      "newPath": "src/assets/images/christmas/decorative/sources/corner-wreath-source.jpg",
+      "filename": "32a48fd7-58a9-41e9-82b4-2d236480f684.jpg",
       "format": "jpeg",
-      "bytes": 2211009,
       "width": 2500,
       "height": 2500,
-      "usedIn": [
+      "sizeBytes": 2211009,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": [
-        "over-1MB",
-        "high-pixels",
-        "broad-eager-glob"
-      ]
+      "usageType": "css-background",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "review-required",
+      "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
     },
     {
-      "path": "src/assets/fleet/ChristmasTrolley/decor/47845d13-7372-4b7f-b409-bd767fac3316.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/ChristmasTrolley/decor/47845d13-7372-4b7f-b409-bd767fac3316.jpg",
+      "newPath": "src/assets/images/christmas/decorative/sources/garland-arch-source.jpg",
+      "filename": "47845d13-7372-4b7f-b409-bd767fac3316.jpg",
       "format": "jpeg",
-      "bytes": 2305757,
       "width": 2500,
       "height": 2500,
-      "usedIn": [
+      "sizeBytes": 2305757,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": [
-        "over-1MB",
-        "high-pixels",
-        "broad-eager-glob"
-      ]
+      "usageType": "css-background",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "review-required",
+      "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
     },
     {
-      "path": "src/assets/fleet/ChristmasTrolley/decor/5d790f87-1ad8-410c-b0a4-ebacbae3153d.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/ChristmasTrolley/decor/5d790f87-1ad8-410c-b0a4-ebacbae3153d.jpg",
+      "newPath": "src/assets/images/christmas/decorative/sources/garland-strand-source.jpg",
+      "filename": "5d790f87-1ad8-410c-b0a4-ebacbae3153d.jpg",
       "format": "jpeg",
-      "bytes": 1994369,
       "width": 2500,
       "height": 2500,
-      "usedIn": [
+      "sizeBytes": 1994369,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": [
-        "over-1MB",
-        "high-pixels",
-        "broad-eager-glob"
-      ]
+      "usageType": "css-background",
+      "category": "christmas",
+      "duplicateOf": null,
+      "status": "review-required",
+      "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
     },
     {
-      "path": "src/assets/fleet/CoachBus/01-exterior.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/CoachBus/01-exterior.jpg",
+      "newPath": "src/assets/images/fleet/coach/exterior-rear-dusk.jpg",
+      "filename": "01-exterior.jpg",
       "format": "jpeg",
-      "bytes": 410400,
       "width": 1100,
       "height": 733,
-      "usedIn": [
+      "sizeBytes": 410400,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-03",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/CoachBus/02-exterior-dusk.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/CoachBus/02-exterior-dusk.jpg",
+      "newPath": "public/images/guides/coach-exterior-side-dusk.jpg",
+      "filename": "02-exterior-dusk.jpg",
       "format": "jpeg",
-      "bytes": 358480,
       "width": 1100,
       "height": 733,
-      "usedIn": [
+      "sizeBytes": 358480,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-04",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "public-url",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "public-required",
+      "notes": "Single canonical copy retained at a stable public URL because raw HTML figures inside Markdown cannot consume imported image metadata."
     },
     {
-      "path": "src/assets/fleet/CoachBus/03-interior.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/CoachBus/03-interior.jpg",
+      "newPath": "src/assets/images/fleet/coach/interior.jpg",
+      "filename": "03-interior.jpg",
       "format": "jpeg",
-      "bytes": 463159,
       "width": 1000,
       "height": 648,
-      "usedIn": [
+      "sizeBytes": 463159,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-01",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/LimoVan/01-exterior.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/LimoVan/01-exterior.jpg",
+      "newPath": "src/assets/images/fleet/sprinter/exterior.jpg",
+      "filename": "01-exterior.jpg",
       "format": "jpeg",
-      "bytes": 1017719,
       "width": 1200,
       "height": 800,
-      "usedIn": [
+      "sizeBytes": 1017719,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-06",
-      "flags": [
-        "over-1MB",
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/LimoVan/02-van.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/LimoVan/02-van.jpg",
+      "newPath": "src/assets/images/fleet/sprinter/interior-front.jpg",
+      "filename": "02-van.jpg",
       "format": "jpeg",
-      "bytes": 194521,
       "width": 1002,
       "height": 665,
-      "usedIn": [
+      "sizeBytes": 194521,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-08",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/LimoVan/03-interior.webp",
-      "area": "source",
+      "currentPath": "src/assets/fleet/LimoVan/03-interior.webp",
+      "newPath": "src/assets/images/fleet/sprinter/interior-rear.webp",
+      "filename": "03-interior.webp",
       "format": "webp",
-      "bytes": 55896,
       "width": 800,
       "height": 531,
-      "usedIn": [
+      "sizeBytes": 55896,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-07",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/PartyBus/24-passenger-white-party-bus-01a.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/PartyBus/24-passenger-white-party-bus-01a.jpg",
+      "newPath": "src/assets/images/fleet/party-bus/exterior.jpg",
+      "filename": "24-passenger-white-party-bus-01a.jpg",
       "format": "jpeg",
-      "bytes": 261194,
       "width": 1000,
       "height": 800,
-      "usedIn": [
+      "sizeBytes": 261194,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-02",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/Trolley/01-classic-exterior.png",
-      "area": "source",
+      "currentPath": "src/assets/fleet/Trolley/01-classic-exterior.png",
+      "newPath": "src/assets/images/fleet/trolley/classic-exterior.png",
+      "filename": "01-classic-exterior.png",
       "format": "png",
-      "bytes": 112238,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 112238,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-13",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/Trolley/02-front-three-quarter.png",
-      "area": "source",
+      "currentPath": "src/assets/fleet/Trolley/02-front-three-quarter.png",
+      "newPath": "src/assets/images/fleet/trolley/front-three-quarter.png",
+      "filename": "02-front-three-quarter.png",
       "format": "png",
-      "bytes": 107550,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 107550,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-10",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/Trolley/03-interior.webp",
-      "area": "source",
+      "currentPath": "src/assets/fleet/Trolley/03-interior.webp",
+      "newPath": "public/images/guides/trolley-interior.webp",
+      "filename": "03-interior.webp",
       "format": "webp",
-      "bytes": 41476,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 41476,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-09",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "public-url",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "public-required",
+      "notes": "Single canonical copy retained at a stable public URL because raw HTML figures inside Markdown cannot consume imported image metadata."
     },
     {
-      "path": "src/assets/fleet/Trolley/04-summer.png",
-      "area": "source",
+      "currentPath": "src/assets/fleet/Trolley/04-summer.png",
+      "newPath": "src/assets/images/fleet/trolley/summer-exterior.png",
+      "filename": "04-summer.png",
       "format": "png",
-      "bytes": 130515,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 130515,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-14",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/Trolley/05-boarding.png",
-      "area": "source",
+      "currentPath": "src/assets/fleet/Trolley/05-boarding.png",
+      "newPath": "src/assets/images/fleet/trolley/boarding-exterior.png",
+      "filename": "05-boarding.png",
       "format": "png",
-      "bytes": 104043,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 104043,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-15",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/Trolley/06-afternoon.png",
-      "area": "source",
+      "currentPath": "src/assets/fleet/Trolley/06-afternoon.png",
+      "newPath": "src/assets/images/fleet/trolley/afternoon-exterior.png",
+      "filename": "06-afternoon.png",
       "format": "png",
-      "bytes": 113960,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 113960,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-16",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "src/assets/fleet/Trolley/07-clear-sky.jpg",
-      "area": "source",
+      "currentPath": "src/assets/fleet/Trolley/07-clear-sky.jpg",
+      "newPath": "src/assets/images/fleet/trolley/winter-exterior.jpg",
+      "filename": "07-clear-sky.jpg",
       "format": "jpeg",
-      "bytes": 49963,
       "width": 555,
       "height": 327,
-      "usedIn": [
+      "sizeBytes": 49963,
+      "usedBy": [
         "src/pages/fleet/[slug].astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "duplicateGroup": "dup-17",
-      "flags": [
-        "duplicate"
-      ]
+      "usageType": "import",
+      "category": "fleet",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "uploads/2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg",
-      "area": "root-upload",
+      "currentPath": "uploads/2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg",
+      "newPath": "src/assets/images/fleet/coach/interior.jpg",
+      "filename": "2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg",
       "format": "jpeg",
-      "bytes": 463159,
       "width": 1000,
       "height": 648,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-01",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 463159,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/coach/interior.jpg",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/coach/interior.jpg."
     },
     {
-      "path": "uploads/3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg",
-      "area": "root-upload",
+      "currentPath": "uploads/3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg",
+      "newPath": "src/assets/images/fleet/coach/exterior-rear-dusk.jpg",
+      "filename": "3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg",
       "format": "jpeg",
-      "bytes": 410400,
       "width": 1100,
       "height": 733,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-03",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 410400,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/coach/exterior-rear-dusk.jpg",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/coach/exterior-rear-dusk.jpg."
     },
     {
-      "path": "uploads/5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg",
-      "area": "root-upload",
+      "currentPath": "uploads/5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg",
+      "newPath": "public/images/guides/coach-exterior-side-dusk.jpg",
+      "filename": "5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg",
       "format": "jpeg",
-      "bytes": 358480,
       "width": 1100,
       "height": 733,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-04",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 358480,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "public/images/guides/coach-exterior-side-dusk.jpg",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched public/images/guides/coach-exterior-side-dusk.jpg."
     },
     {
-      "path": "uploads/heroImg.png",
-      "area": "root-upload",
+      "currentPath": "uploads/WBENC-Certified-Women-Business-.png",
+      "newPath": "src/assets/images/branding/certifications/women-owned-wordmark.png",
+      "filename": "WBENC-Certified-Women-Business-.png",
       "format": "png",
-      "bytes": 2285651,
-      "width": 1536,
-      "height": 1024,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-05",
-      "flags": [
-        "unreferenced-source",
-        "over-1MB",
-        "duplicate"
-      ]
-    },
-    {
-      "path": "uploads/heroImg1.png",
-      "area": "root-upload",
-      "format": "png",
-      "bytes": 2238727,
-      "width": 1829,
-      "height": 860,
-      "referenced": false,
-      "emitted": false,
-      "flags": [
-        "unreferenced-source",
-        "over-1MB"
-      ]
-    },
-    {
-      "path": "uploads/heroImg2.png",
-      "area": "root-upload",
-      "format": "png",
-      "bytes": 2243742,
-      "width": 1774,
-      "height": 887,
-      "referenced": false,
-      "emitted": false,
-      "flags": [
-        "unreferenced-source",
-        "over-1MB"
-      ]
-    },
-    {
-      "path": "uploads/heroMobileView.png",
-      "area": "root-upload",
-      "format": "png",
-      "bytes": 1851254,
-      "width": 941,
-      "height": 1162,
-      "referenced": false,
-      "emitted": false,
-      "flags": [
-        "unreferenced-source",
-        "over-1MB"
-      ]
-    },
-    {
-      "path": "uploads/heroMobileView1.png",
-      "area": "root-upload",
-      "format": "png",
-      "bytes": 2013935,
-      "width": 941,
-      "height": 1672,
-      "referenced": false,
-      "emitted": false,
-      "flags": [
-        "unreferenced-source",
-        "over-1MB"
-      ]
-    },
-    {
-      "path": "uploads/heroMobileView2.png",
-      "area": "root-upload",
-      "format": "png",
-      "bytes": 2124795,
-      "width": 941,
-      "height": 1455,
-      "usedIn": [
+      "width": 546,
+      "height": 351,
+      "sizeBytes": 22143,
+      "usedBy": [
         "src/pages/index.astro"
       ],
-      "referenced": true,
-      "emitted": true,
-      "flags": [
-        "over-1MB"
-      ]
+      "usageType": "import",
+      "category": "branding",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
     },
     {
-      "path": "uploads/new-sprinter-limo-page.jpg",
-      "area": "root-upload",
+      "currentPath": "uploads/WBENC-woman-owned-chicago-private-transportation-service-company-500w.webp",
+      "newPath": "src/assets/images/branding/certifications/wbenc-certificate.webp",
+      "filename": "WBENC-woman-owned-chicago-private-transportation-service-company-500w.webp",
+      "format": "webp",
+      "width": 500,
+      "height": 365,
+      "sizeBytes": 18484,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "branding",
+      "duplicateOf": "src/assets/images/branding/certifications/wbenc-certificate.webp",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/branding/certifications/wbenc-certificate.webp."
+    },
+    {
+      "currentPath": "uploads/heroImg2.png",
+      "newPath": "src/assets/images/home/hero/hero-desktop.png",
+      "filename": "heroImg2.png",
+      "format": "png",
+      "width": 1774,
+      "height": 887,
+      "sizeBytes": 2243742,
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "usageType": "css-background",
+      "category": "home",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+    },
+    {
+      "currentPath": "uploads/heroMobileView2.png",
+      "newPath": "src/assets/images/home/hero/hero-mobile.png",
+      "filename": "heroMobileView2.png",
+      "format": "png",
+      "width": 941,
+      "height": 1455,
+      "sizeBytes": 2124795,
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "usageType": "css-background",
+      "category": "home",
+      "duplicateOf": null,
+      "status": "rename",
+      "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+    },
+    {
+      "currentPath": "uploads/new-sprinter-limo-page.jpg",
+      "newPath": "src/assets/images/fleet/sprinter/exterior.jpg",
+      "filename": "new-sprinter-limo-page.jpg",
       "format": "jpeg",
-      "bytes": 1017719,
       "width": 1200,
       "height": 800,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-06",
-      "flags": [
-        "unreferenced-source",
-        "over-1MB",
-        "duplicate"
-      ]
+      "sizeBytes": 1017719,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/sprinter/exterior.jpg",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/sprinter/exterior.jpg."
     },
     {
-      "path": "uploads/sprinter-limo-interior-1920w.webp",
-      "area": "root-upload",
+      "currentPath": "uploads/sprinter-limo-interior-1920w.webp",
+      "newPath": "src/assets/images/fleet/sprinter/interior-rear.webp",
+      "filename": "sprinter-limo-interior-1920w.webp",
       "format": "webp",
-      "bytes": 55896,
       "width": 800,
       "height": 531,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-07",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 55896,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/sprinter/interior-rear.webp",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/sprinter/interior-rear.webp."
     },
     {
-      "path": "uploads/sprinter-shuttle-van2.jpg",
-      "area": "root-upload",
+      "currentPath": "uploads/sprinter-shuttle-van2.jpg",
+      "newPath": "src/assets/images/fleet/sprinter/interior-front.jpg",
+      "filename": "sprinter-shuttle-van2.jpg",
       "format": "jpeg",
-      "bytes": 194521,
       "width": 1002,
       "height": 665,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-08",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 194521,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/sprinter/interior-front.jpg",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/sprinter/interior-front.jpg."
     },
     {
-      "path": "uploads/trolley-interior.webp",
-      "area": "root-upload",
+      "currentPath": "uploads/trolley-interior.webp",
+      "newPath": "public/images/guides/trolley-interior.webp",
+      "filename": "trolley-interior.webp",
       "format": "webp",
-      "bytes": 41476,
       "width": 555,
       "height": 327,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-09",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 41476,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "public/images/guides/trolley-interior.webp",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched public/images/guides/trolley-interior.webp."
     },
     {
-      "path": "uploads/trolleyBliss.png",
-      "area": "root-upload",
+      "currentPath": "uploads/trolleyBliss.png",
+      "newPath": "src/assets/images/fleet/trolley/front-three-quarter.png",
+      "filename": "trolleyBliss.png",
       "format": "png",
-      "bytes": 107550,
       "width": 555,
       "height": 327,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-10",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 107550,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/trolley/front-three-quarter.png",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/front-three-quarter.png."
     },
     {
-      "path": "uploads/trolleyBliss.webp",
-      "area": "root-upload",
+      "currentPath": "uploads/trolleyBliss.webp",
+      "newPath": "src/assets/images/fleet/trolley/front-three-quarter.webp",
+      "filename": "trolleyBliss.webp",
       "format": "webp",
-      "bytes": 62658,
       "width": 555,
       "height": 327,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-11",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 62658,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/trolley/front-three-quarter.webp",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/front-three-quarter.webp."
     },
     {
-      "path": "uploads/trolleyChristmas.png",
-      "area": "root-upload",
+      "currentPath": "uploads/trolleyChristmas.png",
+      "newPath": "public/images/guides/trolley-christmas-lights.png",
+      "filename": "trolleyChristmas.png",
       "format": "png",
-      "bytes": 90137,
       "width": 555,
       "height": 327,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-12",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 90137,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "christmas",
+      "duplicateOf": "public/images/guides/trolley-christmas-lights.png",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched public/images/guides/trolley-christmas-lights.png."
     },
     {
-      "path": "uploads/trolleyClassic.png",
-      "area": "root-upload",
+      "currentPath": "uploads/trolleyClassic.png",
+      "newPath": "src/assets/images/fleet/trolley/classic-exterior.png",
+      "filename": "trolleyClassic.png",
       "format": "png",
-      "bytes": 112238,
       "width": 555,
       "height": 327,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-13",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 112238,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/trolley/classic-exterior.png",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/classic-exterior.png."
     },
     {
-      "path": "uploads/trolleyFestive.png",
-      "area": "root-upload",
+      "currentPath": "uploads/trolleyFestive.png",
+      "newPath": "src/assets/images/fleet/trolley/summer-exterior.png",
+      "filename": "trolleyFestive.png",
       "format": "png",
-      "bytes": 130515,
       "width": 555,
       "height": 327,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-14",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 130515,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/trolley/summer-exterior.png",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/summer-exterior.png."
     },
     {
-      "path": "uploads/trolleyFusion.png",
-      "area": "root-upload",
+      "currentPath": "uploads/trolleyFusion.png",
+      "newPath": "src/assets/images/fleet/trolley/boarding-exterior.png",
+      "filename": "trolleyFusion.png",
       "format": "png",
-      "bytes": 104043,
       "width": 555,
       "height": 327,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-15",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 104043,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/trolley/boarding-exterior.png",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/boarding-exterior.png."
     },
     {
-      "path": "uploads/trolleyMidnight.png",
-      "area": "root-upload",
+      "currentPath": "uploads/trolleyMidnight.png",
+      "newPath": "src/assets/images/fleet/trolley/afternoon-exterior.png",
+      "filename": "trolleyMidnight.png",
       "format": "png",
-      "bytes": 113960,
       "width": 555,
       "height": 327,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-16",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 113960,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/trolley/afternoon-exterior.png",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/afternoon-exterior.png."
     },
     {
-      "path": "uploads/trolleyUltimate.jpg",
-      "area": "root-upload",
+      "currentPath": "uploads/trolleyUltimate.jpg",
+      "newPath": "src/assets/images/fleet/trolley/winter-exterior.jpg",
+      "filename": "trolleyUltimate.jpg",
       "format": "jpeg",
-      "bytes": 49963,
       "width": 555,
       "height": 327,
-      "referenced": false,
-      "emitted": false,
-      "duplicateGroup": "dup-17",
-      "flags": [
-        "unreferenced-source",
-        "duplicate"
-      ]
+      "sizeBytes": 49963,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "fleet",
+      "duplicateOf": "src/assets/images/fleet/trolley/winter-exterior.jpg",
+      "status": "duplicate",
+      "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/winter-exterior.jpg."
     },
     {
-      "path": "uploads/wbenc-logo.svg",
-      "area": "root-upload",
+      "currentPath": "uploads/wbenc-logo.svg",
+      "newPath": "src/assets/images/branding/certifications/wbenc-logo.svg",
+      "filename": "wbenc-logo.svg",
       "format": "svg",
-      "bytes": 5599,
       "width": 142,
       "height": 30,
-      "referenced": false,
-      "emitted": false,
-      "flags": [
-        "unreferenced-source"
-      ]
+      "sizeBytes": 5599,
+      "usedBy": [],
+      "usageType": "unused",
+      "category": "branding",
+      "duplicateOf": "src/assets/images/branding/certifications/wbenc-logo.svg",
+      "status": "duplicate",
+      "notes": "Removed after a text diff confirmed identical SVG content; only the trailing newline differed."
     }
   ]
 }

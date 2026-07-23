@@ -1,3 +1,6 @@
+import { fleetImages } from './fleet';
+import type { SiteImage } from '../utils/images';
+
 /* ============================================================
    Central content for the ChiTown Trolley site.
    All copy/data lifted from the original DivMagic component so
@@ -162,22 +165,6 @@ export const navMore: NavItem[] = [
 /** Full flat list — used by the footer. */
 export const navAll: NavItem[] = [...navMain, ...navMore];
 
-/* ----------  Home  ---------- */
-export const heroImages = [
-  'uploads/trolleyBliss.webp',
-  'uploads/trolleyClassic.png',
-  'uploads/trolleyFestive.png',
-  'uploads/trolleyMidnight.png',
-];
-
-
-export const fleetPreview = [
-  { name: 'Classic White Trolley', cap: '30–36 Passengers', img: 'uploads/trolleyClassic.png', slug: 'classic-white-trolley' },
-  { name: 'Super Coach Bus', cap: 'Up to 57 guests', img: 'uploads/3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg', slug: 'super-coach-bus' },
-  { name: 'Party Bus', cap: 'Up to 40 Passengers', img: 'uploads/24-passenger-white-party-bus-01a.jpg', slug: 'party-bus' },
-  { name: 'Limo Vans', cap: 'Up to 14 passengers', img: 'uploads/new-sprinter-limo-page.jpg', slug: 'limo-vans' },
-];
-
 export const testimonials = [
   { quote: 'The trolley was the part of the day our guests wouldn’t stop talking about. Our chauffeur felt like family by the last stop.', name: 'Maria & James · Naperville' },
   { quote: 'Spotless, on time, and the balcony photos between the ceremony and reception are our favorites from the whole album.', name: 'Priya & Daniel · Evanston' },
@@ -228,109 +215,16 @@ export const weddingTiles = [
   { big: 'Chicagoland', small: 'Full service area' },
 ];
 
-/* ----------  Fleet  ---------- */
-export interface FleetVehicle {
-  name: string;
-  slug: string;
-  /** Sub-folder under src/assets/fleet/ holding this vehicle's gallery images. */
-  folder: string;
-  cap: string;
-  img: string;
-  /** Exact "Choose Vehicle" option string, for pre-selecting the quote form. */
-  quoteValue: string;
-  /** YouTube video ID — placeholder until real footage is supplied. */
-  video: string;
-  intro: string;
-  stats: { label: string; value: string }[];
-  perfectFor: string[];
-  feats: string[];
-}
-
-export const fleet: FleetVehicle[] = [
-  {
-    name: 'Classic White Trolley',
-    slug: 'classic-white-trolley',
-    folder: 'Trolley',
-    cap: '30–36 passengers',
-    img: 'uploads/trolleyClassic.png',
-    quoteValue: 'Classic White Trolley · 30–36',
-    // TODO: replace with the real YouTube video ID for the Classic White Trolley
-    video: 'YE7VzlLtp-4',
-    intro: 'There is something about an open-air trolley that turns a simple drive into an occasion. Polished rails, a rear balcony made for the photos everyone remembers, and circular seating so the whole party rides facing one another. From the first stop to the last, the Classic White Trolley sets a timeless, old-world tone for the day.',
-    stats: [
-      { label: 'Capacity', value: '30–36' },
-      { label: 'Ideal group', value: '20–34' },
-      { label: 'Minimum', value: '3 hours' },
-    ],
-    perfectFor: ['Wedding ceremonies', 'Bridal party transport', 'Vineyard & brewery tours', 'Engagement photos', 'Holiday light tours'],
-    feats: ['Rear balcony platform', 'Circular perimeter seating', 'Bluetooth sound system', 'Heat & air conditioning', 'Professional chauffeur included'],
-  },
-  {
-    name: 'Super Coach Bus',
-    slug: 'super-coach-bus',
-    folder: 'CoachBus',
-    cap: 'Up to 57 passengers',
-    img: 'uploads/3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg',
-    quoteValue: 'Super Coach Bus · 57',
-    // TODO: replace with the real YouTube video ID for the Super Coach Bus
-    video: 'YE7VzlLtp-4',
-    intro: 'When the guest list outgrows the trolley, the Super Coach Bus keeps everyone together in quilted-leather comfort. Climate-controlled, whisper-smooth, and built for the long haul, it is the effortless way to shuttle guests between hotel and venue — or carry the whole group across state lines without a second vehicle in the convoy.',
-    stats: [
-      { label: 'Capacity', value: 'Up to 57' },
-      { label: 'Ideal group', value: '35–57' },
-      { label: 'Luggage', value: 'Ample' },
-    ],
-    perfectFor: ['Guest shuttles', 'Corporate events', 'Airport transfers', 'Out-of-state trips', 'Sporting events & concerts'],
-    feats: ['Quilted leather seats with armrests', 'Generous luggage storage', 'Heat & air conditioning', 'Ideal for wedding guest shuttles & out-of-state trips', 'Professional chauffeur included'],
-  },
-  {
-    name: 'Party Bus',
-    slug: 'party-bus',
-    folder: 'PartyBus',
-    cap: 'Up to 40 passengers',
-    img: 'uploads/24-passenger-white-party-bus-01a.jpg',
-    quoteValue: 'Party Bus · 40',
-    // TODO: replace with the real YouTube video ID for the Party Bus
-    video: 'YE7VzlLtp-4',
-    intro: 'When the celebration is the whole point, the Party Bus brings the venue along with you. Step aboard to wraparound lounge seating, color-shifting lights, and a sound system built to move — so the night begins the moment the doors close, not when you arrive. It is the rolling centerpiece for every milestone worth remembering.',
-    stats: [
-      { label: 'Capacity', value: 'Up to 40' },
-      { label: 'Ideal group', value: '20–40' },
-      { label: 'Vibe', value: 'Nightlife' },
-    ],
-    perfectFor: ['Bachelor & bachelorette parties', 'Birthdays', 'Night out', 'Concerts & games', 'Prom & homecoming'],
-    feats: ['Wraparound lounge seating', 'Color LED party lighting', 'Premium sound system', 'Open dance-floor space', 'Heat & air conditioning', 'Professional chauffeur included'],
-  },
-  {
-    name: 'Limo Vans',
-    slug: 'limo-vans',
-    folder: 'LimoVan',
-    cap: 'Up to 14 passengers',
-    img: 'uploads/new-sprinter-limo-page.jpg',
-    quoteValue: 'Limo Van · 14',
-    // TODO: replace with the real YouTube video ID for the Limo Vans
-    video: 'YE7VzlLtp-4',
-    intro: 'For smaller parties and executive runs, the Limo Van is the versatile favorite — intimate, understated, and ready for anything from an airport pickup to a night on the town. Executive leather seating and ambient lighting make even the shortest trips feel like part of the celebration.',
-    stats: [
-      { label: 'Capacity', value: 'Up to 14' },
-      { label: 'Ideal group', value: '6–12' },
-      { label: 'Style', value: 'Executive' },
-    ],
-    perfectFor: ['Small parties', 'Airport transfers', 'Date night', 'Corporate travel', 'Wine tours'],
-    feats: ['Executive leather seating', 'Ambient LED lighting', 'Bluetooth sound system', 'Heat & air conditioning', 'Ideal for smaller parties & airport transfers', 'Professional chauffeur included'],
-  },
-];
-
 /* ----------  Services  ---------- */
 export const services = [
-  { eyebrow: 'Business', title: 'Corporate Events', img: 'uploads/trolleyMidnight.png', body: 'Shuttle a team between venues, welcome clients in from out of town, or give the holiday party a proper beginning. Punctual, polished, and quietly memorable.' },
-  { eyebrow: 'School Nights', title: 'Proms & Homecomings', img: 'uploads/trolleyFestive.png', body: 'A safe, chaperone-friendly ride the whole group shares — with a professional chauffeur and room for everyone’s photos before the dance.' },
-  { eyebrow: 'Celebrations', title: 'Quinceañeras', img: 'uploads/trolleyBliss.webp', body: 'From the church to the reception with the court all together. The white trolley photographs beautifully beside every gown.' },
-  { eyebrow: 'The Last Fling', title: 'Bachelor & Bachelorette Parties', img: 'uploads/trolley-interior.webp', body: 'One cabin, one playlist, zero rideshare logistics. Hop between stops while the party never pauses — BYOB welcome for guests 21 and over.' },
-  { eyebrow: 'Game Day', title: 'Sporting Events & Concerts', img: 'uploads/trolleyUltimate.jpg', body: 'Skip the parking scramble. Tailgate on the way, arrive at the gate together, and find your ride waiting when the encore ends.' },
-  { eyebrow: 'Travel', title: 'Airport Transportation', img: 'uploads/trolleyFusion.png', body: 'For wedding weekends and group trips: one comfortable pickup for the whole party, with room for every suitcase.' },
-  { eyebrow: 'Group Travel', title: 'Coach Bus Charters', img: 'uploads/5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg', body: 'When the guest list outgrows the trolley: modern coaches seating up to 57, with quilted leather seats, armrests, and generous under-floor luggage storage. Ideal for wedding guest shuttles, out-of-state trips, and business charters.' },
-  { eyebrow: 'After Dark', title: 'Night Out & General Charter', img: 'uploads/trolleyChristmas.png', body: 'Birthdays, anniversaries, holiday light tours, or no occasion at all. Charter the trolley and let the city roll past the windows.' },
+  { eyebrow: 'Business', title: 'Corporate Events', image: fleetImages.trolley.afternoonExterior, body: 'Shuttle a team between venues, welcome clients in from out of town, or give the holiday party a proper beginning. Punctual, polished, and quietly memorable.' },
+  { eyebrow: 'School Nights', title: 'Proms & Homecomings', image: fleetImages.trolley.summerExterior, body: 'A safe, chaperone-friendly ride the whole group shares — with a professional chauffeur and room for everyone’s photos before the dance.' },
+  { eyebrow: 'Celebrations', title: 'Quinceañeras', image: fleetImages.trolley.frontThreeQuarterWebp, body: 'From the church to the reception with the court all together. The white trolley photographs beautifully beside every gown.' },
+  { eyebrow: 'The Last Fling', title: 'Bachelor & Bachelorette Parties', image: fleetImages.trolley.interior, body: 'One cabin, one playlist, zero rideshare logistics. Hop between stops while the party never pauses — BYOB welcome for guests 21 and over.' },
+  { eyebrow: 'Game Day', title: 'Sporting Events & Concerts', image: fleetImages.trolley.winterExterior, body: 'Skip the parking scramble. Tailgate on the way, arrive at the gate together, and find your ride waiting when the encore ends.' },
+  { eyebrow: 'Travel', title: 'Airport Transportation', image: fleetImages.trolley.boardingExterior, body: 'For wedding weekends and group trips: one comfortable pickup for the whole party, with room for every suitcase.' },
+  { eyebrow: 'Group Travel', title: 'Coach Bus Charters', image: fleetImages.coach.exteriorSideDusk, body: 'When the guest list outgrows the trolley: modern coaches seating up to 57, with quilted leather seats, armrests, and generous under-floor luggage storage. Ideal for wedding guest shuttles, out-of-state trips, and business charters.' },
+  { eyebrow: 'After Dark', title: 'Night Out & General Charter', image: fleetImages.trolley.christmasLights, body: 'Birthdays, anniversaries, holiday light tours, or no occasion at all. Charter the trolley and let the city roll past the windows.' },
 ];
 
 /* ----------  About  ---------- */
@@ -342,18 +236,18 @@ export const aboutTiles = [
 
 /* ----------  Gallery  ---------- */
 export const gallery = [
-  { src: 'uploads/trolleyClassic.png', alt: 'Classic white trolley in warm winter light' },
-  { src: 'uploads/trolley-interior.webp', alt: 'Interior with rose garlands and quilted leather seating' },
-  { src: 'uploads/trolleyBliss.webp', alt: 'White trolley, front three-quarter view' },
-  { src: 'uploads/trolleyFusion.png', alt: 'Grand trolley with boarding door open' },
-  { src: 'uploads/trolleyChristmas.png', alt: 'Trolley at dusk with string lights' },
-  { src: 'uploads/trolleyFestive.png', alt: 'Trolley among summer trees' },
-  { src: 'uploads/trolleyMidnight.png', alt: 'Trolley on a sunny afternoon' },
-  { src: 'uploads/trolleyUltimate.jpg', alt: 'Trolley under a clear winter sky' },
-  { src: 'uploads/5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg', alt: 'Coach buses at dusk' },
-  { src: 'uploads/2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg', alt: 'Coach interior with quilted leather seating for 57' },
-  { src: 'uploads/3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg', alt: 'White coach bus, rear view at dusk' },
-];
+  { image: fleetImages.trolley.classicExterior, alt: 'Classic white trolley in warm winter light' },
+  { image: fleetImages.trolley.interior, alt: 'Interior with rose garlands and quilted leather seating' },
+  { image: fleetImages.trolley.frontThreeQuarterWebp, alt: 'White trolley, front three-quarter view' },
+  { image: fleetImages.trolley.boardingExterior, alt: 'Grand trolley with boarding door open' },
+  { image: fleetImages.trolley.christmasLights, alt: 'Trolley at dusk with string lights' },
+  { image: fleetImages.trolley.summerExterior, alt: 'Trolley among summer trees' },
+  { image: fleetImages.trolley.afternoonExterior, alt: 'Trolley on a sunny afternoon' },
+  { image: fleetImages.trolley.winterExterior, alt: 'Trolley under a clear winter sky' },
+  { image: fleetImages.coach.exteriorSideDusk, alt: 'Coach buses at dusk' },
+  { image: fleetImages.coach.interior, alt: 'Coach interior with quilted leather seating for 57' },
+  { image: fleetImages.coach.exteriorRearDusk, alt: 'White coach bus, rear view at dusk' },
+] satisfies { image: SiteImage; alt: string }[];
 
 /* ----------  FAQ  ---------- */
 export const faqs = [

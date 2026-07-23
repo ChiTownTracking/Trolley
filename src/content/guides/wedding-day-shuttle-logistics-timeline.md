@@ -2,7 +2,7 @@
 title: "Wedding Day Shuttle Logistics: A Timeline Guide for Guest Transportation"
 excerpt: "How to build a transportation timeline that actually holds up on the day — hotel pickups, ceremony-to-reception shuttles, and return trips guests won't stand around waiting for."
 category: guides
-cover: /uploads/3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg
+cover: ../../assets/images/fleet/coach/exterior-rear-dusk.jpg
 coverAlt: "Super coach bus for wedding guest shuttle transportation, rear view at dusk"
 date: 2026-05-27
 readTime: "7 min read"
@@ -33,7 +33,7 @@ It's tempting to arrange pickups at every hotel your guests are staying in, but 
 If multiple pickups are unavoidable, build in a firm 5-minute window per stop and communicate it clearly — "the shuttle will wait no more than 5 minutes at each hotel" sets an expectation that keeps the whole schedule from sliding.
 
 <figure>
-  <img src="../../uploads/5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg" alt="Coach buses staged at dusk for a wedding guest shuttle pickup" loading="lazy" />
+  <img src="../../images/guides/coach-exterior-side-dusk.jpg" width="1100" height="733" alt="Coach buses staged at dusk for a wedding guest shuttle pickup" loading="lazy" />
   <figcaption>Consolidating pickups to one or two hotel stops keeps the whole shuttle schedule on time.</figcaption>
 </figure>
 

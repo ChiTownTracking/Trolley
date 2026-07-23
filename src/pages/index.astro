@@ -2,17 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import GuideCard from '../components/GuideCard.astro';
+import { getImage, Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import { fleetPreview, testimonials, eventTypes, vehicleOptions, hoursOptions, homeFaqs, getLocalBusinessSchema } from '../data/site';
+import { testimonials, eventTypes, vehicleOptions, hoursOptions, homeFaqs, getLocalBusinessSchema } from '../data/site';
+import { fleet } from '../data/fleet';
+import { siteImages } from '../data/site-images';
 import { withBase } from '../utils/paths';
-import heroMobile from '../../uploads/heroMobileView2.png';
-import wbencLogo from '../../uploads/WBENC-Certified-Women-Business-.png';
 
 const passengerOptions = ['1–10', '11–20', '21–30', '31–40', '41–57'];
 
 // Fleet grid: the first vehicle (Classic White Trolley) is the full-width
 // featured card; the rest fill the 3-up row below it.
-const [fleetFeatured, ...fleetRest] = fleetPreview;
+const [fleetFeatured, ...fleetRest] = fleet;
+const featuredFleetWidths = [384, 512, 555];
+const standardFleetWidths = [384, 512, 768, 900];
+const featuredFleetSizes =
+  '(max-width: 640px) calc(100vw - 20px), (max-width: 768px) calc(68.75vw - 13.75px), (max-width: 1100px) calc(68.75vw - 38.5px), 718px';
+const standardFleetSizes =
+  '(max-width: 640px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 26px), (max-width: 900px) calc(50vw - 44px), (max-width: 1100px) calc(33.333vw - 40px), 327px';
 
 // Guides preview: always the 3 most recently published articles.
 const latestGuides = (await getCollection('guides'))
@@ -20,12 +27,19 @@ const latestGuides = (await getCollection('guides'))
   .slice(0, 3);
 
 const businessSchema = getLocalBusinessSchema(new URL(withBase('/'), Astro.site ?? Astro.url).href);
-const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); --hero-mobile: url('${heroMobile.src}')`;
+const mobileHero = await getImage({
+  src: siteImages.homeHero.mobile,
+  width: 900,
+  format: 'webp',
+  quality: 78,
+});
+const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --hero-mobile: url('${mobileHero.src}')`;
 ---
 <BaseLayout
   title="ChiTown Trolley — Timeless Wedding Trolley Transportation in Chicago"
   description="Arrive the way the day deserves — a classic white wedding trolley for Chicagoland weddings and events. Owner-operated, licensed and insured."
   schema={businessSchema}
+  mobileHeroPreload={mobileHero.src}
 >
   <!-- Hero -->
   <section class="hero" style={heroStyle}>
@@ -50,9 +64,9 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); 
           <span class="hero__logoCrop">
             <img
               class="hero__ownershipLogo"
-              src={wbencLogo.src}
-              width={wbencLogo.width}
-              height={wbencLogo.height}
+              src={siteImages.branding.womenOwnedWordmark.src}
+              width={siteImages.branding.womenOwnedWordmark.width}
+              height={siteImages.branding.womenOwnedWordmark.height}
               alt="WBENC-certified Women Owned business"
             />
           </span>
@@ -79,9 +93,9 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); 
       </button>
       <img
         class="certificateModal__image"
-        src={withBase('/uploads/WBENC-woman-owned-chicago-private-transportation-service-company-500w.webp')}
-        width="500"
-        height="364"
+        src={siteImages.branding.wbencCertificate.src}
+        width={siteImages.branding.wbencCertificate.width}
+        height={siteImages.branding.wbencCertificate.height}
         alt="WBENC National Women's Business Enterprise Certification for Sumadija Trans LLC doing business as ChiTown Limobus"
       />
     </div>
@@ -232,10 +246,21 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); 
         {/* Row 1 — featured full-width trolley */}
         <a href={withBase(`/fleet/${fleetFeatured.slug}`)} class="fleet-card fleet-card--feature">
           <div class="fleet-card__media">
-            <img src={withBase(fleetFeatured.img)} alt={fleetFeatured.name} class="fleetp__img" />
+            <Image
+              src={fleetFeatured.image}
+              width={555}
+              widths={featuredFleetWidths}
+              sizes={featuredFleetSizes}
+              format="webp"
+              quality={78}
+              loading="lazy"
+              decoding="async"
+              alt={fleetFeatured.name}
+              class="fleetp__img"
+            />
           </div>
           <div class="fleetp__body">
-            <p class="fleetp__cap">{fleetFeatured.cap}</p>
+            <p class="fleetp__cap">{fleetFeatured.previewCap}</p>
             <h3 class="fleetp__name">{fleetFeatured.name}</h3>
             <span class="link-gold fleetp__more">View Details →</span>
           </div>
@@ -244,10 +269,21 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); 
         {fleetRest.map((fl) => (
           <a href={withBase(`/fleet/${fl.slug}`)} class="fleet-card">
             <div class="fleet-card__media">
-              <img src={withBase(fl.img)} alt={fl.name} class="fleetp__img" />
+              <Image
+                src={fl.image}
+                width={900}
+                widths={standardFleetWidths}
+                sizes={standardFleetSizes}
+                format="webp"
+                quality={78}
+                loading="lazy"
+                decoding="async"
+                alt={fl.name}
+                class="fleetp__img"
+              />
             </div>
             <div class="fleetp__body">
-              <p class="fleetp__cap">{fl.cap}</p>
+              <p class="fleetp__cap">{fl.previewCap}</p>
               <h3 class="fleetp__name">{fl.name}</h3>
             </div>
           </a>
@@ -327,7 +363,7 @@ const heroStyle = `--hero-desktop: url('${withBase('/uploads/heroImg2.png')}'); 
       <div class="guidesp__grid">
         {latestGuides.map((g) => (
           <GuideCard
-            href={withBase(`/guides/${g.slug}`)}
+            href={withBase(`/guides/${g.id}`)}
             image={g.data.cover}
             imageAlt={g.data.coverAlt}
             category={g.data.category}

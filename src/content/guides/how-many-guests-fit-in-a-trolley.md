@@ -2,7 +2,7 @@
 title: "How Many Guests Fit in a Trolley? A Wedding Transportation Sizing Guide"
 excerpt: "Capacity breakdowns for trolleys, coach buses, and limo vans — plus how to estimate your real guest count needs before you book."
 category: guides
-cover: /uploads/trolleyClassic.png
+cover: ../../assets/images/fleet/trolley/classic-exterior.png
 coverAlt: "Classic white trolley parked outside a Chicago wedding venue"
 date: 2026-06-18
 readTime: "6 min read"
@@ -49,7 +49,7 @@ One of the most common mistakes we see is couples trying to put everyone — wed
 The cleaner approach: book a smaller, photo-worthy vehicle (trolley or limo van) exclusively for the wedding party's schedule — ceremony arrival, post-ceremony photos, reception entrance — and a separate, larger vehicle for the broader guest shuttle running on its own loop. It costs more than one shared vehicle, but it removes the single biggest source of wedding-day transportation stress: waiting.
 
 <figure>
-  <img src="../../uploads/trolley-interior.webp" alt="Trolley interior with rose garlands and quilted leather perimeter seating" loading="lazy" />
+  <img src="../../images/guides/trolley-interior.webp" width="555" height="327" alt="Trolley interior with rose garlands and quilted leather perimeter seating" loading="lazy" />
   <figcaption>Circular perimeter seating keeps the wedding party together and facing each other for the whole ride.</figcaption>
 </figure>
 

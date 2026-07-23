@@ -1,22 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Eyebrow from '../../components/Eyebrow.astro';
-import { fleet } from '../../data/site';
+import { fleet } from '../../data/fleet';
+import { imageSrc } from '../../utils/images';
 import { withBase } from '../../utils/paths';
-
-// Eagerly resolve every fleet gallery image to its built URL. Dropping a new
-// image into src/assets/fleet/<Folder>/ automatically adds it to that carousel.
-const galleryImages = import.meta.glob('/src/assets/fleet/**/*.{png,jpg,jpeg,webp}', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-}) as Record<string, string>;
-
-const imagesForFolder = (folder: string): string[] =>
-  Object.entries(galleryImages)
-    .filter(([path]) => path.includes(`/fleet/${folder}/`))
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([, url]) => url);
 
 export function getStaticPaths() {
   return fleet.map((vehicle) => ({
@@ -26,13 +13,14 @@ export function getStaticPaths() {
 }
 
 const { vehicle } = Astro.props;
-const images = imagesForFolder(vehicle.folder);
+const images = vehicle.gallery;
 const hasGallery = images.length > 1;
 ---
 <BaseLayout
   title={`${vehicle.name} — ChiTown Trolley`}
   description={vehicle.intro.slice(0, 155)}
   hideCta={true}
+  preloadSerifItalic={false}
 >
   <article class="vd wrap wrap-1000">
     <a href={withBase('/fleet')} class="vd__back">← Back to Fleet</a>
@@ -45,9 +33,11 @@ const hasGallery = images.length > 1;
     <!-- Image gallery / carousel -->
     <div class="gal" data-gallery tabindex="0" aria-label={`${vehicle.name} photo gallery`}>
       <div class="gal__main">
-        {images.map((src, i) => (
+        {images.map((image, i) => (
           <img
-            src={src}
+            src={imageSrc(image)}
+            width={image.width}
+            height={image.height}
             alt={`${vehicle.name} — photo ${i + 1}`}
             class:list={['gal__img', { 'is-active': i === 0 }]}
             data-gal-slide
@@ -68,9 +58,9 @@ const hasGallery = images.length > 1;
       </div>
       {hasGallery && (
         <div class="gal__thumbs" data-gal-thumbs>
-          {images.map((src, i) => (
+          {images.map((image, i) => (
             <button type="button" class:list={['gal__thumb', { 'is-active': i === 0 }]} data-gal-thumb={i} aria-label={`Show image ${i + 1}`}>
-              <img src={src} alt="" loading="lazy" decoding="async" />
+              <img src={imageSrc(image)} width={image.width} height={image.height} alt="" loading="lazy" decoding="async" />
             </button>
           ))}
         </div>

@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import { steps, weddingTiles } from '../data/site';
+import { fleetImages } from '../data/fleet';
+import { imageSrc } from '../utils/images';
 import { withBase } from '../utils/paths';
 ---
 <BaseLayout
@@ -10,7 +12,13 @@ import { withBase } from '../utils/paths';
 >
   <!-- Hero -->
   <section class="whero">
-    <img src={withBase('/uploads/trolleyClassic.png')} alt="Classic white trolley in warm winter light" class="whero__img" />
+    <img
+      src={fleetImages.trolley.classicExterior.src}
+      width={fleetImages.trolley.classicExterior.width}
+      height={fleetImages.trolley.classicExterior.height}
+      alt="Classic white trolley in warm winter light"
+      class="whero__img"
+    />
     <div class="whero__scrim"></div>
     <div class="whero__content">
       <Eyebrow label="Weddings" size="md" mb={18} />
@@ -29,7 +37,13 @@ import { withBase } from '../utils/paths';
       <p class="split__p">We dress the cabin to suit your day, keep it warm in January and cool in July, and your chauffeur handles every turn while the champagne stays upright.</p>
       <a href={withBase('/contact')} class="link-gold">Check your date →</a>
     </div>
-    <img src={withBase('/uploads/trolley-interior.webp')} alt="Trolley interior with rose garlands and quilted leather seating" class="split__img" />
+    <img
+      src={imageSrc(fleetImages.trolley.interior)}
+      width={fleetImages.trolley.interior.width}
+      height={fleetImages.trolley.interior.height}
+      alt="Trolley interior with rose garlands and quilted leather seating"
+      class="split__img"
+    />
   </section>
 
   <!-- How it works -->
@@ -52,7 +66,13 @@ import { withBase } from '../utils/paths';
   <!-- The wedding package -->
   <section class="rv band">
     <div class="wrap split split--flip">
-      <img src={withBase('/uploads/2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg')} alt="Coach interior with quilted leather seating for 57" class="split__img" />
+      <img
+        src={imageSrc(fleetImages.coach.interior)}
+        width={fleetImages.coach.interior.width}
+        height={fleetImages.coach.interior.height}
+        alt="Coach interior with quilted leather seating for 57"
+        class="split__img"
+      />
       <div>
         <Eyebrow label="The Wedding Package" align="left" single mb={16} />
         <h2 class="split__title">Trolley for the party, coach for the guests</h2>

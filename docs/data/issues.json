@@ -68,8 +68,8 @@
     {
       "id": "P0-003",
       "priority": "P0",
-      "status": "deferred",
-      "statusNote": "Explicitly deferred to the dedicated image-performance phase; Phase 1 did not change the hero path, import, or asset.",
+      "status": "resolved",
+      "statusNote": "The approved desktop and mobile hero files are now explicit imports from src/assets/images/home/hero. The production build emits both hashed assets and the previous missing /uploads/heroImg2.png reference is gone.",
       "category": "assets",
       "title": "Desktop homepage hero references an asset absent from the production build",
       "evidence": [
@@ -155,8 +155,8 @@
     {
       "id": "P1-002",
       "priority": "P1",
-      "status": "deferred",
-      "statusNote": "Deferred to the dedicated image-performance phase; no image glob or image asset behavior changed.",
+      "status": "resolved",
+      "statusNote": "The repository-wide eager fleet glob and the Christmas gallery glob were removed. Typed explicit image arrays now preserve each gallery order, and the unrendered multi-megabyte decorative sources are outside the build graph.",
       "category": "performance",
       "title": "Broad eager fleet image glob emits unrelated multi-megabyte decor assets",
       "evidence": [
@@ -415,7 +415,7 @@
       "id": "P1-011",
       "priority": "P1",
       "status": "deferred",
-      "statusNote": "Deferred to the dedicated image-performance phase; no image markup, dimensions, loading, or responsive behavior changed.",
+      "statusNote": "This image-architecture phase added intrinsic source dimensions to migrated image markup and removed public-path duplication. Responsive srcset/sizes and broader Astro Image/Picture optimization remain deferred to a separately approved performance phase.",
       "category": "images",
       "title": "Most rendered images lack intrinsic dimensions and responsive delivery",
       "evidence": [
@@ -471,8 +471,8 @@
     {
       "id": "P2-001",
       "priority": "P2",
-      "status": "deferred",
-      "statusNote": "Deferred to the dedicated image-performance phase; no image file was moved, renamed, deleted, or deduplicated.",
+      "status": "resolved",
+      "statusNote": "All images were inventoried by dimensions and SHA-256. Thirty byte-identical copies and one content-identical SVG copy were removed, canonical sources were organized, and eight uncertain alternates/upstream decor sources were retained as review-required rather than deleted.",
       "category": "assets",
       "title": "Asset storage contains extensive duplicates and unreferenced source candidates",
       "evidence": [
@@ -534,8 +534,8 @@
     {
       "id": "P2-003",
       "priority": "P2",
-      "status": "open",
-      "statusNote": "Font loading was not changed in Phase 1.",
+      "status": "resolved",
+      "statusNote": "Jost and Cormorant Garamond are now served as four verified local WOFF2 faces with font-display: swap and route-aware preloads. Production output contains no Google Fonts stylesheet, preconnect, or runtime domain reference; all emitted font URLs return HTTP 200 under /Trolley/.",
       "category": "performance",
       "title": "Google Fonts adds render-path and privacy dependencies",
       "evidence": [
@@ -747,7 +747,7 @@
       "id": "P3-001",
       "priority": "P3",
       "status": "deferred",
-      "statusNote": "Theme-color was added, but favicon/app-icon work is image-related and deferred to the dedicated image phase.",
+      "statusNote": "The existing photo favicon now uses the canonical imported asset, but a dedicated approved icon set, Apple touch icon, and manifest remain deferred because generating or inventing branding was outside this phase.",
       "category": "metadata",
       "title": "PWA/browser polish metadata is minimal",
       "evidence": [

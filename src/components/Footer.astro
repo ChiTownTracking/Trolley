@@ -1,5 +1,6 @@
 ---
 import { site, navAll, hasPhone, hasInstagram, hasFacebook } from '../data/site';
+import { siteImages } from '../data/site-images';
 import { withBase, withoutBase } from '../utils/paths';
 
 const path = withoutBase(Astro.url.pathname).replace(/\/+$/, '') || '/';
@@ -75,7 +76,7 @@ const copyrightYear = new Date().getFullYear();
       <p>Serving Chicago and the surrounding suburbs.</p>
       <img
         class="ftr__certLogo"
-        src={withBase('/uploads/wbenc-logo.svg')}
+        src={siteImages.branding.wbencLogo.src}
         alt="WBENC — Women's Business Enterprise National Council"
         width="142"
         height="30"

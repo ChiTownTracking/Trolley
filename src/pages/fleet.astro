@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import { fleet } from '../data/site';
+import { fleet } from '../data/fleet';
+import { imageSrc } from '../utils/images';
 import { withBase } from '../utils/paths';
 
 // The first vehicle (Classic White Trolley) is the full-width featured card;
@@ -20,7 +21,13 @@ const [fleetFeatured, ...fleetRest] = fleet;
     {/* Row 1 — featured full-width trolley (landscape) */}
     <a href={withBase(`/fleet/${fleetFeatured.slug}`)} class="rv fcard fcard--feature">
       <div class="fcard__media">
-        <img src={withBase(fleetFeatured.img)} alt={fleetFeatured.name} class="fcard__img" />
+        <img
+          src={imageSrc(fleetFeatured.image)}
+          width={fleetFeatured.image.width}
+          height={fleetFeatured.image.height}
+          alt={fleetFeatured.name}
+          class="fcard__img"
+        />
       </div>
       <div class="fcard__body">
         <h2 class="fcard__name">{fleetFeatured.name}</h2>
@@ -38,7 +45,13 @@ const [fleetFeatured, ...fleetRest] = fleet;
     {fleetRest.map((fv) => (
       <a href={withBase(`/fleet/${fv.slug}`)} class="rv fcard">
         <div class="fcard__media">
-          <img src={withBase(fv.img)} alt={fv.name} class="fcard__img" />
+          <img
+            src={imageSrc(fv.image)}
+            width={fv.image.width}
+            height={fv.image.height}
+            alt={fv.name}
+            class="fcard__img"
+          />
         </div>
         <div class="fcard__body">
           <h2 class="fcard__name">{fv.name}</h2>

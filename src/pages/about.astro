@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { aboutTiles } from '../data/site';
-import { withBase } from '../utils/paths';
+import { fleetImages } from '../data/fleet';
 ---
 <BaseLayout
   title="About — ChiTown Trolley"
@@ -13,7 +13,13 @@ import { withBase } from '../utils/paths';
   </PageHero>
 
   <section class="rv about wrap wrap-1060">
-    <img src={withBase('/uploads/trolleyFestive.png')} alt="ChiTown trolley among summer trees" class="about__img" />
+    <img
+      src={fleetImages.trolley.summerExterior.src}
+      width={fleetImages.trolley.summerExterior.width}
+      height={fleetImages.trolley.summerExterior.height}
+      alt="ChiTown trolley among summer trees"
+      class="about__img"
+    />
     <div>
       <p class="about__lead">We started ChiTown Trolley for one reason: Chicago couples deserved better than an anonymous mega-fleet.</p>
       <p class="about__p">When you book with us, you talk to the people who own the trolleys, wash them by hand, and drive them on your wedding day. No dispatch center, no substitutions, no surprises — the trolley you toured is the trolley that arrives.</p>

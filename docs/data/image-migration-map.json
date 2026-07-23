@@ -1,0 +1,869 @@
+[
+  {
+    "oldPath": "public/images/christmas-trolley/decor/corner-wreath.webp",
+    "newPath": "src/assets/images/christmas/decorative/corner-wreath.webp",
+    "action": "moved",
+    "hashComparison": "sha256:b5b768ee9da9b5a6f915ef5e08daf130204d6cd01a424f4cd2a5b08c0e6511de",
+    "referencesUpdated": [
+      "src/data/christmas-images.ts",
+      "src/pages/christmas-trolley.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "public/images/christmas-trolley/decor/garland-strand.webp",
+    "newPath": "src/assets/images/christmas/decorative/garland-strand.webp",
+    "action": "moved",
+    "hashComparison": "sha256:5659f7dbfcd3c0749a5068271a4184acc15c92661641163615d431dc9efc00b2",
+    "referencesUpdated": [
+      "src/data/christmas-images.ts",
+      "src/pages/christmas-trolley.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "public/images/christmas-trolley/decor/garland-strip-a.webp",
+    "newPath": "src/assets/images/christmas/decorative/garland-strip-alternate.webp",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:490eca010d1c5183a2907191ae1c285c592953a6cac5fb2fdee63ecfab761e87",
+    "referencesUpdated": [],
+    "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
+  },
+  {
+    "oldPath": "public/images/christmas-trolley/decor/garland-strip-b.webp",
+    "newPath": "src/assets/images/christmas/decorative/garland-strip-bottom.webp",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:cd302c8d9fc1ca7156a1cf5b31dfb8624968f8753add60a0934eff84dddf4203",
+    "referencesUpdated": [
+      "src/data/christmas-images.ts",
+      "src/pages/christmas-trolley.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "public/uploads/2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg",
+    "newPath": "src/assets/images/fleet/coach/interior.jpg",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:44477eeafe2106ba5cac507e1a85eb94148e9976f26b9ac1adad85c4d5842a30",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/gallery.astro",
+      "src/pages/weddings.astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/coach/interior.jpg."
+  },
+  {
+    "oldPath": "public/uploads/24-passenger-white-party-bus-01a.jpg",
+    "newPath": "src/assets/images/fleet/party-bus/exterior.jpg",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:e3bcd1e24896fcdf0651e87f797ccb2df4607a106dfce83d48b76466075039d2",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/index.astro",
+      "src/pages/fleet.astro",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/party-bus/exterior.jpg."
+  },
+  {
+    "oldPath": "public/uploads/3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg",
+    "newPath": "src/assets/images/fleet/coach/exterior-rear-dusk.jpg",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:dce93dafef2f1ebac2edc990f713ff0e1e2c6ff3cae4e6395cd5cadfe99fb65a",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/index.astro",
+      "src/pages/fleet.astro",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/gallery.astro",
+      "src/content/guides/wedding-day-shuttle-logistics-timeline.md"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/coach/exterior-rear-dusk.jpg."
+  },
+  {
+    "oldPath": "public/uploads/5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg",
+    "newPath": "public/images/guides/coach-exterior-side-dusk.jpg",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:1f29c76cad38f67c6eee3fe9d7ed2c500cc2f28ee8392456e4a1c9030818e7c2",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/content/guides/wedding-day-shuttle-logistics-timeline.md"
+    ],
+    "notes": "Removed after SHA-256 matched public/images/guides/coach-exterior-side-dusk.jpg."
+  },
+  {
+    "oldPath": "public/uploads/WBENC-woman-owned-chicago-private-transportation-service-company-500w.webp",
+    "newPath": "src/assets/images/branding/certifications/wbenc-certificate.webp",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:70f30c291301fa203ab6c125f2f52bbf1f714bc2b71874148ebc7587c6e555ed",
+    "referencesUpdated": [
+      "src/data/site-images.ts",
+      "src/pages/index.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "public/uploads/heroImg.png",
+    "newPath": "src/assets/images/home/hero/hero-desktop-alternate.png",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:4589ea78241104989e5bba952d1082b366717976a0e91aded9da4c2dc8c411cc",
+    "referencesUpdated": [],
+    "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
+  },
+  {
+    "oldPath": "public/uploads/heroImg.webp",
+    "newPath": "src/assets/images/home/hero/hero-desktop-alternate.webp",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:7c872e3dc0e836b260dc2096889e7498402718b8767ee91b3deda0a9a8803ff2",
+    "referencesUpdated": [],
+    "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
+  },
+  {
+    "oldPath": "public/uploads/heroMobileView.png",
+    "newPath": "src/assets/images/home/hero/hero-mobile-alternate.png",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:8d4fb0d9c6125ab491b4ae4aaa7386c13af0ef03e1b0eea11a894682f034e3b1",
+    "referencesUpdated": [],
+    "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
+  },
+  {
+    "oldPath": "public/uploads/new-sprinter-limo-page.jpg",
+    "newPath": "src/assets/images/fleet/sprinter/exterior.jpg",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:14c9c13302ffabe5b9d1eb15595ad077d8ce1c6384a88ab8c28f22f5d665a370",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/index.astro",
+      "src/pages/fleet.astro",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/sprinter/exterior.jpg."
+  },
+  {
+    "oldPath": "public/uploads/sprinter-limo-interior-1920w.webp",
+    "newPath": "src/assets/images/fleet/sprinter/interior-rear.webp",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:ddf01e62b80c1d409ee2e335ea98bdaee1292b712281827820ab67ec4c86904f",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/sprinter/interior-rear.webp."
+  },
+  {
+    "oldPath": "public/uploads/sprinter-shuttle-van2.jpg",
+    "newPath": "src/assets/images/fleet/sprinter/interior-front.jpg",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:9dec28f8668389c6e4429a3619f6f8e8b4239e6cf120f045d85e4b8d115ce7d8",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/sprinter/interior-front.jpg."
+  },
+  {
+    "oldPath": "public/uploads/trolley-interior.webp",
+    "newPath": "public/images/guides/trolley-interior.webp",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:ff1b62f97c7fdb0187ca98adbc59db082cfeef19eafc5ed80b0a314afcc6ef8f",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/pages/weddings.astro",
+      "src/content/guides/how-many-guests-fit-in-a-trolley.md"
+    ],
+    "notes": "Removed after SHA-256 matched public/images/guides/trolley-interior.webp."
+  },
+  {
+    "oldPath": "public/uploads/trolleyBliss.png",
+    "newPath": "src/assets/images/fleet/trolley/front-three-quarter.png",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:ea65add861226a1a064736e48c9c7924124401aaaea20aae729d06001215be1a",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/front-three-quarter.png."
+  },
+  {
+    "oldPath": "public/uploads/trolleyBliss.webp",
+    "newPath": "src/assets/images/fleet/trolley/front-three-quarter.webp",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:f44f145c54235bfb85aa0efcc69208b79c3ff26888081ccfd755b2755808bad7",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/layouts/BaseLayout.astro",
+      "src/data/site.ts",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/pages/guides/[slug].astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "public/uploads/trolleyChristmas.png",
+    "newPath": "public/images/guides/trolley-christmas-lights.png",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:1c47712309f62a7c167152e4424369340087ddff21f9a6a6b8742434e383491b",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/content/guides/chicago-trolley-friendly-wedding-venues.md"
+    ],
+    "notes": "Single canonical copy retained at a stable public URL because raw HTML figures inside Markdown cannot consume imported image metadata."
+  },
+  {
+    "oldPath": "public/uploads/trolleyClassic.png",
+    "newPath": "src/assets/images/fleet/trolley/classic-exterior.png",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:e0e744194914fbaecc36a478a9d37184032f485dd51eb8b240aef68dfed7105e",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/index.astro",
+      "src/pages/fleet.astro",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/weddings.astro",
+      "src/data/site.ts",
+      "src/pages/gallery.astro",
+      "src/content/guides/how-many-guests-fit-in-a-trolley.md"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/classic-exterior.png."
+  },
+  {
+    "oldPath": "public/uploads/trolleyFestive.png",
+    "newPath": "src/assets/images/fleet/trolley/summer-exterior.png",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:312594fd95ca5833faff99f6dbd6e8b6f1be222bc6510f1c573a72d7033621b5",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/pages/about.astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/summer-exterior.png."
+  },
+  {
+    "oldPath": "public/uploads/trolleyFusion.png",
+    "newPath": "src/assets/images/fleet/trolley/boarding-exterior.png",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:8ee3e18d8e45053d3380824adc28a9f898f4ae3622704d3fcfed949c87f77a51",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/boarding-exterior.png."
+  },
+  {
+    "oldPath": "public/uploads/trolleyMidnight.png",
+    "newPath": "src/assets/images/fleet/trolley/afternoon-exterior.png",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:7e899ae89d8f1fe3a7412f2050569c89661e3eb42019253862d136828340e660",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/content/guides/chicago-trolley-friendly-wedding-venues.md"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/afternoon-exterior.png."
+  },
+  {
+    "oldPath": "public/uploads/trolleyUltimate.jpg",
+    "newPath": "src/assets/images/fleet/trolley/winter-exterior.jpg",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:d1aa3f63adced6eb26b6f4b4d08553059db9921c93cd24a3d0a6dcf44a36c4ea",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/winter-exterior.jpg."
+  },
+  {
+    "oldPath": "public/uploads/wbenc-logo.svg",
+    "newPath": "src/assets/images/branding/certifications/wbenc-logo.svg",
+    "action": "moved",
+    "hashComparison": "sha256:3bd8581a8c9111c72b0b3dfc54fd4a3bf7557f9e5c110234fc69c121786cea99",
+    "referencesUpdated": [
+      "src/data/site-images.ts",
+      "src/components/Footer.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/ChristmasTrolley/1-WAYTOGO-Trolley-&-Bus-Rentals-Xmas-Trolley-Tours-Chicago3.jpg",
+    "newPath": "src/assets/images/christmas/gallery/christmas-trolley-01.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:65be9232f1594869c4b390c34ce0dd8c06c21750c32c97e863a2773f09cf7d49",
+    "referencesUpdated": [
+      "src/data/christmas-images.ts",
+      "src/pages/christmas-trolley.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/ChristmasTrolley/2-WAYTOGO-Xmas-Trolley-Tour-Chicago.jpg",
+    "newPath": "src/assets/images/christmas/gallery/christmas-trolley-02.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:20c847153456b06863a0bb79ea1ae02343b2cb6837ca74313fec5e2670d9e356",
+    "referencesUpdated": [
+      "src/data/christmas-images.ts",
+      "src/pages/christmas-trolley.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/ChristmasTrolley/3-WAYTOGO-Xmas-Trolleys-Chicago.jpg",
+    "newPath": "",
+    "action": "unused-removed",
+    "hashComparison": "not-applicable",
+    "referencesUpdated": [],
+    "notes": "Watermarked duplicate already excluded by the Christmas gallery filter; repository-wide search found no other use."
+  },
+  {
+    "oldPath": "src/assets/fleet/ChristmasTrolley/4-WAYTOGO-Xmas-Trolley-Tours-Chicago.jpg",
+    "newPath": "src/assets/images/christmas/gallery/christmas-trolley-04.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:0aad179d67b643211795e1a1b84d0e562d1ed593ac0b415ee802ec5f791f85a7",
+    "referencesUpdated": [
+      "src/data/christmas-images.ts",
+      "src/pages/christmas-trolley.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/ChristmasTrolley/5-Chicago-Christmas-Xmas-Trolley-WAYTOGO.jpg",
+    "newPath": "src/assets/images/christmas/gallery/christmas-trolley-05.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:9147c72b1986ff4adbac7c333e4deea64c6a67b383a55c2bed57d4554127aebc",
+    "referencesUpdated": [
+      "src/data/christmas-images.ts",
+      "src/pages/christmas-trolley.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/ChristmasTrolley/6-WAYTOGO-Trolley-&-Bus-Rentals-Xmas-Trolley-Tours-Chicago.jpg",
+    "newPath": "src/assets/images/christmas/gallery/christmas-trolley-06.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:a0916885a8ff91a1a42f8ffc7abba9b9900b8f38faa38b362b86ff809bff7d5c",
+    "referencesUpdated": [
+      "src/data/christmas-images.ts",
+      "src/pages/christmas-trolley.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/ChristmasTrolley/decor/228Z_Christmas_tree22_22.jpg",
+    "newPath": "src/assets/images/christmas/decorative/sources/garland-strip-source.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:32c3f9270ce8a6d5ea20a5a591a72e3c158fc5e9756026c50bf3891c15c894a7",
+    "referencesUpdated": [],
+    "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
+  },
+  {
+    "oldPath": "src/assets/fleet/ChristmasTrolley/decor/32a48fd7-58a9-41e9-82b4-2d236480f684.jpg",
+    "newPath": "src/assets/images/christmas/decorative/sources/corner-wreath-source.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:7a98f6c33ef0c5475725c29855a8ddffd6822f301405fcead0d868efe4e96c6e",
+    "referencesUpdated": [],
+    "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
+  },
+  {
+    "oldPath": "src/assets/fleet/ChristmasTrolley/decor/47845d13-7372-4b7f-b409-bd767fac3316.jpg",
+    "newPath": "src/assets/images/christmas/decorative/sources/garland-arch-source.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:418fcd3816116f017a442c2a1c8135b2b7cfa6f770fd2d4125cd95b49b7f0f39",
+    "referencesUpdated": [],
+    "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
+  },
+  {
+    "oldPath": "src/assets/fleet/ChristmasTrolley/decor/5d790f87-1ad8-410c-b0a4-ebacbae3153d.jpg",
+    "newPath": "src/assets/images/christmas/decorative/sources/garland-strand-source.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:874087e7754c25470a8eeba58c2eee1fa1ab5fed2e3a8ead65996b9d0c042182",
+    "referencesUpdated": [],
+    "notes": "Unreferenced approved/working variant retained outside the build graph pending owner review."
+  },
+  {
+    "oldPath": "src/assets/fleet/CoachBus/01-exterior.jpg",
+    "newPath": "src/assets/images/fleet/coach/exterior-rear-dusk.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:dce93dafef2f1ebac2edc990f713ff0e1e2c6ff3cae4e6395cd5cadfe99fb65a",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/index.astro",
+      "src/pages/fleet.astro",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/gallery.astro",
+      "src/content/guides/wedding-day-shuttle-logistics-timeline.md"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/CoachBus/02-exterior-dusk.jpg",
+    "newPath": "public/images/guides/coach-exterior-side-dusk.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:1f29c76cad38f67c6eee3fe9d7ed2c500cc2f28ee8392456e4a1c9030818e7c2",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/content/guides/wedding-day-shuttle-logistics-timeline.md"
+    ],
+    "notes": "Single canonical copy retained at a stable public URL because raw HTML figures inside Markdown cannot consume imported image metadata."
+  },
+  {
+    "oldPath": "src/assets/fleet/CoachBus/03-interior.jpg",
+    "newPath": "src/assets/images/fleet/coach/interior.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:44477eeafe2106ba5cac507e1a85eb94148e9976f26b9ac1adad85c4d5842a30",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/gallery.astro",
+      "src/pages/weddings.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/LimoVan/01-exterior.jpg",
+    "newPath": "src/assets/images/fleet/sprinter/exterior.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:14c9c13302ffabe5b9d1eb15595ad077d8ce1c6384a88ab8c28f22f5d665a370",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/index.astro",
+      "src/pages/fleet.astro",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/LimoVan/02-van.jpg",
+    "newPath": "src/assets/images/fleet/sprinter/interior-front.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:9dec28f8668389c6e4429a3619f6f8e8b4239e6cf120f045d85e4b8d115ce7d8",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/LimoVan/03-interior.webp",
+    "newPath": "src/assets/images/fleet/sprinter/interior-rear.webp",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:ddf01e62b80c1d409ee2e335ea98bdaee1292b712281827820ab67ec4c86904f",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/PartyBus/24-passenger-white-party-bus-01a.jpg",
+    "newPath": "src/assets/images/fleet/party-bus/exterior.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:e3bcd1e24896fcdf0651e87f797ccb2df4607a106dfce83d48b76466075039d2",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/index.astro",
+      "src/pages/fleet.astro",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/Trolley/01-classic-exterior.png",
+    "newPath": "src/assets/images/fleet/trolley/classic-exterior.png",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:e0e744194914fbaecc36a478a9d37184032f485dd51eb8b240aef68dfed7105e",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/index.astro",
+      "src/pages/fleet.astro",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/weddings.astro",
+      "src/data/site.ts",
+      "src/pages/gallery.astro",
+      "src/content/guides/how-many-guests-fit-in-a-trolley.md"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/Trolley/02-front-three-quarter.png",
+    "newPath": "src/assets/images/fleet/trolley/front-three-quarter.png",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:ea65add861226a1a064736e48c9c7924124401aaaea20aae729d06001215be1a",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/Trolley/03-interior.webp",
+    "newPath": "public/images/guides/trolley-interior.webp",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:ff1b62f97c7fdb0187ca98adbc59db082cfeef19eafc5ed80b0a314afcc6ef8f",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/pages/weddings.astro",
+      "src/content/guides/how-many-guests-fit-in-a-trolley.md"
+    ],
+    "notes": "Single canonical copy retained at a stable public URL because raw HTML figures inside Markdown cannot consume imported image metadata."
+  },
+  {
+    "oldPath": "src/assets/fleet/Trolley/04-summer.png",
+    "newPath": "src/assets/images/fleet/trolley/summer-exterior.png",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:312594fd95ca5833faff99f6dbd6e8b6f1be222bc6510f1c573a72d7033621b5",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/pages/about.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/Trolley/05-boarding.png",
+    "newPath": "src/assets/images/fleet/trolley/boarding-exterior.png",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:8ee3e18d8e45053d3380824adc28a9f898f4ae3622704d3fcfed949c87f77a51",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/Trolley/06-afternoon.png",
+    "newPath": "src/assets/images/fleet/trolley/afternoon-exterior.png",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:7e899ae89d8f1fe3a7412f2050569c89661e3eb42019253862d136828340e660",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/content/guides/chicago-trolley-friendly-wedding-venues.md"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "src/assets/fleet/Trolley/07-clear-sky.jpg",
+    "newPath": "src/assets/images/fleet/trolley/winter-exterior.jpg",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:d1aa3f63adced6eb26b6f4b4d08553059db9921c93cd24a3d0a6dcf44a36c4ea",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "uploads/2-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals_interior1.jpg",
+    "newPath": "src/assets/images/fleet/coach/interior.jpg",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:44477eeafe2106ba5cac507e1a85eb94148e9976f26b9ac1adad85c4d5842a30",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/gallery.astro",
+      "src/pages/weddings.astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/coach/interior.jpg."
+  },
+  {
+    "oldPath": "uploads/3-44-Passengers-Coach-Bus-Way-To-Go-Motor-Coaches.jpg",
+    "newPath": "src/assets/images/fleet/coach/exterior-rear-dusk.jpg",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:dce93dafef2f1ebac2edc990f713ff0e1e2c6ff3cae4e6395cd5cadfe99fb65a",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/index.astro",
+      "src/pages/fleet.astro",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/gallery.astro",
+      "src/content/guides/wedding-day-shuttle-logistics-timeline.md"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/coach/exterior-rear-dusk.jpg."
+  },
+  {
+    "oldPath": "uploads/5-44-Passengers-Coach-Bus-Way-To-Go-Coach-Bus-Rentals.jpg",
+    "newPath": "public/images/guides/coach-exterior-side-dusk.jpg",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:1f29c76cad38f67c6eee3fe9d7ed2c500cc2f28ee8392456e4a1c9030818e7c2",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/content/guides/wedding-day-shuttle-logistics-timeline.md"
+    ],
+    "notes": "Removed after SHA-256 matched public/images/guides/coach-exterior-side-dusk.jpg."
+  },
+  {
+    "oldPath": "uploads/WBENC-Certified-Women-Business-.png",
+    "newPath": "src/assets/images/branding/certifications/women-owned-wordmark.png",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:5ce49de683ccf5d88efff0a82f92ceb17581ca66b4e58bb3a403478bdb057e7b",
+    "referencesUpdated": [
+      "src/data/site-images.ts",
+      "src/pages/index.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "uploads/WBENC-woman-owned-chicago-private-transportation-service-company-500w.webp",
+    "newPath": "src/assets/images/branding/certifications/wbenc-certificate.webp",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:70f30c291301fa203ab6c125f2f52bbf1f714bc2b71874148ebc7587c6e555ed",
+    "referencesUpdated": [
+      "src/data/site-images.ts",
+      "src/pages/index.astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/branding/certifications/wbenc-certificate.webp."
+  },
+  {
+    "oldPath": "uploads/heroImg2.png",
+    "newPath": "src/assets/images/home/hero/hero-desktop.png",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:7a72e301727fd68f29a8f8c04532e19a9362f3036525b727eddbd68c256dd221",
+    "referencesUpdated": [
+      "src/data/site-images.ts",
+      "src/pages/index.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "uploads/heroMobileView2.png",
+    "newPath": "src/assets/images/home/hero/hero-mobile.png",
+    "action": "moved-and-renamed",
+    "hashComparison": "sha256:7734676d11b3b0f229da8676a6f067a90be2dba05092007efebb46aa1eb44026",
+    "referencesUpdated": [
+      "src/data/site-images.ts",
+      "src/pages/index.astro"
+    ],
+    "notes": "Content bytes preserved; references now use typed image data or explicit imports."
+  },
+  {
+    "oldPath": "uploads/new-sprinter-limo-page.jpg",
+    "newPath": "src/assets/images/fleet/sprinter/exterior.jpg",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:14c9c13302ffabe5b9d1eb15595ad077d8ce1c6384a88ab8c28f22f5d665a370",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/index.astro",
+      "src/pages/fleet.astro",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/sprinter/exterior.jpg."
+  },
+  {
+    "oldPath": "uploads/sprinter-limo-interior-1920w.webp",
+    "newPath": "src/assets/images/fleet/sprinter/interior-rear.webp",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:ddf01e62b80c1d409ee2e335ea98bdaee1292b712281827820ab67ec4c86904f",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/sprinter/interior-rear.webp."
+  },
+  {
+    "oldPath": "uploads/sprinter-shuttle-van2.jpg",
+    "newPath": "src/assets/images/fleet/sprinter/interior-front.jpg",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:9dec28f8668389c6e4429a3619f6f8e8b4239e6cf120f045d85e4b8d115ce7d8",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/sprinter/interior-front.jpg."
+  },
+  {
+    "oldPath": "uploads/trolley-interior.webp",
+    "newPath": "public/images/guides/trolley-interior.webp",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:ff1b62f97c7fdb0187ca98adbc59db082cfeef19eafc5ed80b0a314afcc6ef8f",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/pages/weddings.astro",
+      "src/content/guides/how-many-guests-fit-in-a-trolley.md"
+    ],
+    "notes": "Removed after SHA-256 matched public/images/guides/trolley-interior.webp."
+  },
+  {
+    "oldPath": "uploads/trolleyBliss.png",
+    "newPath": "src/assets/images/fleet/trolley/front-three-quarter.png",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:ea65add861226a1a064736e48c9c7924124401aaaea20aae729d06001215be1a",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/fleet/[slug].astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/front-three-quarter.png."
+  },
+  {
+    "oldPath": "uploads/trolleyBliss.webp",
+    "newPath": "src/assets/images/fleet/trolley/front-three-quarter.webp",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:f44f145c54235bfb85aa0efcc69208b79c3ff26888081ccfd755b2755808bad7",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/layouts/BaseLayout.astro",
+      "src/data/site.ts",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/pages/guides/[slug].astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/front-three-quarter.webp."
+  },
+  {
+    "oldPath": "uploads/trolleyChristmas.png",
+    "newPath": "public/images/guides/trolley-christmas-lights.png",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:1c47712309f62a7c167152e4424369340087ddff21f9a6a6b8742434e383491b",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/content/guides/chicago-trolley-friendly-wedding-venues.md"
+    ],
+    "notes": "Removed after SHA-256 matched public/images/guides/trolley-christmas-lights.png."
+  },
+  {
+    "oldPath": "uploads/trolleyClassic.png",
+    "newPath": "src/assets/images/fleet/trolley/classic-exterior.png",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:e0e744194914fbaecc36a478a9d37184032f485dd51eb8b240aef68dfed7105e",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/pages/index.astro",
+      "src/pages/fleet.astro",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/weddings.astro",
+      "src/data/site.ts",
+      "src/pages/gallery.astro",
+      "src/content/guides/how-many-guests-fit-in-a-trolley.md"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/classic-exterior.png."
+  },
+  {
+    "oldPath": "uploads/trolleyFestive.png",
+    "newPath": "src/assets/images/fleet/trolley/summer-exterior.png",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:312594fd95ca5833faff99f6dbd6e8b6f1be222bc6510f1c573a72d7033621b5",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/pages/about.astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/summer-exterior.png."
+  },
+  {
+    "oldPath": "uploads/trolleyFusion.png",
+    "newPath": "src/assets/images/fleet/trolley/boarding-exterior.png",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:8ee3e18d8e45053d3380824adc28a9f898f4ae3622704d3fcfed949c87f77a51",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/boarding-exterior.png."
+  },
+  {
+    "oldPath": "uploads/trolleyMidnight.png",
+    "newPath": "src/assets/images/fleet/trolley/afternoon-exterior.png",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:7e899ae89d8f1fe3a7412f2050569c89661e3eb42019253862d136828340e660",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro",
+      "src/content/guides/chicago-trolley-friendly-wedding-venues.md"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/afternoon-exterior.png."
+  },
+  {
+    "oldPath": "uploads/trolleyUltimate.jpg",
+    "newPath": "src/assets/images/fleet/trolley/winter-exterior.jpg",
+    "action": "duplicate-removed",
+    "hashComparison": "sha256:d1aa3f63adced6eb26b6f4b4d08553059db9921c93cd24a3d0a6dcf44a36c4ea",
+    "referencesUpdated": [
+      "src/data/fleet.ts",
+      "src/data/site.ts",
+      "src/pages/fleet/[slug].astro",
+      "src/pages/services.astro",
+      "src/pages/gallery.astro"
+    ],
+    "notes": "Removed after SHA-256 matched src/assets/images/fleet/trolley/winter-exterior.jpg."
+  },
+  {
+    "oldPath": "uploads/wbenc-logo.svg",
+    "newPath": "src/assets/images/branding/certifications/wbenc-logo.svg",
+    "action": "duplicate-removed-manual",
+    "hashComparison": "content-equal-except-trailing-newline",
+    "referencesUpdated": [
+      "src/data/site-images.ts",
+      "src/components/Footer.astro"
+    ],
+    "notes": "Removed after a text diff confirmed identical SVG content; only the trailing newline differed."
+  }
+]

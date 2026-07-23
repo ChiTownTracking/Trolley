@@ -5,7 +5,12 @@ import Header from '../components/Header.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
+import { fleetImages } from '../data/fleet';
 import { withBase } from '../utils/paths';
+import type { ImageMetadata } from 'astro';
+import jostNormalUrl from '../assets/fonts/jost/jost-latin-variable-normal.woff2?url';
+import cormorantNormalUrl from '../assets/fonts/cormorant-garamond/cormorant-garamond-latin-variable-normal.woff2?url';
+import cormorantItalicUrl from '../assets/fonts/cormorant-garamond/cormorant-garamond-latin-variable-italic.woff2?url';
 
 interface Props {
   title?: string;
@@ -13,13 +18,17 @@ interface Props {
   /** Hide the gold CTA band above the footer (e.g. on Contact/Reservation). */
   hideCta?: boolean;
   /** Root-relative or absolute og:image (e.g. an article's cover photo). */
-  image?: string;
+  image?: string | ImageMetadata;
   /** og:type — pages like guide articles should pass 'article'. */
   ogType?: 'website' | 'article';
   /** Optional crawler directive for confirmed draft/utility pages. */
   robots?: 'index,follow' | 'noindex,follow';
   /** Optional JSON-LD object(s) injected as a <script type="application/ld+json">. */
   schema?: Record<string, unknown> | Record<string, unknown>[];
+  /** Homepage-only mobile hero preload URL; the desktop hero remains unchanged. */
+  mobileHeroPreload?: string;
+  /** Disable only on routes whose initial viewport has no italic serif text. */
+  preloadSerifItalic?: boolean;
 }
 
 const {
@@ -30,10 +39,13 @@ const {
   ogType = 'website',
   robots,
   schema,
+  mobileHeroPreload,
+  preloadSerifItalic = true,
 } = Astro.props;
 
 const canonical = new URL(withBase(Astro.url.pathname), Astro.site ?? Astro.url).href;
-const ogImage = image ? new URL(withBase(image), Astro.site ?? Astro.url).href : undefined;
+const imagePath = typeof image === 'string' ? withBase(image) : image?.src;
+const ogImage = imagePath ? new URL(imagePath, Astro.site ?? Astro.url).href : undefined;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -54,13 +66,22 @@ const ogImage = image ? new URL(withBase(image), Astro.site ?? Astro.url).href :
   <meta name="twitter:description" content={description} />
   <meta name="theme-color" content="#FDFCFA" />
   {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />}
-  <link rel="icon" href={withBase('/uploads/trolleyBliss.webp')} type="image/webp" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:ital,wght@0,300;0,400;0,500;1,300&display=swap"
-    rel="stylesheet"
-  />
+  <link rel="icon" href={fleetImages.trolley.frontThreeQuarterWebp.src} type="image/webp" />
+  <link rel="preload" href={jostNormalUrl} as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href={cormorantNormalUrl} as="font" type="font/woff2" crossorigin="anonymous" />
+  {preloadSerifItalic && (
+    <link rel="preload" href={cormorantItalicUrl} as="font" type="font/woff2" crossorigin="anonymous" />
+  )}
+  {mobileHeroPreload && (
+    <link
+      rel="preload"
+      as="image"
+      href={mobileHeroPreload}
+      type="image/webp"
+      media="(max-width: 768px)"
+      fetchpriority="high"
+    />
+  )}
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>

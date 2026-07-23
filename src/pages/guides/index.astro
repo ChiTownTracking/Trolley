@@ -11,7 +11,7 @@ const allGuides = (await getCollection('guides')).sort(
 );
 
 const featured = allGuides.find((g) => g.data.featured) ?? allGuides[0];
-const rest = allGuides.filter((g) => g.slug !== featured.slug);
+const rest = allGuides.filter((g) => g.id !== featured.id);
 
 // Initial visible batch in the grid — the rest reveal behind "Load More".
 const INITIAL_COUNT = 6;
@@ -35,9 +35,17 @@ const INITIAL_COUNT = 6;
 
   {/* ── Featured article ───────────────────────────────── */}
   <section class="wrap wrap-1140 gfeat-wrap" data-guide-featured data-category={featured.data.category}>
-    <a href={withBase(`/guides/${featured.slug}`)} class="gfeat">
+    <a href={withBase(`/guides/${featured.id}`)} class="gfeat">
       <div class="gfeat__media">
-        <img src={withBase(featured.data.cover)} alt={featured.data.coverAlt} class="gfeat__img" loading="eager" decoding="async" />
+        <img
+          src={featured.data.cover.src}
+          width={featured.data.cover.width}
+          height={featured.data.cover.height}
+          alt={featured.data.coverAlt}
+          class="gfeat__img"
+          loading="eager"
+          decoding="async"
+        />
       </div>
       <div class="gfeat__body">
         <span class="gfeat__tag">{categoryLabel(featured.data.category)}</span>
@@ -59,7 +67,7 @@ const INITIAL_COUNT = 6;
       {rest.map((g, i) => (
         <div class:list={['ggrid__cell', { 'is-hidden-initial': i >= INITIAL_COUNT }]} data-guide-cell data-category={g.data.category}>
           <GuideCard
-            href={`/guides/${g.slug}`}
+            href={`/guides/${g.id}`}
             image={g.data.cover}
             imageAlt={g.data.coverAlt}
             category={g.data.category}
