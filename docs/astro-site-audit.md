@@ -385,7 +385,7 @@ Required design-preserving architecture: real serverless/third-party endpoint; t
 |---|---|---|
 | Desktop hero `/Trolley/uploads/heroImg2.png` | `src/pages/index.astro` | Broken in `dist` |
 | Three forms | home/contact/reservation | False success; no delivery |
-| `(000) TROLLEY` / fake tel URI | `src/data/site.ts`, Footer | Placeholder and clickable in Footer |
+| `+1 630-624-3448` / `tel:+16306243448` | `src/data/site.ts`, shared contact components | Confirmed and centralized after the audit |
 | Social URLs `#` / generic fallbacks | data/Footer | Not official business profiles |
 | Street/postal TODO | `src/data/site.ts` | Structured data omitted |
 | Four identical placeholder video IDs | fleet data/detail | Misleading until replaced/removed |

@@ -6,10 +6,10 @@ Phase 1 intentionally keeps unknown business facts out of live links and structu
 |---|---|---|
 | Final production domain | GitHub Pages currently builds for `https://chitowntracking.github.io/Trolley`; ownership/finality is unconfirmed | Canonicals, sitemap, robots location, redirects, analytics, Search Console |
 | Preferred canonical domain | Not confirmed | Prevent duplicate indexing when a branded domain is introduced |
-| Public phone number | Placeholder `(000) TROLLEY` / `tel:0008765539`; now rendered as non-clickable text | Contact links, forms, LocalBusiness/ContactPoint data |
+| Public phone number | Confirmed as `+1 630-624-3448` / `tel:+16306243448` and centralized in `src/data/site.ts` | Contact links, forms, LocalBusiness/ContactPoint data |
 | Public email | `info@chitowntrolley.com` is rendered but still needs owner confirmation | Contact delivery, legal contact, form notifications |
 | Legal business name | Missing | Legal policies, provider accounts, structured data |
-| Address or service-area-business status | Street and postal code are TODO; Chicago is listed as locality | Local SEO and compliant LocalBusiness data |
+| Address or service-area-business status | Confirmed as `1265 Oakton St, Elk Grove Village, IL 60007` and centralized in `src/data/site.ts` | Local SEO and compliant LocalBusiness data |
 | Cities and states actually served | Suburb list, “Chicagoland,” and a four-state claim currently coexist | Accurate site copy, form eligibility, local SEO |
 | Official Instagram URL | Placeholder; no social link is currently rendered | Footer/top bar and `sameAs` data |
 | Official Facebook URL | Placeholder; no social link is currently rendered | Footer/top bar and `sameAs` data |

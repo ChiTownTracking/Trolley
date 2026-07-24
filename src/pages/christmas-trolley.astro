@@ -5,11 +5,12 @@ import CtaBand from '../components/CtaBand.astro';
 import { site } from '../data/site';
 import { christmasDecor, christmasGallery } from '../data/christmas-images';
 import { withBase } from '../utils/paths';
+import christmasHeaderBackground from '../assets/images/christmas/gallery/christmas-header-bg.png';
 
-// Hero: the side-profile shot with open dusk sky (best canvas for overlay text).
-const heroImage = christmasGallery[1];
-// Feature-section grid: four shots, excluding the hero.
-const featureImages = christmasGallery.filter((image) => image !== heroImage).slice(0, 4);
+// Dedicated Christmas header artwork.
+const heroImage = christmasHeaderBackground;
+// Preserve the approved feature grid that previously excluded gallery image 2.
+const featureImages = christmasGallery.filter((_, index) => index !== 1).slice(0, 4);
 // Full gallery: everything.
 const gallery = christmasGallery;
 
@@ -65,7 +66,7 @@ const featureList = [
         ))}
       </div>
       <div class="xfeat__list">
-        <Eyebrow label="The Christmas Trolley" align="left" single mb={14} />
+        <Eyebrow label="The Christmas Trolley" align="left" mb={14} />
         <h2 class="xfeat__title">Everything the season <em class="grad">calls for</em></h2>
         <ul class="xfeat__items">
           {featureList.map((f, i) => (
@@ -140,22 +141,6 @@ const featureList = [
       other</em> on the circular benches. And when the perfect block of lights appears, the rear
       balcony is waiting for the photo your family will send with next year's cards.
     </p>
-  </section>
-
-  <!-- ═══ Add-on callout ═══ -->
-  <section class="rv wrap wrap-860 xaddon-wrap">
-    <a href={withBase('/contact')} class="xaddon">
-      <span class="xaddon__flourish" style={`--decor-img: url('${christmasDecor.cornerWreath.src}')`} aria-hidden="true"></span>
-      <span class="xaddon__icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="12" rx="1"/><path d="M4 13h16M12 9v12M12 9s-4 0-5.2-1.6C5.6 5.8 7 4 8.6 4.6 10.4 5.3 12 9 12 9Zm0 0s4 0 5.2-1.6C18.4 5.8 17 4 15.4 4.6 13.6 5.3 12 9 12 9Z"/></svg>
-      </span>
-      <span class="xaddon__text">
-        <span class="xaddon__kicker">Make It Unforgettable</span>
-        <span class="xaddon__title">Add a special guest to your ride</span>
-        <span class="xaddon__body">Ask about surprise holiday guests for your tour — a favorite with kids and offices alike.</span>
-      </span>
-      <span class="xaddon__arrow" aria-hidden="true">→</span>
-    </a>
   </section>
 
   <!-- ═══ Festive CTA band ═══ -->
@@ -262,6 +247,13 @@ const featureList = [
   .xfeat__item { display: flex; align-items: center; gap: 14px; }
   /* Eyebrow above the feature list — red, to lead with the Christmas theme. */
   .xfeat :global(.eyebrow__label) { color: #C8102E; }
+  .xfeat :global(.eyebrow__rule) {
+    background: linear-gradient(90deg, transparent, #C8102E);
+  }
+  .xfeat :global(.eyebrow__rule--r) {
+    background: linear-gradient(90deg, #C8102E, transparent);
+    display: none;
+  }
   .xicon { flex: none; width: 22px; height: 22px; color: var(--gold-dark); }
   .xicon svg { width: 100%; height: 100%; }
   /* Icons cycle gold → green → red so the seasonal palette reads as real
@@ -285,7 +277,7 @@ const featureList = [
       radial-gradient(circle 1px at 41% 64%, rgba(255, 255, 255, .08) 50%, transparent 60%),
       radial-gradient(circle 1px at 87% 46%, rgba(255, 255, 255, .12) 50%, transparent 60%),
       linear-gradient(165deg, #142A20 0%, #0A1712 55%, #05100B 100%);
-    padding: 88px 28px 92px;
+    padding: 60px 28px 92px;
   }
   .xgal-band :global(.eyebrow__label) { color: var(--gold-light); }
   .xgal-band__title { color: #fff; margin-bottom: 46px; }
@@ -336,44 +328,13 @@ const featureList = [
   .gal__thumb.is-active { border-color: var(--gold); opacity: 1; }
 
   /* ── Narrative ───────────────────────────────────────── */
-  .xstory { padding: 92px 28px 72px; text-align: center; }
+  .xstory { padding: 50px 28px 72px; text-align: center; }
   .xstory :global(.eyebrow__label) { color: #C8102E; }
   .xstory__body {
     font-family: var(--serif); font-size: 23px; line-height: 1.65;
     font-weight: 400; color: var(--ink); margin: 0; text-align: left;
   }
   .xstory__body em { color: #00BF4C; }
-
-  /* ── Add-on callout ──────────────────────────────────── */
-  .xaddon-wrap { padding: 0 28px 92px; }
-  .xaddon {
-    position: relative; overflow: hidden;
-    display: flex; align-items: center; gap: 24px;
-    text-decoration: none; color: inherit;
-    background: var(--cream); border: 1px solid var(--gold-cream); border-radius: 10px;
-    padding: 30px clamp(24px, 4vw, 44px);
-    transition: box-shadow .3s ease, border-color .3s ease, transform .3s ease;
-  }
-  .xaddon:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 14px 36px rgba(26, 26, 26, .1); }
-  /* Small mirrored wreath flourish, tucked behind the text */
-  .xaddon__flourish {
-    position: absolute; top: -8px; right: -6px; z-index: -1;
-    width: clamp(70px, 9vw, 110px); aspect-ratio: 900 / 1289;
-    background-image: var(--decor-img);
-    background-repeat: no-repeat; background-position: top right; background-size: contain;
-     pointer-events: none;
-  }
-  .xaddon__icon {
-    flex: none; width: 52px; height: 52px; border-radius: 50%;
-    border: 1px solid var(--gold); color:  var(--gold);
-    display: grid; place-items: center;
-  }
-  .xaddon__icon svg { width: 24px; height: 24px; }
-  .xaddon__text { display: flex; flex-direction: column; gap: 5px; }
-  .xaddon__kicker { font-size: 10.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-deep); }
-  .xaddon__title { font-family: var(--serif); font-size: 22px; font-weight: 600; line-height: 1.2; }
-  .xaddon__body { font-weight: 300; font-size: 14px; color: var(--muted); line-height: 1.6; }
-  .xaddon__arrow { margin-left: auto; color: #C8102E; font-size: 20px; }
 
   /* ── Festive CTA garland (bookends the hero treatment) ── */
   .xcta-wrap { position: relative; }
@@ -389,20 +350,35 @@ const featureList = [
 
   /* ── Responsive ──────────────────────────────────────── */
   @media (max-width: 860px) {
-    .xfeat__inner { grid-template-columns: 1fr; }
+    .xfeat__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+    .xfeat__list { display: contents; }
+    .xfeat__list :global(.eyebrow) {
+      order: 1;
+      justify-content: center;
+    }
+    .xfeat__list :global(.eyebrow__rule--r) { display: block; }
+    .xfeat__title {
+      order: 2;
+      text-align: center;
+    }
+    .xfeat__photos { order: 3; margin-bottom: 28px; }
+    .xfeat__items { order: 4; }
+    .xfeat__cta { order: 5; }
     .xfeat__img { height: 170px; }
   }
   @media (max-width: 640px) {
-    .xhero { height: 520px; }
+    .xhero { height: 250px; }
     .xhero__overlay {
       background: linear-gradient(90deg, rgba(8, 11, 20, .88) 0%, rgba(8, 11, 20, .68) 55%, rgba(8, 11, 20, .42) 100%);
     }
     .xhero__lights { height: clamp(20px, 5vw, 28px); }
     .xstory__body { font-size: 20px; }
-    .xaddon { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .xaddon__arrow { display: none; }
-    .xaddon__flourish { display: none; }
-    .xgal-band__garland { height: clamp(36px, 9vw, 52px); }
+  
     .xcta-wrap__garland { height: clamp(34px, 8vw, 48px); }
     /* Kept at 44px (not shrunk) — that's the tap-target minimum. */
   }

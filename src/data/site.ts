@@ -44,24 +44,24 @@ export interface SiteConfig {
 /**
  * Central non-secret site configuration.
  *
- * The phone, street address, postal code, social profiles, legal name, and
- * service-area claims still require owner confirmation. Placeholder contact
- * and social values must never become live links or structured data.
+ * The legal name, public email, and service-area claims still require owner
+ * confirmation. Placeholder values must never become live links or structured
+ * data.
  */
 export const site = {
   name: 'ChiTown Trolley',
   description:
     'Timeless white trolley transportation for weddings and events across Chicagoland. Owner-operated, licensed and insured.',
   contact: {
-    phoneDisplay: '(000) TROLLEY',
-    phoneHref: 'tel:0008765539',
+    phoneDisplay: '+1 630-624-3448',
+    phoneHref: 'tel:+16306243448',
     email: 'info@chitowntrolley.com',
   },
   address: {
-    streetAddress: 'TODO: street address',
-    addressLocality: 'Chicago',
+    streetAddress: '1265 Oakton St',
+    addressLocality: 'Elk Grove Village',
     addressRegion: 'IL',
-    postalCode: 'TODO: postal code',
+    postalCode: '60007',
     addressCountry: 'US',
   },
   locationLabel: 'Chicago, Illinois',
@@ -77,8 +77,9 @@ export const site = {
     'Wheaton',
   ],
   social: {
-    instagram: '#',
-    facebook: '#',
+    instagram:
+      'https://www.instagram.com/chitowntrolley?igsh=MXZrMnVpbGF4NG5iZg%3D%3D&utm_source=qr',
+    facebook: 'https://www.facebook.com/share/1GhfM5hPmT/?mibextid=wwXIfr',
   },
   routes: {
     privacy: '/privacy-policy',
@@ -88,11 +89,7 @@ export const site = {
 } satisfies SiteConfig;
 
 /** Known placeholder values that must never render as a live link or be emitted into structured data. */
-const PLACEHOLDER_VALUES = new Set<string>([
-  '#',
-  site.contact.phoneDisplay,
-  site.contact.phoneHref,
-]);
+const PLACEHOLDER_VALUES = new Set<string>(['#']);
 export const isPlaceholder = (value: string): boolean =>
   PLACEHOLDER_VALUES.has(value) || value.trim().toUpperCase().startsWith('TODO');
 
@@ -181,8 +178,8 @@ export const homeFaqs = [
     a: 'We recommend booking as early as you can — popular Saturdays in wedding season (May through October) and December holiday dates often fill six to twelve months out. That said, it never hurts to ask about a last-minute date; we’ll always check availability for you.',
   },
   {
-    q: 'What areas do you service?',
-    a: 'We serve Chicago and the surrounding suburbs, including Naperville, Evanston, Oak Brook, Schaumburg, Orland Park, Arlington Heights, Hinsdale, Lake Forest, and Wheaton. Out-of-state trips are available for our coach charters — just tell us where you’re headed.',
+    q: 'Where can I rent a trolley near me in the Chicago area?',
+    a: 'ChiTown Trolley provides private trolley service throughout Chicago and many surrounding Chicagoland suburbs. Availability depends on your event date, pickup location, itinerary and vehicle needs. Share your starting address and planned stops when requesting a quote, and we will confirm whether we can serve your route.',
   },
   {
     q: 'Is alcohol allowed on board?',

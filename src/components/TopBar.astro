@@ -3,20 +3,6 @@ import { site, hasPhone, hasInstagram, hasFacebook } from '../data/site';
 ---
 <div class="topbar">
   <div class="topbar__inner wrap wrap-wide">
-    {(hasInstagram || hasFacebook) && (
-      <div class="topbar__social">
-        {hasInstagram && (
-          <a href={site.social.instagram} aria-label="Instagram" class="soc">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF6A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-          </a>
-        )}
-        {hasFacebook && (
-          <a href={site.social.facebook} aria-label="Facebook" class="soc">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF6A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-          </a>
-        )}
-      </div>
-    )}
     <div class="topbar__contact">
       {hasPhone ? (
         <a href={site.contact.phoneHref} class="topbar__link">
@@ -35,6 +21,49 @@ import { site, hasPhone, hasInstagram, hasFacebook } from '../data/site';
         {site.contact.email}
       </a>
     </div>
+    {(hasFacebook || hasInstagram) && (
+      <nav class="topbar__social" aria-label="Social media">
+        {hasFacebook && (
+          <a
+            href={site.social.facebook}
+            class="topbar__socialLink"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit ChiTown Trolley on Facebook"
+            title="Facebook"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M13.7 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5H17V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.5V13h2.8v8h3.4Z"></path>
+            </svg>
+          </a>
+        )}
+        {hasInstagram && (
+          <a
+            href={site.social.instagram}
+            class="topbar__socialLink"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit ChiTown Trolley on Instagram"
+            title="Instagram"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.5" cy="6.5" r=".75" fill="currentColor" stroke="none"></circle>
+            </svg>
+          </a>
+        )}
+      </nav>
+    )}
   </div>
 </div>
 
@@ -47,17 +76,40 @@ import { site, hasPhone, hasInstagram, hasFacebook } from '../data/site';
     justify-content: space-between;
     gap: 20px;
   }
-  .topbar__social { display: flex; align-items: center; gap: 6px; flex: none; }
-  .soc {
-    width: 28px; height: 28px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 50%; text-decoration: none;
-    transition: background .25s ease;
+  .topbar__social {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: none;
+    margin-left: auto;
   }
-  .soc:hover { background: rgba(212, 175, 106, .15); }
+  .topbar__socialLink {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    text-decoration: none;
+    transition: color .2s ease, opacity .2s ease, transform .2s ease;
+  }
+  .topbar__socialLink svg {
+    display: block;
+    width: 17px;
+    height: 17px;
+  }
+  .topbar__socialLink:hover {
+    color: var(--gold-light);
+    transform: translateY(-1px);
+  }
+  .topbar__socialLink:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid var(--gold-light);
+    outline-offset: 2px;
+  }
   .topbar__contact {
     display: flex; align-items: center; gap: 28px;
-    min-width: 0; overflow: hidden; justify-content: flex-end;
+    min-width: 0; overflow: hidden; justify-content: flex-start;
   }
   .topbar__link {
     font-size: 12.5px; letter-spacing: .06em; font-weight: 300;
@@ -70,13 +122,33 @@ import { site, hasPhone, hasInstagram, hasFacebook } from '../data/site';
   .topbar__link--email { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
   .topbar__divider { width: 1px; height: 14px; background: rgba(212, 175, 106, .35); }
 
-  /* Email is the least essential item here (it's also in the footer) — drop
-     it below ~480px so the phone number and social icons have real breathing
-     room instead of everything fighting for a 40px-tall strip. */
-  @media (max-width: 480px) {
+  /* Keep the mobile strip focused: phone left, social links right. */
+  @media (max-width: 768px) {
+    .topbar__inner { gap: 12px; }
     .topbar__link--email,
     .topbar__divider { display: none; }
-    .topbar__inner { height: auto; padding-block: 9px; }
-    .soc { width: 36px; height: 36px; }
+    .topbar__social {
+      gap: 16px;
+      margin-right: 0;
+      margin-left: auto;
+    }
+    .topbar__socialLink {
+      width: 44px;
+      height: 40px;
+    }
+    .topbar__socialLink svg {
+      width: 18px;
+      height: 18px;
+    }
+    .topbar__contact {
+      margin-right: auto;
+      margin-left: 0;
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .topbar__inner { height: 44px; }
+    .topbar__socialLink { height: 44px; }
   }
 </style>

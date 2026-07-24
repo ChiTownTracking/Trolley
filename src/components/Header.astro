@@ -7,7 +7,7 @@ const path = withoutBase(Astro.url.pathname).replace(/\/+$/, '') || '/';
 const isActive = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'));
 const moreActive = navMore.some((n) => isActive(n.href));
 ---
-<header class="hdr">
+<header class="hdr" data-site-header>
   <div class="hdr__inner wrap wrap-wide">
     <a href={withBase('/')} class="brand" aria-label={`${site.name} home`}>
       <span class="brand__row">
@@ -21,7 +21,12 @@ const moreActive = navMore.some((n) => isActive(n.href));
     <!-- Below ~1024px this whole block becomes a slide-in drawer (see the
          max-width media query) — `display:contents` keeps it a no-op wrapper
          at desktop widths so today's inline flex layout is untouched there. -->
-    <div class="hdr__panel" id="hdr-mobile-panel" data-nav-panel>
+    <div
+      class="hdr__panel"
+      id="hdr-mobile-panel"
+      data-mobile-menu
+      aria-label="Mobile navigation"
+    >
       <nav class="nav" aria-label="Main">
         {navMain.map((n) => (
           <a
@@ -68,7 +73,7 @@ const moreActive = navMore.some((n) => isActive(n.href));
     <button
       type="button"
       class="hdr__burger"
-      data-menu-toggle
+      data-mobile-menu-toggle
       aria-expanded="false"
       aria-controls="hdr-mobile-panel"
       aria-label="Open menu"
@@ -79,7 +84,11 @@ const moreActive = navMore.some((n) => isActive(n.href));
     </button>
   </div>
 
-  <div class="hdr__backdrop" data-menu-backdrop aria-hidden="true"></div>
+  <div
+    class="hdr__backdrop"
+    data-mobile-menu-backdrop
+    aria-hidden="true"
+  ></div>
 </header>
 
 <style>
@@ -87,9 +96,25 @@ const moreActive = navMore.some((n) => isActive(n.href));
     position: sticky;
     top: 0;
     z-index: 60;
-    background: rgba(253, 252, 250, .92);
-    backdrop-filter: blur(10px);
+    isolation: isolate;
+    background: transparent;
     border-bottom: 1px solid var(--line);
+  }
+  /* Keep the translucent header treatment off the element that contains the
+     fixed drawer. A backdrop filter on that ancestor can make fixed
+     descendants use the header as their containing block. */
+  .hdr::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(253, 252, 250, .92);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    pointer-events: none;
+  }
+  .hdr.is-menu-open {
+    z-index: 900;
   }
   .hdr__inner {
     padding-block: 12px;
@@ -182,9 +207,9 @@ const moreActive = navMore.some((n) => isActive(n.href));
     display: block; width: 22px; height: 1.5px; background: var(--ink);
     transition: transform .25s ease, opacity .25s ease;
   }
-  .hdr__burger.is-open .hdr__burger-line:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .hdr__burger.is-open .hdr__burger-line:nth-child(2) { opacity: 0; }
-  .hdr__burger.is-open .hdr__burger-line:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .hdr.is-menu-open .hdr__burger-line:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hdr.is-menu-open .hdr__burger-line:nth-child(2) { opacity: 0; }
+  .hdr.is-menu-open .hdr__burger-line:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
   /* Backdrop behind the mobile drawer */
   .hdr__backdrop {
@@ -196,25 +221,53 @@ const moreActive = navMore.some((n) => isActive(n.href));
   .hdr__panel { display: contents; }
 
   @media (max-width: 1023px) {
-    .hdr__burger { display: flex; }
+    .hdr__burger {
+      display: flex;
+      z-index: 920;
+    }
 
     .hdr__backdrop {
-      display: block; position: fixed; inset: 0; z-index: 64;
-      background: rgba(20, 18, 14, .45);
-      opacity: 0; pointer-events: none;
-      transition: opacity .3s ease;
+      display: block;
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      z-index: 900;
+      background: rgba(0, 0, 0, .72);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 220ms ease, visibility 0s linear 220ms;
     }
-    .hdr__backdrop.is-open { opacity: 1; pointer-events: auto; }
+    .hdr.is-menu-open .hdr__backdrop {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: opacity 220ms ease, visibility 0s linear 0s;
+    }
 
     /* The panel becomes the real slide-in drawer. */
     .hdr__panel {
-      display: flex; flex-direction: column; align-items: stretch;
-      position: fixed; top: 0; right: 0; z-index: 65;
-      width: min(320px, 86vw); height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 910;
+      width: min(86vw, 360px);
+      height: 100vh;
+      height: 100dvh;
       background: var(--paper);
-      padding: 96px 28px 32px;
+      padding:
+        calc(80px + env(safe-area-inset-top))
+        calc(28px + env(safe-area-inset-right))
+        calc(24px + env(safe-area-inset-bottom))
+        28px;
       box-shadow: -16px 0 44px rgba(26, 26, 26, .18);
-      transform: translateX(100%);
+      transform: translate3d(100%, 0, 0);
       /* visibility (not just the off-screen transform) must gate the closed
          state — a fixed+transformed box alone can still get counted toward
          the document's scrollable width in some mobile browsers, which is
@@ -222,14 +275,23 @@ const moreActive = navMore.some((n) => isActive(n.href));
          visibility flips to hidden only after the slide-out transition
          finishes (transition-delay), so the close animation still plays. */
       visibility: hidden;
-      transition: transform .35s cubic-bezier(.22, .6, .2, 1), visibility 0s linear .35s;
+      pointer-events: none;
+      transition:
+        transform 260ms cubic-bezier(.22, 1, .36, 1),
+        visibility 0s linear 260ms;
       overflow-y: auto;
+      overflow-x: hidden;
+      overscroll-behavior: contain;
       -webkit-overflow-scrolling: touch;
+      will-change: transform;
     }
-    .hdr__panel.is-open {
-      transform: translateX(0);
+    .hdr.is-menu-open .hdr__panel {
+      transform: translate3d(0, 0, 0);
       visibility: visible;
-      transition: transform .35s cubic-bezier(.22, .6, .2, 1);
+      pointer-events: auto;
+      transition:
+        transform 260ms cubic-bezier(.22, 1, .36, 1),
+        visibility 0s linear 0s;
     }
 
     .nav {
@@ -258,6 +320,14 @@ const moreActive = navMore.some((n) => isActive(n.href));
     .hdr__cta .btn-gold {
       display: flex; align-items: center; justify-content: center;
       width: 100%; min-height: 44px;
+    }
+  }
+
+  @media (max-width: 1023px) and (prefers-reduced-motion: reduce) {
+    .hdr__panel,
+    .hdr__backdrop,
+    .hdr__burger-line {
+      transition-duration: 1ms;
     }
   }
 </style>
@@ -292,29 +362,33 @@ const moreActive = navMore.some((n) => isActive(n.href));
 </script>
 
 <script>
-  // Mobile nav drawer: hamburger toggle, backdrop, Escape, and auto-close on
-  // link click or on resizing back up into the desktop layout.
-  const burger = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
-  const navPanel = document.querySelector<HTMLElement>('[data-nav-panel]');
-  const menuBackdrop = document.querySelector<HTMLElement>('[data-menu-backdrop]');
+  // Mobile nav drawer: one state on the shared header controls the toggle,
+  // backdrop, drawer, accessibility attributes, and page scroll lock.
+  const siteHeader = document.querySelector<HTMLElement>('[data-site-header]');
+  const burger = document.querySelector<HTMLButtonElement>('[data-mobile-menu-toggle]');
+  const navPanel = document.querySelector<HTMLElement>('[data-mobile-menu]');
+  const menuBackdrop = document.querySelector<HTMLElement>('[data-mobile-menu-backdrop]');
+  const desktopMq = window.matchMedia('(min-width: 1024px)');
 
-  // iOS Safari ignores `overflow: hidden` on body for scroll/bounce purposes,
-  // so the body is also pinned with `position: fixed` at its pre-open scroll
-  // offset (via inline `top`) while the drawer is open, then unpinned and
-  // scrolled back to that exact offset on close.
+  // Pin the body at its current scroll offset while the menu is open. This
+  // prevents background bounce on iOS and restores the exact position later.
   let lockedScrollY = 0;
 
   const lockScroll = () => {
+    if (document.documentElement.classList.contains('menu-open')) return;
     lockedScrollY = window.scrollY;
-    document.body.classList.add('no-scroll');
+    document.documentElement.classList.add('menu-open');
     document.body.style.top = `-${lockedScrollY}px`;
   };
 
   const unlockScroll = () => {
-    document.body.classList.remove('no-scroll');
+    if (!document.documentElement.classList.contains('menu-open')) return;
+    document.documentElement.classList.remove('menu-open');
     document.body.style.top = '';
     window.scrollTo(0, lockedScrollY);
   };
+
+  const isMenuOpen = () => siteHeader?.classList.contains('is-menu-open') ?? false;
 
   const getDrawerFocusables = () => {
     const panelFocusables = navPanel
@@ -328,28 +402,40 @@ const moreActive = navMore.some((n) => isActive(n.href));
   };
 
   const setMenuOpen = (open: boolean, restoreFocus = true) => {
-    const wasOpen = navPanel?.classList.contains('is-open') ?? false;
-    burger?.classList.toggle('is-open', open);
-    burger?.setAttribute('aria-expanded', String(open));
-    burger?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    navPanel?.classList.toggle('is-open', open);
-    menuBackdrop?.classList.toggle('is-open', open);
+    if (!siteHeader || !burger || !navPanel || !menuBackdrop) return;
+
+    // The panel is ordinary inline desktop navigation above this breakpoint.
+    if (desktopMq.matches) open = false;
+
+    const wasOpen = isMenuOpen();
+    siteHeader.classList.toggle('is-menu-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menuBackdrop.setAttribute('aria-hidden', String(!open));
+
+    if (desktopMq.matches) {
+      navPanel.removeAttribute('aria-hidden');
+      navPanel.removeAttribute('inert');
+    } else {
+      navPanel.setAttribute('aria-hidden', String(!open));
+      navPanel.toggleAttribute('inert', !open);
+    }
+
     if (open && !wasOpen) {
       lockScroll();
       requestAnimationFrame(() => getDrawerFocusables()[0]?.focus());
     } else if (!open && wasOpen) {
       unlockScroll();
-      if (restoreFocus) burger?.focus();
+      if (restoreFocus) burger.focus();
     }
   };
 
-  burger?.addEventListener('click', () => setMenuOpen(!navPanel?.classList.contains('is-open')));
+  burger?.addEventListener('click', () => setMenuOpen(!isMenuOpen()));
   menuBackdrop?.addEventListener('click', () => setMenuOpen(false));
   document.addEventListener('keydown', (e) => {
-    if (!navPanel?.classList.contains('is-open')) return;
+    if (!isMenuOpen()) return;
 
     if (e.key === 'Escape') {
-      if (e.defaultPrevented) return;
       setMenuOpen(false);
       return;
     }
@@ -371,12 +457,21 @@ const moreActive = navMore.some((n) => isActive(n.href));
   });
   navPanel
     ?.querySelectorAll('a')
-    .forEach((a) => a.addEventListener('click', () => setMenuOpen(false, false)));
+    .forEach((a) =>
+      a.addEventListener('click', () => {
+        if (!desktopMq.matches) setMenuOpen(false, false);
+      }),
+    );
 
-  // If the viewport grows back into the desktop range (e.g. rotating a
-  // tablet, or resizing a browser window), drop the drawer state entirely.
-  const desktopMq = window.matchMedia('(min-width: 1024px)');
-  desktopMq.addEventListener('change', (e) => {
-    if (e.matches) setMenuOpen(false, false);
-  });
+  // Drop all modal state on desktop; initialize mobile as closed and inert.
+  const syncMenuForViewport = () => {
+    setMenuOpen(false, false);
+    if (!desktopMq.matches) {
+      navPanel?.setAttribute('aria-hidden', 'true');
+      navPanel?.setAttribute('inert', '');
+    }
+  };
+
+  desktopMq.addEventListener('change', syncMenuForViewport);
+  syncMenuForViewport();
 </script>

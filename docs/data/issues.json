@@ -40,12 +40,12 @@
       "id": "P0-002",
       "priority": "P0",
       "status": "blocked",
-      "statusNote": "Typed placeholders are centralized. The placeholder phone is no longer a live tel link and generic social fallbacks no longer render, but verified owner data is still required.",
+      "statusNote": "The verified phone, social profiles, and postal address are centralized and live.",
       "category": "content",
       "title": "Launch-critical business contact and social values are placeholders",
       "evidence": [
-        "site.phone is '(000) TROLLEY'; site.phoneHref is 'tel:0008765539'; street/postal address values are TODO; Instagram and Facebook are '#'.",
-        "Footer still renders the placeholder phone as a clickable tel link and substitutes generic platform home pages for social profiles."
+        "site.contact.phoneDisplay is '+1 630-624-3448', site.contact.phoneHref is 'tel:+16306243448', and the postal address is '1265 Oakton St, Elk Grove Village, IL 60007'.",
+        "Shared header, footer, contact, reservation, CTA, and structured-data consumers now use the centralized verified phone."
       ],
       "affected": [
         "src/data/site.ts",
@@ -638,11 +638,11 @@
       "id": "P2-007",
       "priority": "P2",
       "status": "blocked",
-      "statusNote": "Structured data continues to omit placeholder facts; complete business information is still required.",
+      "statusNote": "Structured data includes the verified phone, social profiles, and complete postal address.",
       "category": "structured-data",
       "title": "LocalBusiness structured data is intentionally incomplete",
       "evidence": [
-        "Home emits TaxiService JSON-LD, but telephone, address, and sameAs are omitted because source values are placeholders.",
+        "Home emits TaxiService JSON-LD with telephone, sameAs, and a complete PostalAddress.",
         "Only guide articles emit Article schema elsewhere."
       ],
       "affected": [

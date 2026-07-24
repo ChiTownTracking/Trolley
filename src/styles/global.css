@@ -67,7 +67,7 @@
 /* ----------  Base  ---------- */
 * { box-sizing: border-box; }
 
-html { scroll-behavior: auto; overflow-x: hidden; }
+html { scroll-behavior: auto; overflow-x: clip; }
 
 body {
   margin: 0;
@@ -75,15 +75,18 @@ body {
   color: var(--ink);
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
-/* Mobile nav drawer scroll lock — position:fixed (not just overflow:hidden)
-   is required to stop background scroll/bounce on iOS Safari. `top` is set
-   inline by the drawer script to the negative of the pre-lock scrollY, so
-   the page doesn't visibly jump when it's applied/removed. */
-body.no-scroll {
+/* Mobile drawer scroll lock. The script sets body `top` to the negative of
+   the current scrollY so iOS cannot bounce the page behind the open menu. */
+html.menu-open,
+html.menu-open body {
   overflow: hidden;
+  overscroll-behavior: none;
+}
+
+html.menu-open body {
   position: fixed;
   left: 0;
   right: 0;

@@ -44,12 +44,22 @@ const copyrightYear = new Date().getFullYear();
           <svg class="ftr__contactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           <a href={`mailto:${site.contact.email}`} class="ftr__contactLink">{site.contact.email}</a>
         </li>
+
+        <li class="ftr__contactItem">
+          <svg class="ftr__contactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/>
+            <circle cx="12" cy="10" r="2.5"/>
+          </svg>
+          <span class="ftr__contactLink">
+            {site.address.streetAddress}, {site.address.addressLocality}, {site.address.addressRegion} {site.address.postalCode}
+          </span>
+        </li>
       </ul>
     </address>
 
     {(hasInstagram || hasFacebook) && (
       <section class="ftr__socialSection" aria-labelledby="ftr-social-heading">
-        <h2 class="ftr__heading" id="ftr-social-heading">Follow</h2>
+        <p class="ftr__heading" id="ftr-social-heading">Follow</p>
         <ul class="ftr__socialLinks">
           {hasInstagram && (
             <li>
@@ -72,7 +82,7 @@ const copyrightYear = new Date().getFullYear();
     )}
 
     <section class="ftr__cert" aria-labelledby="ftr-cert-heading">
-      <h2 class="ftr__heading" id="ftr-cert-heading">Women-owned business</h2>
+      <p class="ftr__heading" id="ftr-cert-heading">Women-owned business</p>
       <p>Serving Chicago and the surrounding suburbs.</p>
       <img
         class="ftr__certLogo"

@@ -67,6 +67,9 @@ import { site, eventTypes, hasPhone, hasInstagram, hasFacebook } from '../data/s
           <span class="aside__phone">{site.contact.phoneDisplay}</span>
         )}
         <a href={`mailto:${site.contact.email}`} class="aside__email">{site.contact.email}</a>
+        <address class="aside__address">
+          {site.address.streetAddress}, {site.address.addressLocality}, {site.address.addressRegion} {site.address.postalCode}
+        </address>
       </div>
       <div class="rule-gold"></div>
       <div>
@@ -109,6 +112,14 @@ import { site, eventTypes, hasPhone, hasInstagram, hasFacebook } from '../data/s
   .aside__phone:hover { color: var(--gold-deep); }
   .aside__email { font-weight: 300; font-size: 15px; color: var(--muted); text-decoration: none; display: block; margin-top: 6px; transition: color .25s ease; }
   .aside__email:hover { color: var(--gold-deep); }
+  .aside__address {
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 14.5px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.65;
+  }
   .aside__area { font-weight: 300; font-size: 14.5px; line-height: 2; color: var(--muted); margin: 0; }
   .aside__social { display: flex; gap: 16px; align-items: center; }
   .aside__soc {

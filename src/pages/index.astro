@@ -8,6 +8,8 @@ import { testimonials, eventTypes, vehicleOptions, hoursOptions, homeFaqs, getLo
 import { fleet } from '../data/fleet';
 import { siteImages } from '../data/site-images';
 import { withBase } from '../utils/paths';
+import occasionsImage from '../assets/images/home/occasion/occasion.png';
+import occasionsMobileImage from '../assets/images/home/occasion/occasion-mobile.png';
 
 const passengerOptions = ['1–10', '11–20', '21–30', '31–40', '41–57'];
 
@@ -34,10 +36,24 @@ const mobileHero = await getImage({
   quality: 78,
 });
 const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --hero-mobile: url('${mobileHero.src}')`;
+const occasionsMobileWidths = [480, 768, 1024];
+const occasionsMobileSources = await Promise.all(
+  occasionsMobileWidths.map((width) =>
+    getImage({
+      src: occasionsMobileImage,
+      width,
+      format: 'webp',
+      quality: 78,
+    }),
+  ),
+);
+const occasionsMobileSrcset = occasionsMobileSources
+  .map((image, index) => `${image.src} ${occasionsMobileWidths[index]}w`)
+  .join(', ');
 ---
 <BaseLayout
-  title="ChiTown Trolley — Timeless Wedding Trolley Transportation in Chicago"
-  description="Arrive the way the day deserves — a classic white wedding trolley for Chicagoland weddings and events. Owner-operated, licensed and insured."
+  title="Chicago Trolley Rental for Weddings & Events | ChiTown Trolley"
+  description="Book a Chicago trolley rental for weddings, private events and group transportation. Explore the ChiTown Trolley fleet and request a customized quote."
   schema={businessSchema}
   mobileHeroPreload={mobileHero.src}
 >
@@ -46,10 +62,15 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
     <div class="hero__overlay"></div>
     <div class="hero__content">
       <h1 class="hero__title">
-        <span class="hero__titleLine">Timeless Trolley</span>
-        <span class="hero__titleLine">Transportation</span>
-        <span class="hero__finalLine"><em class="hero__for">for</em> <em class="grad hero__wedding">Your Wedding Day</em></span>
+        <span class="hero__titleLine">Chicago Trolley Rental</span>{' '}
+        <span class="hero__finalLine">
+          <em class="hero__for">for</em>{' '}
+          <em class="grad hero__wedding">Weddings &amp; Events</em>
+        </span>
       </h1>
+      <p class="hero__lead">
+        Private trolley service for celebrations and coordinated group travel throughout Chicago and Chicagoland.
+      </p>
       <span class="hero__divider" aria-hidden="true"><span></span><i></i></span>
       <div class="hero__ownership">
         <span class="hero__proudly">Proudly</span>
@@ -72,7 +93,7 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
           </span>
         </button>
       </div>
-      <a href={withBase('/contact')} class="btn-gold hero__cta">View Trolley</a>
+      <a href={withBase(`/fleet/${fleetFeatured.slug}`)} class="btn-gold hero__cta">View Trolley</a>
     </div>
   </section>
 
@@ -104,7 +125,9 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
   <!-- Get a Quote -->
   <section class="rv getquote" id="getquote">
     <div class="getquote__inner">
-      <h2 class="h-section getquote__title">Request a <em class="grad">free quote</em></h2>
+      <h2 class="h-section getquote__title">
+        Request a <em class="grad">Chicago trolley rental quote</em>
+      </h2>
 
       <form class="qform wizard" data-quote-form>
         <!-- Step 1 · Trip Information -->
@@ -121,30 +144,34 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
             <div class="step__body">
               <div class="step__inner">
                 <div class="step__grid">
-                  <label class="field">
-                    <select name="type" class="field__control" aria-label="Event type">
-                      <option value="" disabled selected>Event Type</option>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="event-type">Event Type</label>
+                    <select id="event-type" name="type" class="field__control">
+                      <option value="" disabled selected>Select event type</option>
                       {eventTypes.map((t) => <option>{t}</option>)}
                     </select>
-                  </label>
-                  <label class="field">
-                    <select name="hours" class="field__control" aria-label="Number of hours">
-                      <option value="" disabled selected>Number of Hours</option>
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="number-of-hours">Number of Hours</label>
+                    <select id="number-of-hours" name="hours" class="field__control">
+                      <option value="" disabled selected>Select duration</option>
                       {hoursOptions.map((h) => <option>{h}</option>)}
                     </select>
-                  </label>
-                  <label class="field">
-                    <select name="vehicle" class="field__control" aria-label="Choose vehicle">
-                      <option value="" disabled selected>Choose Vehicle</option>
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="vehicle">Vehicle</label>
+                    <select id="vehicle" name="vehicle" class="field__control">
+                      <option value="" disabled selected>Select vehicle</option>
                       {vehicleOptions.map((v) => <option>{v}</option>)}
                     </select>
-                  </label>
-                  <label class="field">
-                    <select name="passengers" class="field__control" aria-label="Number of passengers">
-                      <option value="" disabled selected>Number of Passengers</option>
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="number-of-passengers">Number of Passengers</label>
+                    <select id="number-of-passengers" name="passengers" class="field__control">
+                      <option value="" disabled selected>Select group size</option>
                       {passengerOptions.map((p) => <option>{p}</option>)}
                     </select>
-                  </label>
+                  </div>
                 </div>
                 <div class="step__nav">
                   <button type="button" class="btn-gold" data-step-next="2">Next</button>
@@ -168,18 +195,22 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
             <div class="step__body">
               <div class="step__inner">
                 <div class="step__grid">
-                  <label class="field">
-                    <input name="date" type="date" class="field__control" aria-label="Event date" />
-                  </label>
-                  <label class="field">
-                    <input name="time" type="time" class="field__control" aria-label="Pickup time" />
-                  </label>
-                  <label class="field">
-                    <input name="pickup" type="text" placeholder="Pickup Location" class="field__control" aria-label="Pickup location" />
-                  </label>
-                  <label class="field">
-                    <input name="dropoff" type="text" placeholder="Destination" class="field__control" aria-label="Destination" />
-                  </label>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="event-date">Event Date</label>
+                    <input id="event-date" name="date" type="date" class="field__control" />
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="pickup-time">Pickup Time</label>
+                    <input id="pickup-time" name="time" type="time" class="field__control" />
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="pickup-location">Pickup Location</label>
+                    <input id="pickup-location" name="pickup" type="text" placeholder="Enter pickup address" class="field__control" />
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="destination">Destination</label>
+                    <input id="destination" name="dropoff" type="text" placeholder="Enter destination" class="field__control" />
+                  </div>
                 </div>
                 <div class="step__nav">
                   <button type="button" class="btn-ghost" data-step-back="1">Back</button>
@@ -204,18 +235,22 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
             <div class="step__body">
               <div class="step__inner">
                 <div class="step__grid step__grid--3">
-                  <label class="field">
-                    <input required name="name" type="text" placeholder="Full Name" class="field__control" aria-label="Full name" />
-                  </label>
-                  <label class="field">
-                    <input required name="phone" type="tel" placeholder="Phone Number" class="field__control" aria-label="Phone number" />
-                  </label>
-                  <label class="field">
-                    <input required name="email" type="email" placeholder="E-mail Address" class="field__control" aria-label="E-mail address" />
-                  </label>
-                  <label class="field field--full">
-                    <textarea name="message" rows="2" placeholder="How did you find us?" class="field__control" aria-label="How did you find us?"></textarea>
-                  </label>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="full-name">Full Name</label>
+                    <input required id="full-name" name="name" type="text" placeholder="Enter your full name" class="field__control" />
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="phone-number">Phone Number</label>
+                    <input required id="phone-number" name="phone" type="tel" placeholder="Enter your phone number" class="field__control" />
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="email-address">Email Address</label>
+                    <input required id="email-address" name="email" type="email" placeholder="Enter your email address" class="field__control" />
+                  </div>
+                  <div class="qfield qfield--labeled qfield--wide">
+                    <label class="qfield__label" for="referral-source">How Did You Find Us?</label>
+                    <textarea id="referral-source" name="message" rows="2" placeholder="Tell us how you found us" class="field__control"></textarea>
+                  </div>
                 </div>
                 <div class="step__nav">
                   <button type="button" class="btn-ghost" data-step-back="2">Back</button>
@@ -225,11 +260,15 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
             </div>
           </div>
         </div>
+        <p class="getquote__disclaimer">
+          Chicago trolley rental prices vary by date, vehicle, rental duration, itinerary and pickup details.
+          Share your plans for a customized estimate.
+        </p>
       </form>
 
       <div class="confirm" data-quote-confirm role="alert" aria-labelledby="home-form-status-title" tabindex="-1" hidden>
         <span class="confirm__mark">✳</span>
-        <h2 class="confirm__title" id="home-form-status-title">Online request not sent</h2>
+        <p class="confirm__title" id="home-form-status-title">Online request not sent</p>
         <p class="confirm__body">No information was delivered. Online form integration is not configured yet; please use the contact information in the site header or footer.</p>
         <button type="button" class="link-gold" data-quote-reset>Return to form</button>
       </div>
@@ -241,7 +280,10 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
   <section class="rv band">
     <div class="wrap">
       <Eyebrow label="The Fleet" mb={14} />
-      <h2 class="h-section text-center fleetp__title">Trolleys for the party, a coach for the guests</h2>
+      <h2 class="h-section text-center fleetp__title">Explore our Chicago trolley and group transportation fleet</h2>
+      <p class="fleetp__lead">
+        Choose the classic white trolley for weddings and celebrations, or compare our additional vehicles for larger groups and longer itineraries.
+      </p>
       <div class="fleetp__grid">
         {/* Row 1 — featured full-width trolley */}
         <a href={withBase(`/fleet/${fleetFeatured.slug}`)} class="fleet-card fleet-card--feature">
@@ -255,7 +297,7 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
               quality={78}
               loading="lazy"
               decoding="async"
-              alt={fleetFeatured.name}
+              alt="Classic white trolley available for rental in Chicago"
               class="fleetp__img"
             />
           </div>
@@ -290,17 +332,18 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
         ))}
       </div>
       <div class="fleetp__cta">
-        <a href={withBase('/fleet')} class="btn-gold">View Full Fleet</a>
+        <a href={withBase('/fleet')} class="btn-gold">Explore the Full Fleet</a>
       </div>
     </div>
   </section>
 
-
-
   <!-- Testimonials -->
   <section class="rv tst">
     <div class="wrap">
-      <Eyebrow label="Kind Words" mb={40} />
+      <Eyebrow label="Client Reviews" mb={14} />
+      <h2 class="h-section text-center tst__title">
+        What clients remember about ChiTown Trolley
+      </h2>
       <div class="tstc" data-carousel>
         <button type="button" class="tstc__arrow" data-carousel-prev aria-label="Previous testimonial">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -331,11 +374,96 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
     </div>
   </section>
 
+  <section class="rv occasions" aria-labelledby="occasions-title">
+    <div class="wrap occasions__grid">
+      <div class="occasions__media">
+        <picture class="occasions__picture">
+          <source
+            media="(max-width: 800px)"
+            srcset={occasionsMobileSrcset}
+            sizes="(max-width: 560px) calc(100vw - 36px), calc(100vw - 56px)"
+            type="image/webp"
+          />
+          <Image
+            src={occasionsImage}
+            width={1024}
+            widths={[480, 768, 1024]}
+            sizes="560px"
+            format="webp"
+            quality={78}
+            loading="lazy"
+            decoding="async"
+            alt="Guests traveling by private trolley for a Chicago event"
+            class="occasions__image"
+          />
+        </picture>
+      </div>
+
+      <div class="occasions__content">
+        <Eyebrow label="Private Trolley Transportation" mb={12} />
+
+        <h2 class="h-section occasions__title" id="occasions-title">
+          Private trolley service for the moments between destinations
+        </h2>
+
+        <p class="occasions__lead">
+          From wedding parties and milestone celebrations to organized group outings,
+          ChiTown Trolley keeps everyone together between stops. Share your route, timing
+          and group size, and we will help match your plans with the right vehicle for
+          private service throughout Chicago and Chicagoland.
+        </p>
+
+        <div class="occasions__list">
+          <article class="occasion">
+            <h3 class="occasion__title">
+              <a href={withBase('/weddings')} class="occasion__link">Weddings</a>
+            </h3>
+            <p class="occasion__body">
+              Keep the wedding party together between hotels, photo locations, the ceremony and the reception.
+            </p>
+          </article>
+
+          <article class="occasion">
+            <h3 class="occasion__title">
+              <a href={withBase('/services')} class="occasion__link">Private Events</a>
+            </h3>
+            <p class="occasion__body">
+              Keep guests together for birthdays, anniversaries, family celebrations and other private occasions.
+            </p>
+          </article>
+
+          <article class="occasion">
+            <h3 class="occasion__title">
+              <a href={withBase('/services')} class="occasion__link">Group Travel</a>
+            </h3>
+            <p class="occasion__body">
+              Coordinate hotel pickups, venue transfers and multiple stops with one clear itinerary.
+            </p>
+          </article>
+
+          <article class="occasion">
+            <h3 class="occasion__title">Local Service</h3>
+            <p class="occasion__body">
+              Work with an owner-operated, licensed and insured, WBENC-certified Women Owned company.
+            </p>
+          </article>
+        </div>
+
+        <a href="#getquote" class="btn-gold occasions__cta">
+          Plan Your Transportation
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section class="rv faq">
     <div class="wrap">
-      <Eyebrow label="Common Questions" mb={40} />
-    
+      <Eyebrow label="Common Questions" mb={14} />
+      <h2 class="h-section text-center faq__title">
+        Questions before you book
+      </h2>
+
       <div class="faq__list" data-faq>
         {homeFaqs.map((f) => (
           <div class="faq__item">
@@ -358,8 +486,12 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
   <section class="rv guidesp">
     <div class="wrap">
       <Eyebrow label="The Journal" mb={14} />
-      <h2 class="h-section text-center guidesp__title">Helpful Guides for Your <em class="grad">Big Day</em></h2>
-      <p class="guidesp__lead">Everything you need to coordinate transportation for your event.</p>
+      <h2 class="h-section text-center guidesp__title">
+        Trolley and group transportation <em class="grad">guides</em>
+      </h2>
+      <p class="guidesp__lead">
+        Practical resources for planning routes, timing, vehicles and group travel throughout Chicago and Chicagoland.
+      </p>
       <div class="guidesp__grid">
         {latestGuides.map((g) => (
           <GuideCard
@@ -419,6 +551,15 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
   .hero__titleLine, .hero__finalLine { display: block; }
   .hero__for { font-style: italic; }
   .hero__finalLine { white-space: nowrap; }
+  .hero__lead {
+    max-width: 52ch;
+    margin: 18px 0 0;
+    color: rgba(255, 255, 255, .9);
+    font-size: clamp(14px, 1.5vw, 17px);
+    line-height: 1.65;
+    font-weight: 300;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, .42);
+  }
   .hero__divider { display: flex; align-items: center; gap: 11px; margin: 22px 0; }
   .hero__divider span { width: 90px; height: 1px; background: var(--gold); }
   .hero__divider i { width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }
@@ -468,7 +609,8 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
   }
   .hero__cta {
     align-self: flex-start; display: inline-flex; align-items: center;
-    min-height: 44px; padding: 14px 34px; margin-top: 22px;
+    min-height: 38px; padding: 9px 24px; margin-top: 22px;
+    font-size: 11.5px; letter-spacing: .2em;
   }
   .hero__cta:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 4px; }
 
@@ -573,9 +715,17 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
       line-height: .98;
       text-wrap: balance;
     }
+    .hero__finalLine { white-space: normal; }
+
+    .hero__lead {
+      max-width: 34ch;
+      margin-top: 14px;
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
 
     .hero__divider {
-      margin: 20px 0;
+      margin: 18px 0;
     }
 
     .hero__ownership {
@@ -592,12 +742,13 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
 
     .hero__cta {
       justify-content: center;
-      width: min(100%, 150px);
+      width: auto;
+      min-width: 124px;
       min-height: 32px;
-      padding: 4px 8px;
+      padding: 4px 10px;
       margin-top: 14px;
-      font-size: 11.5px;
-      letter-spacing: .2em;
+      font-size: 10.5px;
+      letter-spacing: .18em;
       text-align: center;
     }
   }
@@ -619,10 +770,32 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
   /* Get a Quote — multi-step wizard */
   .getquote { padding: 40px 0 48px; }
   .getquote__inner { margin: 0 auto; padding-inline: clamp(20px, 4vw, 72px); }
-  .getquote__title { margin: 0 0 20px; text-align: left; }
+  .getquote__title { margin: 0 0 28px; text-align: left; }
+  .getquote__disclaimer {
+    max-width: 78ch;
+    margin: 18px 4px 0;
+    color: var(--muted);
+    font-size: 12.5px;
+    font-weight: 300;
+    line-height: 1.65;
+    opacity: .78;
+  }
 
   @media (max-width: 768px) {
     .getquote { padding: 25px 0 48px; }
+    .getquote__title {
+      margin-inline: -12px;
+      font-size: clamp(17px, 5.75vw, 28px);
+      line-height: 1.15;
+      letter-spacing: -.025em;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .getquote__disclaimer {
+      margin-top: 16px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
   }
 
   .wizard { display: flex; flex-direction: column; }
@@ -630,9 +803,60 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
   .qform ::placeholder { color: var(--muted); opacity: .75; }
   .qform select.field__control:has(option:disabled:checked) { color: var(--muted); }
 
+  .qfield--labeled {
+    display: grid;
+    grid-template-rows: auto minmax(42px, auto);
+    align-content: end;
+    min-width: 0;
+  }
+  .qfield--wide {
+    grid-column: 1 / -1;
+  }
+  .qfield__label {
+    display: block;
+    min-height: 14px;
+    margin: 0 0 7px;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: .08em;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  .qfield--labeled input,
+  .qfield--labeled select {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    height: 42px;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .qfield--labeled textarea {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 96px;
+    height: auto;
+    margin: 0;
+    resize: vertical;
+  }
+  .qfield--labeled input[type="date"],
+  .qfield--labeled input[type="time"] {
+    appearance: auto;
+    -webkit-appearance: auto;
+  }
+  .qfield--labeled input[type="date"]::-webkit-date-and-time-value,
+  .qfield--labeled input[type="time"]::-webkit-date-and-time-value {
+    min-height: 1.2em;
+    text-align: left;
+  }
+
   /* Step shell */
-  .step { border-top: 1px solid var(--line-2); }
-  .step:last-of-type { border-bottom: 1px solid var(--line-2); }
+  .step { border-bottom: 1px solid var(--line-2); }
   .step__head {
     width: 100%; display: flex; align-items: center; gap: 18px;
     padding: 22px 4px; background: transparent; border: 0; cursor: pointer;
@@ -703,24 +927,21 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
     .step__panel, .step__chev, .step__num { transition: none; }
   }
 
-  /* Why */
-  .why__title { margin-bottom: 56px; }
-  .why__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; }
-  .feature { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
-  .feature__glyph {
-    width: 58px; height: 58px; border: 1px solid var(--gold); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif); font-size: 22px; color: var(--gold-dark); font-style: italic;
-  }
-  .feature__title { font-family: var(--serif); font-size: 21px; font-weight: 600; margin: 0; }
-  .feature__body { font-weight: 300; font-size: 14px; line-height: 1.7; color: var(--muted); margin: 0; max-width: 26ch; }
-
   /* Services strip */
   .strip { padding: 80px 28px; text-align: center; }
   .strip__chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 14px; }
 
   /* Fleet preview — elevated cards */
-  .fleetp__title { margin-bottom: 52px; }
+  .fleetp__title { margin-bottom: 14px; }
+  .fleetp__lead {
+    max-width: 64ch;
+    margin: 0 auto 46px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
   .fleetp__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
   .fleet-card {
     display: block; text-decoration: none; color: inherit;
@@ -782,8 +1003,136 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
     .fleet-card--feature .fleetp__body { padding: 26px 26px 30px; }
   }
 
+  /* Image-led occasions overview */
+  .occasions {
+    padding: 0 28px 56px;
+    background: var(--paper);
+  }
+  .occasions__grid {
+    display: grid;
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+    align-items: stretch;
+    max-width: 1180px;
+    min-height: 470px;
+  }
+  .occasions__media {
+    min-height: 470px;
+    overflow: hidden;
+  }
+  .occasions__picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .occasions__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .occasions__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(36px, 5vw, 68px);
+    background: var(--cream);
+  }
+  .occasions__content :global(.eyebrow) {
+    display: grid;
+    grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr);
+    width: 100%;
+    gap: 16px;
+  }
+  .occasions__content :global(.eyebrow__rule) {
+    width: 100% !important;
+  }
+  .occasions__content :global(.eyebrow__label) {
+    line-height: 1.55;
+    text-align: center;
+  }
+  .occasions__title {
+    max-width: 16ch;
+    margin: 0 0 18px;
+    text-align: left;
+  }
+  .occasions__lead {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+  .occasions__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 28px;
+    margin-top: 30px;
+  }
+  .occasion {
+    padding: 18px 0;
+    border-top: 1px solid var(--line-2);
+  }
+  .occasion__title {
+    margin: 0 0 7px;
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .occasion__link {
+    color: inherit;
+    text-decoration: none;
+  }
+  .occasion__link:hover {
+    color: var(--gold-dark);
+  }
+  .occasion__link:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+  .occasion__body {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13.5px;
+    font-weight: 300;
+    line-height: 1.65;
+  }
+  .occasions__cta {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 26px;
+  }
+
+  @media (max-width: 800px) {
+    .occasions__grid {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+    .occasions__media { min-height: 320px; }
+    .occasions__content { padding: 38px 30px 42px; }
+    .occasions__title { max-width: 20ch; }
+  }
+
+  @media (max-width: 560px) {
+    .occasions { padding: 0 18px 42px; }
+    .occasions__media { min-height: 250px; }
+    .occasions__content { padding: 32px 22px 36px; }
+    .occasions__content :global(.eyebrow) {
+      grid-template-columns: minmax(20px, 1fr) minmax(0, 22ch) minmax(20px, 1fr);
+      gap: 12px;
+    }
+    .occasions__list {
+      grid-template-columns: 1fr;
+      margin-top: 24px;
+    }
+  }
+
   /* Testimonials carousel */
-  .tst { padding: 40px 5px; }
+  .tst { padding: 48px 5px; }
+  .tst__title { margin: 0 auto 34px; }
   .tstc { display: flex; align-items: center; gap: 12px; max-width: 900px; margin: 0 auto; }
   .tstc__viewport { flex: 1 1 auto; min-width: 0; overflow: hidden; }
   .tstc__track { display: flex; transition: transform .6s cubic-bezier(.22, .6, .2, 1); }
@@ -796,7 +1145,7 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
   }
   .tstc__arrow:hover { color: var(--gold-dark); background: var(--cream); }
   .tstc__arrow svg { width: 26px; height: 26px; }
-  .tstc__dots { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 40px; }
+  .tstc__dots { display: flex; justify-content: center; align-items: center; gap: 8px; }
   /* The bar buttons are created in JS, so they never receive Astro's scoped
      data-astro-cid attribute — a bare `.tstc__dot` here compiles to
      `.tstc__dot[data-astro-cid-…]` and silently matches nothing, leaving the
@@ -835,7 +1184,8 @@ const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --
   .quote__role { font-size: 11.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
 
   /* FAQ accordion (mirrors the quote-form step accordion) */
-  .faq { background: var(--cream); padding: 40px 28px; }
+  .faq { background: var(--cream); padding: 48px 28px; }
+  .faq__title { margin: 0 auto 34px; }
 
   .faq__list { max-width: 800px; margin: 0 auto; }
   .faq__item { border-top: 1px solid var(--line-2); }
