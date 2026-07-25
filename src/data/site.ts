@@ -199,17 +199,80 @@ export const homeFaqs = [
   },
 ];
 
-/* ----------  Weddings  ---------- */
-export const steps = [
-  { num: 'I', title: 'Request a Quote', body: 'Share your date, venues, and guest count. We reply within one business day.' },
-  { num: 'II', title: 'Confirm the Details', body: 'We map the route, timing, and any special touches — then hold your date with a deposit.' },
-  { num: 'III', title: 'Enjoy the Ride', body: 'Your chauffeur arrives early, the cabin is ready, and the day simply flows.' },
+/** Christmas Trolley page FAQs — private-group booking and seasonal planning. */
+export const christmasFaqs = [
+  {
+    q: 'Is the Christmas trolley a private tour?',
+    a: 'Yes. The Christmas trolley is reserved for your group rather than sold by individual seat. Share your preferred date, group size, pickup location and route ideas when requesting a quote.',
+  },
+  {
+    q: 'How many guests fit on the Christmas trolley?',
+    a: 'The Christmas trolley accommodates approximately 24 to 36 guests. The best fit depends on your group size and seating needs, so include an accurate passenger estimate with your quote request.',
+  },
+  {
+    q: 'Can we bring our own drinks?',
+    a: 'Guests who are 21 or older may bring beverages aboard private charters, provided everyone drinking is of legal age. Let us know in advance so the trolley can be prepared for your group.',
+  },
+  {
+    q: 'Can we choose our Christmas lights route?',
+    a: 'You may share preferred neighborhoods, displays and planned stops. The final route depends on your pickup location, reservation length, traffic, vehicle access and confirmed service area.',
+  },
+  {
+    q: 'Where does the Christmas trolley provide service?',
+    a: 'ChiTown Trolley serves Chicago and many surrounding Chicagoland suburbs, including Naperville, subject to route and date availability. Share your starting address and planned stops so the team can confirm service for your evening.',
+  },
+  {
+    q: 'How early should we reserve a Christmas trolley?',
+    a: 'December dates often fill six to twelve months in advance, especially for Friday and Saturday evenings. Reserving early gives your group the best selection of dates and times, although it is still worth checking for last-minute availability.',
+  },
+  {
+    q: 'Where can I find a Christmas trolley near me in the Chicago area?',
+    a: 'Share your pickup address, preferred date and group size when requesting a quote. ChiTown Trolley will review your planned route and confirm whether service is available for your Chicago or suburban location.',
+  },
 ];
 
-export const weddingTiles = [
-  { big: '3 Hours', small: 'Minimum booking' },
-  { big: '30–36', small: 'Passengers per trolley' },
-  { big: 'Chicagoland', small: 'Full service area' },
+/** Wedding page FAQs — timeline, capacity, routing, and private-charter planning. */
+export const weddingFaqs = [
+  {
+    q: 'How many passengers fit on the wedding trolley?',
+    a: 'The classic white trolley seats approximately 30–36 passengers. Include your expected wedding-party count when requesting a quote so the team can confirm the best vehicle arrangement.',
+  },
+  {
+    q: 'How many hours should we reserve?',
+    a: 'The appropriate rental length depends on the pickup schedule, ceremony time, photo stops, reception location and any return transportation. Share the full wedding timeline so the route and required hours can be reviewed accurately.',
+  },
+  {
+    q: 'Can the trolley stop for wedding photos?',
+    a: 'Yes, photo stops can be included when the schedule, route, parking access and reservation length allow. Provide the preferred locations in advance so travel time can be included in the itinerary.',
+  },
+  {
+    q: 'Can we schedule hotel, ceremony and reception pickups?',
+    a: 'Yes. A wedding itinerary can include hotel pickups, the ceremony, photo locations and the reception. Final routing depends on timing, vehicle access, traffic and confirmed service availability.',
+  },
+  {
+    q: 'How far in advance should we reserve?',
+    a: 'Popular wedding-season Saturdays often fill six to twelve months in advance. Reserving early provides the best choice of dates and times, although it is still worth checking for last-minute availability.',
+  },
+  {
+    q: 'Can guests bring beverages aboard?',
+    a: 'Guests who are 21 or older may bring beverages aboard private charters, provided everyone drinking is of legal age. Let the team know in advance so the vehicle can be prepared appropriately.',
+  },
+  {
+    q: 'What happens if the wedding timeline runs late?',
+    a: 'Additional time may be available when the vehicle schedule allows. The team will confirm any extension and applicable hourly charge before adding time to the reservation.',
+  },
+  {
+    q: 'Can we reserve a trolley and coach together?',
+    a: 'Yes. Couples can reserve the trolley for the wedding party and a coach for larger guest transportation. Both vehicles can be coordinated around the same hotel, ceremony and reception schedule.',
+  },
+  {
+    q: 'Where does the wedding trolley provide service?',
+    a: 'ChiTown Trolley serves Chicago and many surrounding Chicagoland suburbs, subject to date, route and vehicle availability. Share the pickup addresses and planned stops so the team can confirm service.',
+  },
+  {
+    q: 'Where can I rent a wedding trolley near me in the Chicago area?',
+    a: 'Submit your wedding date, group size, pickup location and itinerary through the quote form. ChiTown Trolley will review the route and confirm whether wedding trolley service is available for your Chicago or suburban locations.',
+  },
 ];
 
 /* ----------  Services  ---------- */

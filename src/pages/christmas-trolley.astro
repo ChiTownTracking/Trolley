@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { site } from '../data/site';
+import { christmasFaqs } from '../data/site';
 import { christmasDecor, christmasGallery } from '../data/christmas-images';
 import { withBase } from '../utils/paths';
 import christmasHeaderBackground from '../assets/images/christmas/gallery/christmas-header-bg.png';
@@ -13,6 +13,19 @@ const heroImage = christmasHeaderBackground;
 const featureImages = christmasGallery.filter((_, index) => index !== 1).slice(0, 4);
 // Full gallery: everything.
 const gallery = christmasGallery;
+const featureImageAlts = [
+  'Illuminated white trolley viewed from the front with its boarding door open',
+  'Rear balcony and multicolored roof lights on the white holiday trolley',
+  'Front-side view of the heated white trolley lit for a holiday evening',
+  'Open rear balcony beneath the trolley’s multicolored Christmas lights',
+];
+const galleryImageAlts = [
+  'White trolley glowing with multicolored lights at dusk',
+  'Side view of the decorated trolley with its cabin illuminated and door open',
+  'Rear three-quarter view highlighting the trolley’s open photo balcony',
+  'Low front view of a white trolley decorated with roofline lights',
+  'Rear view of the decorated trolley with lit windows and balcony',
+];
 
 // Matches the "Choose Vehicle" option so the quote form pre-selects it.
 const quoteHref = withBase(`/?vehicle=${encodeURIComponent('Christmas Trolley · 24–36')}#getquote`);
@@ -31,8 +44,8 @@ const featureList = [
 ];
 ---
 <BaseLayout
-  title="Christmas Trolley — Private Holiday Lights Tours in Chicago | ChiTown Trolley"
-  description="Tour Chicago's holiday lights aboard a heated, twinkling white trolley. Private BYOB Christmas tours for 24–36 guests across the city and suburbs. Seasonal dates book early."
+  title="Chicago Christmas Trolley Tours | ChiTown Trolley"
+  description="Book a private Chicago Christmas trolley tour for holiday lights, family outings and group celebrations. Heated, BYOB and available across Chicagoland."
   hideCta={true}
 >
   <!-- ═══ Festive hero ═══ -->
@@ -41,11 +54,9 @@ const featureList = [
     <div class="xhero__overlay"></div>
     <div class="xhero__content">
       <p class="xhero__kicker">A ChiTown Trolley Holiday Tradition</p>
-      <h1 class="xhero__title">
-        Chicago's <em class="grad">Christmas Trolley</em>
-      </h1>
-      <p class="xhero__lead">Private holiday lights tours across Chicago &amp; the suburbs — heated, glowing, and yours for the evening.</p>
-     
+      <h1 class="xhero__title">Chicago Christmas Trolley Tours</h1>
+      <p class="xhero__lead">Private holiday lights tours for groups across Chicago and Chicagoland—heated, BYOB and reserved for your evening.</p>
+      <a href={quoteHref} class="btn-gold xhero__cta">Christmas Trolley Quote</a>
     </div>
   </section>
 
@@ -58,7 +69,7 @@ const featureList = [
             src={image.src}
             width={image.width}
             height={image.height}
-            alt={`Christmas trolley with holiday lights — photo ${i + 1}`}
+            alt={featureImageAlts[i]}
             class="xfeat__img"
             loading="lazy"
             decoding="async"
@@ -66,7 +77,7 @@ const featureList = [
         ))}
       </div>
       <div class="xfeat__list">
-        <Eyebrow label="The Christmas Trolley" align="left" mb={14} />
+        <Eyebrow label="Private Christmas Trolley Tour" align="left" mb={14} />
         <h2 class="xfeat__title">Everything the season <em class="grad">calls for</em></h2>
         <ul class="xfeat__items">
           {featureList.map((f, i) => (
@@ -86,7 +97,7 @@ const featureList = [
             </li>
           ))}
         </ul>
-        <a href={quoteHref} class="btn-gold xfeat__cta">Get Your Quote Now</a>
+        <a href={quoteHref} class="btn-gold xfeat__cta">Christmas Trolley Quote</a>
       </div>
     </div>
   </section>
@@ -95,7 +106,7 @@ const featureList = [
   <section class="rv xgal-band">
     <div class="xgal-band__garland xgal-band__garland--top" style={`--decor-img: url('${christmasDecor.garlandStrand.src}')`} aria-hidden="true"></div>
     <div class="wrap wrap-1000">
-      <Eyebrow label="Aglow After Dark" mb={14} />
+      <Eyebrow label="Chicago Christmas Trolley" mb={14} />
       <h2 class="h-section text-center xgal-band__title">The trolley, <em class="grad">dressed for December</em></h2>
       <div class="gal" data-gallery tabindex="0" aria-label="Christmas trolley photo gallery">
         <div class="gal__main">
@@ -104,7 +115,7 @@ const featureList = [
               src={image.src}
               width={image.width}
               height={image.height}
-              alt={`Christmas trolley — photo ${i + 1}`}
+              alt={galleryImageAlts[i]}
               class:list={['gal__img', { 'is-active': i === 0 }]}
               data-gal-slide
               loading={i === 0 ? 'eager' : 'lazy'}
@@ -132,24 +143,64 @@ const featureList = [
 
   <!-- ═══ Seasonal narrative ═══ -->
   <section class="rv xstory wrap wrap-760">
-    <Eyebrow label="The Experience" mb={20} />
-    <p class="xstory__body">
-      As dusk settles over the neighborhoods, the trolley glows to life — strings of lights tracing
-      its roofline, garlands and twinkle inside the cabin, and the heater humming against the
-      December air. Your chauffeur winds past the season's best-dressed streets while your own
-      playlist carries through the Bluetooth sound system, <em>cocoa in hand, everyone facing each
-      other</em> on the circular benches. And when the perfect block of lights appears, the rear
-      balcony is waiting for the photo your family will send with next year's cards.
-    </p>
+    <Eyebrow label="Private Holiday Lights Tour" mb={20} />
+    <h2 class="h-section xstory__title">Plan a Christmas lights route for your group</h2>
+    <div class="xstory__body">
+      <p>
+        As dusk settles over the neighborhoods, the trolley glows to life with lights tracing the roofline, holiday decorations inside the cabin and heat against the December air. Your group can enjoy its own playlist through the Bluetooth sound system while <em>traveling together between displays and planned stops</em>.
+      </p>
+      <p>
+        Share your pickup location, preferred neighborhoods and any stops you would like to include. The final route will depend on your reservation length, traffic, vehicle access and confirmed service area. When the right block of lights appears, the <em>rear balcony provides a memorable place for group photos</em>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ Christmas FAQs ═══ -->
+  <section class="rv faq" aria-labelledby="christmas-faq-title">
+    <div class="wrap wrap-860">
+      <Eyebrow label="Christmas Trolley Questions" mb={16} />
+      <h2 id="christmas-faq-title" class="h-section text-center faq__title">Chicago Christmas trolley FAQs</h2>
+      <div class="faq__list" data-faq>
+        {christmasFaqs.map((item, i) => {
+          const buttonId = `christmas-faq-button-${i + 1}`;
+          const panelId = `christmas-faq-panel-${i + 1}`;
+          return (
+            <div class="faq__item">
+              <button
+                id={buttonId}
+                type="button"
+                class="faq__head"
+                aria-expanded="false"
+                aria-controls={panelId}
+                data-faq-toggle
+              >
+                <span class="faq__q">{item.q}</span>
+                <span class="faq__chev" aria-hidden="true"></span>
+              </button>
+              <div
+                id={panelId}
+                class="faq__panel"
+                role="region"
+                aria-labelledby={buttonId}
+              >
+                <div class="faq__body" inert>
+                  <p class="faq__a">{item.a}</p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   </section>
 
   <!-- ═══ Festive CTA band ═══ -->
   <div class="xcta-wrap">
     <div class="xcta-wrap__garland" style={`--decor-img: url('${christmasDecor.garlandStripBottom.src}')`} aria-hidden="true"></div>
     <CtaBand
-      title="The holidays won't wait — reserve your trolley"
-      sub={`Seasonal dates fill fast. Call ${site.contact.phoneDisplay} or request a quote in under two minutes.`}
-      ctaLabel="Get a Free Quote"
+      title="Reserve your Chicago Christmas trolley"
+      sub="Seasonal dates fill quickly. Share your group size, pickup location and preferred evening to request availability."
+      ctaLabel="Christmas Trolley Quote"
       ctaHref={quoteHref}
     />
   </div>
@@ -164,7 +215,7 @@ const featureList = [
   /* ── Hero ─────────────────────────────────────────────── */
   .xhero {
     position: relative;
-    height: 285px;
+    height: 315px;
     overflow: hidden;
     background-color: #0E1524;
     background-size: cover;
@@ -214,7 +265,7 @@ const featureList = [
     position: relative; z-index: 2; height: 100%;
     max-width: 1400px; margin: 0 auto;
     display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
-    gap: 22px; padding: clamp(24px, 4vw, 40px) clamp(24px, 6vw, 96px) 0;
+    gap: 15px; padding: clamp(24px, 4vw, 30px) clamp(24px, 6vw, 96px) 0;
     animation: fadeInUp 1.1s cubic-bezier(.22, .6, .2, 1) both;
   }
   .xhero__kicker {
@@ -230,6 +281,7 @@ const featureList = [
     font-weight: 300; font-size: 16.5px; letter-spacing: .02em;
     color: rgba(253, 252, 250, .88); max-width: 46ch; line-height: 1.7; margin: 0 0 8px;
   }
+  .xhero__cta { padding: 12px 24px; font-size: 11px; }
 
   /* ── What's included ─────────────────────────────────── */
   .xfeat { position: relative; }
@@ -242,7 +294,7 @@ const featureList = [
   .xfeat__img {
     width: 100%; height: 200px; object-fit: cover; display: block; border-radius: 8px;
   }
-  .xfeat__title { font-family: var(--serif); font-size: clamp(27px, 3vw, 36px); font-weight: 600; line-height: 1.2; margin: 0 0 28px; }
+  .xfeat__title { font-family: var(--serif); font-size: clamp(27px, 3vw, 36px); font-weight: 600; line-height: 1.2; margin: 0 0 18px; }
   .xfeat__items { list-style: none; margin: 0 0 34px; padding: 0; display: flex; flex-direction: column; gap: 14px; }
   .xfeat__item { display: flex; align-items: center; gap: 14px; }
   /* Eyebrow above the feature list — red, to lead with the Christmas theme. */
@@ -330,11 +382,42 @@ const featureList = [
   /* ── Narrative ───────────────────────────────────────── */
   .xstory { padding: 50px 28px 72px; text-align: center; }
   .xstory :global(.eyebrow__label) { color: #C8102E; }
+  .xstory__title { margin: 0 0 28px; }
   .xstory__body {
-    font-family: var(--serif); font-size: 23px; line-height: 1.65;
-    font-weight: 400; color: var(--ink); margin: 0; text-align: left;
+    font-family: var(--serif); font-size: 21px; line-height: 1.65;
+    font-weight: 400; color: var(--ink); text-align: left;
   }
+  .xstory__body p { margin: 0; }
+  .xstory__body p + p { margin-top: 22px; }
   .xstory__body em { color: #00BF4C; }
+
+  /* ── FAQ accordion (matches the homepage pattern) ───── */
+  .faq { background: var(--cream); padding: 56px 28px 72px; }
+  .faq :global(.eyebrow__label) { color: #C8102E; }
+  .faq__title { margin: 0 auto 34px; }
+  .faq__list { max-width: 800px; margin: 0 auto; }
+  .faq__item { border-top: 1px solid var(--line-2); }
+  .faq__item:last-child { border-bottom: 1px solid var(--line-2); }
+  .faq__head {
+    width: 100%; display: flex; align-items: center; gap: 20px;
+    padding: 24px 4px; background: transparent; border: 0; cursor: pointer;
+    text-align: left; font-family: var(--serif); color: var(--ink);
+  }
+  .faq__head:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 4px; }
+  .faq__q { flex: 1; font-size: 20px; font-weight: 600; line-height: 1.35; }
+  .faq__chev {
+    flex: none; width: 10px; height: 10px;
+    border-right: 1.5px solid var(--gold-deep); border-bottom: 1.5px solid var(--gold-deep);
+    transform: translateY(-2px) rotate(45deg); transition: transform .3s ease;
+  }
+  .faq__item.is-open .faq__chev { transform: translateY(2px) rotate(-135deg); }
+  .faq__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+  .faq__item.is-open .faq__panel { grid-template-rows: 1fr; }
+  .faq__body { overflow: hidden; min-height: 0; }
+  .faq__a {
+    margin: 0; padding: 0 4px 26px; max-width: 66ch;
+    color: var(--muted); font-size: 15px; font-weight: 300; line-height: 1.8;
+  }
 
   /* ── Festive CTA garland (bookends the hero treatment) ── */
   .xcta-wrap { position: relative; }
@@ -372,19 +455,44 @@ const featureList = [
     .xfeat__img { height: 170px; }
   }
   @media (max-width: 640px) {
-    .xhero { height: 250px; }
+    .xhero { height: 280px; }
     .xhero__overlay {
       background: linear-gradient(90deg, rgba(8, 11, 20, .88) 0%, rgba(8, 11, 20, .68) 55%, rgba(8, 11, 20, .42) 100%);
     }
     .xhero__lights { height: clamp(20px, 5vw, 28px); }
+    .xhero__content {
+      gap: 10px;
+      padding: 18px 18px 0;
+    }
+    .xhero__kicker { font-size: 9px; letter-spacing: .25em; }
+    .xhero__title { font-size: clamp(28px, 9vw, 40px); line-height: 1.05; }
+    .xhero__lead { max-width: 40ch; font-size: 12.5px; line-height: 1.45; margin-bottom: 2px; }
+    .xhero__cta {
+      min-height: 30px;
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      font-size: 9.25px;
+      letter-spacing: .16em;
+    }
     .xstory__body { font-size: 20px; }
-  
+    .faq { padding: 48px 22px 60px; }
+    .faq__q { font-size: 17px; }
+    .faq__head { gap: 14px; padding: 20px 2px; }
     .xcta-wrap__garland { height: clamp(34px, 8vw, 48px); }
     /* Kept at 44px (not shrunk) — that's the tap-target minimum. */
   }
+  @media (max-width: 481px) {
+    .xfeat :global(.eyebrow__label),
+    .xgal-band :global(.eyebrow__label),
+    .xstory :global(.eyebrow__label),
+    .faq :global(.eyebrow__label) {
+      font-size: 9px !important;
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     .xhero__lights::before, .xhero__lights::after { animation: none; opacity: .85; }
-    .gal__img { transition: none; }
+    .gal__img, .faq__panel, .faq__chev { transition: none; }
   }
 </style>
 
@@ -411,4 +519,25 @@ const featureList = [
       else if (e.key === 'ArrowRight') show(idx + 1);
     });
   });
+
+  // FAQ accordion — one item open at a time, matching the homepage behavior.
+  const faq = document.querySelector<HTMLElement>('[data-faq]');
+  if (faq) {
+    const items = Array.from(faq.querySelectorAll<HTMLElement>('.faq__item'));
+    const setFaqOpen = (item: HTMLElement, open: boolean) => {
+      item.classList.toggle('is-open', open);
+      item.querySelector('[data-faq-toggle]')?.setAttribute('aria-expanded', String(open));
+      const body = item.querySelector<HTMLElement>('.faq__body');
+      if (body) body.inert = !open;
+    };
+
+    items.forEach((item) => {
+      item.querySelector<HTMLButtonElement>('[data-faq-toggle]')?.addEventListener('click', () => {
+        const wasOpen = item.classList.contains('is-open');
+        items.forEach((otherItem) => setFaqOpen(otherItem, false));
+        if (!wasOpen) setFaqOpen(item, true);
+      });
+      setFaqOpen(item, false);
+    });
+  }
 </script>
