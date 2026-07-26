@@ -1,0 +1,69 @@
+---
+import Eyebrow from './Eyebrow.astro';
+
+interface Props {
+  eyebrow: string;
+  body?: string;
+  align?: 'left' | 'center';
+  id?: string;
+}
+
+const {
+  eyebrow,
+  body,
+  align = 'center',
+  id,
+} = Astro.props;
+---
+<header class:list={['section-heading', `section-heading--${align}`]}>
+  <Eyebrow
+    label={eyebrow}
+    align={align}
+    single={align === 'left'}
+    size="sm"
+    mb={16}
+  />
+  <h2 id={id} class="section-heading__title"><slot /></h2>
+  {body && <p class="section-heading__body">{body}</p>}
+</header>
+
+<style>
+  .section-heading {
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .section-heading--left {
+    margin-inline: 0;
+    text-align: left;
+  }
+  .section-heading__title {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: clamp(32px, 4.2vw, 48px);
+    font-weight: 500;
+    line-height: 1.08;
+  }
+  .section-heading__body {
+    max-width: 62ch;
+    margin: 18px auto 0;
+    color: var(--muted);
+    font-size: 15.5px;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+  .section-heading--left .section-heading__body {
+    margin-inline: 0;
+  }
+
+  @media (max-width: 640px) {
+    .section-heading__title {
+      font-size: clamp(29px, 9vw, 38px);
+    }
+    .section-heading__body {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+  }
+</style>

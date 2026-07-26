@@ -277,36 +277,30 @@ export const weddingFaqs = [
 
 /* ----------  Services  ---------- */
 export const services = [
-  { eyebrow: 'Business', title: 'Corporate Events', image: fleetImages.trolley.afternoonExterior, body: 'Shuttle a team between venues, welcome clients in from out of town, or give the holiday party a proper beginning. Punctual, polished, and quietly memorable.' },
-  { eyebrow: 'School Nights', title: 'Proms & Homecomings', image: fleetImages.trolley.summerExterior, body: 'A safe, chaperone-friendly ride the whole group shares — with a professional chauffeur and room for everyone’s photos before the dance.' },
-  { eyebrow: 'Celebrations', title: 'Quinceañeras', image: fleetImages.trolley.frontThreeQuarterWebp, body: 'From the church to the reception with the court all together. The white trolley photographs beautifully beside every gown.' },
-  { eyebrow: 'The Last Fling', title: 'Bachelor & Bachelorette Parties', image: fleetImages.trolley.interior, body: 'One cabin, one playlist, zero rideshare logistics. Hop between stops while the party never pauses — BYOB welcome for guests 21 and over.' },
-  { eyebrow: 'Game Day', title: 'Sporting Events & Concerts', image: fleetImages.trolley.winterExterior, body: 'Skip the parking scramble. Tailgate on the way, arrive at the gate together, and find your ride waiting when the encore ends.' },
-  { eyebrow: 'Travel', title: 'Airport Transportation', image: fleetImages.trolley.boardingExterior, body: 'For wedding weekends and group trips: one comfortable pickup for the whole party, with room for every suitcase.' },
-  { eyebrow: 'Group Travel', title: 'Coach Bus Charters', image: fleetImages.coach.exteriorSideDusk, body: 'When the guest list outgrows the trolley: modern coaches seating up to 57, with quilted leather seats, armrests, and generous under-floor luggage storage. Ideal for wedding guest shuttles, out-of-state trips, and business charters.' },
+  { eyebrow: 'Business', title: 'Corporate Events', image: fleetImages.trolley.classicExterior, body: 'Shuttle a team between venues, welcome clients in from out of town, or give the holiday party a proper beginning. Punctual, polished, and quietly memorable.' },
+  { eyebrow: 'School Nights', title: 'Proms & Homecomings', image: fleetImages.trolley.boardingExterior, body: 'A safe, chaperone-friendly ride the whole group shares — with a professional chauffeur and room for everyone’s photos before the dance.' },
+  { eyebrow: 'Celebrations', title: 'Quinceañeras', image: fleetImages.trolley.classicExterior, body: 'From the church to the reception with the court all together. The white trolley photographs beautifully beside every gown.' },
+  { eyebrow: 'The Last Fling', title: 'Bachelor & Bachelorette Parties', image: fleetImages.partyBus.interior1, body: 'One cabin, one playlist, zero rideshare logistics. Hop between stops while the party never pauses — BYOB welcome for guests 21 and over.' },
+  { eyebrow: 'Game Day', title: 'Sporting Events & Concerts', image: fleetImages.coach.exterior2, body: 'Skip the parking scramble. Tailgate on the way, arrive at the gate together, and find your ride waiting when the encore ends.' },
+  { eyebrow: 'Travel', title: 'Airport Transportation', image: fleetImages.sprinter.exterior, body: 'For wedding weekends and group trips: one comfortable pickup for the whole party, with room for every suitcase.' },
+  { eyebrow: 'Group Travel', title: 'Coach Bus Charters', image: fleetImages.coach.exterior1, body: 'When the guest list outgrows the trolley: modern coaches seating up to 57, with quilted leather seats, armrests, and generous under-floor luggage storage. Ideal for wedding guest shuttles, out-of-state trips, and business charters.' },
   { eyebrow: 'After Dark', title: 'Night Out & General Charter', image: fleetImages.trolley.christmasLights, body: 'Birthdays, anniversaries, holiday light tours, or no occasion at all. Charter the trolley and let the city roll past the windows.' },
-];
-
-/* ----------  About  ---------- */
-export const aboutTiles = [
-  { big: 'Licensed & Insured', small: 'Professional chauffeurs, background-checked and trained.' },
-  { big: 'Hand-Detailed', small: 'Both trolleys washed and inspected before every event.' },
-  { big: 'Owner-Operated', small: 'You book with the people who drive — no dispatch center.' },
 ];
 
 /* ----------  Gallery  ---------- */
 export const gallery = [
   { image: fleetImages.trolley.classicExterior, alt: 'Classic white trolley in warm winter light' },
-  { image: fleetImages.trolley.interior, alt: 'Interior with rose garlands and quilted leather seating' },
-  { image: fleetImages.trolley.frontThreeQuarterWebp, alt: 'White trolley, front three-quarter view' },
   { image: fleetImages.trolley.boardingExterior, alt: 'Grand trolley with boarding door open' },
+  { image: fleetImages.trolley.interior1, alt: 'Wood bench seating inside the classic white trolley' },
+  { image: fleetImages.trolley.interior2, alt: 'Passenger cabin inside the classic white trolley' },
+  { image: fleetImages.trolley.interior3, alt: 'Interior details inside the classic white trolley' },
   { image: fleetImages.trolley.christmasLights, alt: 'Trolley at dusk with string lights' },
-  { image: fleetImages.trolley.summerExterior, alt: 'Trolley among summer trees' },
-  { image: fleetImages.trolley.afternoonExterior, alt: 'Trolley on a sunny afternoon' },
-  { image: fleetImages.trolley.winterExterior, alt: 'Trolley under a clear winter sky' },
-  { image: fleetImages.coach.exteriorSideDusk, alt: 'Coach buses at dusk' },
-  { image: fleetImages.coach.interior, alt: 'Coach interior with quilted leather seating for 57' },
-  { image: fleetImages.coach.exteriorRearDusk, alt: 'White coach bus, rear view at dusk' },
+  { image: fleetImages.partyBus.exterior, alt: 'Party bus exterior' },
+  { image: fleetImages.partyBus.interior1, alt: 'Party bus lounge seating and colorful lighting' },
+  { image: fleetImages.partyBus.interior2, alt: 'Interior seating aboard the party bus' },
+  { image: fleetImages.coach.exterior1, alt: 'White coach bus ready for boarding' },
+  { image: fleetImages.coach.interior1, alt: 'Passenger seating inside the coach bus' },
+  { image: fleetImages.sprinter.exterior, alt: 'Black Sprinter limo van exterior' },
 ] satisfies { image: SiteImage; alt: string }[];
 
 /* ----------  FAQ  ---------- */

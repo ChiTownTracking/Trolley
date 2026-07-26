@@ -49,7 +49,7 @@ const schema = {
   publisher: {
     '@type': 'Organization',
     name: 'ChiTown Trolley',
-    logo: { '@type': 'ImageObject', url: new URL(fleetImages.trolley.frontThreeQuarterWebp.src, Astro.site ?? Astro.url).href },
+    logo: { '@type': 'ImageObject', url: new URL(fleetImages.trolley.classicExterior.src, Astro.site ?? Astro.url).href },
   },
   mainEntityOfPage: { '@type': 'WebPage', '@id': new URL(withBase(`/guides/${guide.id}`), Astro.site ?? Astro.url).href },
 };

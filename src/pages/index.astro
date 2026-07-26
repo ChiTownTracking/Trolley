@@ -129,7 +129,22 @@ const occasionsMobileSrcset = occasionsMobileSources
         Request a <em class="grad">Chicago trolley rental quote</em>
       </h2>
 
-      <form class="qform wizard" data-quote-form>
+      <form
+        class="qform wizard"
+        name="quote-request"
+        method="POST"
+        data-netlify="true"
+        data-netlify-form="true"
+        data-netlify-honeypot="bot-field"
+        data-quote-form
+      >
+        <input type="hidden" name="form-name" value="quote-request" />
+        <p class="netlify-honeypot" aria-hidden="true">
+          <label>
+            Do not fill this out:
+            <input name="bot-field" tabindex="-1" autocomplete="off" />
+          </label>
+        </p>
         <!-- Step 1 · Trip Information -->
         <div class="step is-open" data-step="1">
           <button type="button" class="step__head" data-step-toggle="1" aria-expanded="true">
@@ -260,18 +275,12 @@ const occasionsMobileSrcset = occasionsMobileSources
             </div>
           </div>
         </div>
+        <p class="form-status" data-form-status role="status" aria-live="polite"></p>
         <p class="getquote__disclaimer">
           Chicago trolley rental prices vary by date, vehicle, rental duration, itinerary and pickup details.
           Share your plans for a customized estimate.
         </p>
       </form>
-
-      <div class="confirm" data-quote-confirm role="alert" aria-labelledby="home-form-status-title" tabindex="-1" hidden>
-        <span class="confirm__mark">✳</span>
-        <p class="confirm__title" id="home-form-status-title">Online request not sent</p>
-        <p class="confirm__body">No information was delivered. Online form integration is not configured yet; please use the contact information in the site header or footer.</p>
-        <button type="button" class="link-gold" data-quote-reset>Return to form</button>
-      </div>
     </div>
   </section>
 
@@ -905,15 +914,6 @@ const occasionsMobileSrcset = occasionsMobileSources
     min-height: 44px; display: inline-flex; align-items: center;
   }
 
-  .confirm { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
-  .confirm__mark {
-    font-family: var(--serif); font-size: 40px; line-height: 1;
-    background: linear-gradient(100deg, var(--gold-dark), var(--gold));
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .confirm__title { font-family: var(--serif); font-size: 28px; font-weight: 600; margin: 0; }
-  .confirm__body { font-weight: 300; font-size: 15px; line-height: 1.8; color: var(--muted); margin: 0; max-width: 46ch; }
-
   /* 4/3 cols → 2 on tablet → 1 on mobile */
   @media (max-width: 900px) {
     .step__grid, .step__grid--3 { grid-template-columns: repeat(2, 1fr); }
@@ -1267,10 +1267,8 @@ const occasionsMobileSrcset = occasionsMobileSources
 </script>
 
 <script>
-  // Multi-step accordion wizard + explicit not-connected status.
+  // Multi-step accordion wizard.
   const form = document.querySelector<HTMLFormElement>('[data-quote-form]');
-  const confirm = document.querySelector<HTMLElement>('[data-quote-confirm]');
-  const reset = document.querySelector<HTMLButtonElement>('[data-quote-reset]');
 
   if (form) {
     const steps = Array.from(form.querySelectorAll<HTMLElement>('.step'));
@@ -1325,22 +1323,9 @@ const occasionsMobileSrcset = occasionsMobileSources
       if (sel && match) sel.value = match.value;
     }
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!form.reportValidity()) return;
-      form.hidden = true;
-      if (confirm) {
-        confirm.hidden = false;
-        confirm.focus();
-      }
-    });
-    reset?.addEventListener('click', () => {
-      if (confirm) confirm.hidden = true;
-      form.hidden = false;
-      form.reset();
+    form.addEventListener('netlify-form:success', () => {
       steps.forEach((s) => s.classList.remove('is-done'));
       openStep('1', false);
-      form.querySelector<HTMLElement>('.field__control')?.focus();
     });
   }
 </script>

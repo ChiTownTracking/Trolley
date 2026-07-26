@@ -1,64 +1,540 @@
 ---
+import { getImage, Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
-import { aboutTiles } from '../data/site';
+import Eyebrow from '../components/Eyebrow.astro';
 import { fleetImages } from '../data/fleet';
+import aboutBannerSource from '../assets/images/about/banner.png';
+import wbencLogo from '../assets/images/branding/certifications/wbenc-logo.svg';
+import womenOwnedWordmark from '../assets/images/branding/certifications/women-owned-wordmark.png';
+
+const title = 'About ChiTown Trolley | Women-Owned Chicago Trolley Company';
+const description =
+  'Learn about ChiTown Trolley, a women-owned Chicago transportation company created by ChiTown LimoBus and certified through WBENC.';
+
+const aboutHeroDesktop = await getImage({
+  src: aboutBannerSource,
+  width: 1915,
+  format: 'webp',
+  quality: 82,
+});
+const aboutHeroMobile = await getImage({
+  src: aboutBannerSource,
+  width: 900,
+  format: 'webp',
+  quality: 80,
+});
+
 ---
+
 <BaseLayout
-  title="About — ChiTown Trolley"
-  description="A small, owner-operated Chicago trolley company. You book with the people who wash the trolleys by hand and drive them on your wedding day."
+  title={title}
+  description={description}
+  image={aboutBannerSource}
+  mobileHeroPreload={aboutHeroMobile.src}
 >
-  <PageHero eyebrow="About Us" pb={56}>
-    A small company with a <em class="grad">personal touch</em>
-  </PageHero>
-
-  <section class="rv about wrap wrap-1060">
-    <img
-      src={fleetImages.trolley.summerExterior.src}
-      width={fleetImages.trolley.summerExterior.width}
-      height={fleetImages.trolley.summerExterior.height}
-      alt="ChiTown trolley among summer trees"
-      class="about__img"
-    />
-    <div>
-      <p class="about__lead">We started ChiTown Trolley for one reason: Chicago couples deserved better than an anonymous mega-fleet.</p>
-      <p class="about__p">When you book with us, you talk to the people who own the trolleys, wash them by hand, and drive them on your wedding day. No dispatch center, no substitutions, no surprises — the trolley you toured is the trolley that arrives.</p>
-      <p class="about__p" style="margin-bottom:0">Our chauffeurs are professional, licensed, and background-checked, and both trolleys are inspected and detailed before every event. It's a small operation — which is exactly why the details never slip.</p>
+  <section class="aboutHero" aria-labelledby="about-title">
+    <picture class="aboutHero__media">
+      <source media="(max-width: 700px)" srcset={aboutHeroMobile.src} type="image/webp" />
+      <img
+        src={aboutHeroDesktop.src}
+        width={aboutBannerSource.width}
+        height={aboutBannerSource.height}
+        alt="Warm-toned Chicago skyline beside a gold-trimmed building"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </picture>
+    <div class="aboutHero__overlay" aria-hidden="true"></div>
+    <div class="aboutHero__inner">
+      <p class="aboutHero__eyebrow">About ChiTown Trolley</p>
+      <h1 id="about-title">A women-owned Chicago trolley company built on personal service</h1>
     </div>
   </section>
 
-  <section class="rv about-band">
-    <div class="wrap wrap-1000 about-band__grid">
-      {aboutTiles.map((t) => (
-        <div class="atile">
-          <p class="atile__big">{t.big}</p>
-          <div class="atile__rule"></div>
-          <p class="atile__small">{t.small}</p>
+  <section class="story section" aria-labelledby="story-title">
+    <div class="sectionInner">
+      <div class="story__main">
+        <figure class="story__image rv">
+          <Image
+            src={fleetImages.trolley.classicExterior}
+            alt="Classic white ChiTown trolley parked beside a building"
+            widths={[480, 555]}
+            sizes="(max-width: 780px) calc(100vw - 40px), 47vw"
+            format="webp"
+            quality={82}
+            loading="lazy"
+          />
+        </figure>
+
+        <div class="sectionCopy story__copy">
+          <div class="story__heading rv">
+            <Eyebrow label="Our Story" align="left" single mb={18} />
+            <h2 id="story-title">A trolley experience backed by ChiTown LimoBus</h2>
+          </div>
+          <div class="story__body rv">
+            <p>
+              ChiTown Trolley was created by ChiTown LimoBus to give Chicago groups a distinctive
+              option for weddings, private events and organized transportation. The classic white
+              trolley combines the character couples and event planners want with the route planning
+              required to move a group between multiple locations.
+            </p>
+            <p>
+              The transportation experience behind ChiTown LimoBus helps our team coordinate pickup
+              times, planned stops and vehicle options around one clear itinerary. From the first
+              route question to the final stop, each reservation is handled with attention to the
+              details that keep the day moving.
+            </p>
+            <a
+              class="textLink"
+              href="https://www.chitownlimobus.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit ChiTown LimoBus (opens in a new tab)"
+            >
+              Visit ChiTown LimoBus <span aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
-      ))}
+      </div>
+
     </div>
   </section>
+
+  <section class="certification section" aria-labelledby="certification-title">
+    <div class="sectionInner">
+      <header class="certification__header rv">
+        <div class="certification__title">
+          <Eyebrow label="Women-Owned & WBENC-Certified" align="left" single mb={20} />
+          <h2 id="certification-title">Certified women-owned, operated and managed</h2>
+          <p>Independent certification. Local leadership. Personal accountability.</p>
+        </div>
+      </header>
+
+      <div class="certification__main">
+        <div class="certification__copy rv">
+          <p>
+            ChiTown Trolley is proud to be part of a WBENC-certified women-owned business.
+            WBENC certification verifies that a company is at least 51 percent owned, controlled,
+            operated and managed by a woman or women.
+          </p>
+          <p>
+            The certification process includes a formal review of ownership and business
+            documentation. For clients, it provides independent confirmation that women’s
+            ownership and leadership are central to the company.
+          </p>
+          <a
+            class="textLink"
+            href="https://www.wbenc.org/certification/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Learn About WBENC Certification (opens in a new tab)"
+          >
+            Learn About WBENC Certification <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <aside class="certification__visual rv" aria-label="Women-owned business certifications">
+          <p class="certification__visualLabel">Recognized certification marks</p>
+          <div class="certification__marks">
+            <Image
+              class="certification__wbenc"
+              src={wbencLogo}
+              alt="WBENC Certified Women's Business Enterprise logo"
+              loading="lazy"
+            />
+            <span aria-hidden="true"></span>
+            <Image
+              class="certification__womenOwned"
+              src={womenOwnedWordmark}
+              alt="Women Owned business certification logo"
+              widths={[320, 480, 546]}
+              sizes="(max-width: 720px) 68vw, 320px"
+              format="webp"
+              quality={90}
+              loading="lazy"
+            />
+          </div>
+          <p class="certification__visualNote">
+            Women’s Business Enterprise certification through WBENC
+          </p>
+          <!-- The repository certificate expired August 31, 2025, so it is not displayed. -->
+        </aside>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>
 
 <style>
-  .about {
-    padding: 0 28px 88px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-    gap: 56px;
+  :where(.story, .certification) h2 {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: clamp(34px, 4vw, 52px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -.025em;
+  }
+
+  .section {
+    padding: clamp(64px, 6vw, 88px) 28px;
+  }
+  .sectionInner {
+    width: min(100%, 1240px);
+    margin-inline: auto;
+  }
+  .sectionCopy > p,
+  .story__body > p {
+    max-width: 62ch;
+    margin: 22px 0 0;
+    color: var(--muted);
+    font-size: 15.5px;
+    font-weight: 300;
+    line-height: 1.78;
+  }
+  .sectionCopy > p + p,
+  .story__body > p + p {
+    margin-top: 14px;
+  }
+  .textLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 26px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid currentColor;
+    color: var(--gold-deep);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .aboutHero {
+    position: relative;
+    height: 315px;
+    overflow: hidden;
+    background: #17140f;
+    isolation: isolate;
+  }
+  .aboutHero__media,
+  .aboutHero__media img,
+  .aboutHero__overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .aboutHero__media img {
+    object-fit: cover;
+    object-position: center 56%;
+  }
+  .aboutHero__overlay {
+    z-index: 1;
+    background:
+      linear-gradient(90deg, rgba(10, 9, 7, .94) 0%, rgba(10, 9, 7, .8) 39%, rgba(10, 9, 7, .4) 68%, rgba(10, 9, 7, .08) 100%),
+      linear-gradient(0deg, rgba(9, 8, 7, .25), transparent 65%);
+  }
+  .aboutHero__inner {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 1400px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 auto;
+    padding: clamp(24px, 4vw, 30px) clamp(24px, 6vw, 96px) 0;
+    box-sizing: border-box;
+  }
+  .aboutHero__eyebrow {
+    margin: 0;
+    color: var(--gold-light);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .34em;
+    text-transform: uppercase;
+  }
+  .aboutHero h1 {
+    max-width: 900px;
+    margin: 0;
+    color: #fff;
+    font-family: var(--serif);
+    font-size: clamp(34px, 4.2vw, 58px);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -.035em;
+    text-wrap: balance;
+    text-shadow: 0 4px 28px rgba(0, 0, 0, .38);
+  }
+
+  .story {
+    background: var(--paper);
+  }
+  .story__main {
+    display: flex;
+    gap: clamp(44px, 7vw, 88px);
     align-items: center;
   }
-  .about__img {
-    width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
-    border: 1px solid var(--line); box-shadow: 0 16px 44px rgba(26, 26, 26, .1);
+  .story__main > * {
+    min-width: 0;
   }
-  .about__lead { font-family: var(--serif); font-size: 24px; line-height: 1.55; margin: 0 0 22px; }
-  .about__p { font-weight: 300; font-size: 15.5px; line-height: 1.85; color: var(--muted); margin: 0 0 16px; }
+  .story__image {
+    flex: 0 1 48%;
+  }
+  .story__copy {
+    flex: 1 1 52%;
+  }
+  .story__image {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--cream);
+    box-shadow: 0 20px 52px rgba(26, 26, 26, .11);
+  }
+  .story__image :global(img) {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  .story__image :global(img) {
+    aspect-ratio: 1.45;
+  }
+  .certification {
+    position: relative;
+    overflow: hidden;
+    background: #171714;
+    color: #fff;
+    isolation: isolate;
+  }
+  .certification::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 760px;
+    height: 760px;
+    top: -430px;
+    right: -260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212, 175, 106, .16), transparent 68%);
+    pointer-events: none;
+  }
+  .certification .sectionInner {
+    position: relative;
+  }
+  .certification__header {
+    display: block;
+    padding-bottom: clamp(30px, 4vw, 44px);
+    border-bottom: 1px solid rgba(212, 175, 106, .28);
+  }
+  .certification__title {
+    width: min(100%, 900px);
+    margin-inline: auto;
+  }
+  .certification__title h2 {
+    max-width: 800px;
+    color: #fff;
+    font-size: clamp(38px, 4.6vw, 64px);
+    line-height: .98;
+  }
+  .certification__title > p {
+    margin: 18px 0 0;
+    color: rgba(255, 255, 255, .64);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: .06em;
+    line-height: 1.6;
+  }
+  .certification__main {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(390px, 1.1fr);
+    gap: clamp(44px, 7vw, 90px);
+    align-items: center;
+    margin-top: clamp(38px, 5vw, 58px);
+  }
+  .certification__copy > p {
+    max-width: 57ch;
+    margin: 0;
+    color: rgba(255, 255, 255, .7);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.78;
+  }
+  .certification__copy > p + p {
+    margin-top: 16px;
+  }
+  .certification__copy .textLink {
+    color: var(--gold-light);
+  }
+  .certification__visual {
+    position: relative;
+    margin: 0;
+    padding: clamp(34px, 4vw, 52px);
+    border-top: 4px solid var(--gold);
+    border-radius: 0 0 6px 6px;
+    background: var(--paper);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, .28);
+  }
+  .certification__visual::before {
+    content: '';
+    position: absolute;
+    inset: 13px;
+    border: 1px solid rgba(138, 106, 31, .18);
+    pointer-events: none;
+  }
+  .certification__visualLabel {
+    position: relative;
+    margin: 0 0 34px;
+    color: var(--gold-deep);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .24em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .certification__marks {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(120px, .9fr) 1px minmax(165px, 1.1fr);
+    align-items: center;
+    justify-items: center;
+    gap: clamp(18px, 3vw, 30px);
+  }
+  .certification__marks > span {
+    width: 1px;
+    height: 72px;
+    background: var(--gold);
+  }
+  .certification__wbenc {
+    width: min(100%, 230px);
+    height: auto;
+  }
+  .certification__womenOwned {
+    width: min(100%, 245px);
+    height: auto;
+  }
+  .certification__visualNote {
+    position: relative;
+    max-width: 42ch;
+    margin: 32px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(138, 106, 31, .18);
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: .08em;
+    line-height: 1.55;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  @media (max-width: 1023px) {
+    .section {
+      padding-block: 60px;
+    }
+  }
 
-  .about-band { background: var(--cream); padding: 72px 28px; }
-  .about-band__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; }
-  .atile { text-align: center; display: flex; flex-direction: column; gap: 8px; }
-  .atile__big { font-family: var(--serif); font-size: 24px; font-weight: 600; margin: 0; }
-  .atile__rule { width: 34px; height: 1px; background: linear-gradient(90deg, var(--gold-dark), var(--gold-light)); margin: 4px auto; }
-  .atile__small { font-weight: 300; font-size: 14px; color: var(--muted); margin: 0; line-height: 1.7; }
+  @media (max-width: 820px) {
+    .story__main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 30px;
+    }
+    .story__copy {
+      display: contents;
+    }
+    .story__heading {
+      order: 1;
+    }
+    .story__image {
+      order: 2;
+    }
+    .story__body {
+      order: 3;
+    }
+    .story__body > p:first-child {
+      margin-top: 0;
+    }
+    .certification__visual {
+      width: min(100%, 620px);
+      margin-inline: auto;
+      box-sizing: border-box;
+    }
+    .certification__main {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .certification__main {
+      gap: 36px;
+    }
+    .certification__copy {
+      max-width: 660px;
+    }
+    .story__image,
+    .story__copy {
+      width: 100%;
+      flex-basis: auto;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .aboutHero {
+      height: 280px;
+    }
+    .aboutHero__media img {
+      object-position: center 58%;
+    }
+    .aboutHero__overlay {
+      background: linear-gradient(
+        90deg,
+        rgba(9, 8, 7, .94) 0%,
+        rgba(9, 8, 7, .82) 54%,
+        rgba(9, 8, 7, .48) 100%
+      );
+    }
+    .aboutHero__inner {
+      gap: 10px;
+      padding: 18px 18px 0;
+    }
+    .aboutHero__eyebrow {
+      font-size: 9px;
+      letter-spacing: .25em;
+    }
+    .aboutHero h1 {
+      max-width: 620px;
+      font-size: clamp(28px, 9vw, 40px);
+      line-height: 1.05;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .section {
+      padding: 48px 20px;
+    }
+    :where(.story, .certification) h2 {
+      font-size: clamp(32px, 9.5vw, 42px);
+    }
+    .sectionCopy > p,
+    .story__body > p,
+    .certification__copy > p {
+      font-size: 14.5px;
+      line-height: 1.72;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .certification__visual {
+      padding: 32px 24px;
+    }
+    .certification__marks {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .certification__marks > span {
+      width: 48px;
+      height: 1px;
+    }
+  }
 </style>

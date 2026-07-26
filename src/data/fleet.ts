@@ -1,39 +1,49 @@
 import type { SiteImage } from '../utils/images';
-import { publicImage } from '../utils/images';
 
 import trolleyClassicExterior from '../assets/images/fleet/trolley/classic-exterior.png';
-import trolleyFrontThreeQuarter from '../assets/images/fleet/trolley/front-three-quarter.png';
-import trolleyFrontThreeQuarterWebp from '../assets/images/fleet/trolley/front-three-quarter.webp';
-import trolleySummerExterior from '../assets/images/fleet/trolley/summer-exterior.png';
 import trolleyBoardingExterior from '../assets/images/fleet/trolley/boarding-exterior.png';
-import trolleyAfternoonExterior from '../assets/images/fleet/trolley/afternoon-exterior.png';
-import trolleyWinterExterior from '../assets/images/fleet/trolley/winter-exterior.jpg';
-import coachExteriorRearDusk from '../assets/images/fleet/coach/exterior-rear-dusk.jpg';
-import coachInterior from '../assets/images/fleet/coach/interior.jpg';
+import trolleyChristmasLights from '../assets/images/christmas/gallery/christmas-trolley.png';
+import trolleyInterior1 from '../assets/images/fleet/trolley/trolley-interior-1.jpeg';
+import trolleyInterior2 from '../assets/images/fleet/trolley/trolley-interior-2.jpeg';
+import trolleyInterior3 from '../assets/images/fleet/trolley/trolley-interior-3.jpeg';
+import coachExterior1 from '../assets/images/fleet/coach/coach-bus-exterior-1.jpeg';
+import coachExterior2 from '../assets/images/fleet/coach/coach-bus-exterior-2.jpeg';
+import coachExterior3 from '../assets/images/fleet/coach/coach-bus-exterior-3.jpeg';
+import coachInterior1 from '../assets/images/fleet/coach/interior1.jpeg';
+import coachInterior2 from '../assets/images/fleet/coach/interior2.jpeg';
+import coachInterior3 from '../assets/images/fleet/coach/interior3.jpeg';
+import coachWashroom1 from '../assets/images/fleet/coach/coach-bus-washroom-1.jpeg';
+import coachWashroom2 from '../assets/images/fleet/coach/coach-bus-washroom-2.jpeg';
 import partyBusExterior from '../assets/images/fleet/party-bus/exterior.jpg';
-import sprinterExterior from '../assets/images/fleet/sprinter/exterior.jpg';
+import partyBusInterior1 from '../assets/images/fleet/party-bus/party-bus-interior-1.jpeg';
+import partyBusInterior2 from '../assets/images/fleet/party-bus/party-bus-interior-2.jpeg';
+import sprinterExterior from '../assets/images/fleet/sprinter/sprinter-van-exterior.png';
 import sprinterInteriorFront from '../assets/images/fleet/sprinter/interior-front.jpg';
 import sprinterInteriorRear from '../assets/images/fleet/sprinter/interior-rear.webp';
 
 export const fleetImages = {
   trolley: {
     classicExterior: trolleyClassicExterior,
-    frontThreeQuarter: trolleyFrontThreeQuarter,
-    frontThreeQuarterWebp: trolleyFrontThreeQuarterWebp,
-    interior: publicImage('/images/guides/trolley-interior.webp', 555, 327, 'webp'),
-    summerExterior: trolleySummerExterior,
     boardingExterior: trolleyBoardingExterior,
-    afternoonExterior: trolleyAfternoonExterior,
-    winterExterior: trolleyWinterExterior,
-    christmasLights: publicImage('/images/guides/trolley-christmas-lights.png', 555, 327, 'png'),
+    interior1: trolleyInterior1,
+    interior2: trolleyInterior2,
+    interior3: trolleyInterior3,
+    christmasLights: trolleyChristmasLights,
   },
   coach: {
-    exteriorRearDusk: coachExteriorRearDusk,
-    exteriorSideDusk: publicImage('/images/guides/coach-exterior-side-dusk.jpg', 1100, 733, 'jpeg'),
-    interior: coachInterior,
+    exterior1: coachExterior1,
+    exterior2: coachExterior2,
+    exterior3: coachExterior3,
+    interior1: coachInterior1,
+    interior2: coachInterior2,
+    interior3: coachInterior3,
+    washroom1: coachWashroom1,
+    washroom2: coachWashroom2,
   },
   partyBus: {
     exterior: partyBusExterior,
+    interior1: partyBusInterior1,
+    interior2: partyBusInterior2,
   },
   sprinter: {
     exterior: sprinterExterior,
@@ -52,8 +62,6 @@ export interface FleetVehicle {
   gallery: readonly SiteImage[];
   /** Exact "Choose Vehicle" option string, for pre-selecting the quote form. */
   quoteValue: string;
-  /** YouTube video ID — placeholder until real footage is supplied. */
-  video: string;
   intro: string;
   stats: { label: string; value: string }[];
   perfectFor: string[];
@@ -69,16 +77,12 @@ export const fleet: FleetVehicle[] = [
     image: fleetImages.trolley.classicExterior,
     gallery: [
       fleetImages.trolley.classicExterior,
-      fleetImages.trolley.frontThreeQuarter,
-      fleetImages.trolley.interior,
-      fleetImages.trolley.summerExterior,
       fleetImages.trolley.boardingExterior,
-      fleetImages.trolley.afternoonExterior,
-      fleetImages.trolley.winterExterior,
+      fleetImages.trolley.interior1,
+      fleetImages.trolley.interior2,
+      fleetImages.trolley.interior3,
     ],
     quoteValue: 'Classic White Trolley · 30–36',
-    // TODO: replace with the real YouTube video ID for the Classic White Trolley
-    video: 'YE7VzlLtp-4',
     intro: 'There is something about an open-air trolley that turns a simple drive into an occasion. Polished rails, a rear balcony made for the photos everyone remembers, and circular seating so the whole party rides facing one another. From the first stop to the last, the Classic White Trolley sets a timeless, old-world tone for the day.',
     stats: [
       { label: 'Capacity', value: '30–36' },
@@ -93,15 +97,18 @@ export const fleet: FleetVehicle[] = [
     slug: 'super-coach-bus',
     cap: 'Up to 57 passengers',
     previewCap: 'Up to 57 guests',
-    image: fleetImages.coach.exteriorRearDusk,
+    image: fleetImages.coach.exterior1,
     gallery: [
-      fleetImages.coach.exteriorRearDusk,
-      fleetImages.coach.exteriorSideDusk,
-      fleetImages.coach.interior,
+      fleetImages.coach.exterior1,
+      fleetImages.coach.exterior2,
+      fleetImages.coach.exterior3,
+      fleetImages.coach.interior1,
+      fleetImages.coach.interior2,
+      fleetImages.coach.interior3,
+      fleetImages.coach.washroom1,
+      fleetImages.coach.washroom2,
     ],
     quoteValue: 'Super Coach Bus · 57',
-    // TODO: replace with the real YouTube video ID for the Super Coach Bus
-    video: 'YE7VzlLtp-4',
     intro: 'When the guest list outgrows the trolley, the Super Coach Bus keeps everyone together in quilted-leather comfort. Climate-controlled, whisper-smooth, and built for the long haul, it is the effortless way to shuttle guests between hotel and venue — or carry the whole group across state lines without a second vehicle in the convoy.',
     stats: [
       { label: 'Capacity', value: 'Up to 57' },
@@ -117,10 +124,12 @@ export const fleet: FleetVehicle[] = [
     cap: 'Up to 40 passengers',
     previewCap: 'Up to 40 Passengers',
     image: fleetImages.partyBus.exterior,
-    gallery: [fleetImages.partyBus.exterior],
+    gallery: [
+      fleetImages.partyBus.exterior,
+      fleetImages.partyBus.interior1,
+      fleetImages.partyBus.interior2,
+    ],
     quoteValue: 'Party Bus · 40',
-    // TODO: replace with the real YouTube video ID for the Party Bus
-    video: 'YE7VzlLtp-4',
     intro: 'When the celebration is the whole point, the Party Bus brings the venue along with you. Step aboard to wraparound lounge seating, color-shifting lights, and a sound system built to move — so the night begins the moment the doors close, not when you arrive. It is the rolling centerpiece for every milestone worth remembering.',
     stats: [
       { label: 'Capacity', value: 'Up to 40' },
@@ -142,8 +151,6 @@ export const fleet: FleetVehicle[] = [
       fleetImages.sprinter.interiorRear,
     ],
     quoteValue: 'Limo Van · 14',
-    // TODO: replace with the real YouTube video ID for the Limo Vans
-    video: 'YE7VzlLtp-4',
     intro: 'For smaller parties and executive runs, the Limo Van is the versatile favorite — intimate, understated, and ready for anything from an airport pickup to a night on the town. Executive leather seating and ambient lighting make even the shortest trips feel like part of the celebration.',
     stats: [
       { label: 'Capacity', value: 'Up to 14' },

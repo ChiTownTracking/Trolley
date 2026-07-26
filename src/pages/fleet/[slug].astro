@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Eyebrow from '../../components/Eyebrow.astro';
 import { fleet } from '../../data/fleet';
 import { imageSrc } from '../../utils/images';
 import { withBase } from '../../utils/paths';
@@ -95,24 +94,6 @@ const hasGallery = images.length > 1;
       </section>
     </div>
 
-    <!-- See it in action -->
-    <section class="vd__video">
-      <Eyebrow label="Take a Closer Look" align="left" single mb={12} />
-      <h2 class="vd__h vd__h--lg">See it in action</h2>
-      <!-- TODO: placeholder video — swap vehicle.video in src/data/site.ts for real footage -->
-      <div class="vid">
-        <iframe
-          class="vid__frame"
-          src={`https://www.youtube.com/embed/${vehicle.video}`}
-          title={`${vehicle.name} — video`}
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-        ></iframe>
-      </div>
-    </section>
-
     <!-- Closing CTA -->
     <section class="vd__cta">
       <h2 class="vd__cta-title">Ready to reserve the <em class="grad">{vehicle.name}</em>?</h2>
@@ -178,7 +159,6 @@ const hasGallery = images.length > 1;
   }
   .vd__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 56px; }
   .vd__h { font-family: var(--serif); font-size: 22px; font-weight: 600; margin: 0 0 22px; }
-  .vd__h--lg { font-size: 26px; margin-bottom: 22px; }
   .vd__feats { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
   .vd__feat { font-weight: 300; font-size: 15px; color: var(--muted); display: flex; align-items: baseline; gap: 12px; }
   .vd__diamond { color: var(--gold-dark); font-size: 11px; flex: none; }
@@ -187,14 +167,6 @@ const hasGallery = images.length > 1;
     font-size: 12px; letter-spacing: .04em; color: var(--gold-deep);
     border: 1px solid var(--gold); border-radius: 999px; padding: 8px 16px; background: var(--paper);
   }
-
-  /* Video (16:9) */
-  .vd__video { margin-top: 72px; }
-  .vid {
-    position: relative; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden;
-    background: var(--cream); border: 1px solid var(--line);
-  }
-  .vid__frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
   /* Closing CTA */
   .vd__cta {

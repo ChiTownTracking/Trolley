@@ -1,31 +1,16 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { christmasFaqs } from '../data/site';
-import { christmasDecor, christmasGallery } from '../data/christmas-images';
+import { christmasDecor } from '../data/christmas-images';
 import { withBase } from '../utils/paths';
 import christmasHeaderBackground from '../assets/images/christmas/gallery/christmas-header-bg.png';
+import christmasTrolleyFeatureImage from '../assets/images/christmas/gallery/christmas-trolley.png';
 
 // Dedicated Christmas header artwork.
 const heroImage = christmasHeaderBackground;
-// Preserve the approved feature grid that previously excluded gallery image 2.
-const featureImages = christmasGallery.filter((_, index) => index !== 1).slice(0, 4);
-// Full gallery: everything.
-const gallery = christmasGallery;
-const featureImageAlts = [
-  'Illuminated white trolley viewed from the front with its boarding door open',
-  'Rear balcony and multicolored roof lights on the white holiday trolley',
-  'Front-side view of the heated white trolley lit for a holiday evening',
-  'Open rear balcony beneath the trolley’s multicolored Christmas lights',
-];
-const galleryImageAlts = [
-  'White trolley glowing with multicolored lights at dusk',
-  'Side view of the decorated trolley with its cabin illuminated and door open',
-  'Rear three-quarter view highlighting the trolley’s open photo balcony',
-  'Low front view of a white trolley decorated with roofline lights',
-  'Rear view of the decorated trolley with lit windows and balcony',
-];
 
 // Matches the "Choose Vehicle" option so the quote form pre-selects it.
 const quoteHref = withBase(`/?vehicle=${encodeURIComponent('Christmas Trolley · 24–36')}#getquote`);
@@ -63,18 +48,17 @@ const featureList = [
   <!-- ═══ What's included ═══ -->
   <section class="rv xfeat">
     <div class="xfeat__inner wrap wrap-1140">
-      <div class="xfeat__photos">
-        {featureImages.map((image, i) => (
-          <img
-            src={image.src}
-            width={image.width}
-            height={image.height}
-            alt={featureImageAlts[i]}
-            class="xfeat__img"
-            loading="lazy"
-            decoding="async"
-          />
-        ))}
+      <div class="xfeat__photo">
+        <Image
+          src={christmasTrolleyFeatureImage}
+          alt="White Christmas trolley illuminated with colorful roofline lights"
+          widths={[480, 720, 960, 1200]}
+          sizes="(max-width: 860px) calc(100vw - 56px), 52vw"
+          format="webp"
+          quality={86}
+          class="xfeat__img"
+          loading="lazy"
+        />
       </div>
       <div class="xfeat__list">
         <Eyebrow label="Private Christmas Trolley Tour" align="left" mb={14} />
@@ -100,45 +84,6 @@ const featureList = [
         <a href={quoteHref} class="btn-gold xfeat__cta">Christmas Trolley Quote</a>
       </div>
     </div>
-  </section>
-
-  <!-- ═══ Gallery (dark) ═══ -->
-  <section class="rv xgal-band">
-    <div class="xgal-band__garland xgal-band__garland--top" style={`--decor-img: url('${christmasDecor.garlandStrand.src}')`} aria-hidden="true"></div>
-    <div class="wrap wrap-1000">
-      <Eyebrow label="Chicago Christmas Trolley" mb={14} />
-      <h2 class="h-section text-center xgal-band__title">The trolley, <em class="grad">dressed for December</em></h2>
-      <div class="gal" data-gallery tabindex="0" aria-label="Christmas trolley photo gallery">
-        <div class="gal__main">
-          {gallery.map((image, i) => (
-            <img
-              src={image.src}
-              width={image.width}
-              height={image.height}
-              alt={galleryImageAlts[i]}
-              class:list={['gal__img', { 'is-active': i === 0 }]}
-              data-gal-slide
-              loading={i === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-            />
-          ))}
-          <button type="button" class="gal__arrow gal__arrow--prev" data-gal-prev aria-label="Previous image">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          </button>
-          <button type="button" class="gal__arrow gal__arrow--next" data-gal-next aria-label="Next image">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
-        <div class="gal__thumbs" data-gal-thumbs>
-          {gallery.map((image, i) => (
-            <button type="button" class:list={['gal__thumb', { 'is-active': i === 0 }]} data-gal-thumb={i} aria-label={`Show image ${i + 1}`}>
-              <img src={image.src} width={image.width} height={image.height} alt="" loading="lazy" decoding="async" />
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
-    
   </section>
 
   <!-- ═══ Seasonal narrative ═══ -->
@@ -290,9 +235,9 @@ const featureList = [
     display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(36px, 5vw, 72px);
     align-items: center;
   }
-  .xfeat__photos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .xfeat__photo { overflow: hidden; border-radius: 8px; }
   .xfeat__img {
-    width: 100%; height: 200px; object-fit: cover; display: block; border-radius: 8px;
+    width: 100%; height: auto; display: block;
   }
   .xfeat__title { font-family: var(--serif); font-size: clamp(27px, 3vw, 36px); font-weight: 600; line-height: 1.2; margin: 0 0 18px; }
   .xfeat__items { list-style: none; margin: 0 0 34px; padding: 0; display: flex; flex-direction: column; gap: 14px; }
@@ -317,67 +262,6 @@ const featureList = [
   .xfeat__text--note { color: #C8102E; font-weight: 400; }
   .xfeat__item:last-child .xicon { color: #C8102E; }
   .xfeat__cta { align-self: flex-start; }
-
-  /* ── Dark gallery band ───────────────────────────────── */
-  .xgal-band {
-    position: relative;
-    /* Deep pine-to-black blend (was navy) — lets the garland frame and gold
-       photos read as genuinely "Christmas" rather than just "dark". */
-    background:
-      radial-gradient(circle 1px at 18% 22%, rgba(255, 255, 255, .16) 50%, transparent 60%),
-      radial-gradient(circle 1px at 64% 9%, rgba(255, 255, 255, .1) 50%, transparent 60%),
-      radial-gradient(circle 1px at 41% 64%, rgba(255, 255, 255, .08) 50%, transparent 60%),
-      radial-gradient(circle 1px at 87% 46%, rgba(255, 255, 255, .12) 50%, transparent 60%),
-      linear-gradient(165deg, #142A20 0%, #0A1712 55%, #05100B 100%);
-    padding: 60px 28px 92px;
-  }
-  .xgal-band :global(.eyebrow__label) { color: var(--gold-light); }
-  .xgal-band__title { color: #fff; margin-bottom: 46px; }
-
-  /* Garland strands framing the section's top and bottom edges */
-  .xgal-band__garland {
-    position: absolute; left: 0; right: 0;
-    height: clamp(56px, 8vw, 96px);
-    background-image: var(--decor-img);
-    background-repeat: repeat-x; background-size: auto 100%;
-    pointer-events: none;
-  }
-  .xgal-band__garland--top {
-    top: -32px; background-position: top center;
-    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
-  }
-
-  .gal { outline: none; }
-  .gal__main {
-    position: relative; height: clamp(280px, 44vw, 520px);
-    border-radius: 10px; overflow: hidden; background: #16281F;
-  }
-  .gal__img {
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-    opacity: 0; transition: opacity .5s ease;
-  }
-  .gal__img.is-active { opacity: 1; }
-  .gal__arrow {
-    position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
-    width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
-    background: rgba(253, 252, 250, .85); color: var(--ink);
-    display: grid; place-items: center; box-shadow: 0 2px 12px rgba(0, 0, 0, .3);
-    transition: background .2s ease, color .2s ease;
-  }
-  .gal__arrow:hover { background: #fff; color: var(--gold-deep); }
-  .gal__arrow svg { width: 20px; height: 20px; }
-  .gal__arrow--prev { left: 14px; }
-  .gal__arrow--next { right: 14px; }
-  .gal__thumbs { display: flex; gap: 12px; margin-top: 14px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
-  .gal__thumb {
-    flex: 0 0 auto; width: 96px; height: 66px; padding: 0; cursor: pointer;
-    border: 2px solid transparent; border-radius: 6px; overflow: hidden; background: none;
-    opacity: .55; transition: opacity .25s ease, border-color .25s ease;
-  }
-  .gal__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .gal__thumb:hover { opacity: 1; }
-  .gal__thumb.is-active { border-color: var(--gold); opacity: 1; }
 
   /* ── Narrative ───────────────────────────────────────── */
   .xstory { padding: 50px 28px 72px; text-align: center; }
@@ -449,10 +333,9 @@ const featureList = [
       order: 2;
       text-align: center;
     }
-    .xfeat__photos { order: 3; margin-bottom: 28px; }
+    .xfeat__photo { order: 3; margin-bottom: 28px; }
     .xfeat__items { order: 4; }
     .xfeat__cta { order: 5; }
-    .xfeat__img { height: 170px; }
   }
   @media (max-width: 640px) {
     .xhero { height: 280px; }
@@ -484,7 +367,6 @@ const featureList = [
   }
   @media (max-width: 481px) {
     .xfeat :global(.eyebrow__label),
-    .xgal-band :global(.eyebrow__label),
     .xstory :global(.eyebrow__label),
     .faq :global(.eyebrow__label) {
       font-size: 9px !important;
@@ -492,34 +374,11 @@ const featureList = [
   }
   @media (prefers-reduced-motion: reduce) {
     .xhero__lights::before, .xhero__lights::after { animation: none; opacity: .85; }
-    .gal__img, .faq__panel, .faq__chev { transition: none; }
+    .faq__panel, .faq__chev { transition: none; }
   }
 </style>
 
 <script>
-  // Gallery: thumbnails + arrows with crossfade (same pattern as fleet detail pages).
-  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gal) => {
-    const slides = Array.from(gal.querySelectorAll<HTMLElement>('[data-gal-slide]'));
-    const thumbs = Array.from(gal.querySelectorAll<HTMLElement>('[data-gal-thumb]'));
-    if (slides.length < 2) return;
-    let idx = 0;
-
-    const show = (i: number) => {
-      idx = (i + slides.length) % slides.length;
-      slides.forEach((s, si) => s.classList.toggle('is-active', si === idx));
-      thumbs.forEach((t, ti) => t.classList.toggle('is-active', ti === idx));
-      thumbs[idx]?.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
-    };
-
-    thumbs.forEach((t, i) => t.addEventListener('click', () => show(i)));
-    gal.querySelector('[data-gal-prev]')?.addEventListener('click', () => show(idx - 1));
-    gal.querySelector('[data-gal-next]')?.addEventListener('click', () => show(idx + 1));
-    gal.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') show(idx - 1);
-      else if (e.key === 'ArrowRight') show(idx + 1);
-    });
-  });
-
   // FAQ accordion — one item open at a time, matching the homepage behavior.
   const faq = document.querySelector<HTMLElement>('[data-faq]');
   if (faq) {

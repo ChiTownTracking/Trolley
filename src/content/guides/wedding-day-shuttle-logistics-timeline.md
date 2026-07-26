@@ -2,7 +2,7 @@
 title: "Wedding Day Shuttle Logistics: A Timeline Guide for Guest Transportation"
 excerpt: "How to build a transportation timeline that actually holds up on the day — hotel pickups, ceremony-to-reception shuttles, and return trips guests won't stand around waiting for."
 category: guides
-cover: ../../assets/images/fleet/coach/exterior-rear-dusk.jpg
+cover: ../../assets/images/guides/coach-shuttle-guide-cover.jpg
 coverAlt: "Super coach bus for wedding guest shuttle transportation, rear view at dusk"
 date: 2026-05-27
 readTime: "7 min read"
