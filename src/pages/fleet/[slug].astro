@@ -44,6 +44,11 @@ const hasGallery = images.length > 1;
             decoding="async"
           />
         ))}
+        <button type="button" class="gal__expand" data-gal-expand aria-label="View current image fullscreen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"></path>
+          </svg>
+        </button>
         {hasGallery && (
           <>
             <button type="button" class="gal__arrow gal__arrow--prev" data-gal-prev aria-label="Previous image">
@@ -64,6 +69,25 @@ const hasGallery = images.length > 1;
           ))}
         </div>
       )}
+      <dialog class="gal-lightbox" data-gal-lightbox aria-label={`${vehicle.name} fullscreen photo viewer`}>
+        <button type="button" class="gal-lightbox__close" data-lightbox-close aria-label="Close fullscreen image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+        </button>
+        <div class="gal-lightbox__stage">
+          <img class="gal-lightbox__image" data-lightbox-image src={imageSrc(images[0])} alt={`${vehicle.name} — photo 1`} />
+          {hasGallery && (
+            <>
+              <button type="button" class="gal-lightbox__arrow gal-lightbox__arrow--prev" data-lightbox-prev aria-label="Previous fullscreen image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <button type="button" class="gal-lightbox__arrow gal-lightbox__arrow--next" data-lightbox-next aria-label="Next fullscreen image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </>
+          )}
+        </div>
+        <p class="gal-lightbox__count" data-lightbox-count aria-live="polite">1 of {images.length}</p>
+      </dialog>
     </div>
   <div class="vd__stats">
         {vehicle.stats.map((s) => (
@@ -128,9 +152,17 @@ const hasGallery = images.length > 1;
   }
   .gal__img {
     position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-    opacity: 0; transition: opacity .5s ease;
+    opacity: 0; pointer-events: none; transition: opacity .5s ease;
   }
-  .gal__img.is-active { opacity: 1; }
+  .gal__img.is-active { opacity: 1; pointer-events: auto; cursor: zoom-in; }
+  .gal__expand {
+    position: absolute; top: 14px; right: 14px; z-index: 3;
+    width: 44px; height: 44px; border: 0; border-radius: 50%; cursor: pointer;
+    display: grid; place-items: center; color: var(--ink); background: rgba(253, 252, 250, .88);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .15); transition: background .2s ease, color .2s ease;
+  }
+  .gal__expand:hover { background: #fff; color: var(--gold-deep); }
+  .gal__expand svg { width: 20px; height: 20px; }
   .gal__arrow {
     position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
     width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
@@ -151,6 +183,39 @@ const hasGallery = images.length > 1;
   .gal__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .gal__thumb:hover { opacity: 1; }
   .gal__thumb.is-active { border-color: var(--gold); opacity: 1; }
+
+  /* Fullscreen image viewer */
+  :global(html.gal-lightbox-open) { overflow: hidden; }
+  .gal-lightbox {
+    width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0;
+    border: 0; background: rgba(12, 12, 12, .97); color: #fff; overflow: hidden;
+  }
+  .gal-lightbox[open] { display: grid; grid-template-rows: 1fr auto; }
+  .gal-lightbox::backdrop { background: rgba(0, 0, 0, .82); }
+  .gal-lightbox__stage {
+    position: relative; min-width: 0; min-height: 0; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; padding: 64px 76px 24px;
+  }
+  .gal-lightbox__image {
+    display: block; flex: 0 1 auto; width: auto; height: auto;
+    max-width: max(1px, calc(100vw - 152px)); max-height: max(1px, calc(100dvh - 140px));
+    object-fit: contain; object-position: center;
+  }
+  .gal-lightbox__close,
+  .gal-lightbox__arrow {
+    position: absolute; z-index: 2; width: 48px; height: 48px; padding: 0; border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, .35); background: rgba(20, 20, 20, .7); color: #fff;
+    display: grid; place-items: center; cursor: pointer; transition: background .2s ease, border-color .2s ease;
+  }
+  .gal-lightbox__close:hover,
+  .gal-lightbox__arrow:hover { background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .7); }
+  .gal-lightbox__close { top: 16px; right: 18px; }
+  .gal-lightbox__close svg { width: 24px; height: 24px; }
+  .gal-lightbox__arrow { top: 50%; transform: translateY(-50%); }
+  .gal-lightbox__arrow svg { width: 25px; height: 25px; }
+  .gal-lightbox__arrow--prev { left: 18px; }
+  .gal-lightbox__arrow--next { right: 18px; }
+  .gal-lightbox__count { margin: 0; padding: 8px 20px 22px; text-align: center; font-size: 12px; letter-spacing: .14em; color: rgba(255, 255, 255, .78); }
 
   /* Intro + content */
   .vd__intro {
@@ -180,6 +245,12 @@ const hasGallery = images.length > 1;
   @media (max-width: 700px) {
     .vd__cols { grid-template-columns: 1fr; gap: 40px; }
     .vd__intro { font-size: 20px; }
+    .gal-lightbox__stage { padding: 70px 12px 80px; }
+    .gal-lightbox__image { max-width: max(1px, calc(100vw - 24px)); max-height: max(1px, calc(100dvh - 150px)); }
+    .gal-lightbox__arrow { top: auto; bottom: 18px; transform: none; }
+    .gal-lightbox__arrow--prev { left: 18px; }
+    .gal-lightbox__arrow--next { right: 18px; }
+    .gal-lightbox__count { position: absolute; bottom: 32px; left: 50%; z-index: 1; transform: translateX(-50%); padding: 0; }
     /* Kept at 44px (not shrunk) — that's the tap-target minimum, and there's
        enough room in the responsive-height gallery to keep it. */
   }
@@ -189,26 +260,55 @@ const hasGallery = images.length > 1;
 </style>
 
 <script>
-  // Detail-page image gallery: thumbnails + arrows with a crossfade.
+  // Detail-page image gallery: thumbnails, arrows, and a fullscreen viewer.
   document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gal) => {
-    const slides = Array.from(gal.querySelectorAll<HTMLElement>('[data-gal-slide]'));
+    const slides = Array.from(gal.querySelectorAll<HTMLImageElement>('[data-gal-slide]'));
     const thumbs = Array.from(gal.querySelectorAll<HTMLElement>('[data-gal-thumb]'));
-    if (slides.length < 2) return;
+    const lightbox = gal.querySelector<HTMLDialogElement>('[data-gal-lightbox]');
+    const lightboxImage = lightbox?.querySelector<HTMLImageElement>('[data-lightbox-image]');
+    const lightboxCount = lightbox?.querySelector<HTMLElement>('[data-lightbox-count]');
     let idx = 0;
+
+    const updateLightbox = () => {
+      if (!lightboxImage) return;
+      const active = slides[idx];
+      lightboxImage.src = active.currentSrc || active.src;
+      lightboxImage.alt = active.alt;
+      if (lightboxCount) lightboxCount.textContent = `${idx + 1} of ${slides.length}`;
+    };
 
     const show = (i: number) => {
       idx = (i + slides.length) % slides.length;
       slides.forEach((s, si) => s.classList.toggle('is-active', si === idx));
       thumbs.forEach((t, ti) => t.classList.toggle('is-active', ti === idx));
-      thumbs[idx]?.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
+      if (!lightbox?.open) thumbs[idx]?.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
+      updateLightbox();
     };
+
+    const openLightbox = (i = idx) => {
+      if (!lightbox) return;
+      show(i);
+      lightbox.showModal();
+      document.documentElement.classList.add('gal-lightbox-open');
+    };
+
+    const closeLightbox = () => lightbox?.close();
 
     thumbs.forEach((t, i) => t.addEventListener('click', () => show(i)));
     gal.querySelector('[data-gal-prev]')?.addEventListener('click', () => show(idx - 1));
     gal.querySelector('[data-gal-next]')?.addEventListener('click', () => show(idx + 1));
+    gal.querySelector('[data-gal-expand]')?.addEventListener('click', () => openLightbox());
+    slides.forEach((slide, i) => slide.addEventListener('click', () => openLightbox(i)));
+    lightbox?.querySelector('[data-lightbox-close]')?.addEventListener('click', closeLightbox);
+    lightbox?.querySelector('[data-lightbox-prev]')?.addEventListener('click', () => show(idx - 1));
+    lightbox?.querySelector('[data-lightbox-next]')?.addEventListener('click', () => show(idx + 1));
+    lightbox?.addEventListener('close', () => document.documentElement.classList.remove('gal-lightbox-open'));
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
     gal.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') { show(idx - 1); }
-      else if (e.key === 'ArrowRight') { show(idx + 1); }
+      if (e.key === 'ArrowLeft' && slides.length > 1) { e.preventDefault(); show(idx - 1); }
+      else if (e.key === 'ArrowRight' && slides.length > 1) { e.preventDefault(); show(idx + 1); }
     });
   });
 </script>

@@ -1,11 +1,12 @@
 import type { SiteImage } from '../utils/images';
 
 import trolleyClassicExterior from '../assets/images/fleet/trolley/classic-exterior.png';
-import trolleyBoardingExterior from '../assets/images/fleet/trolley/boarding-exterior.png';
+import trolleyT4Exterior from '../assets/images/fleet/trolley/T4-Trolley-Exterior.png';
+import trolleyT4ExteriorFront from '../assets/images/fleet/trolley/T4-Trolley-Exterior-front.png';
+import trolleyT4Interior1 from '../assets/images/fleet/trolley/T4-Trolley-Interior-1.png';
+import trolleyT4Interior2 from '../assets/images/fleet/trolley/T4-Trolley-Interior-2.png';
+import trolleyT4InteriorLighting from '../assets/images/fleet/trolley/T4-Trolley-Interior-Lighting.png';
 import trolleyChristmasLights from '../assets/images/christmas/gallery/christmas-trolley.png';
-import trolleyInterior1 from '../assets/images/fleet/trolley/trolley-interior-1.jpeg';
-import trolleyInterior2 from '../assets/images/fleet/trolley/trolley-interior-2.jpeg';
-import trolleyInterior3 from '../assets/images/fleet/trolley/trolley-interior-3.jpeg';
 import coachExterior1 from '../assets/images/fleet/coach/coach-bus-exterior-1.jpeg';
 import coachExterior2 from '../assets/images/fleet/coach/coach-bus-exterior-2.jpeg';
 import coachExterior3 from '../assets/images/fleet/coach/coach-bus-exterior-3.jpeg';
@@ -24,10 +25,11 @@ import sprinterInteriorRear from '../assets/images/fleet/sprinter/interior-rear.
 export const fleetImages = {
   trolley: {
     classicExterior: trolleyClassicExterior,
-    boardingExterior: trolleyBoardingExterior,
-    interior1: trolleyInterior1,
-    interior2: trolleyInterior2,
-    interior3: trolleyInterior3,
+    t4Exterior: trolleyT4Exterior,
+    t4ExteriorFront: trolleyT4ExteriorFront,
+    t4Interior1: trolleyT4Interior1,
+    t4Interior2: trolleyT4Interior2,
+    t4InteriorLighting: trolleyT4InteriorLighting,
     christmasLights: trolleyChristmasLights,
   },
   coach: {
@@ -77,10 +79,11 @@ export const fleet: FleetVehicle[] = [
     image: fleetImages.trolley.classicExterior,
     gallery: [
       fleetImages.trolley.classicExterior,
-      fleetImages.trolley.boardingExterior,
-      fleetImages.trolley.interior1,
-      fleetImages.trolley.interior2,
-      fleetImages.trolley.interior3,
+      fleetImages.trolley.t4Exterior,
+      fleetImages.trolley.t4ExteriorFront,
+      fleetImages.trolley.t4Interior1,
+      fleetImages.trolley.t4Interior2,
+      fleetImages.trolley.t4InteriorLighting,
     ],
     quoteValue: 'Classic White Trolley · 30–36',
     intro: 'There is something about an open-air trolley that turns a simple drive into an occasion. Polished rails, a rear balcony made for the photos everyone remembers, and circular seating so the whole party rides facing one another. From the first stop to the last, the Classic White Trolley sets a timeless, old-world tone for the day.',

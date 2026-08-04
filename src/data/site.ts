@@ -278,7 +278,7 @@ export const weddingFaqs = [
 /* ----------  Services  ---------- */
 export const services = [
   { eyebrow: 'Business', title: 'Corporate Events', image: fleetImages.trolley.classicExterior, body: 'Shuttle a team between venues, welcome clients in from out of town, or give the holiday party a proper beginning. Punctual, polished, and quietly memorable.' },
-  { eyebrow: 'School Nights', title: 'Proms & Homecomings', image: fleetImages.trolley.boardingExterior, body: 'A safe, chaperone-friendly ride the whole group shares — with a professional chauffeur and room for everyone’s photos before the dance.' },
+  { eyebrow: 'School Nights', title: 'Proms & Homecomings', image: fleetImages.trolley.t4ExteriorFront, body: 'A safe, chaperone-friendly ride the whole group shares — with a professional chauffeur and room for everyone’s photos before the dance.' },
   { eyebrow: 'Celebrations', title: 'Quinceañeras', image: fleetImages.trolley.classicExterior, body: 'From the church to the reception with the court all together. The white trolley photographs beautifully beside every gown.' },
   { eyebrow: 'The Last Fling', title: 'Bachelor & Bachelorette Parties', image: fleetImages.partyBus.interior1, body: 'One cabin, one playlist, zero rideshare logistics. Hop between stops while the party never pauses — BYOB welcome for guests 21 and over.' },
   { eyebrow: 'Game Day', title: 'Sporting Events & Concerts', image: fleetImages.coach.exterior2, body: 'Skip the parking scramble. Tailgate on the way, arrive at the gate together, and find your ride waiting when the encore ends.' },
@@ -290,10 +290,11 @@ export const services = [
 /* ----------  Gallery  ---------- */
 export const gallery = [
   { image: fleetImages.trolley.classicExterior, alt: 'Classic white trolley in warm winter light' },
-  { image: fleetImages.trolley.boardingExterior, alt: 'Grand trolley with boarding door open' },
-  { image: fleetImages.trolley.interior1, alt: 'Wood bench seating inside the classic white trolley' },
-  { image: fleetImages.trolley.interior2, alt: 'Passenger cabin inside the classic white trolley' },
-  { image: fleetImages.trolley.interior3, alt: 'Interior details inside the classic white trolley' },
+  { image: fleetImages.trolley.t4Exterior, alt: 'T4 classic white trolley exterior' },
+  { image: fleetImages.trolley.t4ExteriorFront, alt: 'Front view of the T4 classic white trolley' },
+  { image: fleetImages.trolley.t4Interior1, alt: 'Passenger seating inside the T4 classic white trolley' },
+  { image: fleetImages.trolley.t4Interior2, alt: 'Interior cabin of the T4 classic white trolley' },
+  { image: fleetImages.trolley.t4InteriorLighting, alt: 'Interior lighting inside the T4 classic white trolley' },
   { image: fleetImages.trolley.christmasLights, alt: 'Trolley at dusk with string lights' },
   { image: fleetImages.partyBus.exterior, alt: 'Party bus exterior' },
   { image: fleetImages.partyBus.interior1, alt: 'Party bus lounge seating and colorful lighting' },
