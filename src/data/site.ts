@@ -282,32 +282,37 @@ export const services = [
   { eyebrow: 'Celebrations', title: 'Quinceañeras', image: fleetImages.trolley.classicExterior, body: 'From the church to the reception with the court all together. The white trolley photographs beautifully beside every gown.' },
   { eyebrow: 'The Last Fling', title: 'Bachelor & Bachelorette Parties', image: fleetImages.partyBus.interior1, body: 'One cabin, one playlist, zero rideshare logistics. Hop between stops while the party never pauses — BYOB welcome for guests 21 and over.' },
   { eyebrow: 'Game Day', title: 'Sporting Events & Concerts', image: fleetImages.coach.exterior2, body: 'Skip the parking scramble. Tailgate on the way, arrive at the gate together, and find your ride waiting when the encore ends.' },
-  { eyebrow: 'Travel', title: 'Airport Transportation', image: fleetImages.sprinter.exterior, body: 'For wedding weekends and group trips: one comfortable pickup for the whole party, with room for every suitcase.' },
+  { eyebrow: 'Travel', title: 'Airport Transportation', image: fleetImages.sprinter.executiveVan.front, body: 'For wedding weekends and group trips: one comfortable pickup for the whole party, with room for every suitcase.' },
   { eyebrow: 'Group Travel', title: 'Coach Bus Charters', image: fleetImages.coach.exterior1, body: 'When the guest list outgrows the trolley: modern coaches seating up to 57, with quilted leather seats, armrests, and generous under-floor luggage storage. Ideal for wedding guest shuttles, out-of-state trips, and business charters.' },
   { eyebrow: 'After Dark', title: 'Night Out & General Charter', image: fleetImages.trolley.christmasLights, body: 'Birthdays, anniversaries, holiday light tours, or no occasion at all. Charter the trolley and let the city roll past the windows.' },
 ];
 
 /* ----------  Gallery  ---------- */
 export const gallery = [
-  { image: fleetImages.trolley.classicExterior, alt: 'Classic white trolley in warm winter light' },
-  { image: fleetImages.trolley.t4Exterior, alt: 'T4 classic white trolley exterior' },
-  { image: fleetImages.trolley.t4ExteriorFront, alt: 'Front view of the T4 classic white trolley' },
-  { image: fleetImages.trolley.t4Interior1, alt: 'Passenger seating inside the T4 classic white trolley' },
-  { image: fleetImages.trolley.t4Interior2, alt: 'Interior cabin of the T4 classic white trolley' },
-  { image: fleetImages.trolley.t4InteriorLighting, alt: 'Interior lighting inside the T4 classic white trolley' },
-  { image: fleetImages.trolley.christmasLights, alt: 'Trolley at dusk with string lights' },
-  { image: fleetImages.partyBus.exterior, alt: 'Party bus exterior' },
-  { image: fleetImages.partyBus.interior1, alt: 'Party bus lounge seating and colorful lighting' },
-  { image: fleetImages.partyBus.interior2, alt: 'Interior seating aboard the party bus' },
-  { image: fleetImages.coach.exterior1, alt: 'White coach bus ready for boarding' },
-  { image: fleetImages.coach.interior1, alt: 'Passenger seating inside the coach bus' },
-  { image: fleetImages.sprinter.exterior, alt: 'Black Sprinter limo van exterior' },
-] satisfies { image: SiteImage; alt: string }[];
+  { image: fleetImages.trolley.classicExterior, alt: 'Classic white trolley in warm winter light', label: 'Classic White Trolley', category: 'trolleys' },
+  { image: fleetImages.trolley.t4Exterior, alt: 'T4 classic white trolley exterior', label: 'White Limo Trolley', category: 'trolleys' },
+  { image: fleetImages.trolley.t4ExteriorFront, alt: 'Front view of the T4 classic white trolley', label: 'White Limo Trolley — Front View', category: 'trolleys' },
+  { image: fleetImages.trolley.t4Interior1, alt: 'Passenger seating inside the T4 classic white trolley', label: 'Trolley Cabin', category: 'interiors' },
+  { image: fleetImages.trolley.t4Interior2, alt: 'Interior cabin of the T4 classic white trolley', label: 'Circular Limo-Style Seating', category: 'interiors' },
+  { image: fleetImages.trolley.t4InteriorLighting, alt: 'Interior lighting inside the T4 classic white trolley', label: 'Trolley Interior Lighting', category: 'interiors' },
+  { image: fleetImages.trolley.christmasLights, alt: 'Trolley at dusk with string lights', label: 'Christmas Trolley', category: 'holiday' },
+  { image: fleetImages.partyBus.exterior, alt: 'Party bus exterior', label: 'Party Bus', category: 'group-fleet' },
+  { image: fleetImages.partyBus.interior1, alt: 'Party bus lounge seating and colorful lighting', label: 'Party Bus Lounge', category: 'interiors' },
+  { image: fleetImages.partyBus.interior2, alt: 'Interior seating aboard the party bus', label: 'Party Bus Seating', category: 'interiors' },
+  { image: fleetImages.coach.exterior1, alt: 'White coach bus ready for boarding', label: 'Super Coach Bus', category: 'group-fleet' },
+  { image: fleetImages.coach.interior1, alt: 'Passenger seating inside the coach bus', label: 'Coach Bus Cabin', category: 'interiors' },
+  { image: fleetImages.sprinter.executiveVan.front, alt: 'Black Executive Van exterior', label: 'Executive Van', category: 'group-fleet' },
+] satisfies {
+  image: SiteImage;
+  alt: string;
+  label: string;
+  category: 'trolleys' | 'interiors' | 'group-fleet' | 'holiday';
+}[];
 
 /* ----------  FAQ  ---------- */
 export const faqs = [
   { q: 'How far in advance should we book?', a: 'For peak wedding season (May through October) and December, 6–12 months ahead is wise — popular Saturdays go first. For other dates, a few weeks is often enough. It never hurts to ask.' },
-  { q: 'How many passengers fit on board?', a: 'Our Classic trolley seats up to 30 and our Grand trolley up to 36, on circular perimeter benches so the whole group rides facing each other.' },
+  { q: 'How are the two white trolleys different?', a: 'The White Classic Trolley uses traditional forward-facing seating, while the White Limo Trolley uses circular perimeter seating so guests can face one another.' },
   { q: 'Is there a minimum booking time?', a: 'Yes — all charters have a 3-hour minimum. Most weddings book 3 to 5 hours to comfortably cover photos, the ceremony, and the reception transfer.' },
   { q: 'Are the trolleys heated and air conditioned?', a: 'Fully. Both trolleys have heat and air conditioning, so the cabin is comfortable in every Chicago season.' },
   { q: 'Can we bring drinks on board?', a: 'Guests 21 and over may bring their own beverages aboard private charters, in keeping with Illinois rules. We provide coolers and ice on request; glass is fine, kegs are not.' },
@@ -329,8 +334,17 @@ export const eventTypes = [
 ];
 
 export const vehicleOptions = [
-  'Classic White Trolley · 30–36', 'Super Coach Bus · 57', 'Limo Van · 14', 'Party Bus · 40',
-  'Christmas Trolley · 24–36', 'Trolley + Coach Package', 'Not sure yet',
+  'White Trolley — Classic',
+  'White Trolley — Limo',
+  'Christmas Trolley',
+  'Party Bus — 45 Passengers',
+  'Party Bus — 35 Passengers',
+  'Party Bus — 25 Passengers',
+  'Super Coach Bus — 57 Passengers',
+  'Coach Bus — 50 Passengers',
+  'Coach Bus — 40 Passengers',
+  'Sprinter — Executive',
+  'Sprinter — Limo',
 ];
 
 export const hoursOptions = [

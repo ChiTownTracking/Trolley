@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getImage, Image } from 'astro:assets';
 import { fleet } from '../../data/fleet';
-import { imageSrc } from '../../utils/images';
 import { withBase } from '../../utils/paths';
 
 export function getStaticPaths() {
@@ -14,6 +14,18 @@ export function getStaticPaths() {
 const { vehicle } = Astro.props;
 const images = vehicle.gallery;
 const hasGallery = images.length > 1;
+const imageWidths = (width: number) => {
+  const widths = [480, 768, 1000, 1400].filter((candidate) => candidate < width);
+  return [...widths, width];
+};
+const fullscreenImages = await Promise.all(
+  images.map((image) => getImage({
+    src: image,
+    width: Math.min(image.width, 1600),
+    format: 'webp',
+    quality: 82,
+  })),
+);
 ---
 <BaseLayout
   title={`${vehicle.name} — ChiTown Trolley`}
@@ -33,13 +45,16 @@ const hasGallery = images.length > 1;
     <div class="gal" data-gallery tabindex="0" aria-label={`${vehicle.name} photo gallery`}>
       <div class="gal__main">
         {images.map((image, i) => (
-          <img
-            src={imageSrc(image)}
-            width={image.width}
-            height={image.height}
+          <Image
+            src={image}
+            widths={imageWidths(image.width)}
+            sizes="(max-width: 1056px) calc(100vw - 56px), 1000px"
+            format="webp"
+            quality={76}
             alt={`${vehicle.name} — photo ${i + 1}`}
             class:list={['gal__img', { 'is-active': i === 0 }]}
             data-gal-slide
+            data-full-src={fullscreenImages[i].src}
             loading={i === 0 ? 'eager' : 'lazy'}
             decoding="async"
           />
@@ -64,7 +79,7 @@ const hasGallery = images.length > 1;
         <div class="gal__thumbs" data-gal-thumbs>
           {images.map((image, i) => (
             <button type="button" class:list={['gal__thumb', { 'is-active': i === 0 }]} data-gal-thumb={i} aria-label={`Show image ${i + 1}`}>
-              <img src={imageSrc(image)} width={image.width} height={image.height} alt="" loading="lazy" decoding="async" />
+              <Image src={image} width={192} format="webp" quality={65} alt="" loading="lazy" decoding="async" />
             </button>
           ))}
         </div>
@@ -74,7 +89,15 @@ const hasGallery = images.length > 1;
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
         </button>
         <div class="gal-lightbox__stage">
-          <img class="gal-lightbox__image" data-lightbox-image src={imageSrc(images[0])} alt={`${vehicle.name} — photo 1`} />
+          <Image
+            class="gal-lightbox__image"
+            data-lightbox-image
+            src={images[0]}
+            width={Math.min(images[0].width, 1600)}
+            format="webp"
+            quality={82}
+            alt={`${vehicle.name} — photo 1`}
+          />
           {hasGallery && (
             <>
               <button type="button" class="gal-lightbox__arrow gal-lightbox__arrow--prev" data-lightbox-prev aria-label="Previous fullscreen image">
@@ -272,7 +295,7 @@ const hasGallery = images.length > 1;
     const updateLightbox = () => {
       if (!lightboxImage) return;
       const active = slides[idx];
-      lightboxImage.src = active.currentSrc || active.src;
+      lightboxImage.src = active.dataset.fullSrc || active.currentSrc || active.src;
       lightboxImage.alt = active.alt;
       if (lightboxCount) lightboxCount.textContent = `${idx + 1} of ${slides.length}`;
     };

@@ -5,7 +5,7 @@ import GuideCard from '../components/GuideCard.astro';
 import { getImage, Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { testimonials, eventTypes, vehicleOptions, hoursOptions, homeFaqs, getLocalBusinessSchema } from '../data/site';
-import { fleet } from '../data/fleet';
+import { fleet, fleetImages } from '../data/fleet';
 import { siteImages } from '../data/site-images';
 import { withBase } from '../utils/paths';
 import occasionsImage from '../assets/images/home/occasion/occasion.png';
@@ -13,15 +13,41 @@ import occasionsMobileImage from '../assets/images/home/occasion/occasion-mobile
 
 const passengerOptions = ['1–10', '11–20', '21–30', '31–40', '41–57'];
 
-// Fleet grid: the first vehicle (Classic White Trolley) is the full-width
-// featured card; the rest fill the 3-up row below it.
-const [fleetFeatured, ...fleetRest] = fleet;
-const featuredFleetWidths = [384, 512, 555];
-const standardFleetWidths = [384, 512, 768, 900];
-const featuredFleetSizes =
-  '(max-width: 640px) calc(100vw - 20px), (max-width: 768px) calc(68.75vw - 13.75px), (max-width: 1100px) calc(68.75vw - 38.5px), 718px';
-const standardFleetSizes =
-  '(max-width: 640px) calc(100vw - 20px), (max-width: 768px) calc(50vw - 26px), (max-width: 900px) calc(50vw - 44px), (max-width: 1100px) calc(33.333vw - 40px), 327px';
+const [fleetFeatured] = fleet;
+const homeTrolleys = [
+  {
+    name: 'White Classic Trolley',
+    href: '/fleet/classic-white-trolley',
+    seating: 'Forward-Facing Seating',
+    description: 'Traditional forward-facing rows for a familiar, orderly ride.',
+    image: fleetImages.trolley.classicExterior,
+    hoverImage: fleetImages.trolley.classicInteriorFrontFacing,
+    widths: [384, 512, 555],
+    alt: 'White classic trolley available for Chicago events',
+  },
+  {
+    name: 'White Limo Trolley',
+    href: '/fleet/white-limo-trolley',
+    seating: 'Circular Limo-Style Seating',
+    description: 'Circular perimeter seating that keeps the group facing one another.',
+    image: fleetImages.trolley.t4Exterior,
+    hoverImage: fleetImages.trolley.t4Interior2,
+    widths: [384, 512, 768, 1080],
+    alt: 'White Limo Trolley available for Chicago events',
+  },
+  {
+    name: 'Christmas Trolley',
+    href: '/christmas-trolley',
+    seating: 'Private Holiday Lights Tours',
+    description: 'A heated, festively decorated trolley for private Christmas lights tours.',
+    image: fleetImages.trolley.christmasLights,
+    hoverImage: fleetImages.trolley.christmasInterior,
+    widths: [384, 512, 768, 1080],
+    alt: 'White Christmas trolley illuminated with colorful holiday lights',
+  },
+];
+const homeTrolleySizes =
+  '(max-width: 640px) calc(100vw - 20px), (max-width: 900px) calc(50vw - 44px), 345px';
 
 // Guides preview: always the 3 most recently published articles.
 const latestGuides = (await getCollection('guides'))
@@ -29,13 +55,19 @@ const latestGuides = (await getCollection('guides'))
   .slice(0, 3);
 
 const businessSchema = getLocalBusinessSchema(new URL(withBase('/'), Astro.site ?? Astro.url).href);
+const desktopHero = await getImage({
+  src: siteImages.homeHero.desktop,
+  width: 1920,
+  format: 'webp',
+  quality: 72,
+});
 const mobileHero = await getImage({
   src: siteImages.homeHero.mobile,
-  width: 900,
+  width: 768,
   format: 'webp',
-  quality: 78,
+  quality: 70,
 });
-const heroStyle = `--hero-desktop: url('${siteImages.homeHero.desktop.src}'); --hero-mobile: url('${mobileHero.src}')`;
+const heroStyle = `--hero-desktop: url('${desktopHero.src}'); --hero-mobile: url('${mobileHero.src}')`;
 const occasionsMobileWidths = [480, 768, 1024];
 const occasionsMobileSources = await Promise.all(
   occasionsMobileWidths.map((width) =>
@@ -56,6 +88,7 @@ const occasionsMobileSrcset = occasionsMobileSources
   description="Book a Chicago trolley rental for weddings, private events and group transportation. Explore the ChiTown Trolley fleet and request a customized quote."
   schema={businessSchema}
   mobileHeroPreload={mobileHero.src}
+  desktopHeroPreload={desktopHero.src}
 >
   <!-- Hero -->
   <section class="hero" style={heroStyle}>
@@ -83,11 +116,15 @@ const occasionsMobileSrcset = occasionsMobileSources
           aria-label="Open the WBENC certificate"
         >
           <span class="hero__logoCrop">
-            <img
+            <Image
               class="hero__ownershipLogo"
-              src={siteImages.branding.womenOwnedWordmark.src}
-              width={siteImages.branding.womenOwnedWordmark.width}
-              height={siteImages.branding.womenOwnedWordmark.height}
+              src={siteImages.branding.womenOwnedWordmark}
+              widths={[160, 240]}
+              sizes="(max-width: 768px) 140px, 165px"
+              format="webp"
+              quality={82}
+              loading="eager"
+              decoding="async"
               alt="WBENC-certified Women Owned business"
             />
           </span>
@@ -288,54 +325,46 @@ const occasionsMobileSrcset = occasionsMobileSources
   <!-- Fleet preview -->
   <section class="rv band">
     <div class="wrap">
-      <Eyebrow label="The Fleet" mb={14} />
-      <h2 class="h-section text-center fleetp__title">Explore our Chicago trolley and group transportation fleet</h2>
+      <Eyebrow label="Choose Your Trolley" mb={14} />
+      <h2 class="h-section text-center fleetp__title">Choose a trolley for every celebration</h2>
       <p class="fleetp__lead">
-        Choose the classic white trolley for weddings and celebrations, or compare our additional vehicles for larger groups and longer itineraries.
+        Compare traditional forward-facing rows, a social circular layout or our festive Christmas trolley for a private holiday lights tour.
       </p>
       <div class="fleetp__grid">
-        {/* Row 1 — featured full-width trolley */}
-        <a href={withBase(`/fleet/${fleetFeatured.slug}`)} class="fleet-card fleet-card--feature">
-          <div class="fleet-card__media">
-            <Image
-              src={fleetFeatured.image}
-              width={555}
-              widths={featuredFleetWidths}
-              sizes={featuredFleetSizes}
-              format="webp"
-              quality={78}
-              loading="lazy"
-              decoding="async"
-              alt="Classic white trolley available for rental in Chicago"
-              class="fleetp__img"
-            />
-          </div>
-          <div class="fleetp__body">
-            <p class="fleetp__cap">{fleetFeatured.previewCap}</p>
-            <h3 class="fleetp__name">{fleetFeatured.name}</h3>
-            <span class="link-gold fleetp__more">View Details →</span>
-          </div>
-        </a>
-        {/* Row 2 — Coach, Party Bus, Limo Van */}
-        {fleetRest.map((fl) => (
-          <a href={withBase(`/fleet/${fl.slug}`)} class="fleet-card">
+        {homeTrolleys.map((trolley) => (
+          <a href={withBase(trolley.href)} class="fleet-card">
             <div class="fleet-card__media">
               <Image
-                src={fl.image}
-                width={900}
-                widths={standardFleetWidths}
-                sizes={standardFleetSizes}
+                src={trolley.image}
+                widths={trolley.widths}
+                sizes={homeTrolleySizes}
                 format="webp"
-                quality={78}
+                quality={62}
                 loading="lazy"
                 decoding="async"
-                alt={fl.name}
+                alt={trolley.alt}
                 class="fleetp__img"
               />
+              {trolley.hoverImage && (
+                <Image
+                  src={trolley.hoverImage}
+                  widths={trolley.widths}
+                  sizes={homeTrolleySizes}
+                  format="webp"
+                  quality={62}
+                  loading="lazy"
+                  decoding="async"
+                  alt=""
+                  aria-hidden="true"
+                  class="fleetp__img fleetp__img--hover"
+                />
+              )}
             </div>
             <div class="fleetp__body">
-              <p class="fleetp__cap">{fl.previewCap}</p>
-              <h3 class="fleetp__name">{fl.name}</h3>
+              <p class="fleetp__cap">{trolley.seating}</p>
+              <h3 class="fleetp__name">{trolley.name}</h3>
+              <p class="fleetp__description">{trolley.description}</p>
+              <span class="link-gold fleetp__more">View Trolley →</span>
             </div>
           </a>
         ))}
@@ -550,7 +579,6 @@ const occasionsMobileSrcset = occasionsMobileSources
     margin-top: 80px;
     padding: 0 clamp(24px, 6vw, 96px);
     
-    animation: fadeInUp 1.1s cubic-bezier(.22, .6, .2, 1) both;
   }
   .hero__title {
     font-family: var(--serif); font-weight: 400; color: #fff;
@@ -729,7 +757,7 @@ const occasionsMobileSrcset = occasionsMobileSources
     .hero__lead {
       max-width: 34ch;
       margin-top: 14px;
-      font-size: 13.5px;
+      font-size: 14.5px;
       line-height: 1.55;
     }
 
@@ -742,7 +770,7 @@ const occasionsMobileSrcset = occasionsMobileSources
     }
 
     .hero__proudly {
-      font-size: 12px;
+      font-size: 13px;
     }
 
     .hero__logoCrop {
@@ -756,7 +784,7 @@ const occasionsMobileSrcset = occasionsMobileSources
       min-height: 32px;
       padding: 4px 10px;
       margin-top: 14px;
-      font-size: 10.5px;
+      font-size: 11.5px;
       letter-spacing: .18em;
       text-align: center;
     }
@@ -769,10 +797,6 @@ const occasionsMobileSrcset = occasionsMobileSources
     .hero__cta { letter-spacing: .16em; }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .hero__content { animation: none; }
-  }
-
   /* Shared section helpers */
   .band { background: var(--cream); padding: 35px 5px; }
 
@@ -783,11 +807,11 @@ const occasionsMobileSrcset = occasionsMobileSources
   .getquote__disclaimer {
     max-width: 78ch;
     margin: 18px 4px 0;
-    color: var(--muted);
+    color: #6b6459;
     font-size: 12.5px;
     font-weight: 300;
     line-height: 1.65;
-    opacity: .78;
+    opacity: 1;
   }
 
   @media (max-width: 768px) {
@@ -802,7 +826,7 @@ const occasionsMobileSrcset = occasionsMobileSources
     }
     .getquote__disclaimer {
       margin-top: 16px;
-      font-size: 12px;
+      font-size: 13px;
       line-height: 1.6;
     }
   }
@@ -942,7 +966,13 @@ const occasionsMobileSrcset = occasionsMobileSources
     font-weight: 300;
     line-height: 1.7;
   }
-  .fleetp__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .fleetp__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
   .fleet-card {
     display: block; text-decoration: none; color: inherit;
     background: var(--paper);
@@ -953,9 +983,28 @@ const occasionsMobileSrcset = occasionsMobileSources
   }
   .fleet-card:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(26, 26, 26, .14); border-color: var(--gold-cream); }
   .fleet-card__media { position: relative; overflow: hidden; }
-  .fleetp__img { width: 100%; height: 260px; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.22, .6, .2, 1); }
-  .fleet-card:hover .fleetp__img { transform: scale(1.05); }
-  .fleetp__body { padding: 22px 26px 26px; text-align: center; }
+  .fleetp__img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    opacity: 1;
+    transition: opacity .45s ease, transform .6s cubic-bezier(.22, .6, .2, 1);
+  }
+  .fleetp__img--hover {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(1.015);
+  }
+  .fleet-card:is(:hover, :focus-visible) .fleetp__img:not(.fleetp__img--hover) {
+    opacity: 0;
+  }
+  .fleet-card:is(:hover, :focus-visible) .fleetp__img--hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  .fleetp__body { padding: 26px 30px 30px; text-align: center; }
   .fleetp__cap { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-deep); margin: 0 0 8px; }
   .fleetp__name {
     font-family: var(--serif); font-size: 25px; font-weight: 600; margin: 0;
@@ -966,41 +1015,29 @@ const occasionsMobileSrcset = occasionsMobileSources
     width: 0; height: 2px; background: var(--grad-gold); transition: width .35s ease;
   }
   .fleet-card:hover .fleetp__name::after { width: 44px; }
+  .fleetp__description {
+    max-width: 34ch;
+    margin: 15px auto 0;
+    color: var(--muted);
+    font-size: 14.5px;
+    font-weight: 300;
+    line-height: 1.65;
+  }
   .fleetp__cta { text-align: center; margin-top: 48px; }
-  .fleetp__more { display: none; }
-
-  /* Featured full-width trolley — landscape layout (image | content) */
-  .fleet-card--feature {
-    grid-column: 1 / -1;
-    display: grid; grid-template-columns: 2.2fr 1fr; align-items: stretch;
-  }
-  .fleet-card--feature .fleet-card__media { height: 100%; min-height: clamp(320px, 34vw, 400px); }
-  .fleet-card--feature .fleetp__img { height: 100%; }
-  .fleet-card--feature .fleetp__body {
-    text-align: left; display: flex; flex-direction: column;
-    justify-content: center; align-items: flex-start;
-    padding: 40px clamp(32px, 4vw, 60px);
-  }
-  .fleet-card--feature .fleetp__cap { margin: 0 0 12px; }
-  .fleet-card--feature .fleetp__name { font-size: clamp(30px, 3.2vw, 40px); }
-  .fleet-card--feature .fleetp__name::after { left: 0; transform: none; }
-  .fleet-card--feature .fleetp__more { display: inline-block; margin-top: 24px; }
+  .fleetp__more { display: inline-block; margin-top: 22px; }
 
   /* Touch devices (no hover): reveal the gold accent by default. */
   @media (hover: none) {
     .fleetp__name::after { width: 44px; }
   }
-  /* Tablet: row 2 collapses to 2 columns (feature stays full width) */
   @media (max-width: 900px) {
-    .fleetp__grid { grid-template-columns: repeat(2, 1fr); }
+    .fleetp__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
-  /* Mobile: everything stacks, feature card becomes image-over-content */
+  /* Mobile: the trolley choices stack. */
   @media (max-width: 640px) {
     .fleetp__grid { grid-template-columns: 1fr; }
     .fleet-card { border-radius: 5px; overflow: hidden; }
-    .fleet-card--feature { grid-template-columns: 1fr; }
-    .fleet-card--feature .fleet-card__media { min-height: 240px; }
-    .fleet-card--feature .fleetp__body { padding: 26px 26px 30px; }
+    .fleetp__body { padding: 24px 24px 28px; }
   }
 
   /* Image-led occasions overview */

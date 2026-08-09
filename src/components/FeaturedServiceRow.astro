@@ -81,7 +81,10 @@ const {
     order: 1;
   }
   .featured-service__media {
-    min-height: 340px;
+    align-self: center;
+    width: 100%;
+    height: clamp(340px, 30vw, 390px);
+    min-height: 0;
     overflow: hidden;
     background: var(--cream);
   }
@@ -170,8 +173,9 @@ const {
       order: initial;
     }
     .featured-service__media {
-      min-height: 260px;
-      max-height: 330px;
+      height: clamp(240px, 50vw, 330px);
+      min-height: 0;
+      max-height: none;
     }
     .featured-service__content {
       max-width: 650px;
@@ -180,10 +184,6 @@ const {
   }
 
   @media (max-width: 520px) {
-    .featured-service__media {
-      height: clamp(230px, 68vw, 290px);
-      min-height: 0;
-    }
     .featured-service__content {
       padding: 30px 20px 38px;
     }

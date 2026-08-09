@@ -29,7 +29,7 @@ Most couples only need to solve for one or two of these groups, not all three. A
 | Classic White Trolley | 30–36 passengers | Wedding party, ceremony-to-reception transfers, photo stops |
 | Super Coach Bus | Up to 57 passengers | Full guest shuttles, hotel pickups, out-of-town groups |
 
-A [Classic White Trolley](../../fleet/classic-white-trolley/) comfortably seats a full bridal party plus parents and grandparents, with room left over for the two of you to make an entrance. Its circular perimeter seating means everyone rides facing each other — which sounds like a small detail until you're the one trying to get a candid photo of your whole crew laughing together between stops.
+A [Classic White Trolley](../../fleet/classic-white-trolley/) comfortably seats a full bridal party plus parents and grandparents, with room left over for the two of you to make an entrance. Its forward-facing rows provide a familiar, orderly layout. For groups that prefer a more social cabin, the [White Limo Trolley](../../fleet/white-limo-trolley/) uses circular perimeter seating so riders can face one another.
 
 Once the guest list climbs past 40 or 50 people, a single trolley starts to feel tight, and that's usually the point where couples add a [Super Coach Bus](../../fleet/super-coach-bus/) to the plan — one vehicle for the wedding party's photo-friendly ride, and one larger coach handling the guest shuttle in parallel. For smaller, more intimate arrangements — a small immediate-family ride, or an executive airport transfer for out-of-town parents — a [Limo Van](../../fleet/limo-vans/) is often the more efficient (and more affordable) choice.
 
@@ -50,7 +50,7 @@ The cleaner approach: book a smaller, photo-worthy vehicle (trolley or limo van)
 
 <figure>
   <img src="../../images/guides/trolley-interior.webp" width="555" height="327" alt="Trolley interior with rose garlands and quilted leather perimeter seating" loading="lazy" />
-  <figcaption>Circular perimeter seating keeps the wedding party together and facing each other for the whole ride.</figcaption>
+  <figcaption>The White Limo Trolley’s circular perimeter seating keeps the wedding party together and facing each other for the whole ride.</figcaption>
 </figure>
 
 ## Timing Considerations: One Big Vehicle or Multiple Trips?

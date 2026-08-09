@@ -1,12 +1,16 @@
 import type { SiteImage } from '../utils/images';
 
 import trolleyClassicExterior from '../assets/images/fleet/trolley/classic-exterior.png';
+import trolleyClassicInteriorFrontFacing from '../assets/images/fleet/trolley/classic-Trolley-interior-frontfacing.png';
+import trolleyClassicInteriorFrontFacing2 from '../assets/images/fleet/trolley/classic-Trolley-interior-frontfacing2.png';
 import trolleyT4Exterior from '../assets/images/fleet/trolley/T4-Trolley-Exterior.png';
 import trolleyT4ExteriorFront from '../assets/images/fleet/trolley/T4-Trolley-Exterior-front.png';
+import trolleyT4ExteriorSide from '../assets/images/fleet/trolley/T4-Trolley-Exterior-side.png';
 import trolleyT4Interior1 from '../assets/images/fleet/trolley/T4-Trolley-Interior-1.png';
 import trolleyT4Interior2 from '../assets/images/fleet/trolley/T4-Trolley-Interior-2.png';
 import trolleyT4InteriorLighting from '../assets/images/fleet/trolley/T4-Trolley-Interior-Lighting.png';
 import trolleyChristmasLights from '../assets/images/christmas/gallery/christmas-trolley.png';
+import trolleyChristmasInterior from '../assets/images/christmas/gallery/christmas-interior.png';
 import coachExterior1 from '../assets/images/fleet/coach/coach-bus-exterior-1.jpeg';
 import coachExterior2 from '../assets/images/fleet/coach/coach-bus-exterior-2.jpeg';
 import coachExterior3 from '../assets/images/fleet/coach/coach-bus-exterior-3.jpeg';
@@ -18,19 +22,27 @@ import coachWashroom2 from '../assets/images/fleet/coach/coach-bus-washroom-2.jp
 import partyBusExterior from '../assets/images/fleet/party-bus/exterior.jpg';
 import partyBusInterior1 from '../assets/images/fleet/party-bus/party-bus-interior-1.jpeg';
 import partyBusInterior2 from '../assets/images/fleet/party-bus/party-bus-interior-2.jpeg';
-import sprinterExterior from '../assets/images/fleet/sprinter/sprinter-van-exterior.png';
-import sprinterInteriorFront from '../assets/images/fleet/sprinter/interior-front.jpg';
-import sprinterInteriorRear from '../assets/images/fleet/sprinter/interior-rear.webp';
+import limoVanFront from '../assets/images/fleet/sprinter/limo van/limo-van-front.png';
+import limoVanBack from '../assets/images/fleet/sprinter/limo van/limo-van-back.png';
+import limoVanInterior from '../assets/images/fleet/sprinter/limo van/limo-van-interior.png';
+import executiveVanFront from '../assets/images/fleet/sprinter/limo van excutive/excutive-van-front.png';
+import executiveVanSide from '../assets/images/fleet/sprinter/limo van excutive/excutive-van-side.png';
+import executiveVanInterior from '../assets/images/fleet/sprinter/limo van excutive/excutive-van-interior.png';
+import executiveVanInteriorDetail from '../assets/images/fleet/sprinter/limo van excutive/excutive-van-interior-1.png';
 
 export const fleetImages = {
   trolley: {
     classicExterior: trolleyClassicExterior,
+    classicInteriorFrontFacing: trolleyClassicInteriorFrontFacing,
+    classicInteriorFrontFacing2: trolleyClassicInteriorFrontFacing2,
     t4Exterior: trolleyT4Exterior,
     t4ExteriorFront: trolleyT4ExteriorFront,
+    t4ExteriorSide: trolleyT4ExteriorSide,
     t4Interior1: trolleyT4Interior1,
     t4Interior2: trolleyT4Interior2,
     t4InteriorLighting: trolleyT4InteriorLighting,
     christmasLights: trolleyChristmasLights,
+    christmasInterior: trolleyChristmasInterior,
   },
   coach: {
     exterior1: coachExterior1,
@@ -48,19 +60,36 @@ export const fleetImages = {
     interior2: partyBusInterior2,
   },
   sprinter: {
-    exterior: sprinterExterior,
-    interiorFront: sprinterInteriorFront,
-    interiorRear: sprinterInteriorRear,
+    limoVan: {
+      front: limoVanFront,
+      back: limoVanBack,
+      interior: limoVanInterior,
+    },
+    executiveVan: {
+      front: executiveVanFront,
+      side: executiveVanSide,
+      interior: executiveVanInterior,
+      interiorDetail: executiveVanInteriorDetail,
+    },
   },
 } as const;
+
+export type FleetCategory =
+  | 'trolley'
+  | 'coach-bus'
+  | 'party-bus'
+  | 'limo-van';
 
 export interface FleetVehicle {
   name: string;
   slug: string;
+  category: FleetCategory;
   cap: string;
   /** Existing homepage wording, retained exactly where it differs from the fleet page. */
   previewCap: string;
   image: SiteImage;
+  /** Optional alternate image revealed on the main fleet card. */
+  hoverImage?: SiteImage;
   gallery: readonly SiteImage[];
   /** Exact "Choose Vehicle" option string, for pre-selecting the quote form. */
   quoteValue: string;
@@ -74,30 +103,56 @@ export const fleet: FleetVehicle[] = [
   {
     name: 'Classic White Trolley',
     slug: 'classic-white-trolley',
+    category: 'trolley',
     cap: '30–36 passengers',
     previewCap: '30–36 Passengers',
     image: fleetImages.trolley.classicExterior,
+    hoverImage: fleetImages.trolley.classicInteriorFrontFacing,
     gallery: [
       fleetImages.trolley.classicExterior,
-      fleetImages.trolley.t4Exterior,
-      fleetImages.trolley.t4ExteriorFront,
-      fleetImages.trolley.t4Interior1,
-      fleetImages.trolley.t4Interior2,
-      fleetImages.trolley.t4InteriorLighting,
+      fleetImages.trolley.classicInteriorFrontFacing,
+      fleetImages.trolley.classicInteriorFrontFacing2,
     ],
-    quoteValue: 'Classic White Trolley · 30–36',
-    intro: 'There is something about an open-air trolley that turns a simple drive into an occasion. Polished rails, a rear balcony made for the photos everyone remembers, and circular seating so the whole party rides facing one another. From the first stop to the last, the Classic White Trolley sets a timeless, old-world tone for the day.',
+    quoteValue: 'White Trolley — Classic',
+    intro: 'There is something about an open-air trolley that turns a simple drive into an occasion. Polished rails, a rear balcony made for the photos everyone remembers, and forward-facing rows give the Classic White Trolley a familiar, orderly layout. From the first stop to the last, it sets a timeless, old-world tone for the day.',
     stats: [
       { label: 'Capacity', value: '30–36' },
       { label: 'Ideal group', value: '20–34' },
       { label: 'Minimum', value: '3 hours' },
     ],
     perfectFor: ['Wedding ceremonies', 'Bridal party transport', 'Vineyard & brewery tours', 'Engagement photos', 'Holiday light tours'],
-    feats: ['Rear balcony platform', 'Circular perimeter seating', 'Bluetooth sound system', 'Heat & air conditioning', 'Professional chauffeur included'],
+    feats: ['Rear balcony platform', 'Forward-facing seating', 'Bluetooth sound system', 'Heat & air conditioning', 'Professional chauffeur included'],
+  },
+  {
+    name: 'White Limo Trolley',
+    slug: 'white-limo-trolley',
+    category: 'trolley',
+    cap: 'Circular limo-style seating',
+    previewCap: 'Circular Limo-Style Seating',
+    image: fleetImages.trolley.t4Exterior,
+    hoverImage: fleetImages.trolley.t4Interior2,
+    gallery: [
+      fleetImages.trolley.t4Exterior,
+      fleetImages.trolley.t4ExteriorFront,
+      fleetImages.trolley.t4ExteriorSide,
+      fleetImages.trolley.t4Interior1,
+      fleetImages.trolley.t4Interior2,
+      fleetImages.trolley.t4InteriorLighting,
+    ],
+    quoteValue: 'White Trolley — Limo',
+    intro: 'Designed around conversation and celebration, the White Limo Trolley uses circular perimeter seating so the group can face one another while riding together. Its wood-finished cabin and open center aisle create a social trolley experience for weddings, private events and nights out.',
+    stats: [
+      { label: 'Seating', value: 'Circular limo-style' },
+      { label: 'Layout', value: 'Perimeter benches' },
+      { label: 'Interior', value: 'Open center aisle' },
+    ],
+    perfectFor: ['Wedding parties', 'Private celebrations', 'Night-out transportation', 'Photo tours', 'Group charters'],
+    feats: ['Circular limo-style seating', 'Group-facing interior layout', 'Wood-finished trolley cabin', 'Open center aisle', 'Professional chauffeur included'],
   },
   {
     name: 'Super Coach Bus',
     slug: 'super-coach-bus',
+    category: 'coach-bus',
     cap: 'Up to 57 passengers',
     previewCap: 'Up to 57 guests',
     image: fleetImages.coach.exterior1,
@@ -124,6 +179,7 @@ export const fleet: FleetVehicle[] = [
   {
     name: 'Party Bus',
     slug: 'party-bus',
+    category: 'party-bus',
     cap: 'Up to 40 passengers',
     previewCap: 'Up to 40 Passengers',
     image: fleetImages.partyBus.exterior,
@@ -143,24 +199,50 @@ export const fleet: FleetVehicle[] = [
     feats: ['Wraparound lounge seating', 'Color LED party lighting', 'Premium sound system', 'Open dance-floor space', 'Heat & air conditioning', 'Professional chauffeur included'],
   },
   {
-    name: 'Limo Vans',
+    name: 'Limo Van',
     slug: 'limo-vans',
+    category: 'limo-van',
     cap: 'Up to 14 passengers',
     previewCap: 'Up to 14 passengers',
-    image: fleetImages.sprinter.exterior,
+    image: fleetImages.sprinter.limoVan.front,
+    hoverImage: fleetImages.sprinter.limoVan.interior,
     gallery: [
-      fleetImages.sprinter.exterior,
-      fleetImages.sprinter.interiorFront,
-      fleetImages.sprinter.interiorRear,
+      fleetImages.sprinter.limoVan.front,
+      fleetImages.sprinter.limoVan.back,
+      fleetImages.sprinter.limoVan.interior,
     ],
-    quoteValue: 'Limo Van · 14',
-    intro: 'For smaller parties and executive runs, the Limo Van is the versatile favorite — intimate, understated, and ready for anything from an airport pickup to a night on the town. Executive leather seating and ambient lighting make even the shortest trips feel like part of the celebration.',
+    quoteValue: 'Sprinter — Limo',
+    intro: 'The Limo Van is built for celebration, pairing wraparound diamond-stitched seating with color-changing ceiling and accent lighting. It gives smaller wedding parties, birthdays and nights out a private lounge atmosphere while a professional chauffeur handles every stop.',
     stats: [
       { label: 'Capacity', value: 'Up to 14' },
-      { label: 'Ideal group', value: '6–12' },
+      { label: 'Layout', value: 'Wraparound lounge' },
+      { label: 'Atmosphere', value: 'Color LED lighting' },
+    ],
+    perfectFor: ['Wedding parties', 'Birthdays', 'Bachelor & bachelorette parties', 'Night out', 'Private celebrations'],
+    feats: ['Wraparound leather lounge seating', 'Color-changing ceiling and accent lighting', 'Wood-look flooring', 'Heat & air conditioning', 'Professional chauffeur included'],
+  },
+  {
+    name: 'Executive Van',
+    slug: 'executive-van',
+    category: 'limo-van',
+    cap: 'Executive-style seating',
+    previewCap: 'Executive-Style Seating',
+    image: fleetImages.sprinter.executiveVan.front,
+    hoverImage: fleetImages.sprinter.executiveVan.interior,
+    gallery: [
+      fleetImages.sprinter.executiveVan.front,
+      fleetImages.sprinter.executiveVan.side,
+      fleetImages.sprinter.executiveVan.interior,
+      fleetImages.sprinter.executiveVan.interiorDetail,
+    ],
+    quoteValue: 'Sprinter — Executive',
+    intro: 'The Executive Van brings a quieter, business-ready setup to group travel, with individual high-back leather seats, a conference table and a refined black cabin. It is a comfortable choice for airport transfers, corporate transportation and smaller groups that prefer personal seating.',
+    stats: [
+      { label: 'Seating', value: 'Individual high-back' },
+      { label: 'Workspace', value: 'Conference table' },
       { label: 'Style', value: 'Executive' },
     ],
-    perfectFor: ['Small parties', 'Airport transfers', 'Date night', 'Corporate travel', 'Wine tours'],
-    feats: ['Executive leather seating', 'Ambient LED lighting', 'Bluetooth sound system', 'Heat & air conditioning', 'Ideal for smaller parties & airport transfers', 'Professional chauffeur included'],
+    perfectFor: ['Airport transfers', 'Corporate travel', 'Executive transportation', 'Small group charters', 'Client transportation'],
+    feats: ['Individual high-back leather seating', 'Conference table', 'Interior reading lights', 'Heat & air conditioning', 'Professional chauffeur included'],
   },
 ];

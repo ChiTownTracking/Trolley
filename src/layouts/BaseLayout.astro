@@ -24,8 +24,9 @@ interface Props {
   robots?: 'index,follow' | 'noindex,follow';
   /** Optional JSON-LD object(s) injected as a <script type="application/ld+json">. */
   schema?: Record<string, unknown> | Record<string, unknown>[];
-  /** Homepage-only mobile hero preload URL; the desktop hero remains unchanged. */
+  /** Homepage hero preload URLs, split by viewport. */
   mobileHeroPreload?: string;
+  desktopHeroPreload?: string;
   /** Disable only on routes whose initial viewport has no italic serif text. */
   preloadSerifItalic?: boolean;
 }
@@ -39,6 +40,7 @@ const {
   robots,
   schema,
   mobileHeroPreload,
+  desktopHeroPreload,
   preloadSerifItalic = true,
 } = Astro.props;
 
@@ -82,6 +84,16 @@ const ogImage = imagePath ? new URL(imagePath, Astro.site ?? Astro.url).href : u
       href={mobileHeroPreload}
       type="image/webp"
       media="(max-width: 768px)"
+      fetchpriority="high"
+    />
+  )}
+  {desktopHeroPreload && (
+    <link
+      rel="preload"
+      as="image"
+      href={desktopHeroPreload}
+      type="image/webp"
+      media="(min-width: 769px)"
       fetchpriority="high"
     />
   )}
