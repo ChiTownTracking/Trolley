@@ -54,6 +54,16 @@ const ogImage = imagePath ? new URL(imagePath, Astro.site ?? Astro.url).href : u
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
+  <!-- Google tag (gtag.js) -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=AW-18375745058"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() {
+      window.dataLayer.push(arguments);
+    };
+    window.gtag('js', new Date());
+    window.gtag('config', 'AW-18375745058');
+  </script>
   <meta name="description" content={description} />
   {robots && <meta name="robots" content={robots} />}
   <link rel="canonical" href={canonical} />

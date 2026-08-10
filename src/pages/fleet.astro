@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
+import Eyebrow from '../components/Eyebrow.astro';
 import { Image } from 'astro:assets';
 import { fleet } from '../data/fleet';
 import type { FleetCategory } from '../data/fleet';
@@ -23,9 +23,10 @@ const fleetFilters = [
   title="Our Fleet — ChiTown Trolley"
   description="Classic white trolley, super coach bus, party bus, and executive limo vans — hand-detailed for weddings and events across Chicagoland."
 >
-  <PageHero eyebrow="The Fleet" pb={40}>
-    ChiTown Trolleys, <em class="grad">hand-detailed</em> for every event
-  </PageHero>
+  <section class="fleet-heading">
+    <Eyebrow label="The Fleet" size="lg" mb={0} />
+    <h1 class="fleet-heading__sr-only">Our Fleet</h1>
+  </section>
 
   <div class="fleet-filter wrap wrap-1140">
     <div
@@ -167,6 +168,21 @@ const fleetFilters = [
 </BaseLayout>
 
 <style>
+  .fleet-heading {
+    padding: 40px 28px;
+    text-align: center;
+  }
+  .fleet-heading__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
   .fleet-filter {
     padding: 0 28px 32px;
     text-align: center;
