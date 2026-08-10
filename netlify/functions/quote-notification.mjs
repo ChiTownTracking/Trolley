@@ -33,10 +33,10 @@ const buildEmailContent = (data) => {
   }));
 
   return {
-    html: `<div style="font-family:Arial,sans-serif;font-size:14px;line-height:1.35;color:#111;">${rows
+    html: `<div style="font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.4;color:#111;">${rows
       .map(
         ({ label, value }) =>
-          `<div style="margin:0 0 3px;"><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</div>`,
+          `<div style="margin:0 0 5px 0;padding:0;"><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</div>`,
       )
       .join('')}</div>`,
     text: rows.map(({ label, value }) => `${label}: ${value}`).join('\n'),
@@ -69,10 +69,11 @@ const sendQuoteNotification = async (data) => {
   const fullName = normalizeValue(data.name);
   const emailAddress = normalizeValue(data.email);
   const { html, text } = buildEmailContent(data);
+  const subject = `REQUEST FREE QUOTE FROM ${fullName}`;
   const email = {
     from,
     to,
-    subject: `REQUEST FREE QUOTE FROM ${fullName}`,
+    subject,
     html,
     text,
   };
@@ -94,6 +95,8 @@ const sendQuoteNotification = async (data) => {
   if (!response.ok) {
     throw new Error(`Resend returned HTTP ${response.status} for the quote notification.`);
   }
+
+  console.log('Resend accepted the quote-request notification.');
 };
 
 export default {
@@ -101,6 +104,7 @@ export default {
     const data = event?.data;
     if (!data || data['form-name'] !== QUOTE_FORM_NAME) return;
 
+    console.log('Processing a verified quote-request form submission.');
     await sendQuoteNotification(data);
   },
 };
