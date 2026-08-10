@@ -10,6 +10,16 @@ const failureMessage =
 
 const submittingForms = new WeakSet<HTMLFormElement>();
 
+const setQuoteSubject = (form: HTMLFormElement) => {
+  if (form.getAttribute('name') !== 'quote-request') return;
+
+  const fullNameField = form.elements.namedItem('name');
+  const subjectField = form.querySelector<HTMLInputElement>('[data-quote-subject]');
+  if (!(fullNameField instanceof HTMLInputElement) || !subjectField) return;
+
+  subjectField.value = `REQUEST FREE QUOTE FROM ${fullNameField.value.trim()}`;
+};
+
 const setStatus = (
   status: HTMLElement,
   message: string,
@@ -46,6 +56,7 @@ document
       setStatus(status, 'Sending…', 'sending');
 
       try {
+        setQuoteSubject(target);
         const formData = new FormData(target);
         const formName = formData.get('form-name');
         if (typeof formName !== 'string' || !formName) {
