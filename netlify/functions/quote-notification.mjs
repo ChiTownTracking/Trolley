@@ -64,7 +64,15 @@ const formConfigurations = new Map([
     {
       fields: quoteFields,
       fieldAliases: quoteFieldAliases,
-      subject: (fullName) => `REQUEST FREE QUOTE FROM ${fullName}`,
+      subject: (fullName) => `${fullName} - New Request Quote - ChiTown Trolley`,
+    },
+  ],
+  [
+    'wedding-quote-request',
+    {
+      fields: quoteFields,
+      fieldAliases: quoteFieldAliases,
+      subject: (fullName) => `${fullName} - New Wedding Quote - ChiTown Trolley`,
     },
   ],
   [
