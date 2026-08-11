@@ -1,4 +1,6 @@
 const QUOTE_FORM_NAME = 'quote-request';
+const DEFAULT_SENDER_NAME = 'ChiTown Trolley';
+const EMAIL_ADDRESS_PATTERN = /^[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+$/;
 
 const quoteFields = [
   ['Event Type', 'type'],
@@ -17,6 +19,25 @@ const quoteFields = [
 
 const normalizeValue = (value) =>
   typeof value === 'string' ? value.replace(/\s+/g, ' ').trim() : '';
+
+const sanitizeSenderName = (value) => {
+  if (typeof value !== 'string' || /[\r\n]/.test(value)) return '';
+
+  return value
+    .replace(/[\u0000-\u001f\u007f]/g, '')
+    .replace(/[^\p{L}\p{M}\p{N} .'\u2019-]/gu, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+};
+
+const extractEmailAddress = (from) => {
+  if (/[\r\n]/.test(from)) return '';
+
+  const angleBracketMatch = from.match(/<\s*([^<>]+)\s*>\s*$/);
+  const emailAddress = (angleBracketMatch?.[1] ?? from).trim();
+
+  return EMAIL_ADDRESS_PATTERN.test(emailAddress) ? emailAddress : '';
+};
 
 const escapeHtml = (value) =>
   value
@@ -46,6 +67,7 @@ const buildEmailContent = (data) => {
 const getEmailConfiguration = () => {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.QUOTE_EMAIL_FROM;
+  const fromAddress = from ? extractEmailAddress(from) : '';
   const to = (process.env.QUOTE_EMAIL_TO ?? '')
     .split(',')
     .map((address) => address.trim())
@@ -54,6 +76,7 @@ const getEmailConfiguration = () => {
   const missing = [
     !apiKey && 'RESEND_API_KEY',
     !from && 'QUOTE_EMAIL_FROM',
+    from && !fromAddress && 'valid QUOTE_EMAIL_FROM address',
     to.length === 0 && 'QUOTE_EMAIL_TO',
   ].filter(Boolean);
 
@@ -61,24 +84,25 @@ const getEmailConfiguration = () => {
     throw new Error(`Quote notification is missing: ${missing.join(', ')}.`);
   }
 
-  return { apiKey, from, to };
+  return { apiKey, fromAddress, to };
 };
 
 const sendQuoteNotification = async (data) => {
-  const { apiKey, from, to } = getEmailConfiguration();
+  const { apiKey, fromAddress, to } = getEmailConfiguration();
   const fullName = normalizeValue(data.name);
+  const senderName = sanitizeSenderName(data.name) || DEFAULT_SENDER_NAME;
   const emailAddress = normalizeValue(data.email);
   const { html, text } = buildEmailContent(data);
   const subject = `REQUEST FREE QUOTE FROM ${fullName}`;
   const email = {
-    from,
+    from: `${senderName} <${fromAddress}>`,
     to,
     subject,
     html,
     text,
   };
 
-  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailAddress)) {
+  if (EMAIL_ADDRESS_PATTERN.test(emailAddress)) {
     email.reply_to = emailAddress;
   }
 
