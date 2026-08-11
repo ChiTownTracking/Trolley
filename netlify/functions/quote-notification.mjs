@@ -138,7 +138,7 @@ const sendQuoteNotification = async (data) => {
   const senderName = sanitizeSenderName(fullName) || DEFAULT_SENDER_NAME;
   const emailAddress = normalizeValue(data.email);
   const { html, text } = buildEmailContent(data);
-  const subject = `REQUEST FREE QUOTE FROM ${fullName}`;
+  const subject = `${fullName} - Request New Quote - ChiTown Trolley`;
   const email = {
     from: `${senderName} <${fromAddress}>`,
     to,
