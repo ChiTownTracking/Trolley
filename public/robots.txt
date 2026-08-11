@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chitowntrolley.com/sitemap-index.xml

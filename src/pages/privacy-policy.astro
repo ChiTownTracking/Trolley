@@ -2,62 +2,152 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { site } from '../data/site';
+import '../styles/legal.css';
 
-// TODO(LEGAL REVIEW): This page is structured placeholder copy only. The
-// business or qualified legal counsel must review and replace it before the
-// policy is treated as final or relied upon publicly.
+const sections = [
+  ['scope', '1. Scope'],
+  ['information-we-collect', '2. Information We Collect'],
+  ['how-we-use-information', '3. How We Use Information'],
+  ['how-we-share-information', '4. How We Share Information'],
+  ['cookies-analytics-advertising', '5. Cookies, Analytics, and Advertising'],
+  ['text-and-telephone', '6. Text Messages and Telephone Communications'],
+  ['payment-information', '7. Payment Information'],
+  ['data-retention', '8. Data Retention'],
+  ['information-security', '9. Information Security'],
+  ['privacy-requests', '10. Your Choices and Privacy Requests'],
+  ['children', '11. Children'],
+  ['third-party-services', '12. Third-Party Links and Services'],
+  ['policy-changes', '13. Changes to This Policy'],
+  ['contact-us', '14. Contact Us'],
+] as const;
 ---
 <BaseLayout
   title="Privacy Policy — ChiTown Trolley"
-  description="Draft privacy policy information for the ChiTown Trolley website."
+  description="Learn how ChiTown Trolley collects, uses, shares, and protects personal information."
   hideCta={true}
-  robots="noindex,follow"
 >
-  <PageHero eyebrow="Legal" pb={40}>
+  <PageHero eyebrow="Legal" pb={36}>
     Privacy <em class="grad">Policy</em>
+    <Fragment slot="lead">Effective Date: <time datetime="2026-08-11">August 11, 2026</time></Fragment>
   </PageHero>
 
-  <article class="legal-page wrap wrap-760">
-    <aside class="legal-page__notice" aria-label="Draft legal notice">
-      <strong>Draft placeholder:</strong> This policy requires review and approval by the business or legal counsel before publication as final legal text.
-    </aside>
+  <article class="legal-page wrap">
+    <p class="legal-page__intro">
+      This Privacy Policy explains how ChiTown Trolley ("ChiTown Trolley," "we," "us," or "our") collects, uses, shares, and protects personal information when you visit chitowntrolley.com, request a quote, make or manage a reservation, communicate with us, or use our transportation services.
+    </p>
 
-    <section>
-      <h2>Information you choose to share</h2>
-      <p>When you contact ChiTown Trolley or submit a quote or reservation request, you may choose to provide contact, event, passenger, route, and scheduling details. The final policy must confirm every form and service that receives this information.</p>
-    </section>
+    <details class="legal-toc">
+      <summary>On this page</summary>
+      <ol>
+        {sections.map(([id, title]) => <li><a href={`#${id}`}>{title.replace(/^\d+\. /, '')}</a></li>)}
+      </ol>
+    </details>
 
-    <section>
-      <h2>How information may be used</h2>
-      <p>Information submitted through the website may be used to respond to an inquiry, discuss availability, prepare a quote, or coordinate a requested service. Final wording must be reviewed against the business's actual operating practices.</p>
-    </section>
+    <div class="legal-sections">
+      <section class="legal-section" id="scope">
+        <h2>1. Scope</h2>
+        <p>This Policy applies to information collected through our website, quote and reservation processes, email, telephone, text messaging, and in connection with transportation services. It does not apply to third-party websites or services that have their own privacy notices.</p>
+      </section>
 
-    <section>
-      <h2>Website and third-party services</h2>
-      <p>The final policy must identify any hosting, form-processing, analytics, communications, payment, or other third-party services used by this website and explain their role accurately. No specific service or retention period is represented by this placeholder.</p>
-    </section>
+      <section class="legal-section" id="information-we-collect">
+        <h2>2. Information We Collect</h2>
+        <p>We may collect information that you provide directly to us, including:</p>
+        <ul>
+          <li>Contact information, such as your name, email address, telephone number, mailing or billing address.</li>
+          <li>Event and transportation information, such as event date and type, passenger count, pickup and drop-off locations, route details, schedule, itinerary, and special requests.</li>
+          <li>Reservation and transaction information, such as quote details, confirmation information, amounts paid or due, billing records, and communications about your reservation.</li>
+          <li>Payment-related information needed to authorize or process a transaction. Payment card information should be provided only through the payment or authorization method designated by ChiTown Trolley.</li>
+          <li>Communications you send to us, including emails, text messages, form submissions, customer-service inquiries, and feedback.</li>
+        </ul>
+        <p>When you use the website, we may also receive limited technical information automatically, such as IP address, device or browser type, referring pages, pages viewed, approximate location derived from IP address, and cookie or similar technology data, depending on the tools enabled on the website.</p>
+      </section>
 
-    <section>
-      <h2>Your questions and choices</h2>
-      <p>Questions about personal information or this draft policy can be sent to <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>. The final policy must define any applicable request process after legal review.</p>
-    </section>
+      <section class="legal-section" id="how-we-use-information">
+        <h2>3. How We Use Information</h2>
+        <p>We may use personal information to:</p>
+        <ul>
+          <li>Respond to inquiries and quote requests.</li>
+          <li>Check availability, prepare pricing, and create or manage reservations.</li>
+          <li>Plan routes, schedules, pickups, drop-offs, and other service details.</li>
+          <li>Process deposits, balances, refunds, or other authorized transactions.</li>
+          <li>Communicate about confirmations, itinerary updates, service changes, and customer support.</li>
+          <li>Send promotional communications where permitted and in accordance with your choices.</li>
+          <li>Operate, maintain, secure, troubleshoot, and improve our website and services.</li>
+          <li>Detect or prevent fraud, misuse, security incidents, and violations of our terms.</li>
+          <li>Comply with legal, accounting, insurance, tax, regulatory, or safety obligations.</li>
+        </ul>
+      </section>
+
+      <section class="legal-section" id="how-we-share-information">
+        <h2>4. How We Share Information</h2>
+        <p>We may share personal information only as reasonably necessary for business operations and service delivery, including with:</p>
+        <ul>
+          <li>Service providers that support website hosting, forms, communications, payment processing, accounting, analytics, advertising, customer service, or other business functions.</li>
+          <li>Drivers, transportation partners, or vendors when information is needed to perform the transportation service you requested.</li>
+          <li>Government authorities, law enforcement, insurers, attorneys, or other parties when required by law or reasonably necessary to protect rights, safety, property, or prevent fraud.</li>
+          <li>A successor or potential successor in connection with a merger, financing, sale, reorganization, or transfer of all or part of the business, subject to applicable law.</li>
+        </ul>
+        <p>ChiTown Trolley does not use customer personal information to create lists for sale to third parties. We do not share mobile opt-in or text-message consent information with third parties for their own marketing or promotional purposes.</p>
+      </section>
+
+      <section class="legal-section" id="cookies-analytics-advertising">
+        <h2>5. Cookies, Analytics, and Advertising</h2>
+        <p>The website may use cookies and similar technologies to support site functionality, understand website use, remember preferences, measure advertising performance, or improve marketing. Some of these technologies may be provided by third-party analytics or advertising providers if those tools are enabled on the website.</p>
+        <p>You can usually control cookies through your browser settings. Disabling some cookies may affect website functionality. Where required by applicable law, we will provide additional notice or choice regarding non-essential cookies.</p>
+      </section>
+
+      <section class="legal-section" id="text-and-telephone">
+        <h2>6. Text Messages and Telephone Communications</h2>
+        <p>If you provide a mobile number and opt in to receive text messages, ChiTown Trolley may send messages related to quotes, reservations, scheduling, service updates, and, where permitted, promotions. Message frequency may vary and message and data rates may apply. Consent to marketing texts is not a condition of purchasing transportation services. You may opt out of marketing texts by replying STOP. For help, reply HELP or contact us using the information below.</p>
+      </section>
+
+      <section class="legal-section" id="payment-information">
+        <h2>7. Payment Information</h2>
+        <p>Payment card data is sensitive information. ChiTown Trolley may use payment processors, merchant-service providers, or other secure payment methods to authorize and process deposits and balances. Please do not send a full payment card number or card-verification code through an ordinary website message, text message, or unencrypted email. Follow the secure payment or authorization instructions provided for your reservation.</p>
+        <p>We retain transaction and accounting records as needed for legitimate business and legal purposes, but card-verification codes should not be retained after transaction authorization.</p>
+      </section>
+
+      <section class="legal-section" id="data-retention">
+        <h2>8. Data Retention</h2>
+        <p>We retain personal information for as long as reasonably necessary to provide services, manage reservations, maintain business and accounting records, resolve disputes, enforce agreements, meet insurance or legal obligations, and protect the security of our operations. Retention periods may vary depending on the type of information and the reason it was collected.</p>
+      </section>
+
+      <section class="legal-section" id="information-security">
+        <h2>9. Information Security</h2>
+        <p>We use reasonable administrative, technical, and physical safeguards designed to protect personal information against unauthorized access, use, alteration, or disclosure. No website, email system, or data-transmission method can be guaranteed to be completely secure, so we cannot guarantee absolute security.</p>
+      </section>
+
+      <section class="legal-section" id="privacy-requests">
+        <h2>10. Your Choices and Privacy Requests</h2>
+        <p>You may unsubscribe from promotional emails by using the unsubscribe method provided in the message, and you may opt out of marketing text messages as described above. You may also contact us to request access to, correction of, or deletion of personal information, subject to applicable law and any information we must retain for contracts, accounting, safety, fraud prevention, or legal compliance.</p>
+        <p>Depending on where you live, applicable law may provide additional privacy rights. We will respond to verified requests as required by applicable law.</p>
+      </section>
+
+      <section class="legal-section" id="children">
+        <h2>11. Children</h2>
+        <p>Our website and transportation booking services are not directed to children under 13, and we do not knowingly collect personal information directly from children under 13 through the website. Information about minor passengers may be provided by a parent, guardian, or event organizer when reasonably necessary to coordinate transportation.</p>
+      </section>
+
+      <section class="legal-section" id="third-party-services">
+        <h2>12. Third-Party Links and Services</h2>
+        <p>Our website may contain links to third-party websites or services. ChiTown Trolley is not responsible for the privacy practices of third parties. We encourage you to review the privacy notices of any third-party service you use.</p>
+      </section>
+
+      <section class="legal-section" id="policy-changes">
+        <h2>13. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time to reflect changes in our services, technology, business practices, or legal requirements. The updated version will be posted on the website with a revised effective date. Material changes may be communicated by additional means when appropriate or required by law.</p>
+      </section>
+
+      <section class="legal-section legal-section--contact" id="contact-us">
+        <h2>14. Contact Us</h2>
+        <p>For questions about this Privacy Policy or our handling of personal information, contact:</p>
+        <address>
+          <strong>ChiTown Trolley</strong><br />
+          {site.address.streetAddress}, {site.address.addressLocality}, {site.address.addressRegion} {site.address.postalCode}<br />
+          Phone: <a href={site.contact.phoneHref}>630-624-3448</a><br />
+          Email: <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+        </address>
+      </section>
+    </div>
   </article>
 </BaseLayout>
-
-<style>
-  .legal-page { padding: 0 28px 96px; }
-  .legal-page__notice { margin: 0 0 38px; padding: 18px 20px; border-left: 3px solid var(--gold); background: var(--cream); color: var(--muted); font-size: 13.5px; line-height: 1.7; }
-  .legal-page section { padding: 28px 0; border-top: 1px solid var(--line-2); }
-  .legal-page section:last-child { border-bottom: 1px solid var(--line-2); }
-  .legal-page h2 { margin: 0 0 12px; color: var(--ink); font-family: var(--serif); font-size: clamp(22px, 3vw, 28px); font-weight: 600; }
-  .legal-page p { margin: 0; color: var(--muted); font-size: 15px; font-weight: 300; line-height: 1.8; }
-  .legal-page a { color: var(--gold-deep); overflow-wrap: anywhere; text-underline-offset: 4px; }
-  .legal-page a:focus-visible { outline: 2px solid var(--gold-dark); outline-offset: 4px; }
-
-  @media (max-width: 639px) {
-    .legal-page { padding-inline: 24px; padding-bottom: 72px; }
-    .legal-page__notice { margin-bottom: 28px; padding: 16px; }
-    .legal-page section { padding-block: 24px; }
-    .legal-page p { font-size: 14.5px; line-height: 1.75; }
-  }
-</style>

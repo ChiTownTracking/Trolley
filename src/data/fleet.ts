@@ -166,7 +166,7 @@ export const fleet: FleetVehicle[] = [
       fleetImages.coach.washroom1,
       fleetImages.coach.washroom2,
     ],
-    quoteValue: 'Super Coach Bus · 57',
+    quoteValue: 'Super Coach Bus — 57 Passengers',
     intro: 'When the guest list outgrows the trolley, the Super Coach Bus keeps everyone together in quilted-leather comfort. Climate-controlled, whisper-smooth, and built for the long haul, it is the effortless way to shuttle guests between hotel and venue — or carry the whole group across state lines without a second vehicle in the convoy.',
     stats: [
       { label: 'Capacity', value: 'Up to 57' },
@@ -188,7 +188,7 @@ export const fleet: FleetVehicle[] = [
       fleetImages.partyBus.interior1,
       fleetImages.partyBus.interior2,
     ],
-    quoteValue: 'Party Bus · 40',
+    quoteValue: 'Party Bus — 40 Passengers',
     intro: 'When the celebration is the whole point, the Party Bus brings the venue along with you. Step aboard to wraparound lounge seating, color-shifting lights, and a sound system built to move — so the night begins the moment the doors close, not when you arrive. It is the rolling centerpiece for every milestone worth remembering.',
     stats: [
       { label: 'Capacity', value: 'Up to 40' },

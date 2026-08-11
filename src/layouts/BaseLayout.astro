@@ -22,6 +22,8 @@ interface Props {
   ogType?: 'website' | 'article';
   /** Optional crawler directive for confirmed draft/utility pages. */
   robots?: 'index,follow' | 'noindex,follow';
+  /** Utility pages such as the 404 should not advertise a nonexistent canonical route. */
+  omitCanonical?: boolean;
   /** Optional JSON-LD object(s) injected as a <script type="application/ld+json">. */
   schema?: Record<string, unknown> | Record<string, unknown>[];
   /** Homepage hero preload URLs, split by viewport. */
@@ -38,6 +40,7 @@ const {
   image,
   ogType = 'website',
   robots,
+  omitCanonical = false,
   schema,
   mobileHeroPreload,
   desktopHeroPreload,
@@ -53,6 +56,7 @@ const ogImage = imagePath ? new URL(imagePath, Astro.site ?? Astro.url).href : u
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script is:inline>document.documentElement.classList.add('reveal-ready');</script>
   <title>{title}</title>
   <!-- Google tag (gtag.js) -->
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=AW-18375745058"></script>
@@ -66,9 +70,9 @@ const ogImage = imagePath ? new URL(imagePath, Astro.site ?? Astro.url).href : u
   </script>
   <meta name="description" content={description} />
   {robots && <meta name="robots" content={robots} />}
-  <link rel="canonical" href={canonical} />
+  {!omitCanonical && <link rel="canonical" href={canonical} />}
   <meta property="og:type" content={ogType} />
-  <meta property="og:url" content={canonical} />
+  {!omitCanonical && <meta property="og:url" content={canonical} />}
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   {ogImage && <meta property="og:image" content={ogImage} />}
@@ -137,7 +141,7 @@ const ogImage = imagePath ? new URL(imagePath, Astro.site ?? Astro.url).href : u
       </button>
       <span class="form-success-popup__icon" aria-hidden="true">✓</span>
       <p class="form-success-popup__eyebrow">Submission received</p>
-      <h2 id="form-success-title">Thank you!</h2>
+      <p class="form-success-popup__title" id="form-success-title">Thank you!</p>
       <p id="form-success-message" data-form-success-popup-message>
         Your request has been submitted successfully.
       </p>

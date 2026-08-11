@@ -2,67 +2,183 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { site } from '../data/site';
+import { withBase } from '../utils/paths';
+import '../styles/legal.css';
 
-// TODO(LEGAL REVIEW): This page is structured placeholder copy only. The
-// business or qualified legal counsel must review and replace it before these
-// terms are treated as final or relied upon publicly.
+const sections = [
+  ['website-use', '1. Website Use'],
+  ['quotes-reservations', '2. Quotes and Reservation Requests'],
+  ['deposit-payment', '3. Deposit, Payment, and Credit Card Authorization'],
+  ['pricing', '4. Pricing and Additional Charges'],
+  ['minimum-time', '5. Minimum Service Time'],
+  ['itinerary-changes', '6. Itinerary and Schedule Changes'],
+  ['capacity-assignment', '7. Passenger Capacity and Vehicle Assignment'],
+  ['delays', '8. Traffic, Weather, Delays, and Events Beyond Our Control'],
+  ['conduct-safety', '9. Passenger Conduct and Safety'],
+  ['alcohol', '10. Alcohol and BYOB Charters'],
+  ['decorations', '11. Decorations'],
+  ['cleaning-damage', '12. Cleaning, Damage, and Property'],
+  ['cancellations', '13. Cancellations, Rescheduling, and Refunds'],
+  ['third-party-venues', '14. Third-Party Venues and Services'],
+  ['communications', '15. Text and Electronic Communications'],
+  ['intellectual-property', '16. Intellectual Property'],
+  ['third-party-links', '17. Third-Party Links'],
+  ['privacy', '18. Privacy'],
+  ['liability', '19. Disclaimers and Limitation of Liability'],
+  ['governing-law', '20. Governing Law'],
+  ['severability', '21. Severability and No Waiver'],
+  ['terms-changes', '22. Changes to These Terms'],
+  ['contact-us', '23. Contact Us'],
+] as const;
 ---
 <BaseLayout
   title="Terms and Conditions — ChiTown Trolley"
-  description="Draft website terms and conditions for ChiTown Trolley."
+  description="Review the website terms and transportation service conditions for ChiTown Trolley."
   hideCta={true}
-  robots="noindex,follow"
 >
-  <PageHero eyebrow="Legal" pb={40}>
+  <PageHero eyebrow="Legal" pb={36}>
     Terms and <em class="grad">Conditions</em>
+    <Fragment slot="lead">Effective Date: <time datetime="2026-08-11">August 11, 2026</time></Fragment>
   </PageHero>
 
-  <article class="legal-page wrap wrap-760">
-    <aside class="legal-page__notice" aria-label="Draft legal notice">
-      <strong>Draft placeholder:</strong> These terms require review and approval by the business or legal counsel before publication as final legal text.
-    </aside>
+  <article class="legal-page wrap">
+    <p class="legal-page__label">Website Terms &amp; Transportation Service Conditions</p>
+    <p class="legal-page__intro">
+      These Terms and Conditions ("Terms") govern use of chitowntrolley.com and establish general conditions that may apply to transportation services provided by ChiTown Trolley ("ChiTown Trolley," "we," "us," or "our"). A specific quote, reservation confirmation, service agreement, invoice, or signed authorization may contain additional terms. If a signed or written reservation agreement conflicts with these Terms, the reservation-specific agreement controls for that reservation.
+    </p>
 
-    <section>
-      <h2>Website information</h2>
-      <p>This website provides general information about ChiTown Trolley's vehicles and services. Final terms must define how website content, availability information, and updates should be interpreted.</p>
-    </section>
+    <details class="legal-toc">
+      <summary>On this page</summary>
+      <ol>
+        {sections.map(([id, title]) => <li><a href={`#${id}`}>{title.replace(/^\d+\. /, '')}</a></li>)}
+      </ol>
+    </details>
 
-    <section>
-      <h2>Quote and reservation requests</h2>
-      <p>Submitting a website form starts a conversation with the business. The final terms must accurately describe when a booking becomes confirmed and identify the documents or approvals that govern an actual reservation.</p>
-    </section>
+    <div class="legal-sections">
+      <section class="legal-section" id="website-use">
+        <h2>1. Website Use</h2>
+        <p>The website provides general information about our vehicles and transportation services. Website content, photographs, availability statements, estimated travel times, and service descriptions are informational and may change. Using the website does not guarantee that a particular vehicle, date, route, or service is available.</p>
+      </section>
 
-    <section>
-      <h2>Service policies</h2>
-      <p>Pricing, deposits, payment timing, cancellations, schedule changes, passenger responsibilities, and vehicle-specific conditions must be supplied and reviewed by the business. This placeholder does not establish those policies.</p>
-    </section>
+      <section class="legal-section" id="quotes-reservations">
+        <h2>2. Quotes and Reservation Requests</h2>
+        <p>Submitting a quote request, contact form, or reservation request starts the booking process but does not by itself create a confirmed reservation. Unless a written quote or service agreement states otherwise, a reservation is considered secured only after ChiTown Trolley confirms the booking and receives the required deposit.</p>
+        <p>The customer is responsible for reviewing all quote and confirmation details, including service date, pickup time, locations, passenger count, vehicle type, service duration, and pricing, and for promptly notifying ChiTown Trolley of any errors or requested changes.</p>
+      </section>
 
-    <section>
-      <h2>External services and links</h2>
-      <p>The website may link to third-party websites or services. Final terms must explain those relationships accurately and should not make guarantees about services the business does not control.</p>
-    </section>
+      <section class="legal-section" id="deposit-payment">
+        <h2>3. Deposit, Payment, and Credit Card Authorization</h2>
+        <p>Unless otherwise stated in writing, a $100 deposit is required to secure a reservation. The remaining balance is due during the week of service. ChiTown Trolley may require a signed credit card authorization form or other payment authorization for the deposit, remaining balance, or other charges authorized under the reservation agreement.</p>
+        <p>By providing a payment method, the cardholder represents that they are authorized to use that payment method and authorizes ChiTown Trolley to process the amounts identified in the applicable quote, invoice, service agreement, or authorization.</p>
+        <p>For security, full payment card numbers and card-verification codes should be submitted only through the secure payment or authorization method designated by ChiTown Trolley and should not be sent through ordinary email, text messaging, or general website contact forms.</p>
+      </section>
 
-    <section>
-      <h2>Questions</h2>
-      <p>Questions about these draft terms can be sent to <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.</p>
-    </section>
+      <section class="legal-section" id="pricing">
+        <h2>4. Pricing and Additional Charges</h2>
+        <p>Pricing is based on the vehicle, date, service period, itinerary, mileage, locations, and other details stated in the quote or reservation. Additional time, additional stops, route changes, parking, tolls, venue access requirements, special requests, or other services not included in the original booking may result in additional charges when disclosed in the reservation agreement or approved by the customer.</p>
+      </section>
+
+      <section class="legal-section" id="minimum-time">
+        <h2>5. Minimum Service Time</h2>
+        <p>Unless otherwise confirmed in writing, private charters are subject to a three-hour minimum. Different minimums may apply to particular dates, vehicles, packages, or special events when stated in the written quote or reservation confirmation.</p>
+      </section>
+
+      <section class="legal-section" id="itinerary-changes">
+        <h2>6. Itinerary and Schedule Changes</h2>
+        <p>Customers should contact ChiTown Trolley at least 14 days before the service date to finalize or update the itinerary. Changes requested after that time are subject to vehicle availability, route feasibility, driver scheduling, venue restrictions, and any applicable additional charges.</p>
+        <p>Customers are responsible for providing accurate pickup and destination addresses, event times, contact information, and passenger counts. ChiTown Trolley may recommend schedule adjustments based on traffic patterns, loading time, event access, or other operational considerations.</p>
+      </section>
+
+      <section class="legal-section" id="capacity-assignment">
+        <h2>7. Passenger Capacity and Vehicle Assignment</h2>
+        <p>Passenger count may not exceed the lawful or stated capacity of the assigned vehicle. Vehicle descriptions and photographs are representative. The vehicle identified in the reservation confirmation is the intended vehicle; however, if an unexpected mechanical, safety, or operational issue occurs, ChiTown Trolley may make reasonable efforts to provide a comparable substitute when available.</p>
+      </section>
+
+      <section class="legal-section" id="delays">
+        <h2>8. Traffic, Weather, Delays, and Events Beyond Our Control</h2>
+        <p>Chicago-area transportation can be affected by traffic, construction, road closures, weather, police activity, venue access, parades, sporting events, concerts, and other conditions outside our control. ChiTown Trolley will use reasonable efforts to follow the agreed itinerary and schedule, but exact travel or arrival times cannot be guaranteed when affected by circumstances beyond our reasonable control.</p>
+      </section>
+
+      <section class="legal-section" id="conduct-safety">
+        <h2>9. Passenger Conduct and Safety</h2>
+        <p>Passengers must follow lawful instructions from the chauffeur and must not interfere with safe operation of the vehicle. Unlawful, threatening, abusive, destructive, or dangerously disruptive conduct may result in refusal or termination of service when reasonably necessary for safety. The customer is responsible for communicating applicable conduct expectations to their group.</p>
+      </section>
+
+      <section class="legal-section" id="alcohol">
+        <h2>10. Alcohol and BYOB Charters</h2>
+        <p>For private charters where alcohol is permitted, only passengers who are 21 years of age or older may possess or consume alcoholic beverages, and all alcohol use must comply with applicable law and ChiTown Trolley safety rules. Kegs are not permitted. ChiTown Trolley may restrict or stop alcohol consumption when reasonably necessary for safety, legal compliance, or protection of the vehicle and passengers.</p>
+      </section>
+
+      <section class="legal-section" id="decorations">
+        <h2>11. Decorations</h2>
+        <p>Decorations such as florals, garlands, ribbons, and signs may be permitted when they can be installed and removed without damaging the vehicle. Customers may not use adhesives, fasteners, materials, or installation methods that cause damage. Decorations must not obstruct exits, windows, driver visibility, or safety equipment.</p>
+      </section>
+
+      <section class="legal-section" id="cleaning-damage">
+        <h2>12. Cleaning, Damage, and Property</h2>
+        <p>The customer may be responsible for reasonable repair, replacement, or extraordinary cleaning costs caused by the customer or members of the customer's party, to the extent stated in the reservation agreement and permitted by law. Passengers should remove personal belongings at the end of service. ChiTown Trolley is not responsible for lost or unattended property except to the extent required by applicable law.</p>
+      </section>
+
+      <section class="legal-section" id="cancellations">
+        <h2>13. Cancellations, Rescheduling, and Refunds</h2>
+        <p>Cancellation, rescheduling, deposit, and refund terms are governed by the written quote, reservation confirmation, or service agreement for the specific booking. Customers should review those terms before authorizing payment. If the reservation document does not address a cancellation or rescheduling issue, contact ChiTown Trolley promptly for written clarification.</p>
+      </section>
+
+      <section class="legal-section" id="third-party-venues">
+        <h2>14. Third-Party Venues and Services</h2>
+        <p>ChiTown Trolley is not responsible for the acts, omissions, rules, schedules, or restrictions of venues, hotels, event organizers, public authorities, parking facilities, or other third parties. Customers are responsible for confirming that pickup, loading, parking, and access arrangements are permitted at each location on the itinerary.</p>
+      </section>
+
+      <section class="legal-section" id="communications">
+        <h2>15. Text and Electronic Communications</h2>
+        <p>By providing an email address or telephone number in connection with an inquiry or reservation, you authorize ChiTown Trolley to use those channels for service-related communications. Marketing text messages will be sent only as permitted by applicable law and your choices. Message and data rates may apply. You may opt out of marketing texts by replying STOP.</p>
+      </section>
+
+      <section class="legal-section" id="intellectual-property">
+        <h2>16. Intellectual Property</h2>
+        <p>The ChiTown Trolley name, logos, website design, photographs, written content, and other materials on the website are owned by or licensed to ChiTown Trolley and are protected by applicable intellectual-property laws. You may view and use the website for personal or legitimate business inquiry purposes, but may not copy, republish, sell, modify, or exploit website content without permission except as allowed by law.</p>
+      </section>
+
+      <section class="legal-section" id="third-party-links">
+        <h2>17. Third-Party Links</h2>
+        <p>The website may link to third-party websites or services for convenience. ChiTown Trolley does not control and is not responsible for third-party content, privacy practices, availability, or services. Use of third-party services is subject to the terms of those providers.</p>
+      </section>
+
+      <section class="legal-section" id="privacy">
+        <h2>18. Privacy</h2>
+        <p>Our collection and use of personal information is described in the ChiTown Trolley <a href={withBase(site.routes.privacy)}>Privacy Policy</a>, available at https://chitowntrolley.com/privacy-policy/.</p>
+      </section>
+
+      <section class="legal-section" id="liability">
+        <h2>19. Disclaimers and Limitation of Liability</h2>
+        <p>To the fullest extent permitted by law, ChiTown Trolley is not liable for indirect, incidental, special, or consequential damages arising solely from website use or from delays and disruptions caused by circumstances beyond our reasonable control. Nothing in these Terms excludes or limits liability that cannot lawfully be excluded or limited, including liability arising from willful misconduct or other liability that applicable law does not permit us to disclaim.</p>
+      </section>
+
+      <section class="legal-section" id="governing-law">
+        <h2>20. Governing Law</h2>
+        <p>These Terms are governed by the laws of the State of Illinois, without regard to conflict-of-law principles, except where federal law or another applicable law requires otherwise. Any dispute that is not resolved informally will be handled in a court of competent jurisdiction as permitted by applicable law and any controlling reservation agreement.</p>
+      </section>
+
+      <section class="legal-section" id="severability">
+        <h2>21. Severability and No Waiver</h2>
+        <p>If any provision of these Terms is found unenforceable, the remaining provisions will remain in effect to the extent permitted by law. A failure by ChiTown Trolley to enforce a provision on one occasion does not waive the right to enforce that provision later.</p>
+      </section>
+
+      <section class="legal-section" id="terms-changes">
+        <h2>22. Changes to These Terms</h2>
+        <p>We may update these Terms from time to time. The version posted on the website will state its effective date. Changes to website terms apply prospectively. A reservation already confirmed remains subject to the reservation-specific terms in effect or agreed for that booking unless the parties agree otherwise in writing or a change is required by law.</p>
+      </section>
+
+      <section class="legal-section legal-section--contact" id="contact-us">
+        <h2>23. Contact Us</h2>
+        <p>Questions about these Terms or a reservation may be directed to:</p>
+        <address>
+          <strong>ChiTown Trolley</strong><br />
+          {site.address.streetAddress}, {site.address.addressLocality}, {site.address.addressRegion} {site.address.postalCode}<br />
+          Phone: <a href={site.contact.phoneHref}>630-624-3448</a><br />
+          Email: <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+        </address>
+      </section>
+    </div>
   </article>
 </BaseLayout>
-
-<style>
-  .legal-page { padding: 0 28px 96px; }
-  .legal-page__notice { margin: 0 0 38px; padding: 18px 20px; border-left: 3px solid var(--gold); background: var(--cream); color: var(--muted); font-size: 13.5px; line-height: 1.7; }
-  .legal-page section { padding: 28px 0; border-top: 1px solid var(--line-2); }
-  .legal-page section:last-child { border-bottom: 1px solid var(--line-2); }
-  .legal-page h2 { margin: 0 0 12px; color: var(--ink); font-family: var(--serif); font-size: clamp(22px, 3vw, 28px); font-weight: 600; }
-  .legal-page p { margin: 0; color: var(--muted); font-size: 15px; font-weight: 300; line-height: 1.8; }
-  .legal-page a { color: var(--gold-deep); overflow-wrap: anywhere; text-underline-offset: 4px; }
-  .legal-page a:focus-visible { outline: 2px solid var(--gold-dark); outline-offset: 4px; }
-
-  @media (max-width: 639px) {
-    .legal-page { padding-inline: 24px; padding-bottom: 72px; }
-    .legal-page__notice { margin-bottom: 28px; padding: 16px; }
-    .legal-page section { padding-block: 24px; }
-    .legal-page p { font-size: 14.5px; line-height: 1.75; }
-  }
-</style>

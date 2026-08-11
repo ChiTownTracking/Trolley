@@ -4,7 +4,6 @@ import CtaBand from '../../components/CtaBand.astro';
 import GuideCard from '../../components/GuideCard.astro';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { categoryLabel, formatGuideDate } from '../../data/guides';
-import { fleetImages } from '../../data/fleet';
 import { withBase } from '../../utils/paths';
 
 export async function getStaticPaths() {
@@ -49,9 +48,8 @@ const schema = {
   publisher: {
     '@type': 'Organization',
     name: 'ChiTown Trolley',
-    logo: { '@type': 'ImageObject', url: new URL(fleetImages.trolley.classicExterior.src, Astro.site ?? Astro.url).href },
   },
-  mainEntityOfPage: { '@type': 'WebPage', '@id': new URL(withBase(`/guides/${guide.id}`), Astro.site ?? Astro.url).href },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': new URL(withBase(`/guides/${guide.id}/`), Astro.site ?? Astro.url).href },
 };
 ---
 <BaseLayout

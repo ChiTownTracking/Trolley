@@ -275,18 +275,6 @@ export const weddingFaqs = [
   },
 ];
 
-/* ----------  Services  ---------- */
-export const services = [
-  { eyebrow: 'Business', title: 'Corporate Events', image: fleetImages.trolley.classicExterior, body: 'Shuttle a team between venues, welcome clients in from out of town, or give the holiday party a proper beginning. Punctual, polished, and quietly memorable.' },
-  { eyebrow: 'School Nights', title: 'Proms & Homecomings', image: fleetImages.trolley.t4ExteriorFront, body: 'A safe, chaperone-friendly ride the whole group shares — with a professional chauffeur and room for everyone’s photos before the dance.' },
-  { eyebrow: 'Celebrations', title: 'Quinceañeras', image: fleetImages.trolley.classicExterior, body: 'From the church to the reception with the court all together. The white trolley photographs beautifully beside every gown.' },
-  { eyebrow: 'The Last Fling', title: 'Bachelor & Bachelorette Parties', image: fleetImages.partyBus.interior1, body: 'One cabin, one playlist, zero rideshare logistics. Hop between stops while the party never pauses — BYOB welcome for guests 21 and over.' },
-  { eyebrow: 'Game Day', title: 'Sporting Events & Concerts', image: fleetImages.coach.exterior2, body: 'Skip the parking scramble. Tailgate on the way, arrive at the gate together, and find your ride waiting when the encore ends.' },
-  { eyebrow: 'Travel', title: 'Airport Transportation', image: fleetImages.sprinter.executiveVan.front, body: 'For wedding weekends and group trips: one comfortable pickup for the whole party, with room for every suitcase.' },
-  { eyebrow: 'Group Travel', title: 'Coach Bus Charters', image: fleetImages.coach.exterior1, body: 'When the guest list outgrows the trolley: modern coaches seating up to 57, with quilted leather seats, armrests, and generous under-floor luggage storage. Ideal for wedding guest shuttles, out-of-state trips, and business charters.' },
-  { eyebrow: 'After Dark', title: 'Night Out & General Charter', image: fleetImages.trolley.christmasLights, body: 'Birthdays, anniversaries, holiday light tours, or no occasion at all. Charter the trolley and let the city roll past the windows.' },
-];
-
 /* ----------  Gallery  ---------- */
 export const gallery = [
   { image: fleetImages.trolley.classicExterior, alt: 'Classic white trolley in warm winter light', label: 'Classic White Trolley', category: 'trolleys' },
@@ -338,6 +326,7 @@ export const vehicleOptions = [
   'White Trolley — Limo',
   'Christmas Trolley',
   'Party Bus — 45 Passengers',
+  'Party Bus — 40 Passengers',
   'Party Bus — 35 Passengers',
   'Party Bus — 25 Passengers',
   'Super Coach Bus — 57 Passengers',

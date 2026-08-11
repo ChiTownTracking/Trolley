@@ -47,6 +47,8 @@ const galleryClient = await Promise.all(
     });
     return {
       src: fullImage.src,
+      width: fullImage.attributes.width,
+      height: fullImage.attributes.height,
       alt: item.alt,
       label: item.label,
       category: item.category,
@@ -145,8 +147,8 @@ const galleryClient = await Promise.all(
         <img
           class="lb__img"
           data-lb-img
-          src={galleryClient[0].src}
-          loading="eager"
+          width={galleryClient[0].width}
+          height={galleryClient[0].height}
           decoding="async"
           alt=""
         />
@@ -643,6 +645,8 @@ const galleryClient = await Promise.all(
     const item = gallery[visibleIndexes[currentPosition]];
     lbImg.removeAttribute('srcset');
     lbImg.removeAttribute('sizes');
+    lbImg.width = item.width;
+    lbImg.height = item.height;
     lbImg.src = item.src;
     lbImg.alt = item.alt;
     lbTitle.textContent = item.label;

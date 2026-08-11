@@ -14,6 +14,9 @@ export function getStaticPaths() {
 const { vehicle } = Astro.props;
 const images = vehicle.gallery;
 const hasGallery = images.length > 1;
+const metaDescription = vehicle.intro.length <= 155
+  ? vehicle.intro
+  : `${vehicle.intro.slice(0, 152).replace(/\s+\S*$/, '').trimEnd()}...`;
 const imageWidths = (width: number) => {
   const widths = [480, 768, 1000, 1400].filter((candidate) => candidate < width);
   return [...widths, width];
@@ -29,7 +32,7 @@ const fullscreenImages = await Promise.all(
 ---
 <BaseLayout
   title={`${vehicle.name} — ChiTown Trolley`}
-  description={vehicle.intro.slice(0, 155)}
+  description={metaDescription}
   hideCta={true}
   preloadSerifItalic={false}
 >

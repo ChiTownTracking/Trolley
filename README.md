@@ -17,10 +17,17 @@ Converted from a single-file DivMagic export (`ChiTown Trolley Website.dc.html` 
 
 ```
 public/
-  uploads/            Images (served at the site root as /uploads/…)
+  favicon_io/         Favicons and web app manifest
+  images/guides/      Guide-body images served at stable public URLs
+  robots.txt          Production crawler policy and sitemap location
+  _headers            Netlify security and immutable-asset headers
+  _redirects          Netlify canonical-host redirects
+netlify/
+  functions/          Server-side form notification function
 src/
+  assets/             Astro-managed images and local WOFF2 fonts
   data/
-    site.ts           All content: nav, fleet, services, FAQs, gallery, copy…
+    site.ts           Shared configuration, navigation, FAQs, gallery, and form options
   styles/
     global.css        Design tokens (colors, type) + shared component classes
   components/
@@ -40,8 +47,10 @@ src/
     about.astro       /about
     gallery.astro     /gallery     (image lightbox)
     faq.astro         /faq         (native <details> accordion)
-    contact.astro     /contact     (quote form)
+    contact.astro     /contact     (contact form)
     reservation.astro /reservation (reservation form)
+    guides/           Guide index and generated article routes
+    fleet/            Generated vehicle-detail routes
 ```
 
 ## Notes on the conversion
@@ -53,15 +62,17 @@ src/
 - `style-hover` / `style-focus` runtime attributes became real CSS `:hover` /
   `:focus` rules in component `<style>` blocks and `global.css`.
 - Interactivity is small vanilla scripts: nav dropdown, gallery lightbox,
-  reveal-on-scroll, and the contact/reservation form confirmations. The FAQ uses
+  reveal-on-scroll, and form confirmations. The FAQ uses
   native `<details name="faq">`, so it works even without JavaScript.
-- Forms currently show an in-page confirmation (as the original did). Wire the
-  `submit` handlers in `contact.astro` / `reservation.astro` to a real endpoint
-  (Formspree, an API route, etc.) when you're ready to receive submissions.
+- Quote, wedding, contact, and reservation forms are stored by Netlify Forms.
+  The server-side `netlify/functions/quote-notification.mjs` function sends
+  notifications through Resend; its credentials must remain in Netlify
+  environment variables and must never be exposed to browser code.
+- Netlify is the authoritative production host. The GitHub Actions workflow
+  validates checks/builds only and does not deploy GitHub Pages.
 
 ### Original source files
 
-The original export is kept for reference and is no longer used by the build:
-`ChiTown Trolley Website.dc.html`, `support.js`, `.thumbnail`, and the top-level
-`uploads/` folder (its images were copied into `public/uploads/`). These can be
-deleted once you're confident in the new site.
+The legacy `support.js` and `.thumbnail` DivMagic artifacts are kept for
+provenance and are not used by the Astro build. Confirm they are no longer
+needed before deleting them.

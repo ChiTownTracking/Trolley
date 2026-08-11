@@ -12,4 +12,9 @@ export const categoryLabel = (slug: string): string =>
   guideCategories.find((c) => c.slug === slug)?.label ?? slug;
 
 export const formatGuideDate = (date: Date): string =>
-  date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });

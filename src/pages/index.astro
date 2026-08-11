@@ -14,7 +14,7 @@ import occasionsMobileImage from '../assets/images/home/occasion/occasion-mobile
 const passengerOptions = ['1–10', '11–20', '21–30', '31–40', '41–57'];
 
 const [fleetFeatured] = fleet;
-const homeTrolleys = [
+const homeTrolleyData = [
   {
     name: 'White Classic Trolley',
     href: '/fleet/classic-white-trolley',
@@ -48,6 +48,30 @@ const homeTrolleys = [
 ];
 const homeTrolleySizes =
   '(max-width: 640px) calc(100vw - 20px), (max-width: 900px) calc(50vw - 44px), 345px';
+const transparentPixel =
+  'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+const homeTrolleys = await Promise.all(
+  homeTrolleyData.map(async (trolley) => {
+    const hoverImages = await Promise.all(
+      trolley.widths.map((width) =>
+        getImage({
+          src: trolley.hoverImage,
+          width,
+          height: Math.round((width * 260) / 345),
+          format: 'webp',
+          quality: 62,
+        }),
+      ),
+    );
+
+    return {
+      ...trolley,
+      hoverSrcset: hoverImages
+        .map((image, index) => `${image.src} ${trolley.widths[index]}w`)
+        .join(', '),
+    };
+  }),
+);
 
 // Guides preview: always the 3 most recently published articles.
 const latestGuides = (await getCollection('guides'))
@@ -151,9 +175,11 @@ const occasionsMobileSrcset = occasionsMobileSources
       </button>
       <img
         class="certificateModal__image"
-        src={siteImages.branding.wbencCertificate.src}
+        data-certificate-image
+        data-src={siteImages.branding.wbencCertificate.src}
         width={siteImages.branding.wbencCertificate.width}
         height={siteImages.branding.wbencCertificate.height}
+        decoding="async"
         alt="WBENC National Women's Business Enterprise Certification for Sumadija Trans LLC doing business as ChiTown Limobus"
       />
     </div>
@@ -347,18 +373,23 @@ const occasionsMobileSrcset = occasionsMobileSources
                 class="fleetp__img"
               />
               {trolley.hoverImage && (
-                <Image
-                  src={trolley.hoverImage}
-                  widths={trolley.widths}
-                  sizes={homeTrolleySizes}
-                  format="webp"
-                  quality={62}
-                  loading="lazy"
-                  decoding="async"
-                  alt=""
-                  aria-hidden="true"
-                  class="fleetp__img fleetp__img--hover"
-                />
+                <picture class="fleetp__hoverPicture" aria-hidden="true">
+                  <source
+                    media="(hover: hover) and (pointer: fine)"
+                    srcset={trolley.hoverSrcset}
+                    sizes={homeTrolleySizes}
+                    type="image/webp"
+                  />
+                  <img
+                    src={transparentPixel}
+                    width="345"
+                    height="260"
+                    loading="lazy"
+                    decoding="async"
+                    alt=""
+                    class="fleetp__img fleetp__img--hover"
+                  />
+                </picture>
               )}
             </div>
             <div class="fleetp__body">
@@ -998,12 +1029,19 @@ const occasionsMobileSrcset = occasionsMobileSources
     opacity: 0;
     transform: scale(1.015);
   }
-  .fleet-card:is(:hover, :focus-visible) .fleetp__img:not(.fleetp__img--hover) {
-    opacity: 0;
+  .fleetp__hoverPicture {
+    position: absolute;
+    inset: 0;
+    display: block;
   }
-  .fleet-card:is(:hover, :focus-visible) .fleetp__img--hover {
-    opacity: 1;
-    transform: scale(1.05);
+  @media (hover: hover) and (pointer: fine) {
+    .fleet-card:is(:hover, :focus-visible) .fleetp__img:not(.fleetp__img--hover) {
+      opacity: 0;
+    }
+    .fleet-card:is(:hover, :focus-visible) .fleetp__img--hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
   }
   .fleetp__body { padding: 26px 30px 30px; text-align: center; }
   .fleetp__cap { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-deep); margin: 0 0 8px; }
@@ -1290,8 +1328,19 @@ const occasionsMobileSrcset = occasionsMobileSources
   const certificateOpen = document.querySelector<HTMLButtonElement>('[data-certificate-open]');
   const certificateDialog = document.querySelector<HTMLDialogElement>('[data-certificate-dialog]');
   const certificateClose = certificateDialog?.querySelector<HTMLButtonElement>('[data-certificate-close]');
+  const certificateImage = certificateDialog?.querySelector<HTMLImageElement>('[data-certificate-image]');
+
+  const loadCertificate = () => {
+    if (!certificateImage?.hasAttribute('src') && certificateImage?.dataset.src) {
+      certificateImage.src = certificateImage.dataset.src;
+    }
+  };
+
+  certificateOpen?.addEventListener('pointerenter', loadCertificate, { once: true });
+  certificateOpen?.addEventListener('focus', loadCertificate, { once: true });
 
   certificateOpen?.addEventListener('click', () => {
+    loadCertificate();
     certificateDialog?.showModal();
   });
 
@@ -1431,7 +1480,7 @@ const occasionsMobileSrcset = occasionsMobileSources
       carousel.addEventListener('mouseenter', () => window.clearInterval(timer));
       carousel.addEventListener('mouseleave', start);
 
-      go(0);
+      dots[0]?.classList.add('active');
       start();
     }
   }
