@@ -352,6 +352,96 @@ main { flex: 1; }
 .form-status:empty { display: none; }
 .form-status[data-state='error'] { color: #8b2f2f; }
 
+.form-success-popup {
+  width: min(460px, calc(100% - 32px));
+  max-width: none;
+  margin: auto;
+  padding: 0;
+  overflow: visible;
+  border: 1px solid rgba(185, 143, 58, .45);
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: 0 24px 80px rgba(24, 20, 13, .24);
+  color: var(--ink);
+}
+.form-success-popup::backdrop {
+  background: rgba(20, 17, 12, .58);
+  backdrop-filter: blur(3px);
+}
+.form-success-popup[open] {
+  animation: form-success-popup-in .22s ease both;
+}
+.form-success-popup__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 42px 42px;
+  text-align: center;
+}
+.form-success-popup__close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: 300 28px/1 var(--sans);
+}
+.form-success-popup__close:hover { color: var(--ink); }
+.form-success-popup__icon {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  margin-bottom: 20px;
+  place-items: center;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold-deep);
+  font-size: 27px;
+}
+.form-success-popup__eyebrow {
+  margin: 0 0 10px;
+  color: var(--gold-deep);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+}
+.form-success-popup h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(34px, 7vw, 44px);
+  font-weight: 600;
+  line-height: 1;
+}
+.form-success-popup [data-form-success-popup-message] {
+  max-width: 350px;
+  margin: 18px 0 28px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+}
+.form-success-popup .btn-gold { min-width: 136px; }
+
+@keyframes form-success-popup-in {
+  from { opacity: 0; transform: translateY(10px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 520px) {
+  .form-success-popup__panel { padding: 44px 24px 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-success-popup[open] { animation: none; }
+}
+
 .field { display: flex; flex-direction: column; gap: 8px; }
 .field--full { grid-column: 1 / -1; }
 .field__label {

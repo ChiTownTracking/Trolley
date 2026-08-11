@@ -120,6 +120,31 @@ const ogImage = imagePath ? new URL(imagePath, Astro.site ?? Astro.url).href : u
     <Footer />
   </div>
 
+  <dialog
+    class="form-success-popup"
+    data-form-success-popup
+    aria-labelledby="form-success-title"
+    aria-describedby="form-success-message"
+  >
+    <div class="form-success-popup__panel">
+      <button
+        type="button"
+        class="form-success-popup__close"
+        data-form-success-popup-close
+        aria-label="Close confirmation"
+      >
+        ×
+      </button>
+      <span class="form-success-popup__icon" aria-hidden="true">✓</span>
+      <p class="form-success-popup__eyebrow">Submission received</p>
+      <h2 id="form-success-title">Thank you!</h2>
+      <p id="form-success-message" data-form-success-popup-message>
+        Your request has been submitted successfully.
+      </p>
+      <button type="button" class="btn-gold" data-form-success-popup-close>Close</button>
+    </div>
+  </dialog>
+
   <script>
     // Reveal-on-scroll for any .rv element on the page.
     const reveal = () => {

@@ -10,6 +10,29 @@ const failureMessage =
 
 const submittingForms = new WeakSet<HTMLFormElement>();
 
+const successPopup = document.querySelector<HTMLDialogElement>('[data-form-success-popup]');
+const successPopupMessage = successPopup?.querySelector<HTMLElement>(
+  '[data-form-success-popup-message]',
+);
+
+const showSuccessPopup = (form: HTMLFormElement, message: string) => {
+  if (!successPopup || !successPopupMessage) return;
+
+  const containingDialog = form.closest<HTMLDialogElement>('dialog[open]');
+  containingDialog?.close();
+  successPopupMessage.textContent = message;
+  if (successPopup.open) successPopup.close();
+  successPopup.showModal();
+};
+
+successPopup
+  ?.querySelectorAll<HTMLButtonElement>('[data-form-success-popup-close]')
+  .forEach((button) => button.addEventListener('click', () => successPopup.close()));
+
+successPopup?.addEventListener('click', (event) => {
+  if (event.target === successPopup) successPopup.close();
+});
+
 const setStatus = (
   status: HTMLElement,
   message: string,
@@ -70,13 +93,12 @@ document
         }
 
         target.reset();
-        setStatus(
-          status,
+        const successMessage =
           successMessages[formName] ??
-            'Thank you. Your request has been submitted successfully.',
-          'success',
-        );
+          'Thank you. Your request has been submitted successfully.';
+        setStatus(status, successMessage, 'success');
         target.dispatchEvent(new CustomEvent('netlify-form:success'));
+        showSuccessPopup(target, successMessage);
       } catch (error) {
         setStatus(status, failureMessage, 'error');
         console.error('Netlify form submission failed.', error);

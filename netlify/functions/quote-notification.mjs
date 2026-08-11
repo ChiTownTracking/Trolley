@@ -1,4 +1,3 @@
-const QUOTE_FORM_NAME = 'quote-request';
 const DEFAULT_SENDER_NAME = 'ChiTown Trolley';
 const EMAIL_ADDRESS_PATTERN = /^[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+$/;
 
@@ -7,8 +6,8 @@ const quoteFields = [
   ['Number of Hours', 'hours'],
   ['Vehicle', 'vehicle'],
   ['Number of Passengers', 'passengers'],
-  ['Event Date', 'date'],
-  ['Pickup Time', 'time'],
+  ['Event Date', 'date', 'date'],
+  ['Pickup Time', 'time', 'time'],
   ['Pickup Location', 'pickup'],
   ['Destination', 'dropoff'],
   ['Full Name', 'name'],
@@ -17,16 +16,134 @@ const quoteFields = [
   ['How Did You Find Us?', 'message'],
 ];
 
+const reservationFields = [
+  ['Full Name', 'name'],
+  ['Phone Number', 'phone'],
+  ['Email', 'email', 'email'],
+  ['Event', 'event'],
+  ['Pickup Date', 'pickup-date', 'date'],
+  ['Pickup Time', 'pickup-time', 'time'],
+  ['End Time', 'end-time', 'time'],
+  ['Pickup Location', 'pickup-location'],
+  ['Drop-off Location', 'dropoff-location'],
+  ['Message', 'message', 'multiline'],
+  ['Number of Hours', 'hours'],
+  ['Requested Vehicle', 'vehicle'],
+  ['Number of Passengers', 'passengers'],
+  ['Price Quote', 'price-quote'],
+  ['Promo Code', 'promo-code'],
+  ['Billing Contact Name', 'billing-name'],
+  ['Card Number', 'billing-card-number'],
+  ['Expiration Date', 'billing-card-exp'],
+  ['Security Code (CVV)', 'billing-card-cvv'],
+  ['Billing Street Address', 'billing-street-address'],
+  ['City', 'billing-city'],
+  ['State', 'billing-state'],
+  ['Billing ZIP Code', 'billing-zip'],
+  ['Terms and Conditions', 'agreement'],
+];
+
+const contactFields = [
+  ['Name', 'name'],
+  ['Email', 'email', 'email'],
+  ['Phone', 'phone'],
+  ['Event Date', 'date', 'date'],
+  ['Event Type', 'type'],
+  ['Passengers', 'passengers'],
+  ['Message', 'message', 'multiline'],
+];
+
 const quoteFieldAliases = {
   type: 'event-type',
   name: 'full-name',
 };
 
+const formConfigurations = new Map([
+  [
+    'quote-request',
+    {
+      fields: quoteFields,
+      fieldAliases: quoteFieldAliases,
+      subject: (fullName) => `REQUEST FREE QUOTE FROM ${fullName}`,
+    },
+  ],
+  [
+    'reservation-request',
+    {
+      fields: reservationFields,
+      subject: (fullName) => `${fullName} - New Reservation - ChiTown Trolley`,
+    },
+  ],
+  [
+    'contact-us',
+    {
+      fields: contactFields,
+      subject: (fullName) => `${fullName} - New Contact Us - ChiTown Trolley`,
+    },
+  ],
+]);
+
 const normalizeValue = (value) =>
   typeof value === 'string' ? value.replace(/\s+/g, ' ').trim() : '';
 
-const getQuoteFieldValue = (data, fieldName) =>
-  normalizeValue(data[fieldName] ?? data[quoteFieldAliases[fieldName]]);
+const normalizeMultilineValue = (value) =>
+  typeof value === 'string'
+    ? value
+        .replace(/\r\n?/g, '\n')
+        .split('\n')
+        .map((line) => line.replace(/[^\S\n]+/g, ' ').trimEnd())
+        .join('\n')
+        .trim()
+    : '';
+
+const formatDateValue = (value) => {
+  const normalizedValue = normalizeValue(value);
+  const match = normalizedValue.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) return normalizedValue;
+
+  const [, yearText, monthText, dayText] = match;
+  const year = Number(yearText);
+  const month = Number(monthText);
+  const day = Number(dayText);
+  const date = new Date(Date.UTC(year, month - 1, day));
+
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day
+  ) {
+    return normalizedValue;
+  }
+
+  const weekday = date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    timeZone: 'UTC',
+  });
+
+  return `${weekday} - ${month}/${day}/${year}`;
+};
+
+const formatTimeValue = (value) => {
+  const normalizedValue = normalizeValue(value);
+  const match = normalizedValue.match(/^([01]\d|2[0-3]):([0-5]\d)(?::[0-5]\d)?$/);
+  if (!match) return normalizedValue;
+
+  const hour = Number(match[1]);
+  const minute = match[2];
+  const period = hour >= 12 ? 'PM' : 'AM';
+  const twelveHour = hour % 12 || 12;
+
+  return `${twelveHour}:${minute} ${period}`;
+};
+
+const getFieldValue = (data, fieldName, fieldAliases, format) => {
+  const value = data[fieldName] ?? data[fieldAliases?.[fieldName]];
+
+  if (format === 'multiline') return normalizeMultilineValue(value);
+  if (format === 'date') return formatDateValue(value);
+  if (format === 'time') return formatTimeValue(value);
+  return normalizeValue(value);
+};
 
 const sanitizeSenderName = (value) => {
   if (typeof value !== 'string' || /[\r\n]/.test(value)) return '';
@@ -77,17 +194,28 @@ const escapeHtml = (value) =>
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#039;');
 
-const buildEmailContent = (data) => {
-  const rows = quoteFields.map(([label, fieldName]) => ({
+const formatHtmlValue = (value, format) => {
+  const escapedValue = escapeHtml(value);
+
+  if (format === 'email' && EMAIL_ADDRESS_PATTERN.test(value)) {
+    return `<a href="mailto:${escapedValue}">${escapedValue}</a>`;
+  }
+
+  return format === 'multiline' ? escapedValue.replaceAll('\n', '<br>') : escapedValue;
+};
+
+const buildEmailContent = (data, configuration) => {
+  const rows = configuration.fields.map(([label, fieldName, format]) => ({
     label,
-    value: getQuoteFieldValue(data, fieldName),
+    value: getFieldValue(data, fieldName, configuration.fieldAliases, format),
+    format,
   }));
 
   return {
     html: `<div style="font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.4;color:#111;">${rows
       .map(
-        ({ label, value }) =>
-          `<div style="margin:0 0 5px 0;padding:0;"><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</div>`,
+        ({ label, value, format }) =>
+          `<div style="margin:0 0 5px 0;padding:0;"><strong>${escapeHtml(label)}:</strong> ${formatHtmlValue(value, format)}</div>`,
       )
       .join('')}</div>`,
     text: rows.map(({ label, value }) => `${label}: ${value}`).join('\n'),
@@ -111,7 +239,7 @@ const getEmailConfiguration = () => {
 
   if (missing.length > 0) {
     throw new Error(
-      `Quote notification is missing required environment variables: ${missing.join(', ')}.`,
+      `Form notification is missing required environment variables: ${missing.join(', ')}.`,
     );
   }
 
@@ -132,13 +260,14 @@ const getEmailConfiguration = () => {
   return { apiKey, fromAddress, to };
 };
 
-const sendQuoteNotification = async (data) => {
+const sendFormNotification = async (formName, data, configuration) => {
   const { apiKey, fromAddress, to } = getEmailConfiguration();
-  const fullName = getQuoteFieldValue(data, 'name');
-  const senderName = sanitizeSenderName(fullName) || DEFAULT_SENDER_NAME;
+  const fullName = getFieldValue(data, 'name', configuration.fieldAliases);
+  const submittedName = data.name ?? data[configuration.fieldAliases?.name];
+  const senderName = sanitizeSenderName(submittedName) || DEFAULT_SENDER_NAME;
   const emailAddress = normalizeValue(data.email);
-  const { html, text } = buildEmailContent(data);
-  const subject = `${fullName} - Request New Quote - ChiTown Trolley`;
+  const { html, text } = buildEmailContent(data, configuration);
+  const subject = configuration.subject(fullName);
   const email = {
     from: `${senderName} <${fromAddress}>`,
     to,
@@ -151,7 +280,7 @@ const sendQuoteNotification = async (data) => {
     email.reply_to = emailAddress;
   }
 
-  console.log('Sending quote-request notification through Resend.');
+  console.log(`Sending ${formName} notification through Resend.`);
 
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -175,14 +304,14 @@ const sendQuoteNotification = async (data) => {
   ]);
 
   if (!response.ok) {
-    console.error('Resend rejected quote notification.', {
+    console.error(`Resend rejected ${formName} notification.`, {
       status: response.status,
       response: safeResponseBody,
     });
-    throw new Error(`Resend rejected the quote notification with HTTP ${response.status}.`);
+    throw new Error(`Resend rejected the ${formName} notification with HTTP ${response.status}.`);
   }
 
-  console.log('Resend accepted the quote-request notification.');
+  console.log(`Resend accepted the ${formName} notification.`);
 
   if (
     responseBody &&
@@ -201,12 +330,15 @@ export default {
     console.log('Form submission event received.');
     console.log('Submitted field names:', Object.keys(data || {}));
 
-    if (!data || data['notification-form'] !== QUOTE_FORM_NAME) {
-      console.log('Ignoring non-quote submission.');
+    const formName = data?.['notification-form'];
+    const configuration = formConfigurations.get(formName);
+
+    if (!data || !configuration) {
+      console.log('Ignoring unsupported form submission.');
       return;
     }
 
-    console.log('Processing a verified quote-request form submission.');
-    await sendQuoteNotification(data);
+    console.log(`Processing a verified ${formName} form submission.`);
+    await sendFormNotification(formName, data, configuration);
   },
 };
