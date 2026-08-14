@@ -322,6 +322,7 @@ export const eventTypes = [
 ];
 
 export const vehicleOptions = [
+  'Wedding Package - Trolley & Coach Bus',
   'White Trolley — Classic',
   'White Trolley — Limo',
   'Christmas Trolley',
