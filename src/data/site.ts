@@ -138,7 +138,7 @@ export interface NavItem {
 export const navMain: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'Fleet', href: '/fleet' },
-  { label: 'Weddings', href: '/weddings' },
+  { label: 'Wedding Package', href: '/weddings' },
   {
     label: 'Christmas Trolley',
     href: '/christmas-trolley',

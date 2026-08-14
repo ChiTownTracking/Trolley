@@ -16,6 +16,8 @@ const quoteFields = [
   ['How Did You Find Us?', 'message'],
 ];
 
+const weddingQuoteFields = quoteFields.filter(([, fieldName]) => fieldName !== 'vehicle');
+
 const reservationFields = [
   ['Full Name', 'name'],
   ['Phone Number', 'phone'],
@@ -70,9 +72,9 @@ const formConfigurations = new Map([
   [
     'wedding-quote-request',
     {
-      fields: quoteFields,
+      fields: weddingQuoteFields,
       fieldAliases: quoteFieldAliases,
-      subject: (fullName) => `${fullName} - New Wedding Quote - ChiTown Trolley`,
+      subject: (fullName) => `${fullName} - Wedding Package - ChiTown Trolley`,
     },
   ],
   [
