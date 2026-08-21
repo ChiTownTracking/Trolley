@@ -40,6 +40,7 @@ const fullscreenImages = await Promise.all(
     <a href={withBase('/fleet')} class="vd__back">← Back to Fleet</a>
 
     <header class="vd__head">
+      {vehicle.comingSoon && <p class="vd__availability">Coming Soon</p>}
       <h1 class="vd__title">{vehicle.name}</h1>
     
     </header>
@@ -146,8 +147,15 @@ const fullscreenImages = await Promise.all(
 
     <!-- Closing CTA -->
     <section class="vd__cta">
-      <h2 class="vd__cta-title">Ready to reserve the <em class="grad">{vehicle.name}</em>?</h2>
-      <p class="vd__cta-body">Tell us your date and we'll confirm availability within one business day — no payment required to request.</p>
+      <h2 class="vd__cta-title">
+        {vehicle.comingSoon ? 'Interested in the ' : 'Ready to reserve the '}
+        <em class="grad">{vehicle.name}</em>?
+      </h2>
+      <p class="vd__cta-body">
+        {vehicle.comingSoon
+          ? 'This vehicle is coming soon. Share your date and trip details to ask about future availability.'
+          : "Tell us your date and we'll confirm availability within one business day — no payment required to request."}
+      </p>
       <div class="vd__cta-actions">
         <a href={withBase(`/?vehicle=${encodeURIComponent(vehicle.quoteValue)}#getquote`)} class="btn-gold">Get a Free Quote</a>
         <a href={withBase('/reservation')} class="btn-ghost">Reserve This Vehicle</a>
@@ -164,6 +172,19 @@ const fullscreenImages = await Promise.all(
   }
   .vd__back:hover { color: var(--gold-dark); }
   .vd__head { margin-bottom: 34px; }
+  .vd__availability {
+    display: inline-block;
+    margin: 0 0 12px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    background: #133626;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
   .vd__title { font-family: var(--serif); font-size: clamp(34px, 5vw, 52px); font-weight: 600; line-height: 1.08; margin: 0; }
   .vd__stats { display: flex; flex-wrap: wrap; gap: 20px 40px; margin-top: 22px; }
   .stat { display: flex; flex-direction: column; gap: 5px; }

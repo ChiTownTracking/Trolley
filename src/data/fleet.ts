@@ -9,6 +9,7 @@ import trolleyT4ExteriorSide from '../assets/images/fleet/trolley/T4-Trolley-Ext
 import trolleyT4Interior1 from '../assets/images/fleet/trolley/T4-Trolley-Interior-1.png';
 import trolleyT4Interior2 from '../assets/images/fleet/trolley/T4-Trolley-Interior-2.png';
 import trolleyT4InteriorLighting from '../assets/images/fleet/trolley/T4-Trolley-Interior-Lighting.png';
+import trolleyFestiveExterior from '../assets/images/fleet/trolley/green-red-festive-trolley.png';
 import trolleyChristmasLights from '../assets/images/christmas/gallery/christmas-trolley.png';
 import trolleyChristmasInterior from '../assets/images/christmas/gallery/christmas-interior.png';
 import coachExterior1 from '../assets/images/fleet/coach/coach-bus-exterior-1.jpeg';
@@ -41,6 +42,7 @@ export const fleetImages = {
     t4Interior1: trolleyT4Interior1,
     t4Interior2: trolleyT4Interior2,
     t4InteriorLighting: trolleyT4InteriorLighting,
+    festiveExterior: trolleyFestiveExterior,
     christmasLights: trolleyChristmasLights,
     christmasInterior: trolleyChristmasInterior,
   },
@@ -93,6 +95,8 @@ export interface FleetVehicle {
   gallery: readonly SiteImage[];
   /** Exact "Choose Vehicle" option string, for pre-selecting the quote form. */
   quoteValue: string;
+  /** Marks vehicles announced on the site before service availability begins. */
+  comingSoon?: boolean;
   intro: string;
   stats: { label: string; value: string }[];
   perfectFor: string[];
@@ -148,6 +152,25 @@ export const fleet: FleetVehicle[] = [
     ],
     perfectFor: ['Wedding parties', 'Private celebrations', 'Night-out transportation', 'Photo tours', 'Group charters'],
     feats: ['Circular limo-style seating', 'Group-facing interior layout', 'Wood-finished trolley cabin', 'Open center aisle', 'Professional chauffeur included'],
+  },
+  {
+    name: 'Festive Trolley',
+    slug: 'festive-trolley',
+    category: 'trolley',
+    cap: 'Coming Soon',
+    previewCap: 'Coming Soon',
+    image: fleetImages.trolley.festiveExterior,
+    gallery: [fleetImages.trolley.festiveExterior],
+    quoteValue: 'Festive Trolley (Coming Soon)',
+    comingSoon: true,
+    intro: 'The Festive Trolley is joining the ChiTown Trolley fleet soon. Its distinctive green-and-red exterior brings a celebratory look to seasonal outings, private events and memorable group transportation. Share your date and trip details to ask about future availability.',
+    stats: [
+      { label: 'Availability', value: 'Coming Soon' },
+      { label: 'Exterior', value: 'Green & red' },
+      { label: 'Service details', value: 'To be announced' },
+    ],
+    perfectFor: ['Seasonal celebrations', 'Holiday events', 'Private events', 'Group transportation', 'Photo opportunities'],
+    feats: ['Distinctive green-and-red exterior', 'Festive trolley styling', 'Availability coming soon', 'Additional service details to be announced'],
   },
   {
     name: 'Super Coach Bus',

@@ -24,6 +24,7 @@ const homeTrolleyData = [
     hoverImage: fleetImages.trolley.classicInteriorFrontFacing,
     widths: [384, 512, 555],
     alt: 'White classic trolley available for Chicago events',
+    comingSoon: false,
   },
   {
     name: 'White Limo Trolley',
@@ -34,6 +35,18 @@ const homeTrolleyData = [
     hoverImage: fleetImages.trolley.t4Interior2,
     widths: [384, 512, 768, 1080],
     alt: 'White Limo Trolley available for Chicago events',
+    comingSoon: false,
+  },
+  {
+    name: 'Festive Trolley',
+    href: '/fleet/festive-trolley',
+    seating: 'Coming Soon',
+    description: 'A distinctive green-and-red trolley joining the ChiTown Trolley fleet soon.',
+    image: fleetImages.trolley.festiveExterior,
+    hoverImage: fleetImages.trolley.festiveExterior,
+    widths: [384, 512, 768, 1080],
+    alt: 'Green and red Festive Trolley coming soon to the ChiTown Trolley fleet',
+    comingSoon: true,
   },
   {
     name: 'Christmas Trolley',
@@ -44,10 +57,11 @@ const homeTrolleyData = [
     hoverImage: fleetImages.trolley.christmasInterior,
     widths: [384, 512, 768, 1080],
     alt: 'White Christmas trolley illuminated with colorful holiday lights',
+    comingSoon: false,
   },
 ];
 const homeTrolleySizes =
-  '(max-width: 640px) calc(100vw - 20px), (max-width: 900px) calc(50vw - 44px), 345px';
+  '(max-width: 640px) calc(100vw - 20px), (max-width: 1120px) calc(50vw - 44px), 500px';
 const transparentPixel =
   'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 const homeTrolleys = await Promise.all(
@@ -355,7 +369,7 @@ const occasionsMobileSrcset = occasionsMobileSources
       <Eyebrow label="Choose Your Trolley" mb={14} />
       <h2 class="h-section text-center fleetp__title">Choose a trolley for every celebration</h2>
       <p class="fleetp__lead">
-        Compare traditional forward-facing rows, a social circular layout or our festive Christmas trolley for a private holiday lights tour.
+        Compare traditional forward-facing rows, a social circular layout, our Festive Trolley coming soon or a Christmas trolley for a private holiday lights tour.
       </p>
       <div class="fleetp__grid">
         {homeTrolleys.map((trolley) => (
@@ -372,6 +386,7 @@ const occasionsMobileSrcset = occasionsMobileSources
                 alt={trolley.alt}
                 class="fleetp__img"
               />
+              {trolley.comingSoon && <span class="fleetp__badge">Coming Soon</span>}
               {trolley.hoverImage && (
                 <picture class="fleetp__hoverPicture" aria-hidden="true">
                   <source
@@ -396,7 +411,9 @@ const occasionsMobileSrcset = occasionsMobileSources
               <p class="fleetp__cap">{trolley.seating}</p>
               <h3 class="fleetp__name">{trolley.name}</h3>
               <p class="fleetp__description">{trolley.description}</p>
-              <span class="link-gold fleetp__more">View Trolley →</span>
+              <span class="link-gold fleetp__more">
+                {trolley.comingSoon ? 'Coming Soon' : 'View Trolley →'}
+              </span>
             </div>
           </a>
         ))}
@@ -999,13 +1016,18 @@ const occasionsMobileSrcset = occasionsMobileSources
     line-height: 1.7;
   }
   .fleetp__grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 32px;
-    max-width: 1100px;
+    max-width: 1180px;
     margin: 0 auto;
   }
   .fleet-card {
+    flex: 1 1 400px;
+    width: 100%;
+    min-width: 400px;
+    max-width: 500px;
     display: block; text-decoration: none; color: inherit;
     background: var(--paper);
     border: 1px solid var(--line-2);
@@ -1017,7 +1039,7 @@ const occasionsMobileSrcset = occasionsMobileSources
   .fleet-card__media { position: relative; overflow: hidden; }
   .fleetp__img {
     width: 100%;
-    height: 260px;
+    height: 330px;
     object-fit: cover;
     display: block;
     opacity: 1;
@@ -1033,6 +1055,22 @@ const occasionsMobileSrcset = occasionsMobileSources
     position: absolute;
     inset: 0;
     display: block;
+  }
+  .fleetp__badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, .68);
+    border-radius: 999px;
+    background: rgba(19, 54, 38, .9);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .17em;
+    line-height: 1;
+    text-transform: uppercase;
   }
   @media (hover: hover) and (pointer: fine) {
     .fleet-card:is(:hover, :focus-visible) .fleetp__img:not(.fleetp__img--hover) {
@@ -1069,14 +1107,17 @@ const occasionsMobileSrcset = occasionsMobileSources
   @media (hover: none) {
     .fleetp__name::after { width: 44px; }
   }
-  @media (max-width: 900px) {
-    .fleetp__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  }
   /* Mobile: the trolley choices stack. */
   @media (max-width: 640px) {
-    .fleetp__grid { grid-template-columns: 1fr; }
+    .fleetp__grid { gap: 24px; }
     .fleet-card { border-radius: 5px; overflow: hidden; }
     .fleetp__body { padding: 24px 24px 28px; }
+  }
+  @media (max-width: 480px) {
+    .fleet-card {
+      flex-basis: 100%;
+      min-width: 0;
+    }
   }
 
   /* Image-led occasions overview */

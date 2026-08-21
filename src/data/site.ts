@@ -325,6 +325,7 @@ export const vehicleOptions = [
   'Wedding Package - Trolley & Coach Bus',
   'White Trolley — Classic',
   'White Trolley — Limo',
+  'Festive Trolley (Coming Soon)',
   'Christmas Trolley',
   'Party Bus — 45 Passengers',
   'Party Bus — 40 Passengers',

@@ -85,6 +85,7 @@ const fleetFilters = [
           alt={fleetFeatured.name}
           class="fcard__img"
         />
+        {fleetFeatured.comingSoon && <span class="fcard__badge">Coming Soon</span>}
         {fleetFeatured.hoverImage && (
           <Image
             src={fleetFeatured.hoverImage}
@@ -132,6 +133,7 @@ const fleetFilters = [
             alt={fv.name}
             class="fcard__img"
           />
+          {fv.comingSoon && <span class="fcard__badge">Coming Soon</span>}
           {fv.hoverImage && (
             <Image
               src={fv.hoverImage}
@@ -295,6 +297,22 @@ const fleetFilters = [
   .fcard__img--hover {
     opacity: 0;
     transform: scale(1.015);
+  }
+  .fcard__badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 2;
+    padding: 9px 14px;
+    border: 1px solid rgba(255, 255, 255, .68);
+    border-radius: 999px;
+    background: rgba(19, 54, 38, .92);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .17em;
+    line-height: 1;
+    text-transform: uppercase;
   }
   .fcard:not(.fcard--image-swap):is(:hover, :focus-visible) .fcard__img {
     transform: scale(1.035);
