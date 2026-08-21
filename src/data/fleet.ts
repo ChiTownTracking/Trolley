@@ -161,7 +161,7 @@ export const fleet: FleetVehicle[] = [
     previewCap: 'Coming Soon',
     image: fleetImages.trolley.festiveExterior,
     gallery: [fleetImages.trolley.festiveExterior],
-    quoteValue: 'Festive Trolley (Coming Soon)',
+    quoteValue: 'Festive Trolley — Red & Green',
     comingSoon: true,
     intro: 'The Festive Trolley is joining the ChiTown Trolley fleet soon. Its distinctive green-and-red exterior brings a celebratory look to seasonal outings, private events and memorable group transportation. Share your date and trip details to ask about future availability.',
     stats: [
