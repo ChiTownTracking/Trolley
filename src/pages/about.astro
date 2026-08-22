@@ -3,6 +3,7 @@ import { getImage, Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import { fleetImages } from '../data/fleet';
+import { withBase } from '../utils/paths';
 import aboutBannerSource from '../assets/images/about/banner.png';
 import wbencLogo from '../assets/images/branding/certifications/wbenc-logo.svg';
 import womenOwnedWordmark from '../assets/images/branding/certifications/women-owned-wordmark.png';
@@ -84,6 +85,11 @@ const aboutHeroMobile = await getImage({
               times, planned stops and vehicle options around one clear itinerary. From the first
               route question to the final stop, each reservation is handled with attention to the
               details that keep the day moving.
+            </p>
+            <p>
+              Destination events are reviewed with the same itinerary-first approach. Learn how we
+              plan <a class="story__inlineLink" href={withBase('/lake-geneva-trolley-rental')}>trolley service for Lake Geneva events</a>
+              by reservation.
             </p>
             <a
               class="textLink"
@@ -210,6 +216,11 @@ const aboutHeroMobile = await getImage({
     letter-spacing: .18em;
     text-decoration: none;
     text-transform: uppercase;
+  }
+  .story__inlineLink {
+    color: var(--gold-deep);
+    font-weight: 500;
+    text-underline-offset: 3px;
   }
 
   .aboutHero {

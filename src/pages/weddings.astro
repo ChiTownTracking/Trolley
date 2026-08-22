@@ -321,6 +321,11 @@ const packageMobileSrcset = packageMobileSources
           </ol>
         </article>
       </div>
+      <p class="wroute__destination">
+        Planning a destination celebration in southern Wisconsin? Explore our guide to
+        <a href={withBase('/lake-geneva-trolley-rental')}>Lake Geneva wedding transportation</a>,
+        including resort pickup, scheduled photo stops and reception routing.
+      </p>
     </div>
   </section>
 
@@ -507,6 +512,22 @@ const packageMobileSrcset = packageMobileSources
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: clamp(48px, 7vw, 82px);
     margin-top: 54px;
+  }
+  .wroute__destination {
+    max-width: 760px;
+    margin: 52px 0 0;
+    padding: 24px 28px;
+    border-left: 3px solid var(--gold-dark);
+    background: var(--cream);
+    color: var(--muted);
+    font-size: 14.5px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .wroute__destination a {
+    color: var(--gold-deep);
+    font-weight: 500;
+    text-underline-offset: 3px;
   }
   .wroute__plan {
     min-width: 0;
@@ -1080,6 +1101,7 @@ const packageMobileSrcset = packageMobileSources
     .wroute { padding-bottom: 20px; }
     .wpackage { padding-block: 24px; }
     .wroute__plans { gap: 44px; margin-top: 38px; }
+    .wroute__destination { margin-top: 40px; padding: 21px 22px; }
     .wroute__plan { padding-top: 22px; }
     .wroute__timeline { margin-top: 25px; }
     .wroute__timeline .wroute__wait { margin-inline: -10px; padding-inline: 10px; }

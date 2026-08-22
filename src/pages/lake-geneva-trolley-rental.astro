@@ -1,0 +1,1291 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import { fleet, fleetImages } from '../data/fleet';
+import { eventTypes, hoursOptions, vehicleOptions } from '../data/site';
+import { withBase } from '../utils/paths';
+import lakeGenevaHero from '../assets/images/lake-geneva-trolley-hero.webp';
+
+const classicTrolley = fleet.find((vehicle) => vehicle.slug === 'classic-white-trolley');
+const coachBus = fleet.find((vehicle) => vehicle.slug === 'super-coach-bus');
+
+if (!classicTrolley || !coachBus) {
+  throw new Error('Lake Geneva page requires the Classic White Trolley and Super Coach Bus fleet data.');
+}
+
+const quoteHref = '#lake-geneva-quote';
+const classicTrolleyHref = withBase(`/fleet/${classicTrolley.slug}`);
+const coachHref = withBase(`/fleet/${coachBus.slug}`);
+const passengerOptions = ['1–10', '11–20', '21–30', '31–40', '41–57'];
+
+const trustItems = [
+  'Private Group Transportation',
+  'Classic White Trolley',
+  'Wedding & Event Service',
+  'Professional Chauffeur Included',
+  'Lake Geneva Service by Reservation',
+] as const;
+
+const itinerarySteps = [
+  {
+    number: '01',
+    title: 'Resort or Hotel Pickup',
+    body: 'Begin with one confirmed meeting point for the wedding party or private group. Pickup can be planned around a hotel, resort or vacation accommodation, with enough time for everyone to gather, board and depart together before the next scheduled stop.',
+  },
+  {
+    number: '02',
+    title: 'Ceremony Transportation',
+    body: 'The departure time is built backward from the ceremony schedule, expected loading time and route. Keeping the group aboard one vehicle helps avoid separate arrivals while giving the planner, couple or group contact one coordinated transportation timeline.',
+  },
+  {
+    number: '03',
+    title: 'Lake Geneva Photo Stops',
+    body: 'Approved photo locations can be added between the ceremony and reception when travel time, parking access and the reservation length allow. Share preferred stops early so the schedule can account for unloading, photographs and boarding without rushing the next destination.',
+  },
+  {
+    number: '04',
+    title: 'Reception & Return Service',
+    body: 'The itinerary can finish with a scheduled reception arrival and, when included in the confirmed reservation, planned return transportation. Final timing should identify the pickup point, destination and passengers expected so the closing portion of the route remains clear.',
+  },
+] as const;
+
+const lakeGenevaFaqs = [
+  {
+    q: 'Do you offer trolley rentals in Lake Geneva, Wisconsin?',
+    a: 'Yes. ChiTown Trolley provides private trolley service for qualifying Lake Geneva-area events by reservation. Service depends on the event date, complete itinerary, trip duration and vehicle availability. Share every pickup and stop when requesting a quote so the route can be reviewed accurately.',
+  },
+  {
+    q: 'How much does a Lake Geneva trolley rental cost?',
+    a: 'Pricing is customized rather than posted as a single flat rate. The estimate depends on the date, requested vehicle, rental duration, pickup location, planned itinerary and total service time. Submit those details through the quote form for a trip-specific estimate.',
+  },
+  {
+    q: 'Can we use the trolley for a Lake Geneva wedding?',
+    a: 'Yes, subject to availability and route confirmation. A wedding itinerary may include hotel or resort pickup, ceremony transportation, approved photo stops, reception arrival and a scheduled return when it is included in the reservation.',
+  },
+  {
+    q: 'Can the trolley make multiple stops around Lake Geneva?',
+    a: 'Multiple stops can be planned when the addresses, timing, loading access and overall reservation length are approved in advance. Include each requested destination with your inquiry; a stop should not be assumed until it appears in the confirmed itinerary.',
+  },
+  {
+    q: 'Do you provide transportation for wedding guests as well as the wedding party?',
+    a: 'Yes. The Classic White Trolley can carry the wedding party while a larger coach handles guest transportation between hotels, the ceremony and reception. The appropriate combination depends on passenger counts, luggage needs, timing and vehicle availability.',
+  },
+  {
+    q: 'How far in advance should we reserve a Lake Geneva wedding trolley?',
+    a: 'Popular wedding-season Saturdays often fill six to twelve months ahead, so early planning gives you the best date and time selection. It is still worth asking about closer dates because availability varies throughout the year.',
+  },
+  {
+    q: 'Do you serve Fontana and Williams Bay?',
+    a: 'Service outside the central Lake Geneva area depends on the complete route. Share every address when requesting a quote so the team can confirm availability for Lake Geneva, Fontana, Williams Bay and other surrounding communities included in your itinerary.',
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Lake Geneva Trolley Rental | Weddings & Events | ChiTown Trolley"
+  description="Book a Lake Geneva trolley rental for weddings, private events and group transportation. Classic white trolley service with custom itineraries."
+  image={lakeGenevaHero}
+  hideCta={true}
+>
+  <section class="lg-hero" aria-labelledby="lake-geneva-title">
+    <Image
+      src={lakeGenevaHero}
+      alt="White trolley beside a lakefront promenade"
+      widths={[640, 960, 1280, 1600, 1870]}
+      sizes="100vw"
+      format="webp"
+      quality={82}
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+      class="lg-hero__image"
+    />
+    <div class="lg-hero__overlay"></div>
+    <div class="lg-hero__content wrap wrap-1140">
+      <p class="lg-hero__eyebrow">Lake Geneva, Wisconsin</p>
+      <h1 id="lake-geneva-title">Lake Geneva, WI Trolley Rental</h1>
+      <p class="lg-hero__lead">
+        Private trolley transportation for weddings, celebrations and coordinated group travel throughout the Lake Geneva area.
+      </p>
+      <div class="lg-hero__actions">
+        <a href={quoteHref} class="btn-gold">Request a Lake Geneva Trolley Quote</a>
+        <a href={classicTrolleyHref} class="lg-button-outline">View the White Trolley</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-trust" aria-label="Lake Geneva trolley service facts">
+    <div class="lg-trust__inner wrap wrap-wide">
+      {trustItems.map((item) => (
+        <span><i aria-hidden="true"></i>{item}</span>
+      ))}
+    </div>
+  </section>
+
+  <section class="rv getquote" id="lake-geneva-quote" aria-labelledby="lake-geneva-quote-title">
+    <div class="getquote__inner">
+      <h2 class="h-section getquote__title" id="lake-geneva-quote-title">
+        Request a <em class="grad">Lake Geneva trolley rental quote</em>
+      </h2>
+
+      <form
+        class="qform wizard"
+        name="quote-request"
+        method="POST"
+        data-netlify="true"
+        data-netlify-form="true"
+        data-netlify-honeypot="bot-field"
+        data-quote-form
+      >
+        <input type="hidden" name="form-name" value="quote-request" />
+        <input type="hidden" name="notification-form" value="quote-request" />
+        <p class="netlify-honeypot" aria-hidden="true">
+          <label>
+            Do not fill this out:
+            <input name="bot-field" tabindex="-1" autocomplete="off" />
+          </label>
+        </p>
+
+        <div class="step is-open" data-step="1">
+          <button type="button" class="step__head" data-step-toggle="1" aria-expanded="true">
+            <span class="step__num"><span class="step__digit">1</span></span>
+            <span class="step__label">
+              <span class="step__kicker">Step 1 of 3</span>
+              <span class="step__name">Trip Information</span>
+            </span>
+            <span class="step__chev" aria-hidden="true"></span>
+          </button>
+          <div class="step__panel">
+            <div class="step__body">
+              <div class="step__inner">
+                <div class="step__grid">
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="event-type">Event Type</label>
+                    <select id="event-type" name="type" class="field__control">
+                      <option value="" disabled selected>Select event type</option>
+                      {eventTypes.map((eventType) => <option>{eventType}</option>)}
+                    </select>
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="number-of-hours">Number of Hours</label>
+                    <select id="number-of-hours" name="hours" class="field__control">
+                      <option value="" disabled selected>Select duration</option>
+                      {hoursOptions.map((duration) => <option>{duration}</option>)}
+                    </select>
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="vehicle">Vehicle</label>
+                    <select id="vehicle" name="vehicle" class="field__control">
+                      <option value="" disabled>Select vehicle</option>
+                      {vehicleOptions.map((vehicle) => (
+                        <option selected={vehicle === classicTrolley.quoteValue}>{vehicle}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="number-of-passengers">Number of Passengers</label>
+                    <select id="number-of-passengers" name="passengers" class="field__control">
+                      <option value="" disabled selected>Select group size</option>
+                      {passengerOptions.map((passengers) => <option>{passengers}</option>)}
+                    </select>
+                  </div>
+                </div>
+                <div class="step__nav">
+                  <button type="button" class="btn-gold" data-step-next="2">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" data-step="2">
+          <button type="button" class="step__head" data-step-toggle="2" aria-expanded="false">
+            <span class="step__num"><span class="step__digit">2</span></span>
+            <span class="step__label">
+              <span class="step__kicker">Step 2 of 3</span>
+              <span class="step__name">Itinerary</span>
+            </span>
+            <span class="step__chev" aria-hidden="true"></span>
+          </button>
+          <div class="step__panel">
+            <div class="step__body">
+              <div class="step__inner">
+                <div class="step__grid">
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="event-date">Event Date</label>
+                    <input id="event-date" name="date" type="date" class="field__control" />
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="pickup-time">Pickup Time</label>
+                    <input id="pickup-time" name="time" type="time" class="field__control" />
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="pickup-location">Pickup Location</label>
+                    <input
+                      id="pickup-location"
+                      name="pickup"
+                      type="text"
+                      value="Lake Geneva, WI"
+                      placeholder="Enter pickup address"
+                      class="field__control"
+                    />
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="destination">Destination</label>
+                    <input id="destination" name="dropoff" type="text" placeholder="Enter destination" class="field__control" />
+                  </div>
+                </div>
+                <div class="step__nav">
+                  <button type="button" class="btn-ghost" data-step-back="1">Back</button>
+                  <button type="button" class="btn-gold" data-step-next="3">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" data-step="3">
+          <button type="button" class="step__head" data-step-toggle="3" aria-expanded="false">
+            <span class="step__num"><span class="step__digit">3</span></span>
+            <span class="step__label">
+              <span class="step__kicker">Step 3 of 3</span>
+              <span class="step__name">Personal Info</span>
+            </span>
+            <span class="step__chev" aria-hidden="true"></span>
+          </button>
+          <div class="step__panel">
+            <div class="step__body">
+              <div class="step__inner">
+                <div class="step__grid step__grid--3">
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="full-name">Full Name</label>
+                    <input required id="full-name" name="name" type="text" placeholder="Enter your full name" class="field__control" />
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="phone-number">Phone Number</label>
+                    <input required id="phone-number" name="phone" type="tel" placeholder="Enter your phone number" class="field__control" />
+                  </div>
+                  <div class="qfield qfield--labeled">
+                    <label class="qfield__label" for="email-address">Email Address</label>
+                    <input required id="email-address" name="email" type="email" placeholder="Enter your email address" class="field__control" />
+                  </div>
+                  <div class="qfield qfield--labeled qfield--wide">
+                    <label class="qfield__label" for="referral-source">How Did You Find Us?</label>
+                    <textarea id="referral-source" name="message" rows="2" placeholder="Tell us how you found us" class="field__control"></textarea>
+                  </div>
+                </div>
+                <div class="step__nav">
+                  <button type="button" class="btn-ghost" data-step-back="2">Back</button>
+                  <button type="submit" class="btn-gold">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+        <p class="getquote__disclaimer">
+          Lake Geneva trolley rental prices vary by date, vehicle, rental duration, itinerary and pickup details.
+          Share your plans for a customized estimate.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <section class="lg-intro" aria-labelledby="lake-geneva-intro-title">
+    <div class="lg-intro__inner wrap wrap-1140">
+      <div class="lg-intro__media rv">
+        <Image
+          src={fleetImages.trolley.classicExterior}
+          alt="Classic White Trolley exterior"
+          widths={[400, 555]}
+          sizes="(max-width: 840px) calc(100vw - 40px), 48vw"
+          format="webp"
+          quality={82}
+          loading="lazy"
+          decoding="async"
+          class="lg-intro__image"
+        />
+        <p class="lg-intro__caption">Private trolley transportation planned around your confirmed event itinerary.</p>
+      </div>
+      <div class="lg-intro__copy rv">
+        <Eyebrow label="Private Trolley Transportation" align="left" single size="sm" mb={17} />
+        <h2 id="lake-geneva-intro-title">A trolley experience made for Lake Geneva celebrations</h2>
+        <p>
+          Lake Geneva is a destination where one event can span a full wedding weekend. Guests may stay at a downtown hotel, lakeside resort or vacation property while the ceremony, photographs and reception take place at separate destinations around Geneva Lake. A private trolley gives the wedding party or event group one vehicle, one meeting point and one coordinated schedule instead of relying on separate cars between stops.
+        </p>
+        <p>
+          ChiTown Trolley serves Lake Geneva-area itineraries by reservation. Service is planned around confirmed pickup locations, passenger count, scheduled stops and event timing, including hotel pickup and return transportation when those details are part of the reservation. Availability depends on the date, requested vehicle, trip duration and complete route, so the most useful inquiry includes every address and the timing that matters to your day.
+        </p>
+        <a href={quoteHref} class="link-gold">Share Your Lake Geneva Itinerary →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-itinerary" aria-labelledby="lake-geneva-itinerary-title">
+    <div class="wrap wrap-wide">
+      <header class="lg-section-head">
+        <Eyebrow label="Lake Geneva Weddings & Events" mb={17} />
+        <h2 id="lake-geneva-itinerary-title">One itinerary from hotel pickup to the final stop</h2>
+        <p>
+          Destination events work best when loading time, travel time and venue access are considered together—not as separate rides arranged at the last minute.
+        </p>
+      </header>
+
+      <ol class="lg-itinerary__steps">
+        {itinerarySteps.map((step) => (
+          <li class="lg-itinerary__step rv">
+            <span class="lg-itinerary__number" aria-hidden="true">{step.number}</span>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </li>
+        ))}
+      </ol>
+
+      <aside class="lg-destination rv" aria-labelledby="lake-geneva-planning-title">
+        <div class="lg-destination__heading">
+          <p class="lg-destination__kicker">Destination Planning</p>
+          <h3 id="lake-geneva-planning-title">Planning transportation around Lake Geneva</h3>
+        </div>
+        <div class="lg-destination__copy">
+          <p>
+            Lake Geneva itineraries may connect hotels, resorts and event venues in downtown Lake Geneva and around Geneva Lake. Planning examples include the Riviera Ballroom, Grand Geneva Resort &amp; Spa, The Geneva Inn, Maxwell Mansion, Destination Geneva National and The Abbey Resort in Fontana. A wedding weekend may also include accommodations or scheduled stops near Williams Bay.
+          </p>
+          <p>
+            These names are provided only as route-planning examples; they do not imply a partnership, endorsement, prior booking or guaranteed trolley access. Loading locations, parking, property rules and transportation approval should always be confirmed directly with each venue before the itinerary is finalized.
+          </p>
+          <a href="https://www.visitlakegeneva.com/weddings/" class="lg-destination__link">Explore official Lake Geneva wedding planning resources →</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="lg-fleet" aria-labelledby="lake-geneva-fleet-title">
+    <div class="wrap wrap-1140">
+      <header class="lg-section-head lg-section-head--light">
+        <Eyebrow label="Choose Your Transportation" mb={17} />
+        <h2 id="lake-geneva-fleet-title">The trolley for the celebration, additional vehicles when the group grows</h2>
+        <p>
+          Match each part of the itinerary to the group riding it. A trolley can carry the wedding party while a coach follows a separate guest-shuttle schedule.
+        </p>
+      </header>
+
+      <div class="lg-fleet__grid">
+        <article class="lg-vehicle rv">
+          <div class="lg-vehicle__media">
+            <Image
+              src={classicTrolley.image}
+              alt="Classic White Trolley exterior"
+              widths={[480, 720, 960]}
+              sizes="(max-width: 760px) calc(100vw - 40px), 47vw"
+              format="webp"
+              quality={82}
+              loading="lazy"
+              decoding="async"
+              class="lg-vehicle__image"
+            />
+          </div>
+          <div class="lg-vehicle__body">
+            <p class="lg-vehicle__type">Primary Wedding Trolley</p>
+            <h3>{classicTrolley.name}</h3>
+            <p class="lg-vehicle__capacity">{classicTrolley.cap}</p>
+            <p>
+              A distinctive private trolley for wedding parties, ceremonies, scheduled photo stops, private events and group outings. Its traditional appearance makes the ride feel like part of the celebration rather than only transportation between addresses.
+            </p>
+            <a href={classicTrolleyHref} class="link-gold">View the Classic White Trolley →</a>
+          </div>
+        </article>
+
+        <article class="lg-vehicle rv">
+          <div class="lg-vehicle__media">
+            <Image
+              src={coachBus.image}
+              alt="White Super Coach Bus exterior"
+              widths={[480, 720, 960]}
+              sizes="(max-width: 760px) calc(100vw - 40px), 47vw"
+              format="webp"
+              quality={82}
+              loading="lazy"
+              decoding="async"
+              class="lg-vehicle__image"
+            />
+          </div>
+          <div class="lg-vehicle__body">
+            <p class="lg-vehicle__type">Guest & Group Transportation</p>
+            <h3>{coachBus.name}</h3>
+            <p class="lg-vehicle__capacity">{coachBus.cap}</p>
+            <p>
+              When the guest list is larger than the trolley group, a coach can provide separate hotel, ceremony and reception transportation. Share the guest count and complete schedule so both vehicles can be reviewed as one coordinated transportation plan.
+            </p>
+            <div class="lg-vehicle__links">
+              <a href={coachHref} class="link-gold">View the Super Coach Bus →</a>
+              <a href={withBase('/fleet')} class="link-gold">Explore the Full Fleet →</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-faq" aria-labelledby="lake-geneva-faq-title">
+    <div class="wrap wrap-860">
+      <Eyebrow label="Lake Geneva Trolley Questions" mb={17} />
+      <h2 id="lake-geneva-faq-title">Lake Geneva trolley rental FAQs</h2>
+      <div class="lg-faq__list" data-lake-geneva-faq>
+        {lakeGenevaFaqs.map((item, index) => {
+          const buttonId = `lake-geneva-faq-button-${index + 1}`;
+          const panelId = `lake-geneva-faq-panel-${index + 1}`;
+          return (
+            <div class="lg-faq__item">
+              <button
+                id={buttonId}
+                type="button"
+                class="lg-faq__head"
+                aria-expanded="false"
+                aria-controls={panelId}
+                data-lake-geneva-faq-toggle
+              >
+                <span>{item.q}</span>
+                <span class="lg-faq__chevron" aria-hidden="true"></span>
+              </button>
+              <div
+                id={panelId}
+                class="lg-faq__panel"
+                role="region"
+                aria-labelledby={buttonId}
+              >
+                <div class="lg-faq__body" inert>
+                  <p>{item.a}</p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <div class="lg-final">
+    <CtaBand
+      title="Plan your Lake Geneva trolley rental"
+      sub="Share your event date, group size, pickup location and planned stops for a customized transportation quote."
+      ctaLabel="Request a Lake Geneva Trolley Quote"
+      ctaHref={quoteHref}
+      secondaryLabel="View the White Trolley"
+      secondaryHref={classicTrolleyHref}
+    />
+  </div>
+</BaseLayout>
+
+<style>
+  :where(.lg-intro, .lg-itinerary, .lg-fleet, .lg-faq) h2 {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: clamp(34px, 4.4vw, 52px);
+    font-weight: 500;
+    line-height: 1.06;
+  }
+
+  .lg-hero {
+    position: relative;
+    display: grid;
+    overflow: hidden;
+    background: #171717;
+    isolation: isolate;
+  }
+  .lg-hero__image {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+  }
+  .lg-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(90deg, rgba(12, 10, 7, .91) 0%, rgba(12, 10, 7, .78) 42%, rgba(12, 10, 7, .32) 72%, rgba(12, 10, 7, .16) 100%),
+      linear-gradient(0deg, rgba(12, 10, 7, .48), transparent 60%);
+  }
+  .lg-hero__content {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 30px 28px 64px;
+  }
+  .lg-hero__eyebrow {
+    margin: 0 0 18px;
+    color: var(--gold-light);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+  }
+  .lg-hero h1 {
+    max-width: 820px;
+    margin: 0;
+    color: var(--paper);
+    font-family: var(--serif);
+    font-size: clamp(44px, 6.3vw, 78px);
+    font-weight: 500;
+    line-height: .98;
+    text-wrap: balance;
+    text-shadow: 0 3px 28px rgba(0, 0, 0, .42);
+  }
+  .lg-hero__lead {
+    max-width: 62ch;
+    margin: 23px 0 0;
+    color: rgba(253, 252, 250, .88);
+    font-size: clamp(16px, 1.7vw, 19px);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+  .lg-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-top: 32px;
+  }
+  .lg-hero__actions a {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+  }
+  .lg-button-outline {
+    padding: 14px 27px;
+    border: 1px solid rgba(253, 252, 250, .65);
+    color: var(--paper);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .18em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: border-color .22s ease, background .22s ease;
+  }
+  .lg-button-outline:hover {
+    border-color: var(--paper);
+    background: rgba(253, 252, 250, .1);
+  }
+  .lg-button-outline:focus-visible,
+  .lg-destination__link:focus-visible,
+  .lg-faq__head:focus-visible {
+    outline: 2px solid var(--gold-light);
+    outline-offset: 4px;
+  }
+
+  .lg-trust {
+    border-block: 1px solid rgba(212, 175, 106, .24);
+    background: #171717;
+  }
+  .lg-trust__inner {
+    display: flex;
+    min-height: 72px;
+    align-items: center;
+    justify-content: center;
+    gap: 14px 30px;
+    padding: 16px 28px;
+  }
+  .lg-trust span {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(253, 252, 250, .78);
+    font-size: 10px;
+    letter-spacing: .16em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .lg-trust i {
+    width: 5px;
+    height: 5px;
+    flex: none;
+    transform: rotate(45deg);
+    background: var(--gold);
+  }
+
+  /* Homepage quote form */
+  .getquote { padding: 40px 0 48px; }
+  .getquote__inner { margin: 0 auto; padding-inline: clamp(20px, 4vw, 72px); }
+  .getquote__title { margin: 0 0 28px; text-align: left; }
+  .getquote__disclaimer {
+    max-width: 78ch;
+    margin: 18px 4px 0;
+    color: #6b6459;
+    font-size: 12.5px;
+    font-weight: 300;
+    line-height: 1.65;
+    opacity: 1;
+  }
+  .wizard { display: flex; flex-direction: column; }
+  .qform .field__control { width: 100%; }
+  .qform ::placeholder { color: var(--muted); opacity: .75; }
+  .qform select.field__control:has(option:disabled:checked) { color: var(--muted); }
+  .qfield--labeled {
+    display: grid;
+    grid-template-rows: auto minmax(42px, auto);
+    align-content: end;
+    min-width: 0;
+  }
+  .qfield--wide { grid-column: 1 / -1; }
+  .qfield__label {
+    display: block;
+    min-height: 14px;
+    margin: 0 0 7px;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: .08em;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  .qfield--labeled input,
+  .qfield--labeled select {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    height: 42px;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .qfield--labeled textarea {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 96px;
+    height: auto;
+    margin: 0;
+    resize: vertical;
+  }
+  .qfield--labeled input[type="date"],
+  .qfield--labeled input[type="time"] {
+    appearance: auto;
+    -webkit-appearance: auto;
+  }
+  .qfield--labeled input[type="date"]::-webkit-date-and-time-value,
+  .qfield--labeled input[type="time"]::-webkit-date-and-time-value {
+    min-height: 1.2em;
+    text-align: left;
+  }
+  .step { border-bottom: 1px solid var(--line-2); }
+  .step__head {
+    width: 100%; display: flex; align-items: center; gap: 18px;
+    padding: 22px 4px; background: transparent; border: 0; cursor: pointer;
+    text-align: left; font-family: var(--sans); color: var(--ink);
+  }
+  .step__num {
+    position: relative; flex: none; width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid var(--gold); color: var(--gold-deep);
+    font-family: var(--serif); font-size: 18px;
+    transition: background .25s ease, color .25s ease, border-color .25s ease;
+  }
+  .step__digit { position: absolute; top: 43%; left: 50%; transform: translate(-50%, -50%); line-height: 1; }
+  .step.is-open .step__num { background: var(--grad-gold); color: #fff; }
+  .step.is-done:not(.is-open) .step__num { background: var(--gold-deep); color: #fff; border-color: transparent; }
+  .step__label { display: flex; flex-direction: column; gap: 3px; }
+  .step__kicker { font-size: 10.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-deep); }
+  .step__name { font-family: var(--serif); font-size: 21px; font-weight: 600; line-height: 1.05; color: var(--ink); }
+  .step__chev {
+    margin-left: auto; flex: none; width: 9px; height: 9px;
+    border-right: 1.5px solid var(--gold-deep); border-bottom: 1.5px solid var(--gold-deep);
+    transform: translateY(-2px) rotate(45deg); transition: transform .3s ease;
+  }
+  .step.is-open .step__chev { transform: translateY(2px) rotate(-135deg); }
+  .step__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+  .step.is-open .step__panel { grid-template-rows: 1fr; }
+  .step__body { overflow: hidden; min-height: 0; }
+  .step__inner { padding: 2px 4px 30px; }
+  .step__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 22px; }
+  .step__grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .step__nav { display: flex; align-items: center; justify-content: flex-end; gap: 14px; margin-top: 26px; }
+  .step__nav .btn-gold {
+    padding: 11px 30px; font-size: 11.5px; letter-spacing: .22em; box-shadow: none;
+    min-height: 44px; display: inline-flex; align-items: center;
+  }
+  .step__nav .btn-ghost {
+    padding: 10px 29px; font-size: 11.5px; letter-spacing: .22em;
+    min-height: 44px; display: inline-flex; align-items: center;
+  }
+
+  @media (max-width: 900px) {
+    .step__grid, .step__grid--3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .getquote { padding: 25px 0 48px; }
+    .getquote__title {
+      margin-inline: -12px;
+      font-size: clamp(17px, 5.75vw, 28px);
+      line-height: 1.15;
+      letter-spacing: -.025em;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .getquote__disclaimer {
+      margin-top: 16px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+  }
+  @media (max-width: 560px) {
+    .step__grid, .step__grid--3 { grid-template-columns: 1fr; }
+    .step__head { gap: 14px; padding: 18px 2px; }
+    .step__name { font-size: 19px; }
+  }
+
+  .lg-intro {
+    padding: 112px 28px;
+    background: var(--paper);
+  }
+  .lg-intro__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.04fr) minmax(360px, .96fr);
+    align-items: center;
+    gap: clamp(54px, 8vw, 100px);
+  }
+  .lg-intro__media {
+    min-width: 0;
+  }
+  .lg-intro__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    border-radius: 7px;
+  }
+  .lg-intro__caption {
+    margin: 13px 0 0;
+    color: var(--faint);
+    font-size: 11px;
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .lg-intro__copy {
+    min-width: 0;
+  }
+  .lg-intro__copy > p {
+    margin: 20px 0 0;
+    color: var(--muted);
+    font-size: 15.5px;
+    font-weight: 300;
+    line-height: 1.78;
+  }
+  .lg-intro__copy .link-gold {
+    display: inline-block;
+    margin-top: 27px;
+  }
+
+  .lg-itinerary {
+    padding: 108px 28px;
+    border-block: 1px solid var(--line);
+    background: var(--cream);
+  }
+  .lg-section-head {
+    max-width: 810px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .lg-section-head > p {
+    max-width: 66ch;
+    margin: 20px auto 0;
+    color: var(--muted);
+    font-size: 15.5px;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+  .lg-itinerary__steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    margin: 68px 0 0;
+    padding: 0;
+    border-block: 1px solid var(--line-2);
+    list-style: none;
+  }
+  .lg-itinerary__step {
+    min-width: 0;
+    padding: 34px clamp(20px, 2.6vw, 34px) 38px;
+    border-left: 1px solid var(--line-2);
+  }
+  .lg-itinerary__step:first-child {
+    border-left: 0;
+  }
+  .lg-itinerary__number {
+    display: block;
+    margin-bottom: 24px;
+    color: var(--gold-deep);
+    font-family: var(--serif);
+    font-size: 18px;
+  }
+  .lg-itinerary__step h3 {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: clamp(23px, 2.4vw, 29px);
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .lg-itinerary__step p {
+    margin: 15px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.72;
+  }
+  .lg-destination {
+    display: grid;
+    grid-template-columns: minmax(260px, .72fr) minmax(0, 1.28fr);
+    gap: clamp(36px, 7vw, 90px);
+    margin-top: 72px;
+    padding: 46px clamp(30px, 5vw, 62px);
+    border-left: 3px solid var(--gold-dark);
+    background: var(--paper);
+    box-shadow: 0 16px 46px rgba(42, 34, 20, .07);
+  }
+  .lg-destination__kicker {
+    margin: 0 0 12px;
+    color: var(--gold-deep);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+  }
+  .lg-destination h3 {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: clamp(29px, 3.3vw, 39px);
+    font-weight: 500;
+    line-height: 1.08;
+  }
+  .lg-destination__copy p {
+    margin: 0 0 15px;
+    color: var(--muted);
+    font-size: 14.5px;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+  .lg-destination__link {
+    display: inline-block;
+    margin-top: 5px;
+    color: var(--gold-deep);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    line-height: 1.5;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .lg-fleet {
+    padding: 112px 28px 120px;
+    background: #171717;
+  }
+  .lg-section-head--light h2 {
+    color: var(--paper);
+  }
+  .lg-section-head--light > p {
+    color: rgba(253, 252, 250, .67);
+  }
+  .lg-fleet__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    margin-top: 62px;
+  }
+  .lg-vehicle {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 106, .22);
+    background: #211f1b;
+  }
+  .lg-vehicle__media {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #292620;
+  }
+  .lg-vehicle__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .55s ease;
+  }
+  .lg-vehicle:hover .lg-vehicle__image {
+    transform: scale(1.025);
+  }
+  .lg-vehicle__body {
+    padding: 34px clamp(26px, 4vw, 44px) 40px;
+  }
+  .lg-vehicle__type {
+    margin: 0 0 11px;
+    color: var(--gold-light);
+    font-size: 10px;
+    letter-spacing: .23em;
+    text-transform: uppercase;
+  }
+  .lg-vehicle h3 {
+    margin: 0;
+    color: var(--paper);
+    font-family: var(--serif);
+    font-size: clamp(31px, 3.5vw, 42px);
+    font-weight: 500;
+    line-height: 1.06;
+  }
+  .lg-vehicle__capacity {
+    margin: 10px 0 0 !important;
+    color: var(--gold-light) !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .lg-vehicle__body > p:not(.lg-vehicle__type, .lg-vehicle__capacity) {
+    margin: 21px 0 25px;
+    color: rgba(253, 252, 250, .69);
+    font-size: 14.5px;
+    font-weight: 300;
+    line-height: 1.72;
+  }
+  .lg-vehicle__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 26px;
+  }
+
+  .lg-faq {
+    padding: 104px 28px 112px;
+    background: var(--paper);
+  }
+  .lg-faq h2 {
+    margin-bottom: 42px;
+    text-align: center;
+  }
+  .lg-faq__item {
+    border-top: 1px solid var(--line-2);
+  }
+  .lg-faq__item:last-child {
+    border-bottom: 1px solid var(--line-2);
+  }
+  .lg-faq__head {
+    display: flex;
+    width: 100%;
+    min-height: 72px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 22px 2px;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: left;
+  }
+  .lg-faq__head span:first-child {
+    flex: 1;
+  }
+  .lg-faq__chevron {
+    width: 10px;
+    height: 10px;
+    flex: none;
+    transform: translateY(-2px) rotate(45deg);
+    border-right: 1px solid var(--gold-deep);
+    border-bottom: 1px solid var(--gold-deep);
+    transition: transform .3s ease;
+  }
+  .lg-faq__item.is-open .lg-faq__chevron {
+    transform: translateY(3px) rotate(-135deg);
+  }
+  .lg-faq__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .35s ease;
+  }
+  .lg-faq__item.is-open .lg-faq__panel {
+    grid-template-rows: 1fr;
+  }
+  .lg-faq__body {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .lg-faq__body p {
+    max-width: 72ch;
+    margin: 0;
+    padding: 0 40px 25px 2px;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  @media (max-width: 1040px) {
+    .lg-trust__inner {
+      flex-wrap: wrap;
+    }
+    .lg-intro__inner {
+      grid-template-columns: minmax(0, 1fr) minmax(330px, .9fr);
+      gap: 48px;
+    }
+    .lg-itinerary__steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .lg-itinerary__step:nth-child(3) {
+      border-left: 0;
+      border-top: 1px solid var(--line-2);
+    }
+    .lg-itinerary__step:nth-child(4) {
+      border-top: 1px solid var(--line-2);
+    }
+  }
+
+  @media (max-width: 840px) {
+    .lg-intro__inner,
+    .lg-destination,
+    .lg-fleet__grid {
+      grid-template-columns: 1fr;
+    }
+    .lg-intro__copy {
+      max-width: 720px;
+    }
+    .lg-intro__image {
+      aspect-ratio: 16 / 10;
+    }
+    .lg-destination {
+      gap: 25px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .lg-hero__image {
+      object-position: 63% 60%;
+    }
+    .lg-hero__overlay {
+      background: linear-gradient(90deg, rgba(12, 10, 7, .9), rgba(12, 10, 7, .62));
+    }
+    .lg-hero__content {
+      justify-content: flex-end;
+      padding: 72px 20px 55px;
+    }
+    .lg-hero h1 {
+      font-size: clamp(40px, 12.5vw, 57px);
+      line-height: 1;
+    }
+    .lg-hero__lead {
+      font-size: 15.5px;
+      line-height: 1.58;
+    }
+    .lg-hero__actions {
+      width: 100%;
+      flex-direction: column;
+    }
+    .lg-hero__actions a {
+      width: 100%;
+      padding-inline: 16px;
+      text-align: center;
+    }
+    .lg-trust__inner {
+      justify-content: flex-start;
+      gap: 11px 20px;
+      padding-inline: 20px;
+    }
+    .lg-trust span {
+      font-size: 9px;
+      white-space: normal;
+    }
+    .lg-intro,
+    .lg-itinerary,
+    .lg-fleet,
+    .lg-faq {
+      padding-inline: 20px;
+    }
+    .lg-intro {
+      padding-block: 82px;
+    }
+    .lg-itinerary {
+      padding-block: 82px;
+    }
+    .lg-itinerary__steps {
+      grid-template-columns: 1fr;
+      margin-top: 48px;
+    }
+    .lg-itinerary__step,
+    .lg-itinerary__step:nth-child(3),
+    .lg-itinerary__step:nth-child(4) {
+      padding: 27px 4px 31px;
+      border-left: 0;
+      border-top: 1px solid var(--line-2);
+    }
+    .lg-itinerary__step:first-child {
+      border-top: 0;
+    }
+    .lg-itinerary__number {
+      margin-bottom: 14px;
+    }
+    .lg-destination {
+      margin-top: 52px;
+      padding: 34px 25px;
+    }
+    .lg-fleet {
+      padding-block: 84px 90px;
+    }
+    .lg-fleet__grid {
+      margin-top: 46px;
+    }
+    .lg-vehicle__body {
+      padding: 29px 24px 34px;
+    }
+    .lg-faq {
+      padding-block: 82px 88px;
+    }
+    .lg-faq h2 {
+      margin-bottom: 29px;
+    }
+    .lg-faq__head {
+      min-height: 64px;
+      gap: 17px;
+      padding-block: 19px;
+      font-size: 17px;
+    }
+    .lg-faq__body p {
+      padding-right: 24px;
+      font-size: 14.5px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .lg-hero__content,
+    .lg-trust__inner,
+    .lg-intro,
+    .lg-itinerary,
+    .lg-fleet,
+    .lg-faq {
+      padding-inline: 16px;
+    }
+    .lg-hero__eyebrow {
+      letter-spacing: .22em;
+    }
+    .lg-destination {
+      padding-inline: 20px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lg-button-outline,
+    .lg-vehicle__image,
+    .lg-faq__panel,
+    .lg-faq__chevron,
+    .step__panel,
+    .step__chev,
+    .step__num {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-quote-form]');
+
+  if (form) {
+    const steps = Array.from(form.querySelectorAll<HTMLElement>('.step'));
+    const stepByNum = (number: string) => steps.find((step) => step.dataset.step === number);
+
+    const setOpen = (step: HTMLElement, open: boolean) => {
+      step.classList.toggle('is-open', open);
+      step.querySelector('.step__head')?.setAttribute('aria-expanded', String(open));
+      const body = step.querySelector<HTMLElement>('.step__body');
+      if (body) body.inert = !open;
+    };
+
+    const openStep = (number: string, focus = true) => {
+      steps.forEach((step) => setOpen(step, step.dataset.step === number));
+      if (focus) {
+        const firstControl = stepByNum(number)?.querySelector<HTMLElement>(
+          '.step__body .field__control',
+        );
+        firstControl?.focus({ preventScroll: true });
+      }
+    };
+
+    const toggleStep = (number: string) => {
+      const step = stepByNum(number);
+      if (!step) return;
+      if (step.classList.contains('is-open')) steps.forEach((item) => setOpen(item, false));
+      else openStep(number, false);
+    };
+
+    form.querySelectorAll<HTMLElement>('[data-step-toggle]').forEach((button) =>
+      button.addEventListener('click', () => toggleStep(button.dataset.stepToggle!)),
+    );
+    form.querySelectorAll<HTMLElement>('[data-step-next]').forEach((button) =>
+      button.addEventListener('click', () => {
+        button.closest<HTMLElement>('.step')?.classList.add('is-done');
+        openStep(button.dataset.stepNext!);
+      }),
+    );
+    form.querySelectorAll<HTMLElement>('[data-step-back]').forEach((button) =>
+      button.addEventListener('click', () => openStep(button.dataset.stepBack!)),
+    );
+
+    steps.forEach((step) => setOpen(step, step.classList.contains('is-open')));
+
+    const searchParams = new URLSearchParams(location.search);
+    const requestedVehicle = searchParams.get('vehicle');
+    if (requestedVehicle) {
+      const vehicleSelect = form.querySelector<HTMLSelectElement>('select[name="vehicle"]');
+      const matchingOption = vehicleSelect &&
+        Array.from(vehicleSelect.options).find((option) => option.text === requestedVehicle);
+      if (vehicleSelect && matchingOption) vehicleSelect.value = matchingOption.value;
+    }
+    const requestedPickup = searchParams.get('pickup');
+    if (requestedPickup) {
+      const pickupInput = form.querySelector<HTMLInputElement>('input[name="pickup"]');
+      if (pickupInput) pickupInput.value = requestedPickup;
+    }
+
+    form.addEventListener('netlify-form:success', () => {
+      steps.forEach((step) => step.classList.remove('is-done'));
+      openStep('1', false);
+    });
+  }
+</script>
+
+<script>
+  const lakeGenevaFaq = document.querySelector<HTMLElement>('[data-lake-geneva-faq]');
+
+  if (lakeGenevaFaq) {
+    const items = Array.from(lakeGenevaFaq.querySelectorAll<HTMLElement>('.lg-faq__item'));
+    const setOpen = (item: HTMLElement, open: boolean) => {
+      item.classList.toggle('is-open', open);
+      item
+        .querySelector('[data-lake-geneva-faq-toggle]')
+        ?.setAttribute('aria-expanded', String(open));
+      const body = item.querySelector<HTMLElement>('.lg-faq__body');
+      if (body) body.inert = !open;
+    };
+
+    items.forEach((item) => {
+      item
+        .querySelector<HTMLButtonElement>('[data-lake-geneva-faq-toggle]')
+        ?.addEventListener('click', () => {
+          const wasOpen = item.classList.contains('is-open');
+          items.forEach((otherItem) => setOpen(otherItem, false));
+          if (!wasOpen) setOpen(item, true);
+        });
+      setOpen(item, false);
+    });
+  }
+</script>

@@ -208,6 +208,18 @@ const reasons = [
           />
         ))}
       </div>
+
+      <aside class="services-destination" aria-labelledby="services-destination-title">
+        <div>
+          <p class="services-destination__eyebrow">Destination Service</p>
+          <h3 id="services-destination-title">Planning beyond Chicagoland?</h3>
+        </div>
+        <p>
+          For resort pickups, wedding-day stops and private group itineraries in southern
+          Wisconsin, explore our <a href={withBase('/lake-geneva-trolley-rental')}>Lake Geneva trolley rental</a>
+          planning guide.
+        </p>
+      </aside>
     </div>
   </section>
 
@@ -401,6 +413,43 @@ const reasons = [
     margin-top: 62px;
     border-block: 1px solid var(--line-2);
   }
+  .services-destination {
+    display: grid;
+    grid-template-columns: minmax(240px, .72fr) minmax(0, 1.28fr);
+    align-items: center;
+    gap: clamp(30px, 6vw, 80px);
+    margin-top: 58px;
+    padding: 34px clamp(26px, 4vw, 48px);
+    border-left: 3px solid var(--gold-dark);
+    background: var(--cream);
+  }
+  .services-destination__eyebrow {
+    margin: 0 0 9px;
+    color: var(--gold-deep);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+  }
+  .services-destination h3 {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: clamp(25px, 3vw, 34px);
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  .services-destination > p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14.5px;
+    font-weight: 300;
+    line-height: 1.72;
+  }
+  .services-destination a {
+    color: var(--gold-deep);
+    font-weight: 500;
+    text-underline-offset: 3px;
+  }
 
   .services-reasons {
     padding: 104px 28px;
@@ -566,6 +615,12 @@ const reasons = [
     }
     .featured-services__list {
       margin-top: 46px;
+    }
+    .services-destination {
+      grid-template-columns: 1fr;
+      gap: 17px;
+      margin-top: 42px;
+      padding: 29px 24px;
     }
     .services-reasons {
       padding-block: 80px;

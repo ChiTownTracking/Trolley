@@ -34,14 +34,6 @@ const reservationFields = [
   ['Number of Passengers', 'passengers'],
   ['Price Quote', 'price-quote'],
   ['Promo Code', 'promo-code'],
-  ['Billing Contact Name', 'billing-name'],
-  ['Card Number', 'billing-card-number'],
-  ['Expiration Date', 'billing-card-exp'],
-  ['Security Code (CVV)', 'billing-card-cvv'],
-  ['Billing Street Address', 'billing-street-address'],
-  ['City', 'billing-city'],
-  ['State', 'billing-state'],
-  ['Billing ZIP Code', 'billing-zip'],
   ['Terms and Conditions', 'agreement'],
 ];
 
