@@ -229,7 +229,7 @@ import { withBase } from "../utils/paths";
 
         <fieldset class="rform__section">
           <legend class="rform__legend"
-            ><span>04</span> Quote Reference</legend
+            ><span>04</span> Quote &amp; Payment Method</legend
           >
           <div class="rform__grid">
             <label class="field">
@@ -249,6 +249,100 @@ import { withBase } from "../utils/paths";
                 type="text"
                 autocomplete="off"
                 placeholder="If applicable"
+                class="field__control"
+              />
+            </label>
+            <label class="field field--full">
+              <span class="field__label">Billing Contact Name</span>
+              <input
+                name="billing-name"
+                type="text"
+                autocomplete="billing name"
+                placeholder="Name associated with the future payment"
+                class="field__control"
+              />
+            </label>
+            <label class="field field--full">
+              <span class="field__label">Card Number</span>
+              <input
+                name="billing-card-number"
+                type="text"
+                placeholder="1234 5678 9012 3456"
+                class="field__control"
+              />
+            </label>
+
+            <label class="field">
+              <span class="field__label">Expiration Date</span>
+              <input
+                name="billing-card-exp"
+                type="text"
+                inputmode="numeric"
+                maxlength="5"
+                placeholder="MM/YY"
+                pattern="(0[1-9]|1[0-2])\/[0-9]{2}"
+                class="field__control"
+                oninput="
+      let v = this.value.replace(/\D/g, '').slice(0, 4);
+      if (v.length >= 3) {
+        v = v.slice(0, 2) + '/' + v.slice(2);
+      }
+      this.value = v;
+    "
+              />
+            </label>
+
+            <label class="field">
+              <span class="field__label">Security Code (CVV)</span>
+              <input
+                name="billing-card-cvv"
+                type="text"
+                inputmode="numeric"
+                maxlength="3"
+                pattern="[0-9]{3}"
+                placeholder="123"
+                class="field__control"
+              />
+            </label>
+
+            <label class="field field--full">
+              <span class="field__label">Billing Street Address</span>
+              <input
+                name="billing-street-address"
+                type="text"
+                autocomplete="billing street-address"
+                placeholder="Street address"
+                class="field__control"
+              />
+            </label>
+            <label class="field">
+              <span class="field__label">City</span>
+              <input
+                name="billing-city"
+                type="text"
+                autocomplete="billing address-level2"
+                class="field__control"
+              />
+            </label>
+            <label class="field">
+              <span class="field__label">State</span>
+              <input
+                name="billing-state"
+                type="text"
+                autocomplete="billing address-level1"
+                maxlength="2"
+                placeholder="IL"
+                class="field__control"
+              />
+            </label>
+            <label class="field">
+              <span class="field__label">Billing ZIP Code</span>
+              <input
+                name="billing-zip"
+                type="text"
+                autocomplete="billing postal-code"
+                inputmode="numeric"
+                placeholder="60007"
                 class="field__control"
               />
             </label>
