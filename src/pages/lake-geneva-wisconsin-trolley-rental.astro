@@ -15,7 +15,7 @@ import lakeGenevaMansionAutumn from '../assets/images/lake-geneva/lake-geneva-ma
 const classicTrolley = fleet.find((vehicle) => vehicle.slug === 'classic-white-trolley');
 
 if (!classicTrolley) {
-  throw new Error('Lake Geneva page requires the Classic White Trolley fleet data.');
+  throw new Error('The Lake Geneva, WI page requires the Classic White Trolley fleet data.');
 }
 
 const quoteHref = '#lake-geneva-quote';
@@ -27,7 +27,7 @@ const trustItems = [
   'Classic White Trolley',
   'Wedding & Event Service',
   'Professional Chauffeur Included',
-  'Lake Geneva Service by Reservation',
+  'Lake Geneva, WI Service by Reservation',
 ] as const;
 
 const itinerarySteps = [
@@ -43,7 +43,7 @@ const itinerarySteps = [
   },
   {
     number: '03',
-    title: 'Lake Geneva Photo Stops',
+    title: 'Photo Stops in Lake Geneva, WI',
     body: 'Approved photo locations can be added between the ceremony and reception when travel time, parking access and the reservation length allow. Share preferred stops early so the schedule can account for unloading, photographs and boarding without rushing the next destination.',
   },
   {
@@ -56,7 +56,7 @@ const itinerarySteps = [
 const popularResorts = [
   {
     name: 'Grand Geneva Resort & Spa',
-    location: 'Lake Geneva',
+    location: 'Lake Geneva, WI',
     description:
       'An expansive resort campus with lodge and villa accommodations, two championship golf courses, WELL Spa, seasonal skiing and the Timber Ridge indoor waterpark.',
     planningNote:
@@ -74,7 +74,7 @@ const popularResorts = [
   },
   {
     name: 'Destination Geneva National',
-    location: 'Lake Geneva',
+    location: 'Lake Geneva, WI',
     description:
       'Lodging includes the Lodge, suites and multi-bedroom cottages, with access to six dining options, saltwater pools, a marina, outdoor activities and 54 holes of golf.',
     planningNote:
@@ -86,18 +86,18 @@ const popularResorts = [
 const lakeGenevaFaqs = [
   {
     q: 'Do you offer trolley rentals in Lake Geneva, Wisconsin?',
-    a: 'Yes. ChiTown Trolley provides private trolley service for qualifying Lake Geneva-area events by reservation. Service depends on the event date, complete itinerary, trip duration and vehicle availability. Share every pickup and stop when requesting a quote so the route can be reviewed accurately.',
+    a: 'Yes. ChiTown Trolley provides private trolley service for qualifying events in Lake Geneva, WI, by reservation. Service depends on the event date, complete itinerary, trip duration and vehicle availability. Share every pickup and stop when requesting a quote so the route can be reviewed accurately.',
   },
   {
-    q: 'How much does a Lake Geneva trolley rental cost?',
+    q: 'How much does a trolley rental in Lake Geneva, WI cost?',
     a: 'Pricing is customized rather than posted as a single flat rate. The estimate depends on the date, requested vehicle, rental duration, pickup location, planned itinerary and total service time. Submit those details through the quote form for a trip-specific estimate.',
   },
   {
-    q: 'Can we use the trolley for a Lake Geneva wedding?',
+    q: 'Can we use the trolley for a wedding in Lake Geneva, WI?',
     a: 'Yes, subject to availability and route confirmation. A wedding itinerary may include hotel or resort pickup, ceremony transportation, approved photo stops, reception arrival and a scheduled return when it is included in the reservation.',
   },
   {
-    q: 'Can the trolley make multiple stops around Lake Geneva?',
+    q: 'Can the trolley make multiple stops around Lake Geneva, WI?',
     a: 'Multiple stops can be planned when the addresses, timing, loading access and overall reservation length are approved in advance. Include each requested destination with your inquiry; a stop should not be assumed until it appears in the confirmed itinerary.',
   },
   {
@@ -105,19 +105,19 @@ const lakeGenevaFaqs = [
     a: 'Yes. The Classic White Trolley can carry the wedding party while a larger coach handles guest transportation between hotels, the ceremony and reception. The appropriate combination depends on passenger counts, luggage needs, timing and vehicle availability.',
   },
   {
-    q: 'How far in advance should we reserve a Lake Geneva wedding trolley?',
+    q: 'How far in advance should we reserve a wedding trolley in Lake Geneva, WI?',
     a: 'Popular wedding-season Saturdays often fill six to twelve months ahead, so early planning gives you the best date and time selection. It is still worth asking about closer dates because availability varies throughout the year.',
   },
   {
     q: 'Do you serve Fontana and Williams Bay?',
-    a: 'Service outside the central Lake Geneva area depends on the complete route. Share every address when requesting a quote so the team can confirm availability for Lake Geneva, Fontana, Williams Bay and other surrounding communities included in your itinerary.',
+    a: 'Service beyond central Lake Geneva, WI, depends on the complete route. Share every address when requesting a quote so the team can confirm availability in Lake Geneva, WI; Fontana; Williams Bay; and other surrounding communities included in your itinerary.',
   },
 ] as const;
 ---
 
 <BaseLayout
-  title="Lake Geneva Trolley Rental | Weddings & Events | ChiTown Trolley"
-  description="Book a Lake Geneva trolley rental for weddings, private events and group transportation. Classic white trolley service with custom itineraries."
+  title="Lake Geneva, WI Trolley Rental | Weddings & Events | ChiTown Trolley"
+  description="Book a trolley rental in Lake Geneva, WI, for weddings, private events and group transportation. Classic white trolley service with custom itineraries."
   image={lakeGenevaHero}
   hideCta={true}
 >
@@ -139,16 +139,16 @@ const lakeGenevaFaqs = [
       <p class="lg-hero__eyebrow">Lake Geneva, Wisconsin</p>
       <h1 id="lake-geneva-title">Lake Geneva, WI Trolley Rental</h1>
       <p class="lg-hero__lead">
-        Private trolley transportation for weddings, celebrations and coordinated group travel throughout the Lake Geneva area.
+        Private trolley transportation for weddings, celebrations and coordinated group travel throughout Lake Geneva, WI, and the surrounding area.
       </p>
       <div class="lg-hero__actions">
-        <a href={quoteHref} class="btn-gold">Request a Lake Geneva Trolley Quote</a>
+        <a href={quoteHref} class="btn-gold">Request a Trolley Quote for Lake Geneva, WI</a>
         <a href={classicTrolleyHref} class="lg-button-outline">View the White Trolley</a>
       </div>
     </div>
   </section>
 
-  <section class="lg-trust" aria-label="Lake Geneva trolley service facts">
+  <section class="lg-trust" aria-label="Lake Geneva, WI trolley service facts">
     <div class="lg-trust__inner wrap wrap-wide">
       {trustItems.map((item) => (
         <span><i aria-hidden="true"></i>{item}</span>
@@ -159,7 +159,7 @@ const lakeGenevaFaqs = [
   <section class="rv getquote" id="lake-geneva-quote" aria-labelledby="lake-geneva-quote-title">
     <div class="getquote__inner">
       <h2 class="h-section getquote__title" id="lake-geneva-quote-title">
-        Request a <em class="grad">Lake Geneva trolley rental quote</em>
+        Request a <em class="grad">trolley rental quote for Lake Geneva, WI</em>
       </h2>
 
       <form
@@ -172,7 +172,7 @@ const lakeGenevaFaqs = [
         data-quote-form
       >
         <input type="hidden" name="form-name" value="quote-request" />
-        <input type="hidden" name="notification-form" value="quote-request" />
+        <input type="hidden" name="notification-form" value="lake-geneva-quote-request" />
         <p class="netlify-honeypot" aria-hidden="true">
           <label>
             Do not fill this out:
@@ -318,7 +318,7 @@ const lakeGenevaFaqs = [
         </div>
         <p class="form-status" data-form-status role="status" aria-live="polite"></p>
         <p class="getquote__disclaimer">
-          Lake Geneva trolley rental prices vary by date, vehicle, rental duration, itinerary and pickup details.
+          Trolley rental prices in Lake Geneva, WI vary by date, vehicle, rental duration, itinerary and pickup details.
           Share your plans for a customized estimate.
         </p>
       </form>
@@ -342,14 +342,14 @@ const lakeGenevaFaqs = [
       </div>
       <div class="lg-intro__copy rv">
         <Eyebrow label="Private Trolley Transportation" align="left" single size="sm" mb={17} />
-        <h2 id="lake-geneva-intro-title">A trolley experience made for Lake Geneva celebrations</h2>
+        <h2 id="lake-geneva-intro-title">A trolley experience made for celebrations in Lake Geneva, WI</h2>
         <p>
-          Lake Geneva is a destination where one event can span a full wedding weekend. Guests may stay at a downtown hotel, lakeside resort or vacation property while the ceremony, photographs and reception take place at separate destinations around Geneva Lake. A private trolley gives the wedding party or event group one vehicle, one meeting point and one coordinated schedule instead of relying on separate cars between stops.
+          Lake Geneva, Wisconsin, is a destination where one event can span a full wedding weekend. Guests may stay at a downtown hotel, lakeside resort or vacation property while the ceremony, photographs and reception take place at separate destinations around Geneva Lake. A private trolley gives the wedding party or event group one vehicle, one meeting point and one coordinated schedule instead of relying on separate cars between stops.
         </p>
         <p>
-          ChiTown Trolley serves Lake Geneva-area itineraries by reservation. Service is planned around confirmed pickup locations, passenger count, scheduled stops and event timing, including hotel pickup and return transportation when those details are part of the reservation. Availability depends on the date, requested vehicle, trip duration and complete route, so the most useful inquiry includes every address and the timing that matters to your day.
+          ChiTown Trolley serves itineraries in Lake Geneva, WI, by reservation. Service is planned around confirmed pickup locations, passenger count, scheduled stops and event timing, including hotel pickup and return transportation when those details are part of the reservation. Availability depends on the date, requested vehicle, trip duration and complete route, so the most useful inquiry includes every address and the timing that matters to your day.
         </p>
-        <a href={quoteHref} class="link-gold">Share Your Lake Geneva Itinerary →</a>
+        <a href={quoteHref} class="link-gold">Share Your Itinerary for Lake Geneva, WI →</a>
       </div>
     </div>
   </section>
@@ -357,7 +357,7 @@ const lakeGenevaFaqs = [
   <section class="lg-itinerary" aria-labelledby="lake-geneva-itinerary-title">
     <div class="wrap wrap-wide">
       <header class="lg-section-head">
-        <Eyebrow label="Lake Geneva Weddings & Events" mb={17} />
+        <Eyebrow label="Lake Geneva, WI Weddings & Events" mb={17} />
         <h2 id="lake-geneva-itinerary-title">One itinerary from hotel pickup to the final stop</h2>
         <p>
           Destination events work best when loading time, travel time and venue access are considered together—not as separate rides arranged at the last minute.
@@ -377,16 +377,16 @@ const lakeGenevaFaqs = [
       <aside class="lg-destination rv" aria-labelledby="lake-geneva-planning-title">
         <div class="lg-destination__heading">
           <p class="lg-destination__kicker">Destination Planning</p>
-          <h3 id="lake-geneva-planning-title">Planning transportation around Lake Geneva</h3>
+          <h3 id="lake-geneva-planning-title">Planning transportation around Lake Geneva, WI</h3>
         </div>
         <div class="lg-destination__copy">
           <p>
-            Lake Geneva itineraries may connect hotels, resorts and event venues in downtown Lake Geneva and around Geneva Lake. Planning examples include the Riviera Ballroom, Grand Geneva Resort &amp; Spa, The Geneva Inn, Maxwell Mansion, Destination Geneva National and The Abbey Resort in Fontana. A wedding weekend may also include accommodations or scheduled stops near Williams Bay.
+            Itineraries in Lake Geneva, WI, may connect hotels, resorts and event venues downtown and around Geneva Lake. Planning examples include the Riviera Ballroom, Grand Geneva Resort &amp; Spa, The Geneva Inn, Maxwell Mansion, Destination Geneva National and The Abbey Resort in Fontana. A wedding weekend may also include accommodations or scheduled stops near Williams Bay.
           </p>
           <p>
             These names are provided only as route-planning examples; they do not imply a partnership, endorsement, prior booking or guaranteed trolley access. Loading locations, parking, property rules and transportation approval should always be confirmed directly with each venue before the itinerary is finalized.
           </p>
-          <a href="https://www.visitlakegeneva.com/weddings/" class="lg-destination__link">Explore official Lake Geneva wedding planning resources →</a>
+          <a href="https://www.visitlakegeneva.com/weddings/" class="lg-destination__link">Explore official wedding planning resources for Lake Geneva, WI →</a>
         </div>
       </aside>
     </div>
@@ -396,11 +396,11 @@ const lakeGenevaFaqs = [
     <div class="wrap wrap-1140">
       <header class="lg-resorts__head">
         <div>
-          <Eyebrow label="Popular Lake Geneva Resorts" align="left" single size="sm" mb={17} />
+          <Eyebrow label="Popular Resorts in Lake Geneva, WI" align="left" single size="sm" mb={17} />
           <h2 id="lake-geneva-resorts-title">Stay together.<br />Ride together.</h2>
         </div>
         <p>
-          Lake Geneva wedding weekends often unfold across expansive resort properties. Use the resort guide below to identify the exact lodging building, entrance and approved loading point before your trolley schedule is finalized.
+          Wedding weekends in Lake Geneva, WI often unfold across expansive resort properties. Use the resort guide below to identify the exact lodging building, entrance and approved loading point before your trolley schedule is finalized.
         </p>
       </header>
 
@@ -424,7 +424,7 @@ const lakeGenevaFaqs = [
         <figure class="lg-resorts__photo">
           <Image
             src={lakeGenevaDockAtDusk}
-            alt="Lake Geneva waterfront and boat docks illuminated at dusk"
+            alt="Lake Geneva, WI waterfront and boat docks illuminated at dusk"
             width={720}
             widths={[360, 540, 720]}
             sizes="(max-width: 640px) 50vw, 32vw"
@@ -455,7 +455,7 @@ const lakeGenevaFaqs = [
       </div>
 
       <p class="lg-resorts__credit">
-        Lake Geneva photography by Yinan Chen, public domain via Wikimedia Commons:
+        Photography from Lake Geneva, WI by Yinan Chen, public domain via Wikimedia Commons:
         <a href="https://commons.wikimedia.org/wiki/File:Gfp-wisconsin-lake-geneva-across-the-lake.jpg" target="_blank" rel="noopener noreferrer">autumn lake</a>,
         <a href="https://commons.wikimedia.org/wiki/File:Gfp-wisconsin-lake-geneva-at-dusk.jpg" target="_blank" rel="noopener noreferrer">waterfront at dusk</a>, and
         <a href="https://commons.wikimedia.org/wiki/File:Gfp-wisconsin-lake-geneva-mansion-on-the-lake.jpg" target="_blank" rel="noopener noreferrer">lakeside mansion</a>.
@@ -488,8 +488,8 @@ const lakeGenevaFaqs = [
 
   <section class="lg-faq" aria-labelledby="lake-geneva-faq-title">
     <div class="wrap wrap-860">
-      <Eyebrow label="Lake Geneva Trolley Questions" mb={17} />
-      <h2 id="lake-geneva-faq-title">Lake Geneva trolley rental FAQs</h2>
+      <Eyebrow label="Trolley Questions for Lake Geneva, WI" mb={17} />
+      <h2 id="lake-geneva-faq-title">Trolley rental FAQs for Lake Geneva, WI</h2>
       <div class="lg-faq__list" data-lake-geneva-faq>
         {lakeGenevaFaqs.map((item, index) => {
           const buttonId = `lake-geneva-faq-button-${index + 1}`;
@@ -526,9 +526,9 @@ const lakeGenevaFaqs = [
 
   <div class="lg-final">
     <CtaBand
-      title="Plan your Lake Geneva trolley rental"
+      title="Plan your trolley rental in Lake Geneva, WI"
       sub="Share your event date, group size, pickup location and planned stops for a customized transportation quote."
-      ctaLabel="Request a Lake Geneva Trolley Quote"
+      ctaLabel="Request a Trolley Quote for Lake Geneva, WI"
       ctaHref={quoteHref}
       secondaryLabel="View the White Trolley"
       secondaryHref={classicTrolleyHref}

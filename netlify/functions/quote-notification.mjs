@@ -70,6 +70,14 @@ const formConfigurations = new Map([
     },
   ],
   [
+    'lake-geneva-quote-request',
+    {
+      fields: quoteFields,
+      fieldAliases: quoteFieldAliases,
+      subject: (fullName) => `${fullName} - Lake Geneva, WI Quote Request - ChiTown Trolley`,
+    },
+  ],
+  [
     'wedding-quote-request',
     {
       fields: weddingQuoteFields,
