@@ -74,7 +74,7 @@ const formConfigurations = new Map([
     {
       fields: quoteFields,
       fieldAliases: quoteFieldAliases,
-      subject: (fullName) => `${fullName} - Lake Geneva, WI Quote Request - ChiTown Trolley`,
+      subject: (fullName) => `${fullName} - Wisconsin Quote Request - ChiTown Trolley`,
     },
   ],
   [
