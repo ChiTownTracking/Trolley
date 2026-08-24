@@ -66,7 +66,7 @@ const formConfigurations = new Map([
     {
       fields: quoteFields,
       fieldAliases: quoteFieldAliases,
-      subject: (fullName) => `${fullName} - New Request Quote - ChiTown Trolley`,
+      subject: (fullName) => `${fullName} - Quote - ChiTown Trolley`,
     },
   ],
   [
@@ -74,7 +74,7 @@ const formConfigurations = new Map([
     {
       fields: quoteFields,
       fieldAliases: quoteFieldAliases,
-      subject: (fullName) => `${fullName} - Wisconsin Quote Request - ChiTown Trolley`,
+      subject: (fullName) => `${fullName} - Wisconsin Quote - ChiTown Trolley`,
     },
   ],
   [
@@ -89,14 +89,14 @@ const formConfigurations = new Map([
     'reservation-request',
     {
       fields: reservationFields,
-      subject: (fullName) => `${fullName} - New Reservation - ChiTown Trolley`,
+      subject: (fullName) => `${fullName} - Reservation - ChiTown Trolley`,
     },
   ],
   [
     'contact-us',
     {
       fields: contactFields,
-      subject: (fullName) => `${fullName} - New Contact Us - ChiTown Trolley`,
+      subject: (fullName) => `${fullName} - Contact Us - ChiTown Trolley`,
     },
   ],
 ]);
