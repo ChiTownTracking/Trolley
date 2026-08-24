@@ -136,7 +136,6 @@ export interface NavItem {
 
 /** Primary nav items shown inline in the header. */
 export const navMain: NavItem[] = [
-  { label: 'Home', href: '/' },
   { label: 'Fleet', href: '/fleet' },
   { label: 'Wedding Package', href: '/weddings' },
   {
@@ -147,12 +146,13 @@ export const navMain: NavItem[] = [
       { text: 'Trolley', className: 'xmas-t' },
     ],
   },
+  { label: 'LAKE GENEVA, WI', href: '/lake-geneva-wisconsin-trolley-rental' },
   { label: 'Services', href: '/services' },
-  { label: 'Guides', href: '/guides' },
 ];
 
 /** Secondary items tucked under the "More" dropdown. */
 export const navMore: NavItem[] = [
+  { label: 'Guides', href: '/guides' },
   { label: 'About', href: '/about' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'FAQ', href: '/faq' },

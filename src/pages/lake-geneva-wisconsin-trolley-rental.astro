@@ -3,21 +3,23 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Eyebrow from '../components/Eyebrow.astro';
-import { fleet, fleetImages } from '../data/fleet';
+import { fleet } from '../data/fleet';
 import { eventTypes, hoursOptions, vehicleOptions } from '../data/site';
 import { withBase } from '../utils/paths';
 import lakeGenevaHero from '../assets/images/lake-geneva-trolley-hero.webp';
+import lakeGenevaTrolleyExteriorInterior from '../assets/images/lake-geneva/lake-geneva-trolley-exterior-interior.png';
+import lakeGenevaResortsImage from '../assets/images/lake-geneva/lake-geneva-autumn-resorts.jpg';
+import lakeGenevaDockAtDusk from '../assets/images/lake-geneva/lake-geneva-dock-at-dusk.jpg';
+import lakeGenevaMansionAutumn from '../assets/images/lake-geneva/lake-geneva-mansion-autumn.jpg';
 
 const classicTrolley = fleet.find((vehicle) => vehicle.slug === 'classic-white-trolley');
-const coachBus = fleet.find((vehicle) => vehicle.slug === 'super-coach-bus');
 
-if (!classicTrolley || !coachBus) {
-  throw new Error('Lake Geneva page requires the Classic White Trolley and Super Coach Bus fleet data.');
+if (!classicTrolley) {
+  throw new Error('Lake Geneva page requires the Classic White Trolley fleet data.');
 }
 
 const quoteHref = '#lake-geneva-quote';
 const classicTrolleyHref = withBase(`/fleet/${classicTrolley.slug}`);
-const coachHref = withBase(`/fleet/${coachBus.slug}`);
 const passengerOptions = ['1–10', '11–20', '21–30', '31–40', '41–57'];
 
 const trustItems = [
@@ -48,6 +50,36 @@ const itinerarySteps = [
     number: '04',
     title: 'Reception & Return Service',
     body: 'The itinerary can finish with a scheduled reception arrival and, when included in the confirmed reservation, planned return transportation. Final timing should identify the pickup point, destination and passengers expected so the closing portion of the route remains clear.',
+  },
+] as const;
+
+const popularResorts = [
+  {
+    name: 'Grand Geneva Resort & Spa',
+    location: 'Lake Geneva',
+    description:
+      'An expansive resort campus with lodge and villa accommodations, two championship golf courses, WELL Spa, seasonal skiing and the Timber Ridge indoor waterpark.',
+    planningNote:
+      'Confirm the exact building and entrance before setting the trolley pickup time.',
+    href: 'https://www.grandgeneva.com/',
+  },
+  {
+    name: 'The Abbey Resort',
+    location: 'Fontana-on-Geneva Lake',
+    description:
+      'A 90-acre waterfront resort with lake-inspired guestrooms, on-site dining, indoor and outdoor pools, marina activities and Avani Spa.',
+    planningNote:
+      'Identify the group’s lodging building and the resort-approved loading point.',
+    href: 'https://www.theabbeyresort.com/',
+  },
+  {
+    name: 'Destination Geneva National',
+    location: 'Lake Geneva',
+    description:
+      'Lodging includes the Lodge, suites and multi-bedroom cottages, with access to six dining options, saltwater pools, a marina, outdoor activities and 54 holes of golf.',
+    planningNote:
+      'Specify whether pickup is at the Lodge, Clubhouse, suites or cottages.',
+    href: 'https://www.destinationgn.com/',
   },
 ] as const;
 
@@ -297,9 +329,9 @@ const lakeGenevaFaqs = [
     <div class="lg-intro__inner wrap wrap-1140">
       <div class="lg-intro__media rv">
         <Image
-          src={fleetImages.trolley.classicExterior}
-          alt="Classic White Trolley exterior"
-          widths={[400, 555]}
+          src={lakeGenevaTrolleyExteriorInterior}
+          alt="White trolley beside the lake and its wood-trimmed passenger cabin"
+          widths={[400, 555, 800, 1100]}
           sizes="(max-width: 840px) calc(100vw - 40px), 48vw"
           format="webp"
           quality={82}
@@ -307,7 +339,6 @@ const lakeGenevaFaqs = [
           decoding="async"
           class="lg-intro__image"
         />
-        <p class="lg-intro__caption">Private trolley transportation planned around your confirmed event itinerary.</p>
       </div>
       <div class="lg-intro__copy rv">
         <Eyebrow label="Private Trolley Transportation" align="left" single size="sm" mb={17} />
@@ -361,70 +392,97 @@ const lakeGenevaFaqs = [
     </div>
   </section>
 
-  <section class="lg-fleet" aria-labelledby="lake-geneva-fleet-title">
+  <section class="lg-resorts" aria-labelledby="lake-geneva-resorts-title">
     <div class="wrap wrap-1140">
-      <header class="lg-section-head lg-section-head--light">
-        <Eyebrow label="Choose Your Transportation" mb={17} />
-        <h2 id="lake-geneva-fleet-title">The trolley for the celebration, additional vehicles when the group grows</h2>
+      <header class="lg-resorts__head">
+        <div>
+          <Eyebrow label="Popular Lake Geneva Resorts" align="left" single size="sm" mb={17} />
+          <h2 id="lake-geneva-resorts-title">Stay together.<br />Ride together.</h2>
+        </div>
         <p>
-          Match each part of the itinerary to the group riding it. A trolley can carry the wedding party while a coach follows a separate guest-shuttle schedule.
+          Lake Geneva wedding weekends often unfold across expansive resort properties. Use the resort guide below to identify the exact lodging building, entrance and approved loading point before your trolley schedule is finalized.
         </p>
       </header>
 
-      <div class="lg-fleet__grid">
-        <article class="lg-vehicle rv">
-          <div class="lg-vehicle__media">
-            <Image
-              src={classicTrolley.image}
-              alt="Classic White Trolley exterior"
-              widths={[480, 720, 960]}
-              sizes="(max-width: 760px) calc(100vw - 40px), 47vw"
-              format="webp"
-              quality={82}
-              loading="lazy"
-              decoding="async"
-              class="lg-vehicle__image"
-            />
-          </div>
-          <div class="lg-vehicle__body">
-            <p class="lg-vehicle__type">Primary Wedding Trolley</p>
-            <h3>{classicTrolley.name}</h3>
-            <p class="lg-vehicle__capacity">{classicTrolley.cap}</p>
-            <p>
-              A distinctive private trolley for wedding parties, ceremonies, scheduled photo stops, private events and group outings. Its traditional appearance makes the ride feel like part of the celebration rather than only transportation between addresses.
-            </p>
-            <a href={classicTrolleyHref} class="link-gold">View the Classic White Trolley →</a>
-          </div>
-        </article>
+      <div class="lg-resorts__gallery rv" aria-label="Scenes around Geneva Lake">
+        <figure class="lg-resorts__photo lg-resorts__photo--main">
+          <Image
+            src={lakeGenevaResortsImage}
+            alt="Autumn trees reflected across Geneva Lake in Wisconsin"
+            width={960}
+            widths={[480, 720, 960]}
+            sizes="(max-width: 640px) calc(100vw - 40px), 61vw"
+            format="webp"
+            quality={76}
+            loading="lazy"
+            decoding="async"
+            class="lg-resorts__photo-image"
+          />
+          <figcaption>Autumn across Geneva Lake</figcaption>
+        </figure>
 
-        <article class="lg-vehicle rv">
-          <div class="lg-vehicle__media">
-            <Image
-              src={coachBus.image}
-              alt="White Super Coach Bus exterior"
-              widths={[480, 720, 960]}
-              sizes="(max-width: 760px) calc(100vw - 40px), 47vw"
-              format="webp"
-              quality={82}
-              loading="lazy"
-              decoding="async"
-              class="lg-vehicle__image"
-            />
-          </div>
-          <div class="lg-vehicle__body">
-            <p class="lg-vehicle__type">Guest & Group Transportation</p>
-            <h3>{coachBus.name}</h3>
-            <p class="lg-vehicle__capacity">{coachBus.cap}</p>
-            <p>
-              When the guest list is larger than the trolley group, a coach can provide separate hotel, ceremony and reception transportation. Share the guest count and complete schedule so both vehicles can be reviewed as one coordinated transportation plan.
-            </p>
-            <div class="lg-vehicle__links">
-              <a href={coachHref} class="link-gold">View the Super Coach Bus →</a>
-              <a href={withBase('/fleet')} class="link-gold">Explore the Full Fleet →</a>
-            </div>
-          </div>
-        </article>
+        <figure class="lg-resorts__photo">
+          <Image
+            src={lakeGenevaDockAtDusk}
+            alt="Lake Geneva waterfront and boat docks illuminated at dusk"
+            width={720}
+            widths={[360, 540, 720]}
+            sizes="(max-width: 640px) 50vw, 32vw"
+            format="webp"
+            quality={74}
+            loading="lazy"
+            decoding="async"
+            class="lg-resorts__photo-image"
+          />
+          <figcaption>Waterfront at dusk</figcaption>
+        </figure>
+
+        <figure class="lg-resorts__photo">
+          <Image
+            src={lakeGenevaMansionAutumn}
+            alt="Lakeside mansion surrounded by autumn trees near Geneva Lake"
+            width={720}
+            widths={[360, 540, 720]}
+            sizes="(max-width: 640px) 50vw, 32vw"
+            format="webp"
+            quality={74}
+            loading="lazy"
+            decoding="async"
+            class="lg-resorts__photo-image"
+          />
+          <figcaption>Lakeside autumn color</figcaption>
+        </figure>
       </div>
+
+      <p class="lg-resorts__credit">
+        Lake Geneva photography by Yinan Chen, public domain via Wikimedia Commons:
+        <a href="https://commons.wikimedia.org/wiki/File:Gfp-wisconsin-lake-geneva-across-the-lake.jpg" target="_blank" rel="noopener noreferrer">autumn lake</a>,
+        <a href="https://commons.wikimedia.org/wiki/File:Gfp-wisconsin-lake-geneva-at-dusk.jpg" target="_blank" rel="noopener noreferrer">waterfront at dusk</a>, and
+        <a href="https://commons.wikimedia.org/wiki/File:Gfp-wisconsin-lake-geneva-mansion-on-the-lake.jpg" target="_blank" rel="noopener noreferrer">lakeside mansion</a>.
+      </p>
+
+      <div class="lg-resorts__cards">
+        {popularResorts.map((resort, index) => (
+          <article class="lg-resort rv">
+            <div class="lg-resort__topline">
+              <span class="lg-resort__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <p class="lg-resort__location">{resort.location}</p>
+            </div>
+            <h3>{resort.name}</h3>
+            <p class="lg-resort__description">{resort.description}</p>
+            <div class="lg-resort__footer">
+              <p class="lg-resort__note"><strong>Pickup planning</strong>{resort.planningNote}</p>
+              <a href={resort.href} class="lg-resort__link" target="_blank" rel="noopener noreferrer">
+                Resort details <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p class="lg-resorts__disclaimer">
+        Resorts are included as independent itinerary-planning examples. ChiTown Trolley is not affiliated with or endorsed by these properties, and service is subject to route, access and availability confirmation.
+      </p>
     </div>
   </section>
 
@@ -479,7 +537,7 @@ const lakeGenevaFaqs = [
 </BaseLayout>
 
 <style>
-  :where(.lg-intro, .lg-itinerary, .lg-fleet, .lg-faq) h2 {
+  :where(.lg-intro, .lg-itinerary, .lg-resorts, .lg-faq) h2 {
     margin: 0;
     font-family: var(--serif);
     font-size: clamp(34px, 4.4vw, 52px);
@@ -576,6 +634,8 @@ const lakeGenevaFaqs = [
   }
   .lg-button-outline:focus-visible,
   .lg-destination__link:focus-visible,
+  .lg-resort__link:focus-visible,
+  .lg-resorts__credit a:focus-visible,
   .lg-faq__head:focus-visible {
     outline: 2px solid var(--gold-light);
     outline-offset: 4px;
@@ -759,16 +819,10 @@ const lakeGenevaFaqs = [
   .lg-intro__image {
     display: block;
     width: 100%;
-    aspect-ratio: 5 / 4;
+    height: clamp(600px, 42vw, 780px);
     object-fit: cover;
+    object-position: center;
     border-radius: 7px;
-  }
-  .lg-intro__caption {
-    margin: 13px 0 0;
-    color: var(--faint);
-    font-size: 11px;
-    font-style: italic;
-    line-height: 1.5;
   }
   .lg-intro__copy {
     min-width: 0;
@@ -887,80 +941,195 @@ const lakeGenevaFaqs = [
     text-transform: uppercase;
   }
 
-  .lg-fleet {
-    padding: 112px 28px 120px;
-    background: #171717;
+  .lg-resorts {
+    padding: 118px 28px 122px;
+    border-block: 1px solid var(--line);
+    background: var(--cream);
   }
-  .lg-section-head--light h2 {
-    color: var(--paper);
-  }
-  .lg-section-head--light > p {
-    color: rgba(253, 252, 250, .67);
-  }
-  .lg-fleet__grid {
+  .lg-resorts__head {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px;
-    margin-top: 62px;
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
+    align-items: end;
+    gap: clamp(48px, 8vw, 104px);
   }
-  .lg-vehicle {
+  .lg-resorts__head h2 {
+    max-width: 650px;
+  }
+  .lg-resorts__head > p {
+    max-width: 46ch;
+    margin: 0 0 4px;
+    color: var(--muted);
+    font-size: 15.5px;
+    font-weight: 300;
+    line-height: 1.78;
+  }
+  .lg-resorts__gallery {
+    display: grid;
+    height: clamp(460px, 50vw, 590px);
+    grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1fr);
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 66px;
+  }
+  .lg-resorts__photo {
+    position: relative;
     min-width: 0;
+    min-height: 0;
+    margin: 0;
     overflow: hidden;
-    border: 1px solid rgba(212, 175, 106, .22);
-    background: #211f1b;
+    border-radius: 7px;
+    background: #d8d1c3;
   }
-  .lg-vehicle__media {
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background: #292620;
+  .lg-resorts__photo--main {
+    grid-row: 1 / -1;
   }
-  .lg-vehicle__image {
+  .lg-resorts__photo::after {
+    position: absolute;
+    inset: auto 0 0;
+    height: 42%;
+    background: linear-gradient(transparent, rgba(13, 11, 8, .62));
+    content: '';
+    pointer-events: none;
+  }
+  .lg-resorts__photo-image {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform .55s ease;
+    transition: transform .65s cubic-bezier(.22, .6, .2, 1);
   }
-  .lg-vehicle:hover .lg-vehicle__image {
+  .lg-resorts__photo:hover .lg-resorts__photo-image {
     transform: scale(1.025);
   }
-  .lg-vehicle__body {
-    padding: 34px clamp(26px, 4vw, 44px) 40px;
-  }
-  .lg-vehicle__type {
-    margin: 0 0 11px;
-    color: var(--gold-light);
-    font-size: 10px;
-    letter-spacing: .23em;
-    text-transform: uppercase;
-  }
-  .lg-vehicle h3 {
-    margin: 0;
-    color: var(--paper);
-    font-family: var(--serif);
-    font-size: clamp(31px, 3.5vw, 42px);
+  .lg-resorts__photo figcaption {
+    position: absolute;
+    z-index: 1;
+    right: 22px;
+    bottom: 18px;
+    left: 22px;
+    color: rgba(255, 255, 255, .92);
+    font-size: 9.5px;
     font-weight: 500;
-    line-height: 1.06;
-  }
-  .lg-vehicle__capacity {
-    margin: 10px 0 0 !important;
-    color: var(--gold-light) !important;
-    font-size: 11px !important;
-    font-weight: 500 !important;
-    letter-spacing: .16em;
+    letter-spacing: .18em;
+    line-height: 1.45;
     text-transform: uppercase;
   }
-  .lg-vehicle__body > p:not(.lg-vehicle__type, .lg-vehicle__capacity) {
-    margin: 21px 0 25px;
-    color: rgba(253, 252, 250, .69);
+  .lg-resorts__credit {
+    margin: 13px 0 0;
+    color: var(--faint);
+    font-size: 10.5px;
+    font-style: italic;
+    line-height: 1.55;
+  }
+  .lg-resorts__credit a {
+    color: inherit;
+    text-underline-offset: 2px;
+  }
+  .lg-resorts__cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 66px;
+  }
+  .lg-resort {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 420px;
+    flex-direction: column;
+    padding: 34px clamp(26px, 3vw, 36px) 32px;
+    border: 1px solid var(--line-2);
+    background: rgba(253, 252, 250, .82);
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+  .lg-resort::before {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 68px;
+    height: 2px;
+    background: var(--grad-gold);
+    content: '';
+  }
+  .lg-resort:hover {
+    transform: translateY(-4px);
+    border-color: rgba(177, 132, 37, .4);
+    box-shadow: 0 18px 42px rgba(42, 31, 14, .08);
+  }
+  .lg-resort__topline {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 18px;
+  }
+  .lg-resort__number {
+    color: var(--gold-deep);
+    font-family: var(--serif);
+    font-size: 16px;
+    font-style: italic;
+  }
+  .lg-resort__location {
+    margin: 0 !important;
+    color: var(--gold-deep) !important;
+    font-size: 9px !important;
+    font-weight: 500 !important;
+    letter-spacing: .2em;
+    line-height: 1.5;
+    text-align: right;
+    text-transform: uppercase;
+  }
+  .lg-resort h3 {
+    margin: 28px 0 0;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: clamp(29px, 2.8vw, 37px);
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  .lg-resort__description {
+    margin: 17px 0 0;
+    color: var(--muted);
     font-size: 14.5px;
     font-weight: 300;
     line-height: 1.72;
   }
-  .lg-vehicle__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px 26px;
+  .lg-resort__footer {
+    margin-top: auto;
+    padding-top: 26px;
+    border-top: 1px solid var(--line-2);
+  }
+  .lg-resort__note {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+  .lg-resort__note strong {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--ink);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .lg-resort__link {
+    display: inline-block;
+    margin-top: 20px;
+    color: var(--gold-deep);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .13em;
+    line-height: 1.5;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .lg-resorts__disclaimer {
+    max-width: 790px;
+    margin: 34px 0 0;
+    color: var(--faint);
+    font-size: 11px;
+    line-height: 1.65;
   }
 
   .lg-faq {
@@ -1055,21 +1224,37 @@ const lakeGenevaFaqs = [
   @media (max-width: 840px) {
     .lg-intro__inner,
     .lg-destination,
-    .lg-fleet__grid {
+    .lg-resorts__head {
       grid-template-columns: 1fr;
     }
     .lg-intro__copy {
       max-width: 720px;
     }
     .lg-intro__image {
-      aspect-ratio: 16 / 10;
+      height: clamp(480px, 90vw, 680px);
     }
     .lg-destination {
       gap: 25px;
     }
+    .lg-resorts__head {
+      gap: 24px;
+    }
+    .lg-resorts__head > p {
+      max-width: 64ch;
+    }
+    .lg-resorts__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .lg-resort:last-child {
+      grid-column: 1 / -1;
+      min-height: 360px;
+    }
   }
 
   @media (max-width: 640px) {
+    .lg-trust {
+      display: none;
+    }
     .lg-hero__image {
       object-position: 63% 60%;
     }
@@ -1108,7 +1293,7 @@ const lakeGenevaFaqs = [
     }
     .lg-intro,
     .lg-itinerary,
-    .lg-fleet,
+    .lg-resorts,
     .lg-faq {
       padding-inline: 20px;
     }
@@ -1117,6 +1302,9 @@ const lakeGenevaFaqs = [
     }
     .lg-itinerary {
       padding-block: 82px;
+    }
+    .lg-resorts {
+      padding-block: 82px 88px;
     }
     .lg-itinerary__steps {
       grid-template-columns: 1fr;
@@ -1139,14 +1327,38 @@ const lakeGenevaFaqs = [
       margin-top: 52px;
       padding: 34px 25px;
     }
-    .lg-fleet {
-      padding-block: 84px 90px;
+    .lg-resorts__gallery {
+      height: auto;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: auto;
+      gap: 9px;
+      margin-top: 48px;
     }
-    .lg-fleet__grid {
-      margin-top: 46px;
+    .lg-resorts__photo {
+      aspect-ratio: 4 / 3;
     }
-    .lg-vehicle__body {
-      padding: 29px 24px 34px;
+    .lg-resorts__photo--main {
+      grid-column: 1 / -1;
+      grid-row: auto;
+      aspect-ratio: 16 / 10;
+    }
+    .lg-resorts__photo figcaption {
+      right: 15px;
+      bottom: 13px;
+      left: 15px;
+      font-size: 8px;
+    }
+    .lg-resorts__cards {
+      grid-template-columns: 1fr;
+      margin-top: 50px;
+    }
+    .lg-resort,
+    .lg-resort:last-child {
+      min-height: 0;
+      grid-column: auto;
+    }
+    .lg-resort__footer {
+      margin-top: 30px;
     }
     .lg-faq {
       padding-block: 82px 88px;
@@ -1171,7 +1383,7 @@ const lakeGenevaFaqs = [
     .lg-trust__inner,
     .lg-intro,
     .lg-itinerary,
-    .lg-fleet,
+    .lg-resorts,
     .lg-faq {
       padding-inline: 16px;
     }
@@ -1185,13 +1397,18 @@ const lakeGenevaFaqs = [
 
   @media (prefers-reduced-motion: reduce) {
     .lg-button-outline,
-    .lg-vehicle__image,
+    .lg-resort,
+    .lg-resorts__photo-image,
     .lg-faq__panel,
     .lg-faq__chevron,
     .step__panel,
     .step__chev,
     .step__num {
       transition: none;
+    }
+    .lg-resort:hover,
+    .lg-resorts__photo:hover .lg-resorts__photo-image {
+      transform: none;
     }
   }
 </style>
