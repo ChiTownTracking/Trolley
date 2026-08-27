@@ -1,11 +1,25 @@
 ---
-import { Image } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FeaturedServiceRow from '../components/FeaturedServiceRow.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import { fleetImages } from '../data/fleet';
 import { withBase } from '../utils/paths';
 import servicesBannerBackground from '../assets/images/services/services-banner-bg.png';
+
+const servicesHeroDesktop = await getImage({
+  src: servicesBannerBackground,
+  width: servicesBannerBackground.width,
+  format: 'webp',
+  quality: 80,
+});
+const servicesHeroMobile = await getImage({
+  src: servicesBannerBackground,
+  width: 960,
+  format: 'webp',
+  quality: 78,
+});
+const servicesHeroStyle = `--services-hero-desktop: url('${servicesHeroDesktop.src}'); --services-hero-mobile: url('${servicesHeroMobile.src}')`;
 
 const featuredServices = [
   {
@@ -164,12 +178,14 @@ const reasons = [
 <BaseLayout
   title="Chicago Transportation Services | ChiTown Trolley"
   description="Private transportation for Chicago weddings, corporate events, celebrations, airport transfers, tours and group charters. Explore ChiTown Trolley services."
-  image={servicesBannerBackground}
+  image={servicesHeroDesktop.src}
+  mobileHeroPreload={servicesHeroMobile.src}
+  desktopHeroPreload={servicesHeroDesktop.src}
 >
   <section
     class="services-hero"
     aria-labelledby="services-title"
-    style={`background-image: url('${servicesBannerBackground.src}')`}
+    style={servicesHeroStyle}
   >
     <div class="services-hero__overlay"></div>
     <div class="services-hero__content">
@@ -289,7 +305,11 @@ const reasons = [
         <p class="services-fleet__eyebrow">Explore the Fleet</p>
         <h2 id="services-fleet-title">Find the right ride for your group</h2>
         <p>
-          Compare the Classic White Trolley, Super Coach Bus, Party Bus and Limo Vans,
+          Compare the Classic White Trolley,
+          <a class="services-fleet__vehicleLink" href={withBase('/fleet/super-coach-bus')}>Super Coach Bus</a>,
+          <a class="services-fleet__vehicleLink" href={withBase('/fleet/party-bus')}>Party Bus</a>,
+          <a class="services-fleet__vehicleLink" href={withBase('/fleet/limo-vans')}>Limo Vans</a> and the
+          <a class="services-fleet__vehicleLink" href={withBase('/fleet/executive-van')}>Executive Van</a>,
           including passenger capacity, interiors and the occasions each vehicle suits best.
         </p>
         <a href={withBase('/fleet')} class="btn-gold">View the Fleet</a>
@@ -305,6 +325,7 @@ const reasons = [
     height: 315px;
     overflow: hidden;
     background-color: #171717;
+    background-image: var(--services-hero-desktop);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -544,6 +565,12 @@ const reasons = [
     font-weight: 300;
     line-height: 1.75;
   }
+  .services-fleet__vehicleLink {
+    color: inherit;
+    text-decoration-color: var(--gold);
+    text-underline-offset: 3px;
+  }
+  .services-fleet__vehicleLink:hover { color: var(--gold-light); }
 
   @media (max-width: 1024px) {
     .services-reasons__grid {
@@ -566,6 +593,7 @@ const reasons = [
   @media (max-width: 640px) {
     .services-hero {
       height: 280px;
+      background-image: var(--services-hero-mobile);
       background-position: center;
     }
     .services-hero__overlay {

@@ -1,6 +1,8 @@
 ---
 title: "Wedding Day Shuttle Logistics: A Timeline Guide for Guest Transportation"
+seoTitle: "Wedding Shuttle Timeline Guide | ChiTown Trolley"
 excerpt: "How to build a transportation timeline that actually holds up on the day — hotel pickups, ceremony-to-reception shuttles, and return trips guests won't stand around waiting for."
+metaDescription: "Plan wedding transportation with a practical shuttle timeline for hotel pickup, ceremony and reception transfers, and guest return trips."
 category: guides
 cover: ../../assets/images/guides/coach-shuttle-guide-cover.jpg
 coverAlt: "Super coach bus for wedding guest shuttle transportation, rear view at dusk"

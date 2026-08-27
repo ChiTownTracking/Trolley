@@ -22,6 +22,8 @@ interface Props {
 const { guide, allGuides } = Astro.props;
 const { data } = guide;
 const { Content, headings } = await render(guide);
+const pageTitle = data.seoTitle ?? `${data.title} — ChiTown Trolley Guides`;
+const pageDescription = data.metaDescription ?? data.excerpt;
 
 // Table of contents — auto-derived from H2/H3s; Astro already slugs heading
 // ids to match, so anchors and IntersectionObserver targets need no extra wiring.
@@ -41,7 +43,7 @@ const schema = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: data.title,
-  description: data.excerpt,
+  description: pageDescription,
   image: new URL(data.cover.src, Astro.site ?? Astro.url).href,
   datePublished: data.date.toISOString(),
   author: { '@type': 'Organization', name: data.author },
@@ -53,8 +55,8 @@ const schema = {
 };
 ---
 <BaseLayout
-  title={`${data.title} — ChiTown Trolley Guides`}
-  description={data.excerpt}
+  title={pageTitle}
+  description={pageDescription}
   image={data.cover}
   ogType="article"
   schema={schema}

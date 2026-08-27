@@ -9,7 +9,11 @@ const guides = defineCollection({
   loader: glob({ base: './src/content/guides', pattern: '**/*.{md,mdx}' }),
   schema: ({ image }) => z.object({
     title: z.string(),
+    /** Optional search-result title; the visible article title remains unchanged. */
+    seoTitle: z.string().optional(),
     excerpt: z.string(),
+    /** Optional search-result description; cards continue to use the excerpt. */
+    metaDescription: z.string().optional(),
     category: z.string().default('guides'),
     cover: image(),
     coverAlt: z.string(),

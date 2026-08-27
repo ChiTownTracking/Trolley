@@ -157,7 +157,7 @@ const fullscreenImages = await Promise.all(
           : "Tell us your date and we'll confirm availability within one business day — no payment required to request."}
       </p>
       <div class="vd__cta-actions">
-        <a href={withBase(`/?vehicle=${encodeURIComponent(vehicle.quoteValue)}#getquote`)} class="btn-gold">Get a Free Quote</a>
+        <a href={withBase(`/#vehicle=${encodeURIComponent(vehicle.quoteValue)}`)} class="btn-gold">Get a Free Quote</a>
         <a href={withBase('/reservation')} class="btn-ghost">Reserve This Vehicle</a>
       </div>
     </section>

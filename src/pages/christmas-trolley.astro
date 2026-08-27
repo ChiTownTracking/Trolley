@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -11,9 +11,22 @@ import christmasTrolleyFeatureImage from '../assets/images/christmas/gallery/chr
 
 // Dedicated Christmas header artwork.
 const heroImage = christmasHeaderBackground;
+const christmasHeroDesktop = await getImage({
+  src: heroImage,
+  width: heroImage.width,
+  format: 'webp',
+  quality: 80,
+});
+const christmasHeroMobile = await getImage({
+  src: heroImage,
+  width: 960,
+  format: 'webp',
+  quality: 78,
+});
+const christmasHeroStyle = `--christmas-hero-desktop: url('${christmasHeroDesktop.src}'); --christmas-hero-mobile: url('${christmasHeroMobile.src}')`;
 
 // Matches the "Choose Vehicle" option so the quote form pre-selects it.
-const quoteHref = withBase(`/?vehicle=${encodeURIComponent('Christmas Trolley')}#getquote`);
+const quoteHref = withBase(`/#vehicle=${encodeURIComponent('Christmas Trolley')}`);
 
 // Restrained decor accents — transparent garland/wreath cutouts imported
 // explicitly from the Christmas image data module.
@@ -31,10 +44,13 @@ const featureList = [
 <BaseLayout
   title="Chicago Christmas Trolley Tours | ChiTown Trolley"
   description="Book a private Chicago Christmas trolley tour for holiday lights, family outings and group celebrations. Heated, BYOB and available across Chicagoland."
+  image={christmasHeroDesktop.src}
   hideCta={true}
+  mobileHeroPreload={christmasHeroMobile.src}
+  desktopHeroPreload={christmasHeroDesktop.src}
 >
   <!-- ═══ Festive hero ═══ -->
-  <section class="xhero" style={`background-image: url('${heroImage.src}')`}>
+  <section class="xhero" style={christmasHeroStyle}>
     <div class="xhero__lights" aria-hidden="true"></div>
     <div class="xhero__overlay"></div>
     <div class="xhero__content">
@@ -163,6 +179,7 @@ const featureList = [
     height: 315px;
     overflow: hidden;
     background-color: #0E1524;
+    background-image: var(--christmas-hero-desktop);
     background-size: cover;
     background-position: center 22%;
   }
@@ -338,7 +355,7 @@ const featureList = [
     .xfeat__cta { order: 5; }
   }
   @media (max-width: 640px) {
-    .xhero { height: 280px; }
+    .xhero { height: 280px; background-image: var(--christmas-hero-mobile); }
     .xhero__overlay {
       background: linear-gradient(90deg, rgba(8, 11, 20, .88) 0%, rgba(8, 11, 20, .68) 55%, rgba(8, 11, 20, .42) 100%);
     }

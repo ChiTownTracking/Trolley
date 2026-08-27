@@ -1,5 +1,6 @@
 ---
 title: "How Many Guests Fit in a Trolley? A Wedding Transportation Sizing Guide"
+seoTitle: "Trolley Capacity Guide for Weddings | ChiTown Trolley"
 excerpt: "Capacity breakdowns for trolleys, coach buses, and limo vans — plus how to estimate your real guest count needs before you book."
 category: guides
 cover: ../../assets/images/guides/trolley-guide-cover.png

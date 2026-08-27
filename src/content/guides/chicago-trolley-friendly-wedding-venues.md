@@ -1,6 +1,8 @@
 ---
 title: "Chicago's Most Trolley-Friendly Wedding Venues"
+seoTitle: "Chicago Trolley-Friendly Wedding Venues | ChiTown Trolley"
 excerpt: "What actually makes a venue easy to arrive at by trolley — driveway clearance, drop-off zones, and photo backdrops — plus where around Chicagoland to look."
+metaDescription: "Find Chicago wedding venues that work well for trolley arrivals, with tips for driveway clearance, drop-off zones and photo backdrops."
 category: guides
 cover: ../../assets/images/guides/trolley-guide-cover.png
 coverAlt: "White wedding trolley parked on a sunny afternoon near a venue entrance"

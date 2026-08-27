@@ -15,9 +15,22 @@ if (!classicTrolley) throw new Error('Classic White Trolley fleet data is requir
 
 const weddingTestimonials = [testimonials[0], testimonials[1], testimonials[5]];
 const trolleyQuoteHref = withBase(
-  `/?vehicle=${encodeURIComponent(classicTrolley.quoteValue)}#getquote`,
+  `/#vehicle=${encodeURIComponent(classicTrolley.quoteValue)}`,
 );
 const trolleyHref = withBase('/fleet/classic-white-trolley');
+const weddingHeroDesktop = await getImage({
+  src: weddingBannerBackground,
+  width: weddingBannerBackground.width,
+  format: 'webp',
+  quality: 80,
+});
+const weddingHeroMobile = await getImage({
+  src: weddingBannerBackground,
+  width: 960,
+  format: 'webp',
+  quality: 78,
+});
+const weddingHeroStyle = `--wedding-hero-desktop: url('${weddingHeroDesktop.src}'); --wedding-hero-mobile: url('${weddingHeroMobile.src}')`;
 const packageMobileWidths = [480, 720, 960, 1200];
 const packageMobileSources = await Promise.all(
   packageMobileWidths.map((width) =>
@@ -39,11 +52,13 @@ const packageMobileSrcset = packageMobileSources
   description="Book a Chicago wedding trolley rental for the ceremony, photos and reception. Classic white trolley service for 30–36 guests across Chicagoland."
   image={fleetImages.trolley.classicExterior}
   hideCta={true}
+  mobileHeroPreload={weddingHeroMobile.src}
+  desktopHeroPreload={weddingHeroDesktop.src}
 >
   <!-- Full-width service hero -->
   <section
     class="whero"
-    style={`background-image: url('${weddingBannerBackground.src}')`}
+    style={weddingHeroStyle}
   >
     <div class="whero__overlay"></div>
     <div class="whero__content">
@@ -414,6 +429,7 @@ const packageMobileSrcset = packageMobileSources
     height: 315px;
     overflow: hidden;
     background-color: #17140f;
+    background-image: var(--wedding-hero-desktop);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -1065,6 +1081,7 @@ const packageMobileSrcset = packageMobileSources
   @media (max-width: 640px) {
     .whero {
       height: 280px;
+      background-image: var(--wedding-hero-mobile);
       background-position: center;
       background-size: cover;
     }

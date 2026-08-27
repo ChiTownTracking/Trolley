@@ -1443,15 +1443,31 @@ const occasionsMobileSrcset = occasionsMobileSources
     // Initialize inert/aria from the markup's default (Step 1 open).
     steps.forEach((s) => setOpen(s, s.classList.contains('is-open')));
 
-    // Pre-fill supported trip details when arriving from a fleet or destination page.
-    const searchParams = new URLSearchParams(location.search);
-    const wantVehicle = searchParams.get('vehicle');
-    if (wantVehicle) {
-      const sel = form.querySelector<HTMLSelectElement>('select[name="vehicle"]');
-      const match = sel && Array.from(sel.options).find((o) => o.text === wantVehicle);
-      if (sel && match) sel.value = match.value;
-    }
-    const wantPickup = searchParams.get('pickup');
+    // Vehicle CTAs use a fragment so the selection never becomes a server-side
+    // crawl variant. Query support remains as a compatibility fallback for old
+    // external links, which still receive the clean homepage canonical.
+    const queryParams = new URLSearchParams(location.search);
+    const vehicleSelect = form.querySelector<HTMLSelectElement>('select[name="vehicle"]');
+    const applyVehiclePreselection = () => {
+      const fragmentParams = new URLSearchParams(location.hash.replace(/^#/, ''));
+      const fragmentVehicle = fragmentParams.get('vehicle');
+      const wantVehicle = fragmentVehicle ?? queryParams.get('vehicle');
+      if (!vehicleSelect || !wantVehicle) return false;
+
+      const match = Array.from(vehicleSelect.options).find((option) => option.value === wantVehicle);
+      if (!match) return false;
+
+      vehicleSelect.value = match.value;
+      return Boolean(fragmentVehicle);
+    };
+
+    const revealQuoteForm = () => document.getElementById('getquote')?.scrollIntoView();
+    if (applyVehiclePreselection()) requestAnimationFrame(revealQuoteForm);
+    window.addEventListener('hashchange', () => {
+      if (applyVehiclePreselection()) revealQuoteForm();
+    });
+
+    const wantPickup = queryParams.get('pickup');
     if (wantPickup) {
       const pickup = form.querySelector<HTMLInputElement>('input[name="pickup"]');
       if (pickup) pickup.value = wantPickup;
