@@ -187,7 +187,7 @@ export const homeFaqs = [
   },
   {
     q: 'How many passengers can each vehicle hold?',
-    a: 'Our Classic White Trolley seats 30–36 passengers, the Limo Vans seat up to 14, and the Super Coach Bus holds up to 57. For larger parties, ask about pairing a trolley for the wedding party with a coach for the rest of your guests.',
+    a: 'Our Classic White Trolley seats 30 passengers, the White Limo Trolley seats 36, the Limo Vans seat up to 14, and the Super Coach Bus holds up to 57. For larger parties, ask about pairing a trolley for the wedding party with a coach for the rest of your guests.',
   },
   {
     q: 'Do you require a deposit?',
@@ -207,7 +207,7 @@ export const christmasFaqs = [
   },
   {
     q: 'How many guests fit on the Christmas trolley?',
-    a: 'The Christmas trolley accommodates approximately 24 to 36 guests. The best fit depends on your group size and seating needs, so include an accurate passenger estimate with your quote request.',
+    a: 'The Christmas trolley seats 36 guests. Include an accurate passenger count and any seating needs with your quote request so the team can confirm the best vehicle arrangement.',
   },
   {
     q: 'Can we bring our own drinks?',
@@ -235,7 +235,7 @@ export const christmasFaqs = [
 export const weddingFaqs = [
   {
     q: 'How many passengers fit on the wedding trolley?',
-    a: 'The classic white trolley seats approximately 30–36 passengers. Include your expected wedding-party count when requesting a quote so the team can confirm the best vehicle arrangement.',
+    a: 'The Classic White Trolley seats 30 passengers, while the White Limo Trolley seats 36 with circular limo-style seating. Include your expected wedding-party count when requesting a quote so the team can confirm the best vehicle arrangement.',
   },
   {
     q: 'How many hours should we reserve?',

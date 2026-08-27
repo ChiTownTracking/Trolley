@@ -27,10 +27,11 @@ Most couples only need to solve for one or two of these groups, not all three. A
 | Vehicle | Typical Capacity | Best For |
 |---|---|---|
 | Limo Van | Up to 14 passengers | Small parties, immediate family, executive airport runs |
-| Classic White Trolley | 30–36 passengers | Wedding party, ceremony-to-reception transfers, photo stops |
+| Classic White Trolley | 30 passengers | Wedding party, ceremony-to-reception transfers, photo stops |
+| White Limo Trolley | 36 passengers | Wedding parties that prefer circular, group-facing seating |
 | Super Coach Bus | Up to 57 passengers | Full guest shuttles, hotel pickups, out-of-town groups |
 
-A [Classic White Trolley](../../fleet/classic-white-trolley/) comfortably seats a full bridal party plus parents and grandparents, with room left over for the two of you to make an entrance. Its forward-facing rows provide a familiar, orderly layout. For groups that prefer a more social cabin, the [White Limo Trolley](../../fleet/white-limo-trolley/) uses circular perimeter seating so riders can face one another.
+A [Classic White Trolley](../../fleet/classic-white-trolley/) seats 30 passengers and uses forward-facing rows for a familiar, orderly layout. For groups that prefer a more social cabin, the [White Limo Trolley](../../fleet/white-limo-trolley/) seats 36 passengers and uses circular perimeter seating so riders can face one another.
 
 Once the guest list climbs past 40 or 50 people, a single trolley starts to feel tight, and that's usually the point where couples add a [Super Coach Bus](../../fleet/super-coach-bus/) to the plan — one vehicle for the wedding party's photo-friendly ride, and one larger coach handling the guest shuttle in parallel. For smaller, more intimate arrangements — a small immediate-family ride, or an executive airport transfer for out-of-town parents — a [Limo Van](../../fleet/limo-vans/) is often the more efficient (and more affordable) choice.
 
@@ -48,6 +49,8 @@ A few rules of thumb that hold up across most weddings we work on:
 One of the most common mistakes we see is couples trying to put everyone — wedding party and guests — into a single vehicle "to keep it simple." In practice, this usually means the wedding party is stuck waiting around for a bus that's also picking up guests from three different hotels.
 
 The cleaner approach: book a smaller, photo-worthy vehicle (trolley or limo van) exclusively for the wedding party's schedule — ceremony arrival, post-ceremony photos, reception entrance — and a separate, larger vehicle for the broader guest shuttle running on its own loop. It costs more than one shared vehicle, but it removes the single biggest source of wedding-day transportation stress: waiting.
+
+Couples comparing vehicle combinations can explore our [Chicago wedding trolley rental](/weddings/) options before matching each ride to the timeline.
 
 <figure>
   <img src="../../images/guides/trolley-interior.webp" width="555" height="327" alt="Trolley interior with rose garlands and quilted leather perimeter seating" loading="lazy" />

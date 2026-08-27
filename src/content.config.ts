@@ -17,6 +17,8 @@ const guides = defineCollection({
     category: z.string().default('guides'),
     cover: image(),
     coverAlt: z.string(),
+    /** Optional tighter crop shown on narrow screens instead of `cover`. */
+    coverMobile: image().optional(),
     date: z.coerce.date(),
     readTime: z.string(),
     author: z.string().default('ChiTown Trolley'),

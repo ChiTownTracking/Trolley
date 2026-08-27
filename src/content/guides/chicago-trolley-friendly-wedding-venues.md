@@ -26,7 +26,7 @@ The best venues have a dedicated area near the entrance — a circular drive, a 
 
 ### Somewhere Great to Take Photos
 
-Once you've arrived, the trolley itself often becomes part of the photography — especially with our [Classic White Trolley](../../fleet/classic-white-trolley/) and its rear balcony platform. Venues with an attractive building façade, a tree-lined approach, or simply good natural light near the drop-off tend to produce the photos couples end up loving most, precisely because they weren't the "official" posed shots.
+Once you've arrived, the trolley itself often becomes part of the photography — especially when the reserved vehicle is our [Classic White Trolley](../../fleet/classic-white-trolley/), the model shown with a rear balcony platform. Not every trolley has a rear balcony, so ask the team to confirm the vehicle if that feature matters to your photo plan. Venues with an attractive building façade, a tree-lined approach, or simply good natural light near the drop-off tend to produce the photos couples end up loving most, precisely because they weren't the "official" posed shots.
 
 ## Regions Around Chicagoland Worth Considering
 
@@ -59,6 +59,8 @@ Sharing these answers with your transportation provider well ahead of the weddin
 ## Coordinating Logistics Without the Back-and-Forth
 
 The smoothest wedding-day transportation happens when the venue coordinator and the transportation company are talking directly, rather than passing details through the couple. When you [request a quote](../../reservation/), let us know your venue and we'll reach out to their team directly to confirm drop-off logistics — it's one less thing on your plate, and it means the driveway conversation happens between the two parties who actually need to have it.
+
+If you're still choosing the right vehicle for that plan, our [wedding trolley options](/weddings/) show how a trolley can fit around the ceremony, photos, and reception.
 
 If you're still finalizing your guest list and trying to figure out which vehicle actually fits your venue and headcount, our guide on [how many guests fit in a trolley](../how-many-guests-fit-in-a-trolley/) is a good next stop — sizing and venue logistics tend to go hand in hand.
 

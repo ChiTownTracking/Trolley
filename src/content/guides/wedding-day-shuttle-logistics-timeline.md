@@ -28,6 +28,8 @@ Every wedding is different, but most guest shuttle schedules follow a similar sh
 - **Reception arrival:** Guests dropped directly at the entrance, ideally timed to arrive 10–15 minutes ahead of the wedding party's grand entrance.
 - **End of night:** One or more return shuttles to the hotel, timed either as a single departure or staggered runs (more on this below).
 
+When the day calls for separate wedding-party and guest movements, our [wedding trolley transportation](/weddings/) options show how the trolley and coach can work together.
+
 ## Hotel Pickups: Fewer Locations Beat More Convenience
 
 It's tempting to arrange pickups at every hotel your guests are staying in, but each additional stop adds real time to the route — and multiplies the chances of a guest not being downstairs when the shuttle arrives. Where possible, consolidate your room block into one or two hotels, or ask guests staying elsewhere to meet at a single central pickup point.
