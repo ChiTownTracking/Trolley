@@ -4,8 +4,9 @@ seoTitle: "Chicago Trolley Rental Cost Guide | ChiTown Trolley"
 excerpt: "A practical look at the factors that shape trolley rental pricing in Chicago, from timing and vehicle choice to pickup locations and itinerary details."
 metaDescription: "Learn what affects Chicago trolley rental costs, what details belong in a quote request and how to compare options for a private trolley rental."
 category: guides
-cover: ../../assets/images/fleet/trolley/classic-exterior.png
-coverAlt: "Classic white trolley available for private rentals in Chicago"
+cover: ../../assets/images/guides/chicago-trolley-rental-cost-hero.png
+coverAlt: "White Chicago trolley beside a gold dollar coin against a skyline outline"
+coverMobile: ../../assets/images/guides/chicago-trolley-rental-cost-hero-mobile.png
 date: 2026-08-27
 readTime: "7 min read"
 ---

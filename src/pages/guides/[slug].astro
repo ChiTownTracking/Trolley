@@ -165,7 +165,7 @@ const schema = {
         {related.map((g) => (
           <GuideCard
             href={`/guides/${g.id}`}
-            image={g.data.cover}
+            image={g.data.coverMobile ?? g.data.cover}
             imageAlt={g.data.coverAlt}
             category={g.data.category}
             title={g.data.title}
@@ -335,12 +335,12 @@ const schema = {
     .gart-layout { grid-template-columns: 1fr; gap: 0; }
     .gtoc { display: none; }
     .gtoc-mobile { display: block; }
-    /* Matches the <source> breakpoint above. No forced box here: height:auto +
-       aspect-ratio:auto means whichever source the browser picks renders at its
-       own natural proportions, so the coverMobile crop is never re-cropped. */
+    /* Matches the <source> breakpoint above. One fixed height for every guide so
+       the hero band is consistent no matter how each coverMobile file is shaped
+       (they range from 1.13:1 to 1.78:1); object-fit: cover does the cropping. */
     .gart__hero {
       aspect-ratio: auto;
-      height: auto;
+      height: 320px;
       max-height: none;
       margin-bottom: 34px;
     }

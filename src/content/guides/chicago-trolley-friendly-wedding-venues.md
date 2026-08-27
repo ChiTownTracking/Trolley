@@ -39,11 +39,6 @@ Chicago and its suburbs offer a wide range of venue styles, and trolley logistic
 
 Wherever your venue sits, the region matters less than the specific driveway — always confirm the physical layout rather than assuming based on general area.
 
-<figure>
-  <img src="../../images/guides/trolley-christmas-lights.png" width="555" height="327" alt="Trolley arriving at a venue entrance at dusk with string lights visible" loading="lazy" />
-  <figcaption>A well-lit drop-off zone does double duty: easy access, and a beautiful backdrop for evening arrival photos.</figcaption>
-</figure>
-
 ## Questions to Ask Your Venue Coordinator
 
 Before finalizing transportation, most venue coordinators can answer these in a single email or phone call:

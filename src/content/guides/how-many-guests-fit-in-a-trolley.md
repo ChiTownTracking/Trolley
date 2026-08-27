@@ -52,11 +52,6 @@ The cleaner approach: book a smaller, photo-worthy vehicle (trolley or limo van)
 
 Couples comparing vehicle combinations can explore our [Chicago wedding trolley rental](/weddings/) options before matching each ride to the timeline.
 
-<figure>
-  <img src="../../images/guides/trolley-interior.webp" width="555" height="327" alt="Trolley interior with rose garlands and quilted leather perimeter seating" loading="lazy" />
-  <figcaption>The White Limo Trolley’s circular perimeter seating keeps the wedding party together and facing each other for the whole ride.</figcaption>
-</figure>
-
 ## Timing Considerations: One Big Vehicle or Multiple Trips?
 
 If your guest count sits right on the edge between two vehicle sizes, the deciding factor is usually timing, not just seats.

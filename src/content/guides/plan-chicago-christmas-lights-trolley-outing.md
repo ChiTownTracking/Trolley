@@ -4,8 +4,9 @@ seoTitle: "Plan a Private Chicago Christmas Trolley Outing"
 excerpt: "A practical planning guide for private holiday trolley outings, including group size, pickup points, route priorities, traffic and onboard atmosphere."
 metaDescription: "Plan a private Chicago Christmas lights trolley outing with practical tips for group size, pickup locations, route priorities, traffic and reservations."
 category: guides
-cover: ../../assets/images/christmas/gallery/christmas-trolley.png
-coverAlt: "Private Chicago Christmas trolley illuminated with colorful holiday lights"
+cover: ../../assets/images/guides/chicago-christmas-lights-hero.png
+coverAlt: "White trolley strung with colorful holiday lights on a snowy Chicago street at dusk"
+coverMobile: ../../assets/images/guides/chicago-christmas-lights-hero-mobile.png
 date: 2026-08-27
 readTime: "7 min read"
 ---

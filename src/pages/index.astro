@@ -583,7 +583,7 @@ const occasionsMobileSrcset = occasionsMobileSources
         {latestGuides.map((g) => (
           <GuideCard
             href={withBase(`/guides/${g.id}`)}
-            image={g.data.cover}
+            image={g.data.coverMobile ?? g.data.cover}
             imageAlt={g.data.coverAlt}
             category={g.data.category}
             title={g.data.title}
