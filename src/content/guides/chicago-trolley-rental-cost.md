@@ -11,7 +11,7 @@ date: 2026-08-27
 readTime: "4 min read"
 ---
 
-Chicago trolley rental prices generally start between **$1,195 and $2,195+**, depending on the day of the week and the length of your rental.
+ChiTown trolley rental prices generally start between **$1,195 and $2,195+**, depending on the day of the week and the length of your rental.
 
 If you are comparing trolley companies or planning your transportation budget, these are the most important numbers to know:
 
@@ -19,10 +19,10 @@ If you are comparing trolley companies or planning your transportation budget, t
 
 | Rental day   | Rental length |     Starting price |
 | ------------ | ------------: | -----------------: |
-| **Saturday** |   **4 hours** | **$1,695–$1,895+** |
 | **Saturday** |   **5 hours** | **$1,895–$2,195+** |
-| **Weekday**  |   **3 hours** | **$1,195–$1,395+** |
+| **Saturday** |   **4 hours** | **$1,695–$1,895+** |
 | **Weekday**  |   **4 hours** | **$1,495–$1,695+** |
+| **Weekday**  |   **3 hours** | **$1,195–$1,395+** |
 
 **Gratuity is discretionary.**
 
@@ -34,8 +34,8 @@ Saturday is the busiest day for weddings and private events, especially during C
 
 Current Saturday starting prices are:
 
-* **Four-hour trolley rental: $1,695–$1,895+**
 * **Five-hour trolley rental: $1,895–$2,195+**
+* **Four-hour trolley rental: $1,695–$1,895+**
 
 Saturday rates may vary depending on the season, trolley style, trolley color, itinerary, pickup location, destination, total mileage, travel requirements, and overall demand for your date.
 
@@ -47,8 +47,8 @@ Weekday trolley rentals generally have lower starting prices and shorter minimum
 
 Current weekday starting prices are:
 
-* **Three-hour trolley rental: $1,195–$1,395+**
 * **Four-hour trolley rental: $1,495–$1,695+**
+* **Three-hour trolley rental: $1,195–$1,395+**
 
 Weekday prices depend primarily on the season, availability, and how busy the requested date is. Your route, pickup location, mileage, selected trolley, and itinerary may also affect the final quote.
 
