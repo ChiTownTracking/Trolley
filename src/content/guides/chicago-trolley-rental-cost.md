@@ -106,6 +106,6 @@ The more complete your itinerary is, the more accurately the required travel tim
 
 Ready to check pricing and availability for your event?
 
-Call **[630-624-3448](tel:+16306243448)** or [submit a quote request](/contact/) with your event date, rental length, passenger count, pickup location, and itinerary.
+Call **[630-624-3448](tel:+16306243448)** or [submit a quote request](/#getquote) with your event date, rental length, passenger count, pickup location, and itinerary.
 
 **Saturday rentals start at $1,695–$1,895+ for four hours. Weekday rentals start at $1,195–$1,395+ for three hours. Gratuity is discretionary.**
