@@ -1,11 +1,14 @@
 ---
-import { navMain, navMore, site } from '../data/site';
+import { navFleet, navMain, navMore, site } from '../data/site';
 import { withBase, withoutBase } from '../utils/paths';
 
 // Normalize the current path (strip trailing slash) for active matching.
 const path = withoutBase(Astro.url.pathname).replace(/\/+$/, '') || '/';
 const isActive = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'));
 const moreActive = navMore.some((n) => isActive(n.href));
+// The Fleet item becomes a dropdown; its categories are hash links onto /fleet,
+// so activeness is decided by the parent path alone.
+const fleetActive = isActive('/fleet');
 ---
 <header class="hdr" data-site-header>
   <div class="hdr__inner wrap wrap-wide">
@@ -29,17 +32,40 @@ const moreActive = navMore.some((n) => isActive(n.href));
     >
       <nav class="nav" aria-label="Main">
         {navMain.map((n) => (
-          <a
-            href={withBase(n.href)}
-            class:list={['nav__link', { active: isActive(n.href) }]}
-            aria-current={isActive(n.href) ? 'page' : undefined}
-          >
-            {n.labelParts
-              ? n.labelParts.map((part) => (
-                  <span class={part.className}>{part.text} </span>
-                ))
-              : n.label}
-          </a>
+          n.href === '/fleet' ? (
+            <div class="more" data-more-menu>
+              <button
+                type="button"
+                class:list={['nav__link', 'more__btn', { active: fleetActive }]}
+                aria-expanded="false"
+                aria-haspopup="true"
+                data-more-toggle
+              >
+                {n.label}
+                <svg class="more__caret" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="more__menu" data-more-panel hidden>
+                {navFleet.map((f) => (
+                  <a
+                    href={withBase(f.href)}
+                    class:list={['more__item', { active: path === '/fleet' && f.href === '/fleet' }]}
+                  >{f.label}</a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={withBase(n.href)}
+              class:list={['nav__link', { active: isActive(n.href) }]}
+              aria-current={isActive(n.href) ? 'page' : undefined}
+            >
+              {n.labelParts
+                ? n.labelParts.map((part) => (
+                    <span class={part.className}>{part.text} </span>
+                  ))
+                : n.label}
+            </a>
+          )
         ))}
 
         <div class="more" data-more-menu>
@@ -333,31 +359,61 @@ const moreActive = navMore.some((n) => isActive(n.href));
 </style>
 
 <script>
-  // "More" dropdown: toggle, close on outside click / Escape.
-  const menu = document.querySelector<HTMLElement>('[data-more-menu]');
-  const toggle = menu?.querySelector<HTMLButtonElement>('[data-more-toggle]');
-  const panel = menu?.querySelector<HTMLElement>('[data-more-panel]');
+  // Nav dropdowns ("Fleet" and "More"): toggle, close on outside click / Escape.
+  // Opening one closes the other so two panels never overlap at desktop widths.
+  const dropdowns = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-more-menu]'),
+  ).map((menu) => ({
+    menu,
+    toggle: menu.querySelector<HTMLButtonElement>('[data-more-toggle]'),
+    panel: menu.querySelector<HTMLElement>('[data-more-panel]'),
+  }));
 
-  function setMoreOpen(open: boolean, restoreFocus = false) {
-    if (!menu || !toggle || !panel) return;
+  type Dropdown = (typeof dropdowns)[number];
+
+  function setOpen(dropdown: Dropdown, open: boolean, restoreFocus = false) {
+    const { menu, toggle, panel } = dropdown;
+    if (!toggle || !panel) return;
     menu.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', String(open));
     panel.hidden = !open;
     if (!open && restoreFocus) toggle.focus();
   }
 
-  toggle?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    setMoreOpen(menu?.classList.contains('open') ? false : true);
+  const closeAll = (except?: Dropdown, restoreFocus = false) => {
+    dropdowns.forEach((dropdown) => {
+      if (dropdown !== except) setOpen(dropdown, false, restoreFocus);
+    });
+  };
+
+  dropdowns.forEach((dropdown) => {
+    dropdown.toggle?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const willOpen = !dropdown.menu.classList.contains('open');
+      closeAll(dropdown);
+      setOpen(dropdown, willOpen);
+    });
+
+    // Collapse once a destination is chosen. Same-page hash links (a Fleet
+    // category while already on /fleet) cause no navigation, so without this
+    // the panel would stay open over the filtered results.
+    dropdown.panel?.querySelectorAll('a').forEach((link) =>
+      link.addEventListener('click', () => setOpen(dropdown, false)),
+    );
   });
+
   document.addEventListener('click', (e) => {
-    if (menu && !menu.contains(e.target as Node)) setMoreOpen(false);
+    dropdowns.forEach((dropdown) => {
+      if (!dropdown.menu.contains(e.target as Node)) setOpen(dropdown, false);
+    });
   });
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menu?.classList.contains('open')) {
-      e.preventDefault();
-      setMoreOpen(false, true);
-    }
+    if (e.key !== 'Escape') return;
+    const open = dropdowns.find((dropdown) => dropdown.menu.classList.contains('open'));
+    if (!open) return;
+    e.preventDefault();
+    setOpen(open, false, true);
   });
 </script>
 

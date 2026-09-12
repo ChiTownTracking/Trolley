@@ -150,6 +150,20 @@ export const navMain: NavItem[] = [
   { label: 'Services', href: '/services' },
 ];
 
+/**
+ * Fleet categories shown in the header's Fleet dropdown. Each hash is a
+ * FleetCategory value, which /fleet reads to preselect that filter.
+ * The Christmas trolley is deliberately absent — it has its own page and is
+ * not one of the fleet filter categories.
+ */
+export const navFleet: NavItem[] = [
+  { label: 'All Vehicles', href: '/fleet' },
+  { label: 'Trolley', href: '/fleet#trolley' },
+  { label: 'Coach Bus', href: '/fleet#coach-bus' },
+  { label: 'Party Bus', href: '/fleet#party-bus' },
+  { label: 'Limo Van', href: '/fleet#limo-van' },
+];
+
 /** Secondary items tucked under the "More" dropdown. */
 export const navMore: NavItem[] = [
   { label: 'Guides', href: '/guides' },

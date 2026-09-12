@@ -63,15 +63,38 @@ if (controls && status && cards.length > 0) {
     }
   };
 
+  const buttonFor = (filter: FleetFilter) =>
+    buttons.find((button) => button.dataset.fleetFilter === filter);
+
+  const isFleetFilter = (value: string): value is FleetFilter =>
+    Object.prototype.hasOwnProperty.call(categoryNames, value);
+
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
       const filter = button.dataset.fleetFilter as FleetFilter | undefined;
-      if (filter) applyFilter(filter, button);
+      if (!filter) return;
+      applyFilter(filter, button);
+      // Reflect the choice in the URL so the view can be linked and shared.
+      // replaceState keeps the back button out of the filter history.
+      history.replaceState(null, '', `#${filter}`);
     });
   });
 
-  const defaultButton = buttons.find(
-    (button) => button.dataset.fleetFilter === 'trolley',
-  );
-  if (defaultButton) applyFilter('trolley', defaultButton);
+  // The header's Fleet dropdown links to /fleet#<category>, so the hash decides
+  // the starting filter; anything else falls back to trolley.
+  const filterFromHash = (): FleetFilter => {
+    const hash = decodeURIComponent(location.hash.replace(/^#/, ''));
+    return isFleetFilter(hash) ? hash : 'trolley';
+  };
+
+  const applyFromHash = () => {
+    const filter = filterFromHash();
+    const button = buttonFor(filter);
+    if (button) applyFilter(filter, button);
+  };
+
+  applyFromHash();
+  // Same-page hash links (dropdown clicks while already on /fleet) fire this
+  // instead of a navigation.
+  window.addEventListener('hashchange', applyFromHash);
 }
