@@ -12,9 +12,11 @@ import trolleyT4InteriorLighting from '../assets/images/fleet/trolley/T4-Trolley
 import trolleyFestiveExterior from '../assets/images/fleet/trolley/green-red-festive-trolley.png';
 import trolleyChristmasLights from '../assets/images/christmas/gallery/christmas-trolley.png';
 import trolleyChristmasInterior from '../assets/images/christmas/gallery/christmas-interior.png';
+import coachExteriorDusk from '../assets/images/fleet/coach/exterior-dusk.png';
 import coachExterior1 from '../assets/images/fleet/coach/coach-bus-exterior-1.jpeg';
 import coachExterior2 from '../assets/images/fleet/coach/coach-bus-exterior-2.jpeg';
 import coachExterior3 from '../assets/images/fleet/coach/coach-bus-exterior-3.jpeg';
+import coachInteriorDaylight from '../assets/images/fleet/coach/interior-daylight.jpeg';
 import coachInterior1 from '../assets/images/fleet/coach/interior1.jpeg';
 import coachInterior2 from '../assets/images/fleet/coach/interior2.jpeg';
 import coachInterior3 from '../assets/images/fleet/coach/interior3.jpeg';
@@ -47,6 +49,8 @@ export const fleetImages = {
     christmasInterior: trolleyChristmasInterior,
   },
   coach: {
+    exteriorDusk: coachExteriorDusk,
+    interiorDaylight: coachInteriorDaylight,
     exterior1: coachExterior1,
     exterior2: coachExterior2,
     exterior3: coachExterior3,
@@ -178,7 +182,8 @@ export const fleet: FleetVehicle[] = [
     category: 'coach-bus',
     cap: 'Up to 57 passengers',
     previewCap: 'Up to 57 guests',
-    image: fleetImages.coach.exterior1,
+    image: fleetImages.coach.exteriorDusk,
+    hoverImage: fleetImages.coach.interiorDaylight,
     gallery: [
       fleetImages.coach.exterior1,
       fleetImages.coach.exterior2,
