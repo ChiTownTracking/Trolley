@@ -4,6 +4,7 @@ import TopBar from '../components/TopBar.astro';
 import Header from '../components/Header.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Footer from '../components/Footer.astro';
+import FloatingQuote from '../components/FloatingQuote.astro';
 import { site } from '../data/site';
 import { withBase } from '../utils/paths';
 import type { ImageMetadata } from 'astro';
@@ -131,6 +132,8 @@ const ogImage = imagePath ? new URL(imagePath, Astro.site ?? Astro.url).href : u
     {!hideCta && <CtaBand />}
     <Footer />
   </div>
+
+  <FloatingQuote />
 
   <dialog
     class="form-success-popup"

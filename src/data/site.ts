@@ -346,7 +346,9 @@ export const vehicleOptions = [
   'Party Bus — 25 Passengers',
   'Super Coach Bus — 57 Passengers',
   'Coach Bus — 50 Passengers',
+  'Coach Bus — 44 Passengers',
   'Coach Bus — 40 Passengers',
+  'Coach Bus — 28 Passengers',
   'Sprinter — Executive',
   'Sprinter — Limo',
 ];

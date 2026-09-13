@@ -13,6 +13,10 @@ import trolleyFestiveExterior from '../assets/images/fleet/trolley/green-red-fes
 import trolleyChristmasLights from '../assets/images/christmas/gallery/christmas-trolley.png';
 import trolleyChristmasInterior from '../assets/images/christmas/gallery/christmas-interior.png';
 import coachExteriorDusk from '../assets/images/fleet/coach/exterior-dusk.png';
+import coachBus44Exterior from '../assets/images/fleet/coach/coach-bus-44-exterior.webp';
+import coachBus44Interior from '../assets/images/fleet/coach/coach-bus-44-interior.webp';
+import coachBus28Exterior from '../assets/images/fleet/coach/coach-bus-28-exterior.webp';
+import coachBus28Interior from '../assets/images/fleet/coach/coach-bus-28-interior.webp';
 import coachExterior1 from '../assets/images/fleet/coach/coach-bus-exterior-1.jpeg';
 import coachExterior2 from '../assets/images/fleet/coach/coach-bus-exterior-2.jpeg';
 import coachExterior3 from '../assets/images/fleet/coach/coach-bus-exterior-3.jpeg';
@@ -51,6 +55,10 @@ export const fleetImages = {
   coach: {
     exteriorDusk: coachExteriorDusk,
     interiorDaylight: coachInteriorDaylight,
+    bus44Exterior: coachBus44Exterior,
+    bus44Interior: coachBus44Interior,
+    bus28Exterior: coachBus28Exterior,
+    bus28Interior: coachBus28Interior,
     exterior1: coachExterior1,
     exterior2: coachExterior2,
     exterior3: coachExterior3,
@@ -180,7 +188,7 @@ export const fleet: FleetVehicle[] = [
     name: 'Super Coach Bus',
     slug: 'super-coach-bus',
     category: 'coach-bus',
-    cap: 'Up to 57 passengers',
+    cap: '50–57 passengers',
     previewCap: 'Up to 57 guests',
     image: fleetImages.coach.exteriorDusk,
     hoverImage: fleetImages.coach.interiorDaylight,
@@ -197,12 +205,56 @@ export const fleet: FleetVehicle[] = [
     quoteValue: 'Super Coach Bus — 57 Passengers',
     intro: 'When the guest list outgrows the trolley, the Super Coach Bus keeps everyone together in quilted-leather comfort. Climate-controlled, whisper-smooth, and built for the long haul, it is the effortless way to shuttle guests between hotel and venue — or carry the whole group across state lines without a second vehicle in the convoy.',
     stats: [
-      { label: 'Capacity', value: 'Up to 57' },
-      { label: 'Ideal group', value: '35–57' },
+      { label: 'Capacity', value: '50–57' },
+      { label: 'Ideal group', value: '40–57' },
       { label: 'Luggage', value: 'Ample' },
     ],
     perfectFor: ['Guest shuttles', 'Corporate events', 'Airport transfers', 'Out-of-state trips', 'Sporting events & concerts'],
     feats: ['Quilted leather seats with armrests', 'Generous luggage storage', 'Heat & air conditioning', 'Ideal for wedding guest shuttles & out-of-state trips', 'Professional chauffeur included'],
+  },
+  {
+    name: 'Coach Bus',
+    slug: 'coach-bus-44',
+    category: 'coach-bus',
+    cap: '39–44 passengers',
+    previewCap: 'Up to 44 guests',
+    image: fleetImages.coach.bus44Exterior,
+    hoverImage: fleetImages.coach.bus44Interior,
+    gallery: [
+      fleetImages.coach.bus44Exterior,
+      fleetImages.coach.bus44Interior,
+    ],
+    quoteValue: 'Coach Bus — 44 Passengers',
+    intro: 'The middle of the coach range — a full motorcoach for the group that has outgrown a small bus but will not fill a Super Coach. High-back reclining leather, overhead storage and the same smooth ride, sized so you are not paying for rows nobody sits in.',
+    stats: [
+      { label: 'Capacity', value: '39–44' },
+      { label: 'Ideal group', value: '30–44' },
+      { label: 'Luggage', value: 'Overhead + limited under' },
+    ],
+    perfectFor: ['Guest shuttles', 'Corporate outings', 'Airport transfers', 'Day trips', 'School & team travel'],
+    feats: ['High-back reclining leather seats', 'Lavatory available on request', 'Overhead luggage space', 'Sound system with onboard PA', 'Seatbelts at every seat', 'USB charging ports'],
+  },
+  {
+    name: 'Small Coach Bus',
+    slug: 'coach-bus-28',
+    category: 'coach-bus',
+    cap: '22–28 passengers',
+    previewCap: 'Up to 28 guests',
+    image: fleetImages.coach.bus28Exterior,
+    hoverImage: fleetImages.coach.bus28Interior,
+    gallery: [
+      fleetImages.coach.bus28Exterior,
+      fleetImages.coach.bus28Interior,
+    ],
+    quoteValue: 'Coach Bus — 28 Passengers',
+    intro: 'A true coach at the smaller end of the range, so a mid-size group still travels together in one vehicle instead of splitting across two vans. Quilted leather seating, overhead storage and coach comfort in a frame that handles tighter city streets.',
+    stats: [
+      { label: 'Capacity', value: '22–28' },
+      { label: 'Ideal group', value: '18–28' },
+      { label: 'Luggage', value: 'Overhead' },
+    ],
+    perfectFor: ['Wedding parties', 'Corporate shuttles', 'Airport transfers', 'Winery & brewery tours', 'City tours'],
+    feats: ['High-back reclining leather seats', 'Overhead luggage space', 'Sound system with onboard PA', 'Seatbelts at every seat', 'USB charging ports', 'Professional chauffeur included'],
   },
   {
     name: 'Party Bus',

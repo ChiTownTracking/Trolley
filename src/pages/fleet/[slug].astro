@@ -12,6 +12,11 @@ export function getStaticPaths() {
 }
 
 const { vehicle } = Astro.props;
+// Coach names are alike, so the capacity range leads the heading:
+// "39-44 Coach Bus". Derived from `cap` to keep one source of truth.
+const displayName = vehicle.category === 'coach-bus'
+  ? `${vehicle.cap.replace(/\s*passengers?$/i, '')} ${vehicle.name}`
+  : vehicle.name;
 const images = vehicle.gallery;
 const hasGallery = images.length > 1;
 const metaDescription = vehicle.intro.length <= 155
@@ -41,7 +46,7 @@ const fullscreenImages = await Promise.all(
 
     <header class="vd__head">
       {vehicle.comingSoon && <p class="vd__availability">Coming Soon</p>}
-      <h1 class="vd__title">{vehicle.name}</h1>
+      <h1 class="vd__title">{displayName}</h1>
     
     </header>
 
@@ -185,7 +190,17 @@ const fullscreenImages = await Promise.all(
     line-height: 1;
     text-transform: uppercase;
   }
-  .vd__title { font-family: var(--serif); font-size: clamp(34px, 5vw, 52px); font-weight: 600; line-height: 1.08; margin: 0; }
+  /* Cormorant defaults to old-style figures, which drop 3/4/9 below the
+     baseline next to the caps in "39-44 Coach Bus". Lining figures match
+     the cap height. */
+  .vd__title {
+    font-family: var(--serif);
+    font-size: clamp(34px, 5vw, 52px);
+    font-weight: 600;
+    line-height: 1.08;
+    margin: 0;
+    font-variant-numeric: lining-nums;
+  }
   .vd__stats { display: flex; flex-wrap: wrap; gap: 20px 40px; margin-top: 22px; }
   .stat { display: flex; flex-direction: column; gap: 5px; }
   .stat__label { font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-deep); }
