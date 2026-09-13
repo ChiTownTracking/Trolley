@@ -46,10 +46,7 @@ const fleetActive = isActive('/fleet');
               </button>
               <div class="more__menu" data-more-panel hidden>
                 {navFleet.map((f) => (
-                  <a
-                    href={withBase(f.href)}
-                    class:list={['more__item', { active: path === '/fleet' && f.href === '/fleet' }]}
-                  >{f.label}</a>
+                  <a href={withBase(f.href)} class="more__item">{f.label}</a>
                 ))}
               </div>
             </div>

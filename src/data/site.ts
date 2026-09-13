@@ -157,7 +157,6 @@ export const navMain: NavItem[] = [
  * not one of the fleet filter categories.
  */
 export const navFleet: NavItem[] = [
-  { label: 'All Vehicles', href: '/fleet' },
   { label: 'Trolley', href: '/fleet#trolley' },
   { label: 'Coach Bus', href: '/fleet#coach-bus' },
   { label: 'Party Bus', href: '/fleet#party-bus' },
