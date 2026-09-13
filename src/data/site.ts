@@ -330,8 +330,14 @@ export const resNotes = [
 ];
 
 export const eventTypes = [
-  'Wedding', 'Corporate Event', 'Prom / Homecoming', 'Quinceañera', 'Bachelor / Bachelorette',
-  'Sporting Event / Concert', 'Airport Transportation', 'Coach Bus Charter', 'Out-of-State Trip', 'Night Out / Other',
+  'Out-of-State Trips',
+  'Wedding',
+  'Wedding Guest Shuttle',
+  'Corporate Events',
+  'General Events',
+  'Airport Transportation',
+  'Night Out',
+  'Others',
 ];
 
 export const vehicleOptions = [
