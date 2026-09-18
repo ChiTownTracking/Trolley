@@ -355,7 +355,8 @@ const occasionsMobileSrcset = occasionsMobileSources
         </div>
         <p class="form-status" data-form-status role="status" aria-live="polite"></p>
         <p class="getquote__disclaimer">
-          Chicago trolley rental prices vary by date, vehicle, rental duration, itinerary and pickup details.
+          <a href={withBase('/guides/chicago-trolley-rental-cost/')}>Chicago trolley rental prices</a>{' '}
+          vary by date, vehicle, rental duration, itinerary and pickup details.
           Share your plans for a customized estimate.
         </p>
       </form>
@@ -861,6 +862,10 @@ const occasionsMobileSrcset = occasionsMobileSources
     font-weight: 300;
     line-height: 1.65;
     opacity: 1;
+  }
+  .getquote__disclaimer a {
+    color: inherit;
+    text-decoration: none;
   }
 
   @media (max-width: 768px) {

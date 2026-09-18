@@ -29,6 +29,8 @@ Both vehicles keep a group together while a professional chauffeur handles the r
 
 Capacity is only one part of the comparison. A vehicle can have enough seats and still be the wrong match for the desired photographs, boarding plan or sequence of stops.
 
+For the budget, compare [Chicago trolley rental prices](/guides/chicago-trolley-rental-cost/) by day and rental length, then request a party bus quote for the same itinerary. That gives you comparable totals for the two vehicle options.
+
 ## When a Wedding Trolley Makes Sense
 
 ### You Want a Classic Wedding Look

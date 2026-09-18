@@ -33,6 +33,8 @@ Most couples only need to solve for one or two of these groups, not all three. A
 
 A [Classic White Trolley](../../fleet/classic-white-trolley/) seats 30 passengers and uses forward-facing rows for a familiar, orderly layout. For groups that prefer a more social cabin, the [White Limo Trolley](../../fleet/white-limo-trolley/) seats 36 passengers and uses circular perimeter seating so riders can face one another.
 
+Once you know your passenger count, use the [Chicago trolley rental cost guide](/guides/chicago-trolley-rental-cost/) to compare starting prices and work out a budget per rider. The guide also explains how rental length and the itinerary affect your quote.
+
 Once the guest list climbs past 40 or 50 people, a single trolley starts to feel tight, and that's usually the point where couples add a [Super Coach Bus](../../fleet/super-coach-bus/) to the plan — one vehicle for the wedding party's photo-friendly ride, and one larger coach handling the guest shuttle in parallel. For smaller, more intimate arrangements — a small immediate-family ride, or an executive airport transfer for out-of-town parents — a [Limo Van](../../fleet/limo-vans/) is often the more efficient (and more affordable) choice.
 
 ## How to Estimate Your Guest Count Needs

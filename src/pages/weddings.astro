@@ -414,6 +414,11 @@ const packageMobileSrcset = packageMobileSources
     <div class="wrap wrap-860">
       <Eyebrow label="Wedding Trolley Questions" mb={16} />
       <h2 id="wedding-faq-title">Planning your wedding trolley rental</h2>
+      <p class="wfaq__pricing">
+        Planning your transportation budget? See our
+        <a href={withBase('/guides/chicago-trolley-rental-cost/')}><u>Chicago trolley rental cost guide</u></a>
+        for Saturday and weekday starting prices. Trolley and coach packages are quoted separately.
+      </p>
       <div class="wfaq__list" data-wedding-faq>
         {weddingFaqs.map((item, index) => {
           const buttonId = `wedding-faq-button-${index + 1}`;
@@ -1029,6 +1034,7 @@ const packageMobileSrcset = packageMobileSources
   /* FAQs */
   .wfaq { padding: 94px 28px 100px; background: var(--cream); }
   .wfaq > .wrap > h2 { margin-bottom: 38px; text-align: center; }
+  .wfaq__pricing { max-width: 68ch; margin: 0 auto 30px; font-size: 15px; line-height: 1.8; color: var(--muted); text-align: center; }
   .wfaq__list { margin: 0 auto; }
   .wfaq__item { border-top: 1px solid var(--line-2); }
   .wfaq__item:last-child { border-bottom: 1px solid var(--line-2); }

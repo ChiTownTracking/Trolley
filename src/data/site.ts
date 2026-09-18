@@ -314,7 +314,7 @@ export const gallery = [
 export const faqs = [
   { q: 'How far in advance should we book?', a: 'For peak wedding season (May through October) and December, 6–12 months ahead is wise — popular Saturdays go first. For other dates, a few weeks is often enough. It never hurts to ask.' },
   { q: 'How are the two white trolleys different?', a: 'The White Classic Trolley uses traditional forward-facing seating, while the White Limo Trolley uses circular perimeter seating so guests can face one another.' },
-  { q: 'Is there a minimum booking time?', a: 'Yes — all charters have a 3-hour minimum. Most weddings book 3 to 5 hours to comfortably cover photos, the ceremony, and the reception transfer.' },
+  { q: 'Is there a minimum booking time?', a: 'Saturday trolley rentals have a 4-hour minimum; weekday trolley rentals start at 3 hours. Share your date and itinerary so we can confirm the minimum and allow enough time for photos, the ceremony, and the reception transfer.' },
   { q: 'Are the trolleys heated and air conditioned?', a: 'Fully. Both trolleys have heat and air conditioning, so the cabin is comfortable in every Chicago season.' },
   { q: 'Can we bring drinks on board?', a: 'Guests 21 and over may bring their own beverages aboard private charters, in keeping with Illinois rules. We provide coolers and ice on request; glass is fine, kegs are not.' },
   { q: 'What area do you serve?', a: 'All of Chicagoland — the city proper and suburbs including Naperville, Evanston, Oak Brook, Schaumburg, Orland Park, Arlington Heights, Hinsdale, Lake Forest, and Wheaton. Farther afield? Just ask.' },

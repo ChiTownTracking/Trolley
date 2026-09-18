@@ -46,6 +46,7 @@ const schema = {
   description: pageDescription,
   image: new URL(data.cover.src, Astro.site ?? Astro.url).href,
   datePublished: data.date.toISOString(),
+  ...(data.updatedDate && { dateModified: data.updatedDate.toISOString() }),
   author: { '@type': 'Organization', name: data.author },
   publisher: {
     '@type': 'Organization',
@@ -84,6 +85,12 @@ const schema = {
           <span>{data.author}</span>
           <span class="gart__dot" aria-hidden="true">·</span>
           <time datetime={data.date.toISOString()}>{formatGuideDate(data.date)}</time>
+          {data.updatedDate && (
+            <>
+              <span class="gart__dot" aria-hidden="true">·</span>
+              <span>Updated <time datetime={data.updatedDate.toISOString()}>{formatGuideDate(data.updatedDate)}</time></span>
+            </>
+          )}
           <span class="gart__dot" aria-hidden="true">·</span>
           <span>{data.readTime}</span>
         </div>
@@ -218,7 +225,7 @@ const schema = {
     border-radius: 999px; padding: 6px 14px; margin-bottom: 18px;
   }
   .gart__title { font-family: var(--serif); font-size: clamp(32px, 4.6vw, 48px); font-weight: 600; line-height: 1.15; margin: 0 0 18px; }
-  .gart__byline { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--muted); }
+  .gart__byline { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; font-size: 13px; color: var(--muted); }
   .gart__dot { color: var(--gold); }
 
   .gart__hero {

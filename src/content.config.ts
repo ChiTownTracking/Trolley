@@ -20,6 +20,8 @@ const guides = defineCollection({
     /** Optional tighter crop shown on narrow screens instead of `cover`. */
     coverMobile: image().optional(),
     date: z.coerce.date(),
+    /** Date of a substantive article update, shown to readers and in article metadata. */
+    updatedDate: z.coerce.date().optional(),
     readTime: z.string(),
     author: z.string().default('ChiTown Trolley'),
     /** Manually pin an article as the index page's featured block. */
